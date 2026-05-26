@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+logs/
+*.db
+*.db-wal
+*.db-shm
+extended_memory.jsonl
+conscience_checked.json
+.lacia-evolve-*

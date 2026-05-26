@@ -1,0 +1,1898 @@
+■ CONTENTS
+
+Post-Exploitation ................................................................................... 75
+Summary ............................................................................................... 77
+Exercises ............................................................................................... 77
+■Chapter 6: Breaking Web Sites ..................................................... 79
+Web Architecture ................................................................................... 80
+Business Logic and Data ........................................................................................ 82
+Architecture Protections ......................................................................................... 84
+Asynchronous Javascript and XML (AJAX) ............................................................. 85
+
+Common Web Application Attacks ......................................................... 86
+Cross Site Scripting (XSS) ...................................................................................... 86
+SQL Injection........................................................................................................... 87
+Command Injection ................................................................................................. 88
+XML External Entity Attacks .................................................................................... 89
+Clickjacking Attacks ............................................................................................... 90
+Cross Site Request Forgery .................................................................................... 90
+Evasion Attacks ...................................................................................................... 91
+
+Testing Strategies.................................................................................. 91
+Automated Tools ..................................................................................................... 93
+Passive Scanning ................................................................................................... 98
+
+Practice Sites ........................................................................................ 99
+Summary ............................................................................................. 100
+Exercises ............................................................................................. 101
+■Chapter 7: Reporting .................................................................. 103
+Executive Summary ............................................................................ 104
+Methodology........................................................................................ 106
+Findings ............................................................................................... 107
+Finding .................................................................................................................. 108
+Recommendation.................................................................................................. 108
+ix
+
+■ CONTENTS
+
+Evidence ............................................................................................................... 109
+References............................................................................................................ 109
+Informational ........................................................................................................ 109
+
+Summary ............................................................................................. 109
+Index .............................................................................................. 111
+
+x
+
+About the Author
+Ric Messier, MS, GCIH, GSEC, CEH, CISSP, is the
+program director for Cyber Security, Computer
+Forensics and Digital Investigations, and Economic
+Crime Investigation bachelor’s degree programs, as well
+as the Information Security Operations and Digital
+Forensic Science master’s degree programs, at
+Champlain College.
+Messier has been involved in the networking and
+security arena since the early 1980s. He has worked
+at companies ranging from large Internet service
+providers to small software companies, developing
+knowledge and experience about a range of topics
+related to networking and security. Messier spent
+more than four years at a large telecommunications hardware vendor doing penetration
+testing and has spent the last six years doing security assessments, penetration tests, Web
+application tests, and other consulting work for a number of clients.
+As an author and an established expert in the field, Messier has published several
+articles for Hackin9 Magazine, has developed a number of video training titles with
+O’Reilly Media and has written a number of books on information security.
+
+xi
+
+About the Technical
+Reviewers
+Chris Williams has been involved in the IT security
+field since 1994. He is a co-author of the book Enterprise
+Cybersecurity: How to Build a Successful Cyberdefense
+Program Against Advanced Threats (Apress, 2015) and
+holds a patent for secure e-commerce technology. He
+has been with Leidos since 2003, focusing on enterprise
+cybersecurity, defense against advanced threats, and
+regulatory compliance. He has presented on these
+topics at RSA, (ISC)2, ISSA, B-Sides, HIMSS, MILCOM,
+and other forums. He is a former ranger-qualified
+paratrooper and holds degrees in computer science and
+information assurance from Princeton and George
+Washington Universities.
+Dr. Stanley Siegel earned a nuclear physics doctorate
+from Rutgers University. He has more than 40 years of
+progressive experience as a systems engineer,
+mathematician, and computer specialist. His career
+started with the U.S. Government in the Commerce
+Department and then the Defense Department. After
+his government service, he was with Grumman for
+15 years and Science Applications International
+Corporation (SAIC) for over 20 years (before SAIC split
+into two companies—SAIC and Leidos).
+At SAIC he was a senior technical advisor
+and director in areas such as software engineering
+methodology assessment, software requirements
+analysis, software testing and quality assurance, and
+technology assessment.
+He is a co-author of the book Enterprise Cybersecurity: How to Build a Successful
+Cyberdefense Program Against Advanced Threats (Apress, 2015). Dr. Siegel has taught
+software systems engineering graduate courses at Johns Hopkins University since the
+mid-1990s. Johns Hopkins honored him in 2009 with an Excellence in Teaching Award.
+
+xiii
+
+Introduction
+First, this is an introduction to the field of security assessments and penetration testing.
+Becoming really good at these tasks takes a lot of work. You should use this as a starting
+point. It is not a blueprint with a set of instructions for you to follow exactly on your way
+to an exciting career in information security. The most important thing you can do is to
+get your hands dirty and practice, practice, practice so you can keep growing your skills,
+knowledge, and experience.
+There are plenty of places to acquire software and systems to test against. The most
+important thing you should know before you get started is that a lot of the tools and
+techniques we are going to be talking about over the course of this book can cause system
+outages and data loss or corruption. Once you start working with tools and programs
+that are designed to break things, you can cause breakage. As a result, it’s essential that
+you only work on systems that are yours to start with. Get yourself a lab and work there.
+Virtual machines and free software are your friends here.
+The moment that you start working with clients or employers performing
+penetration testing or security assessments—and this can’t be said enough times—make
+sure to get permission. Informed consent is your friend, because inevitably you will
+cause some damage. Whether you intend to or not, you will run across a fragile system
+or a piece of software that misbehaves. Outages will occur, so it’s best to make sure
+everyone is on board with all of this. Let them know that you may cause outages and that
+in very, very rare instances you may cause data loss or corruption. It happens. Once you
+cause damage or downtime, the very last thing you want to do is to have the client or
+your employer come back to you and say you didn’t let them know it was possible. Get
+everything in writing.
+Once you have everything in writing and everyone knows what is possible, you can
+get started on all of the fun work, which is what you are about to do here. Keep in mind
+that in spite of what you see on TV and in the movies, breaking into systems isn’t nearly as
+simple, as a general rule, as a few taps of the keyboard. It’s tedious and can be a lot of hard
+work. Once you’ve popped your first box, though, it makes the time and effort worth it.
+Enjoy the ride!
+
+xv
+
+CHAPTER 1
+
+What Is Penetration Testing?
+Penetration testing is an art. You can learn a lot of techniques and understand all of the
+tools, but the reality is that software is complex, especially when you start putting a lot of
+software systems together. It’s that complexity that means that there is no one-size-fitsall solution when it comes to finding ways to get into systems. An attack that may work
+against one Web server may not work for the same Web server running on a different
+system. Sometimes, you can try a particular attack a number of times without success
+before it suddenly starts working and you find a way to break into the system. A skilled
+and successful penetration tester has not only the technical skills necessary to run the
+tools and understand what is happening, but also the creativity necessary to try different
+approaches.
+You may hear penetration testing referred to as ethical hacking. In fact, there are
+some professional certifications that include ethical hacking in the name. They are
+essentially the same thing, though ethical hacking includes a component in the name
+that penetration testing doesn’t. Ethics is an important component when it comes
+to penetration testing. The name says it all, after all. You are testing to see if you can
+penetrate system and network defenses. If you can penetrate, you gain some level of
+access. In the course of normal operations, this may be access you may not otherwise
+have, and this is where ethics come in, though in reality the ethical component is more of
+a legal requirement.
+The laws in the United States, and in many other countries, make it illegal to obtain
+unauthorized access to computer systems and networks. Once you have gained the
+access that is the point of a penetration test, you have broken the law. Unless, of course,
+you have permission to do it. While you may not have accounts on the systems in
+question, which would be explicit authorization, you should always have permission to
+perform the test, which is an implicit authorization to gain access to the systems. This
+permission is critical, and you may sometimes hear it referred to as a “get out of jail free”
+card. While technically it’s more of a “stay out of jail” card than a “get out of jail” card, the
+important word you don’t want to overlook is jail. If you think you are doing someone a
+favor by testing their network or application security for them and that they will thank
+you when you find a serious hole, think again. Even years ago when everyone wasn’t
+exactly on edge about computer security, this wasn’t done by respectable professionals.
+Performing any sort of penetration testing or using the tools we are going to be reviewing
+against systems you don’t have an agreement in place to touch has the potential to land
+you in jail.
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_1
+
+1
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Breaking into systems can be fun and exciting, and some people really find
+solving the puzzle and getting in to be a bit of a high. There are a lot of ways you can get
+experience without testing on other people’s systems, however. Using virtual machine
+software like VirtualBox, VMWare, or Parallels, you can install a number of operating
+systems on a single computer system. In fact, I would strongly recommend getting some
+virtual machines up and running so you can try out some of the techniques we will be
+going over. At a minimum, you may want to have an installation of Kali Linux and a copy
+of Metasploitable 2. Kali Linux is a Linux distribution that was once called BackTrack. It
+contains a lot of security tools installed by default and can be used to perform penetration
+tests with what’s in place in the distribution. Metasploitable 2 is an implementation of
+Linux that is designed to be exploitable. It includes versions of various services that are
+vulnerable to exploits and are available in the exploit framework Metasploit. A copy of an
+older Windows installation may not be a bad idea either, just to see what Windows attacks
+look like.
+
+Information Security
+Why do we perform penetration testing? Ultimately, the goal of a penetration tester is
+to help an organization improve their defenses in case a real attacker comes by to break
+in and steal information. This information can come in many forms. In the case of a
+business, it may be intellectual property. This is any information that the business relies
+on to set them apart from other companies. This may be patents, source code, or any
+other documentation about how the business is run. Other forms of data are banking
+information, credit card numbers, social security numbers, usernames, passwords, and
+especially anything related to health care. Attackers may be trying to steal any of that
+information, because it can be sold or used to gain additional access to other systems.
+
+You will find I avoid the use of almost any form of the word hack. Hacking has a long
+and storied history that predates its application to computers by several decades. When
+I started using computers, hacking meant doing something really cool and interesting
+with a computer. A hack was the result of that hacking. These days, hack and hacking are
+apparently meant to suggest something else, but the way the media uses the words is very
+vague and it obscures what is really going on. For the most part, when you hear about a
+“hack” in the news, what you are hearing about is a crime. I find it’s best to call a crime
+a crime. If we are talking about the people perpetrating that crime, we are talking about
+criminals. In order to be very clear, you will be seeing the words attacker or adversary.
+These are the people who are trying to break into your systems. You will see the word attack
+used to indicate what they are doing. It’s essential to remember that there is nothing cute
+or charming about what these people are doing. They are frequently well funded and well
+organized, and their activities are run as a business because they make a lot of money from
+them. Treat them as though they are armed and dangerous, because they are.
+
+2
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Organizations will spend a lot of time and resources trying to protect themselves
+from these attacks. They will implement firewalls to keep attackers out and intrusion
+detection systems to hopefully catch when someone gets through the firewall. They will
+also implement procedures within the organization to protect themselves from insider
+attacks, which are also common. This may include the requirement of strong passwords
+or perhaps multi-factor authentication, which may require the user to have something
+on them or even use something like a fingerprint in addition to using a username and
+password.
+The thing that organizations are trying to protect against is vulnerability. A
+vulnerability is a weakness in a system. System, though, is a very vague term. By using
+the word system, in this case, we are not only talking about the operating system and
+applications that make your computer useful but also, in a larger context, all of the
+computers and network devices within the entire enterprise network. The organization
+will try to locate its weaknesses, or vulnerabilities, and either remove or reduce them.
+The process of trying to remove or reduce a vulnerability is called remediation. When
+you are trying to reduce the impact of a vulnerability being taken advantage of, you are
+mitigating the impact. So, in the process of managing vulnerabilities, you will hear the
+terms mitigation and remediation.
+When you take advantage of a vulnerability, you are exploiting it. You will see
+references to exploits as we continue, which are specific techniques or even pieces of
+software that are designed to exploit a particular vulnerability. The point of an exploit
+may be to obtain system-level access, meaning the attacker can see and even control files,
+users, and services. Some of these actions require a higher level of access than a regular
+user may have. On Windows systems, you would say that you have administrator access.
+Under a Linux or Unix-like system, you may say that you have root or superuser access.
+The user root is the default administrative account on a Unix-like system, including
+Linux. If you are root, you can do anything on the system. If you are root and there is some
+action you can’t take, there is probably something wrong.
+The last thing to go over, while we are talking about information security and
+vulnerability management, is the idea of probability and impact. When assessing a
+vulnerability, a security professional will generally take into account two factors. The first
+is the probability. This is often given a qualitative valuation like low, medium, or high.
+What it refers to is the likelihood of a particular vulnerability being exploited. If there
+is proof-of-concept code available or if there is flat out an exploit widely available (“in
+the wild”), the likelihood may be very high. If you have additional mitigations in place,
+like you have to be on the local network and not remote in order to take advantage of
+the vulnerability, you may decide the probability is lower. Making this valuation and
+categorization will often take a combination of knowledge and experience.
+The other factor that is important to know about is the impact. This is what happens
+if the exploit is triggered. If the exploit causes the application to crash but it comes right
+back up, this is probably a low-impact exploit. If, on the other hand, it causes a remote
+attacker to get unauthorized administrative access to your system, the impact is high. If it
+causes the destruction of critical or sensitive information for the business, you may also
+say it’s high impact. While this may be easier to gauge than probability, it still takes a fair
+amount of knowledge and experience to be able to do it accurately.
+
+3
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+It may be tempting to just rate high on impact and probability in order to get someone to pay
+attention to a particular vulnerability, but you will quickly lose credibility. It’s not essential
+that absolutely every vulnerability get fixed. Ensuring that the most critical ones get the most
+attention is far more important. Be honest and based in facts and you will ensure that your
+opinion means something.
+One last thing to note. We have been talking about information security, and that’s
+a phrase you will hear about a lot. The objective is to protect the information assets of
+an organization. However, an attacker may not care about your information assets. They
+may care more about your computing assets. In other words, they may simply be looking
+to collect a system they can add to their network of systems that will perform tasks for
+them. This is a very lucrative business, so don’t assume that just because you are a small
+organization you aren’t a target. You are. Especially if you are easy for the picking. Your
+systems and their computing power are just as good as those from large, high-profile
+companies—more so if they are easy to break into.
+
+Limitations of Penetration Testing
+Penetration testing is looking for vulnerabilities and trying to exploit them. However,
+there may be a tendency for some people and organizations to expect that all
+vulnerabilities can be exploited quickly. In fact, when done well, penetration testing can
+be a very time-consuming operation, and you often have a very limited amount of time
+in order to perform your testing. If the organization is looking for the big bang, the one
+big exploit that gives you the enormous haul of data, then something shy of that may be
+viewed as an indication that they are safe. In fact, nothing could be further from the truth.
+If you or the organization you are working for is myopic about the goal, you will
+end up with generally poor results or, worse, will provide the organization with a false
+sense of their safety. If you only find little things, you haven’t achieved your objective of
+penetration. If you haven’t penetrated any system or haven’t penetrated any system in any
+significant way, it may be seen as a sign that the system or application can’t be penetrated.
+All it means is that you were unable to penetrate it given the time you had available when
+that time was spent on a large number of systems. It’s critical to keep in mind that the
+company’s adversaries are motivated and generally patient over a long period of time. If
+you are a target for them, they will keep coming at you over a much longer period of time
+than you will be provided with as you are doing your penetration test.
+Often, penetration tests can be crippled before they even begin because of the rules
+and constraints that are put into place. As an example, I have worked on engagements
+where the client didn’t want specific systems and networks touched because they knew
+they were fragile. A test that leaves out infrastructure that is known to be vulnerable
+doesn’t provide a complete or accurate representation of the security posture of the
+organization or how vulnerable they are. If the report is used in isolation without the
+additional information, it is misleading.
+
+4
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Focusing on the act of penetration may not be doing the company you are working
+for many favors. Instead, it may be better to perform a security assessment. This is partly a
+penetration test, but it isn’t limited to just the components you were able to quickly break
+into. You may be unable to find issues in the limited time you have. That doesn’t mean
+there aren’t issues that need to be resolved. As an example, though it’s very, very lowhanging fruit, we often see Web servers configured to provide not only the name of the
+software but also the version. Sometimes, even the Linux kernel version, if it’s on a Linux
+system. Windows systems will sometimes provide details about the version of Windows
+that the Internet Information Server (IIS) is running on. While these may not be terrible
+problems, they provide far too much information to an attacker. Sure, they can probably
+figure out some of this information in other ways, but why make their job easier? Make
+them work for every bit of information they get. This is especially true when it’s really easy
+to close some of the leakages. Turning off the feature that exposes version numbers from
+a Web server is a couple of minutes of work. There is almost no reason to not take that
+couple of minutes to just tighten up the perimeter.
+This is the type of finding that doesn’t score many points if you are working on a
+penetration test. A security assessment, though, is a different animal altogether. The
+objective behind a security assessment is to give an honest and complete as possible
+appraisal of the security posture a company has. You may turn up far more items in a
+security assessment than you would in a penetration test. In a penetration test, you may
+not be working in cooperation with the target. This is generally a mistake if the target
+is looking to find ways to shore up defenses. Yes, you can test operational response
+capabilities and you can get a sense of how far someone may be able to get without any
+inside assistance, but as noted above that’s a false sense of security. Again, discovering
+that someone couldn’t get in after working for three days doesn’t tell you anything about
+your readiness against a determined attacker working around the clock for weeks.
+The security assessment is a partnership between the security professional and
+the target. This is usually a full-knowledge penetration test as well as a review of
+configurations and settings that a penetration tester may never get to see. This is valuable
+for two reasons. The first is because the attacker is going to keep poking and prodding
+until something eventually gives. Second, some attacks happen from the inside. These
+people will know about some of these settings and be able to make use of them. A security
+assessment can turn up far more valuable information by just exposing business as usual
+to a third party who isn’t looking at the way things are every day and becoming blind
+to problems because “that’s just the way things are done here.” A security professional
+performing a security assessment can provide an objective analysis of what is found so
+issues can be prioritized by management and resolved.
+
+Testing Types
+The first is called a black box test. This is something like a traditional penetration test,
+but on the extreme end. A black box test means the tester has no knowledge of the target
+other than who the target is. The attacker may not know IP addresses, domain names, or
+anything. This requires gathering a lot of intelligence up front. This can be a very valuable
+exercise, since a company should always know how much information they are leaking to
+the outside world that could be used to attack them. The information gathering will take
+
+5
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+up a large amount of time, so it’s important to make sure that the time for that has been
+scheduled in. You wouldn’t want to take two days out of four you have been allocated just
+gathering information so you can start to perform your attacks.
+When someone is performing a full-blown black box penetration test, it may be
+a good chance to test response capabilities. In that case, you may have a red team,
+also sometimes called a tiger team. The red team is the attack team. They are the ones
+trying to get in. The ones on the inside, whether they are aware it’s happening or not
+(and sometimes the operations staff has no idea in order to get a true sense of response
+capabilities), are called the blue team. You may also have a white team, which is aware of
+both ends of the equation. This is more common in competitions, however, and the white
+team in that case is entirely neutral and manages the competition.
+
+If you are interested in engaging in practice with your penetration testing and you want
+to do it in a safe way that’s also quite challenging, there are a number of competitions
+available online. These are sometimes called capture the flag competitions or cyber defense
+competitions. Sometimes you work in teams, but there are also challenges where you can
+work on your own to solve a particular puzzle to get into a system.
+On the other end of the spectrum, closer to the security assessment mentioned
+earlier, is the white box test. This is generally full knowledge. The attack team works
+closely with the target. It may involve having credentials established ahead of time.
+This allows the tester to perform full local (on-system) assessments without having to
+penetrate before checking the local settings. You may have systems that appear to be very
+hard on the outside, but once the system is popped it’s a soft, gooey mess on the inside.
+This can be an enormous problem, so it’s helpful to check local hardening as well as
+remote hardening. The operations team is generally informed and works with the attack
+team to ensure that there is no impact to customers as a result of the testing.
+In between the black box and the white box is the gray box. This is, not to sound flip,
+a gray area. Each gray box test may be different because it’s somewhere between the black
+and the white tests. One common approach may be to provide all of the initial parameters
+up front. This would be the IP addresses and hostnames that are considered in play.
+This way, the red team doesn’t have to spend time hunting down that information. This
+approach also has the benefit of limiting the impact to systems that are clearly out of scope,
+which may happen by accident if it’s a true black box test. Considering the sorts of activities
+that may be happening here, keeping innocent bystanders out of play is important.
+Determining how you plan to approach should ideally be based on an intersection
+of the amount of time you have and what the client is really looking to accomplish. There
+are always trade-offs associated with the different types of test you can do, so you should
+talk the client or your employer through what you can do in the amount of time you have
+been given. If they are concerned about what could be done once someone is in, a white
+box test may be most in order. If they are really looking to get a sense of how they respond
+to incidents, you may want to use a black box test. Black box testing will often spend a lot
+of time on reconnaissance and less time on actually testing. Sometimes gray box testing
+provides the best balance, but that’s something you need to make sure to communicate
+about with the client.
+
+6
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Typically, testing is performed in a production environment. This provides the
+best idea of how good the defenses are in the live systems. There is a risk to this,
+however. Some companies may prefer some of the testing to be done in a protected lab
+environment to avoid any impact to the live systems. This may be done to ensure that
+the business can continue to take customers, but it may also be done if there is a concern
+about data corruption or leakage as a result of the testing. Either of these cases is valid,
+depending on the circumstances, but you have to be sure that the lab environment
+mirrors the live environment as closely as absolutely possible or else it’s a waste to be
+performing the testing to begin with.
+
+Who Does Pen Testing
+This is really a tricky question, and you may approach it from a couple of different angles.
+First, you may be wondering about the types of people who may be performing this work.
+This may come down to the types of knowledge or skills they have. Just because you are a
+security professional doesn’t mean that you would be a good penetration tester. If you are
+a firewall administrator, you would technically be a security professional, but you may not
+be any good at doing penetration testing work. That doesn’t mean you wouldn’t be good
+at it but the two don’t automatically go hand in hand.
+Personally, I think it has far less to do with technical skills, since those can always
+be taught or picked up. Someone who might be good at penetration testing is likely
+someone who is very curious. This is someone who wouldn’t allow things to sit at face
+value. As part of that, they would also be persistent. They would want to know more about
+something and keep after a particular problem or challenge until they had either resolved
+it or exhausted all possibilities. There is also a certain amount of creativity required of a
+penetration tester. This is because you need someone who can come at a problem from
+different perspectives and not just give up at a road block on the first attempt.
+Sorting out this question is important if you are looking for someone internally to do
+your testing for you. This brings up the important question of whether to use someone
+internal to the organization or to go outside. If you use an outside organization, you get
+the benefit of objectivity. Someone who is outside won’t know the way things work, and
+so they likely won’t make assumptions. Anytime someone performing a penetration test
+starts making assumptions, they run the risk of missing a lot of vulnerabilities. The same
+can be just as true if you continue to use the same outside tester over and over again.
+There ends up being too much familiarity. As an example, I had a client I was working
+with several years ago. In the process of some testing early on, I inadvertently caused
+a system to fail while doing some very basic scanning. The system was clearly far more
+fragile than any of us expected, but that experience ended up coloring a lot of subsequent
+testing over the next couple of years. We were always careful about how aggressive we
+were. This includes the external team as well as the internal team.
+Using someone internal, however, means that you theoretically have someone at
+your disposal whenever you need them, and you can do a lot of incremental testing. As
+with anything else, though, there are advantages and disadvantages to this. If you look too
+much at something, you may miss a change because you start to assume too much. Also,
+unless you can pay someone whose sole purpose is to perform this sort of testing, you are
+losing productivity from someone who may have other things to do if you are using them
+regularly for penetration testing.
+
+7
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+In terms of finding someone to perform penetration testing, there are a lot of things
+to consider. If you are someone who is looking to become a penetration tester yourself, as
+seems likely considering what you are reading, prepare to spend some time learning not
+only about basic penetration testing practices but also about how complex IT systems are
+built, including programming languages, databases, and system administration. These
+will all help you be a better penetration tester and more deeply understand what it is you
+are doing. This will make you in more demand. The larger your toolkit is, the more people
+will want to make use of you.
+
+Methodology
+There are a number of methodologies available when it comes to performing security
+testing. You can go find one you like, whether it’s deep in scope or just very simple. You
+can develop your own, and you may want to do just that once you start getting the hang
+of what you are doing. For our purposes, we will be using a very simplified framework. As
+you start doing your own penetration testing, no matter what methodology you use—and
+you will need to use some sort of methodology—you will want to communicate that
+methodology to your clients or employers.
+The reason for using a methodology is to demonstrate that what you have done is
+repeatable. You weren’t just shooting in the dark. You actually thought through what you
+were doing. Providing your methodology, at a high level, demonstrates that you are using
+a documented process, even if you are flying by the seat of your pants in each individual
+moment. Providing the methodology will generally give more weight to your testing and
+your conclusions. If I were to just provide a bunch of conclusions, and they had no idea
+how I had come to those conclusions, the whole thing may be harder to swallow. It’s just
+like you were in math class. Show your work.
+The methodology we will be using in this book is a modified version of a common
+methodology I would use when working with a client. It will allow us to get right to the
+meat of penetration testing. With that said, this methodology is simplified somewhat.
+There will be a number of areas that we won’t get into that will come up as you keep
+working, including the following:
+1.
+
+8
+
+Intelligence gathering – this is reconnaissance work against
+your target and will vary based on how much information
+you were provided before the engagement. Even if you were
+provided the entire scope, you will probably want to perform
+some reconnaissance so you can provide guidance to the
+client as to how exposed they are from an information leakage
+perspective.
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+2.
+
+Scanning – this is a different level of reconnaissance. Before
+you start determining your attack strategy, you need to know
+what your targets are. This will provide you with a lot of
+information about systems and ports as well as, potentially,
+any firewalls that may be in place. This is also where you may
+need to exercise caution, depending on what level of testing
+you are performing. This can be a very noisy step, since you
+are starting to engage directly with the target here. It may be
+useful for the client to see if they can detect the scanning as
+part of shoring up their defensive stance.
+
+3.
+
+Vulnerability identification – once you have some target
+systems and applications identified, getting a list of known
+vulnerabilities will tell you where you can quickly and easily
+get in. You may use a number of techniques to perform this
+step. Some of them may be automated, but others will be very
+manual.
+
+4.
+
+Exploitation – the vulnerabilities that you have identified will
+lead you to exploitation. This is where you actually begin to
+penetrate the systems by exploiting the vulnerabilities that
+you have identified. This step can be very time consuming and
+also heart breaking, simply because a vulnerability doesn’t
+always lead to a system compromise. Some vulnerabilities are
+very difficult to exploit, and other exploits may just not work.
+You may end up finding a lot of false positives in this stage
+where the vulnerability was identified but the expected exploit
+didn’t work.
+
+5.
+
+Reporting – once you are done, make sure to clearly
+document all of your findings so you have something tangible
+and coherent to present to your employer or client. This stage
+is essential. For all the fun that you can have doing the first
+four steps, if you don’t do a good job with this one, you won’t
+get asked back to play again, and word may eventually get
+around so that no one will ask you in to play with their toys.
+Spend time learning to write a good and effective report.
+
+In reality, some of these stages may be collapsed, depending on how much time
+you are working with. Some of the automated tools that you may find to use will do
+much of this in a single step. Don’t rely on the automated tools, however. Always double
+check your results, and don’t assume that they will always find vulnerabilities or that the
+vulnerabilities they find will always be exploitable. This is why it’s always a good idea
+to do all of this work separately, even if you have a tool that will do a bunch of it all at
+the same time. The fact is that, while various methodologies are designed to mimic the
+actions of an attacker, attackers aren’t always following these steps. They may simply do
+a port scan or a port sweep and then launch attacks once they have identified open ports
+that may be vulnerable. For the most part, there is almost no cost to blindly launching
+attacks.
+
+9
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Summary
+Anyone can be a penetration tester. Good penetration testers require experience and
+knowledge, just as someone who is good at any other profession. Penetration testing is
+as much an art as it is anything else, in spite of its being a highly technical profession.
+That’s because something that works one day may not work the following day. Software is
+complex. Being able to handle the differences from one day to another and accommodate
+those differences is an important part of the job and a big part of what makes it an art.
+There is never a clear step-by-step process all the way through every penetration test. You
+will have to be a little creative, a lot persistent, and a lot resilient. Patience and persistence
+will get you a long way toward success.
+As you prepare to become a penetration tester, you should keep in mind the
+expected ethical obligations. If you just want to go out and break into systems without
+regard to laws, you are free to do that, of course. That doesn’t make you a penetration
+tester, though. It makes you a criminal, and it’s entirely possible that you won’t be free for
+much longer. Always, always get complete agreement from your target about what it is you
+are expected to be doing. As you are learning, either find someone or some organization
+that is very understanding and lenient that will let you try things out on their systems, or,
+better yet, get yourself a small lab system that you can work on. There are a number of
+ways to do this. The cheapest is to get a system with a lot of memory in it and build virtual
+machines. This doesn’t have to be very expensive. Just about any modern computer will
+work for what you need it for. You can then get free software like VirtualBox to host your
+virtual machines.
+As you start to get into penetration testing, pay attention to the steps you are
+following. As you get comfortable with following a fairly regular routine, you develop
+your methodology. It’s probably helpful to document that. You will likely want to use the
+documentation you produce in reports you generate for your employer or customers.
+Educating your client will improve your relationship with them, give them more for
+their money, and also clearly demonstrate your value. Many penetration testers deliver
+reports highlighting everything they were able to do without clearly explaining what
+happened or what can be done about it. Providing clear and complete documentation
+will also establish that you are following a process and not just shooting from the hip with
+everything you are doing.
+
+Exercises
+1.
+
+10
+
+Obtain a copy of VirtualBox, or VMWare or Parallels if you are
+more comfortable with them. Install it on your system. You
+can obtain VirtualBox from http://www.virtualbox.org. It
+will be a straightforward installation, and you shouldn’t need
+to do anything other than accept the defaults for any prompts.
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+2.
+
+Obtain a copy of Kali Linux. This will be an .ISO image that
+you will use to install Kali into a virtual machine. You can
+download the current .ISO from http://www.kali.org.
+VirtualBox will allow you to install a new operating system
+from the .ISO image you have downloaded. Again, installation
+of Kali should be fairly straightforward. Accept defaults within
+the installation, since a default Kali installation will get you
+going for our purposes.
+
+3.
+
+Obtain a copy of Metasploitable 2. There are different places
+to get this. You should use Google, Bing, or your favorite
+search tool to look for a place from which to download it. It
+will make for a good target for some of what we will be doing.
+This does not require installation. It is a VMWare image that
+you should be able to just open in any virtualization software
+that you have, including VirtualBox.
+
+11
+
+CHAPTER 2
+
+Digging for Information
+The first step along our path to system conquest is digging up information on the
+target. Fortunately, in the connected age that we live in, there is a lot of information
+that is available online somewhere if you know how and where to look for it. The easy
+availability of information means that there is a lot of it easily available. Of course, there
+are privacy issues related to all of the information that is so easily available, but for the
+moment we aren’t concerned about privacy. In fact, we will be grateful for the freeflowing information that you will find you have access to without having to resort to any
+trickery, deceit, or law breaking. Not even any potential law breaking. You may be aware
+of stories of dumpster diving and other means of obtaining information from the days
+long before information became so free and easy to come by. These sorts of tactics are
+almost entirely unnecessary.
+For a start, you have Google. In addition to the unbelievable volume of information
+accessible via Google, there are a number of techniques you can use to improve your
+searches. Google provides a number of ways to dial in pretty tightly on the information
+you are looking for so you aren’t wading through a large number of pages just to find
+the one piece of information you are looking for. You can think of it as an automated hay
+filter as you are searching for your needle. While Google hacking, as it is called, is very
+powerful, it’s not perfect. You may still need to do a lot of manual filtering and reading.
+Beyond Google, there are a number of sites that can be used to gather information
+about targets. Social networking sites are often good places to go to acquire information,
+and certainly job sites are great repositories of information, especially when it comes to
+gathering technical information about your target. Depending on the awareness levels
+of the company you are working with, you may be able to turn up a large amount of
+information that is, again, stored in very public locations.
+While the Internet is mostly decentralized, there are some cases where there are
+central repositories of information. These repositories are called Regional Internet
+Registries (RIRs), and they can be useful in acquiring information about a business. This
+may include information about domain registrations and IP addresses that are assigned
+to the business. In general, this is public information, though some details, specifically
+those associated with domain registrations, may be masked. When it comes to IP
+addresses, though, it’s all public. Mining these repositories can sometimes turn up useful
+information, including contact data.
+Using a combination of all of these sites and tactics, you will be able to gather a lot of
+information about your target.
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_2
+
+13
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Google Hacking
+The phrase Google hacking sounds incredibly cool, and in some ways it really is, with
+applications far beyond what we are talking about. However, in spite of the name, this
+is not an attack on Google in any way. Instead, it’s a way of using a number of keywords
+that Google has implemented in their search engine to help you get the narrowest of
+results possible. Long gone are the days of 1,589,341 pages returned from your search.
+Instead, you can get very, very specific using a different type of searching. It’s called
+Google hacking, but in reality, other search engines have implemented many of the same
+keywords. If you really love another search engine instead of Google, you should try
+some of these out to see if they work there. Table 2-1 shows the keywords that Google has
+introduced to allow you to narrow results.
+Table 2-1. Google Hacking Keywords
+
+Operator
+
+Description
+
+intitle
+
+Looks for the search terms in the title
+
+allintitle
+
+Looks for the search terms only in the title and nowhere else in the
+document
+
+inurl
+
+Looks through the URL (the address) for the search terms
+
+allinurl
+
+Similar to allintitle, looks only in the URL for the search terms
+
+filetype
+
+You provide the filetype and search terms. All results have that filetype.
+
+allintext
+
+The search will not look at the URL and just in the text.
+
+site
+
+Narrow your search to a particular site. You have to provide the site as
+well as search terms.
+
+link
+
+Searches for links to pages
+
+inanchor
+
+This search will look in anchor tags only
+
+numrange
+
+Searches for a number
+
+daterange
+
+Results will be within a range of dates, as specified
+
+author
+
+Searches Google Groups for a particular author. This only works in
+Google Groups.
+
+group
+
+Looks for a group name. This only works in Google Groups.
+
+insubject
+
+Searches subject lines in posts. This only works in Google Groups.
+
+msgid
+
+Searches within a group for a message ID.
+
+Google is not only a search engine for Web pages. It is also used for searching
+images, groups, and news. Google hosts groups, which are similar to mailing lists or
+the old Usenet groups. They can be used exclusively online, but they can also be used
+with e-mail. Additionally, Google will allow you to search through news. This is a way of
+getting to a collection of sources of news information as defined by Google. If you had a
+particular breaking event you wanted to know about, you would search through Google
+News in order to locate information about it.
+
+14
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+As you can see from the keywords, though, you can start to really narrow in on
+your subject matter. As an example, you can see in Figure 2-1 a search designed to
+find all of the Excel spreadsheets on the microsoft.com site that include the words
+Microsoft Windows. In order to pull this particular search off, we used the filetype
+and site keywords.
+
+Figure 2-1. Google hacking keywords
+There are, of course, a number of far more useful searches that you can use to get
+more interesting information than just a list of Excel spreadsheets from Microsoft’s Web
+site. You could look for sites that include directory listings. Most Web sites should have
+directory listings turned off, because the administrators don’t want you to get direct access
+to all of the files there. They may be using some as background files, and those may include
+things like passwords. This may be especially true in the case of any configuration file.
+
+15
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Web servers have a root directory or folder for each site the server is responsible for. All
+pages that are served up from that Web server would be under that root directory or folder.
+Web servers use index pages, meaning specific pages that are served up automatically if
+no specific page is requested. If there is no index page and the server is configured to allow
+it, which is uncommon, the server will present a list of all of the files and folders in the
+directory.
+In order to locate Web sites that have directory listings turned on, we turn to the use
+of another keyword, intitle. When a Web site is showing a list of its files within a given
+directory, it will commonly put the words “Index of” in the title of the page. So, if we use
+the intitle keyword and look for “Index of” we should get back pages that have directory
+listings turned on. You may take it a step further and look for specific filetypes. If the directory
+listing has a .txt file, for instance, that may be of particular interest. This may include
+the robots.txt file, which may include a listing of all the files that the Web administrator
+does not want search engines to look at. The reason for this is often that there is sensitive
+information within these files, and so the site owner doesn’t want them easily found.
+If you find yourself at a loss for interesting things to search for, you can go
+to the Google Hacking Database (GHDB). As of this writing, it is located at
+https://www.exploit-db.org/google-hacking-database/, though given the fluid
+nature of the Internet, the URL may be prone to change over time. The best way to find it
+is with a quick Google search. The Google Hacking Database is a repository of interesting
+searches that can be used to turn up a wide variety of results. In Figure 2-2, you can
+see the categories of searches that can be found. You can do a lot of looking for various
+devices that belong to the “Internet of Things,” as it’s called. You can find Web cams, look
+for specific error messages given by applications, find vulnerable systems, and do a lot of
+other very targeted searching using Google hacking. This is a great starting point if your
+creativity is a bit tapped as to where to go with the search you are trying to do.
+
+Figure 2-2. Google Hacking Database categories
+
+16
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+GHDB includes a lot of canned search terms that can be used without having to
+figure them out on your own. Of course, while there is a lot of temptation within the
+database, keep in mind that you are only working on the client who has contracted
+your services. Starting to play around with things like login portals to see what you can
+accomplish with some default usernames and passwords is not only unethical, but it may
+also be considered illegal if it is out of scope of your engagement or is conducted against
+a Web site that you do not have permission to access. As always, tread carefully. When
+working for a customer, it is important to tack on the site: keyword to look specifically
+within the domain of your client for some of these issues. Remembering to use the site:
+keyword to restrict your searches to only your client will help to keep you out of trouble.
+When you combine some of the techniques associated with Google hacking
+with information you can gain using other sources, you may be able to identify some
+vulnerabilities. As one good example, you can use the site: tag with search terms,
+such as error messages, to identify vulnerabilities within the infrastructure of your
+target company. This is especially true with Web applications. A Web application that is
+vulnerable to attack will often generate specific error messages. You may be able to search
+for instances of error messages within Web pages belonging to your target. "Google
+hacking" can save you a lot of time by seeing whether an error was ever turned up as part
+of a crawl of sites belonging to your target.
+Using the keywords that Google provides can give you some very targeted results.
+Many of these terms can be combined to make your searches quite powerful. If you
+are interested in learning more or getting some ideas about how to make your Google
+searches more effective, the Google Hacking Database is a great resource. You may also
+find that some of the keywords work on other search sites as well.
+
+Social Networking
+Google is not the only place from which to get a lot of juicy information. There is a lot
+to be found on social networking sites. Twitter, being a big public forum, may be really
+helpful if you do some judicious searching. In the case where you have a specific client,
+do a search like the one you can see in Figure 2-3. Rather than looking for something that
+may include potentially exploitable information, this particular example search is boring.
+It is simply for the publisher of this book to demonstrate the process. If you are working
+with a company, you may find that they post job listings or reference specific skills they
+are looking for. There may be a number of useful and interesting posts related to what
+they have going on in-house, and any of that information can potentially be used down
+the road. Technical information is always gold, like any employee skills they reference or
+any vendors they work with, but there could be a number of other references that could
+be used in a social engineering attack later on.
+
+17
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Figure 2-3. Twitter search results
+Twitter isn’t the only social networking site that can be trolled for information.
+Facebook is another such site, though it has a range of permission settings that may make
+it harder to locate information than it is commonly for Twitter. There was once a public
+Application Programming Interface (API) that anyone could use to query Facebook for
+information. This has now been all but shut down. In order to get anything of any interest,
+you have to have an account with the right permissions. In other words, if you are looking
+for posts from a particular person and those posts have been set to only be available
+to friends, you would have to be a friend of that person to acquire the information.
+Businesses may make public posts, but the API and information available isn’t nearly as
+open as it used to be. While the API was commonly used only to query public posts, you
+may be surprised to see how many posts are made public by people who simply didn’t
+know any better. A few years ago, the Web site weknowwhatyouredoing.com, written by
+one young man by himself, pulled a collection of statuses related to doing drugs and
+saying bad things about your company. He was able to do this because of the public API
+that Facebook published. The site no longer exists because the public API no longer
+exists.
+
+18
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+The fact that the public API isn’t there anymore doesn’t mean that you can’t
+connect to Facebook and go browsing a little yourself. The nice thing about Facebook
+is that no one can see you’re doing a little stalking. The same can’t be similarly said
+of LinkedIn. LinkedIn is also a social networking site, but rather than being primarily
+personal in nature, as Facebook is, it is more business focused. Over time, LinkedIn has
+added a variety of features from other social networking sites, including status updates.
+These status updates may provide a lot of useful information, sometimes including job
+availabilities with a short set of requirements.
+One downside to LinkedIn, unlike other social networking sites, is if you go visit
+someone’s LinkedIn profile, they will get a notice that you stopped by. This may or may
+not be what you want. However, there is a wealth of information that is available in
+LinkedIn. It’s more or less a very public repository of resumes from all over the world.
+As is often the case with resumes, the LinkedIn profiles include a lot of details about job
+responsibilities people had when they were at the companies that show up in their work
+history. If you can see the list of technologies that someone has been working on at a
+company, you can determine the types of infrastructure that company is using. You can
+see a sample of that in Figure 2-4. This is from an employee at a company that has used
+Juniper and Cisco equipment in their networks. They also used Nortel equipment. From
+this list, we can determine the types of systems for which we could look for vulnerabilities.
+This may yield pathways into the network for us.
+
+Figure 2-4. List of technologies from LinkedIn
+
+19
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+The great thing about LinkedIn is that, unlike on other social networking sites like
+Facebook, information is public. LinkedIn works best if people can see one another and
+what they have done. It’s a great way of locating potential employers or learning more
+about potential employees, vendors, or partners. It’s a great site for a lot of reasons. When
+it comes to locating information about infrastructure, LinkedIn is not the only source,
+however. Any job site could be used. In Figure 2-5, you can see a small section of a job
+listing for a security engineer position at an unspecified company. This job listing tells us
+that the company uses Cisco within their network and also does work with VMWare. Both
+of these facts can be used as you are looking for information about your target.
+
+Figure 2-5. Job Listing
+While this doesn’t tell us a lot, it’s a starting point. If you can put it together with other
+information that you have already gained, you may get a lot more traction. Sometimes
+you can use information from a variety of sources in order to get a better understanding
+of what is going on at your target. You can get information from ex-employees via sites
+like LinkedIn, where they may provide a list of vendor-specific skills they made use of
+at an employer. This may tell you that the target uses, for example, Palo Alto Networks
+equipment or Cisco equipment. If you find a job listing from after the tenure of the exemployee indicating a different set of equipment, you may draw the conclusion that this
+is a newer deployment that may not have all of the bugs and configuration settings shaken
+out yet, so it may be a ripe target. Of course, it could also just be a separate location,
+though in larger companies they may use the same equipment vendors across all sites
+for uniformity and cost savings from buying in bulk. You would have to do some poking
+and prodding on the network in order to determine what you are dealing with, but this
+information that you gather from job sites may be valuable as a starting point.
+
+Internet Registries
+Companies that have a presence on the Internet have to register information in various
+places. As the Internet has grown, the number of locations where this information is stored
+has increased. When a company registers a domain name, such as apress.com, it has
+to provide contact information that is stored with the Internet Corporation for Assigned
+Names and Numbers (ICANN). There are a number of registrars who will provide the
+interface for the consumer and manage that interface, but there is a single repository
+for all of the data that is captured. Fortunately, there is a single tool that is used to gather
+information from this repository. Figure 2-6 shows the use of the tool whois from a
+command line. You provide a domain name and whois gathers all of the information about
+that domain. The problem with these databases is that they have long been used to extract
+contacts that are then used for various marketing and spam purposes. Consequently,
+many companies are using "private" registrations, which block the whois tool from
+revealing contact information about the people who registered the domain. What you will
+get back from your whois query is an indication that the contact information is hidden, so
+you won’t have any company-specific information to work with.
+
+20
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Figure 2-6. Whois request
+Even if you can’t get contact information, you can get other information back from a
+whois request that can’t be withheld or blocked, such as who the registrar for the domain
+is as well as the creation date and the date the information about the domain was last
+updated. This isn’t nearly as interesting as getting names, phone numbers, addresses
+and e-mail addresses associated with the domain, but it’s something. You may also
+find domains where the registration hasn’t been turned private, so you may be able to
+obtain other information about the domain registration. There are a number of ways of
+obtaining whois information, including using a command line whois program on any
+Unix-like operating system, like Linux or Mac OS X, as shown in Figure 2-6. There are
+also Web interfaces that you can use that are available from any system, including mobile
+devices.
+In addition to being responsible for domain registrations, ICANN is also responsible
+for handing out Internet Protocol (IP) address allocations through one of its departments,
+the Internet Assigned Numbers Authority (IANA). IANA manages registrations for IP
+addresses and the well-known ports (ports for well-known services like Web and e-mail),
+among other things. IANA distributes network address blocks to the Regional Internet
+Registries (RIRs), including the American Registry for Internet Numbers (ARIN), Reseaux
+IP Europeens (RIPE), Asia Pacific Network Information Center (APNIC), Latin America
+Network Information Center (LACNIC), and the African Network Information Center
+(AfriNIC). Each of these registries maintains its own database of information indicating
+who owns IP address blocks as well as information about the organization and its contact
+information. There is a long tradition of registrations, like domain names and IP address
+block ownership, including a technical and administrative contact at a minimum. If
+you look up an IP address using whois, you will get the organization information as
+well as contact information. Companies that are concerned with exposure of internal
+information will generally hide behind generic contact information.
+
+21
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Even in cases where the information is generic, you can gather a lot of details from
+a whois lookup on an IP address. In Figure 2-7, you can see a whois request against an
+IP address. In the response, you can see the range of addresses that the one IP address
+belongs to. You can see whether the IP address belongs to a small block or a much larger
+block. This will help you to scope your investigation. You may be given a single IP address,
+or you may discover a single IP address if you haven’t been provided much information
+from your target. Getting the full block will give you other addresses you can look at. This
+will also protect you from mistakenly poking at another IP address that doesn’t actually
+belong to the company you are working with.
+
+Figure 2-7. Whois request on an IP address
+Whois implementations differ, unfortunately. Some whois implementations will
+only tell you which RIR owns the piece of information you are looking for. You may
+need to actually specify which RIR you want to query. In Figure 2-7, you can see that the
+host whois.apnic.net was specified as the system to query for the information about
+the IP address 1.1.1.1. Generally, each RIR has a hostname called whois that handles
+
+22
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+these queries. For APNIC, whois.apnic.net handles the requests and for ARIN, it’s
+whois.arin.net. The other RIRs have similar hostnames. You can see in Figure 2-7
+that the organization owns the block 1.1.1.0-1.1.1.255. In some cases, you may see that
+there is an organization that owns a larger block, but that a more specific block has
+been granted to another organization. Being able to determine who owns particular
+addresses is very helpful.
+In some cases, you may be able to identify a particular IP address as being used by
+a company for a Web or e-mail server when in fact the IP address may belong to another
+company altogether. This may tell you that the company you are targeting has outsourced
+hosting of some of its services to a provider rather than hosting them in house.
+In order to allow everyone on the Internet to get to the places they want to go, there
+is a wealth of information available from a handful of repositories. These repositories,
+regional Internet registries, can provide information like contact addresses or ranges of IP
+addresses. You may also discover that the company is concerned about the information
+they provide. In cases where you don’t get any contact information because it is being
+hidden by the registrar, you will know that the company has taken at least some simple
+steps to protect itself. That information may be useful as you go forward because you will
+know you are taking on an adversary that has some protections in place.
+
+Summary
+The most important skill that you can take away here is that of Google hacking. Google
+hacking makes use of specific keywords to help narrow your search parameters to
+get very specific results back. With this information you can better identify points of
+weakness within the infrastructure, but you may also turn up confidential memos or
+other documents that may provide useful information like usernames or passwords.
+Many companies have no idea just what is being stored within their Web-accessible
+systems, which Google may be scouring and cataloging on a regular basis. Google
+hacking keywords can help you reduce the haystack you are searching through down to
+a few strands of hay that may be obscuring the needle you are looking for. Even outside
+of penetration testing, Google hacking is an incredibly useful skill to have. The more you
+use those keywords, the more they become second nature and reduce the time that you
+spend looking for information within Google.
+There are a number of locations in which you can gather information related to a
+company, often without touching the company at all. In today’s world, companies need
+to maintain a presence in the Internet world and often have more of a presence than they
+realize, simply because they can’t always control what current and former employees
+say or do. This means that social networking sites like Facebook, Twitter, and LinkedIn
+can be very valuable resources for you as a penetration tester. You can often very easily
+determine what vendors the company is using within its infrastructure, which can
+provide you a leg up on finding ways in. Often, job descriptions or LinkedIn profiles can
+be very specific about the technologies that are in use.
+
+23
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+In addition, you can also make use of the various Internet registries that are used
+to maintain all of the information related to domain names and IP addresses, which are
+global across the entire Internet. Often, these will come with physical addresses and even
+contact names, e-mail addresses, and phone numbers. You can use this information
+for phishing or other social engineering attacks. Depending on the attack techniques
+you are using, this information may be even more valuable than the technical details of
+infrastructure vendors.
+
+Exercises
+
+24
+
+1.
+
+Use Google hacking techniques to obtain a list of Web sites
+that provide you access to a Web cam that has an admin login.
+
+2.
+
+Use whois, either from the command line if you are using
+Linux or Mac OS or through one of the many Web interfaces,
+to get all of the information you can about Apress. Then, look
+for the information about the company you are working for.
+
+3.
+
+Use whois to gather information about IP addresses, including
+4.2.2.1 and 8.8.8.8. Both of these addresses belong to wellknown domain name servers.
+
+4.
+
+Use Google hacking to locate Web server pages that have
+generated 500 Internal Server Error responses. The 500
+Internal Server error indicates that the server has run into a
+problem with the request and can be an indication of either
+a programming error or a misconfiguration. Either of these
+possibilities could potentially be exploited.
+
+5.
+
+Use Google hacking to get a list of PDFs that may be stored at
+ICANN.
+
+CHAPTER 3
+
+What’s Open?
+Commonly at this point, whether you were provided some starting places or you figured
+some out as you were poking around in Google or the Internet registries, you have at least
+some IP addresses or maybe hostnames to work with. In either case, the domain name
+system (DNS) is one of the next steps. At a minimum, having a better understanding
+of the structure and use of DNS is important. The DNS is where Internet Protocol (IP)
+addresses are mapped to hostnames and vice versa. There are some really useful tools
+that are commonly used when prowling around DNS, and we’re going to take a look at
+those tools, since you likely want to figure out in more detail just what you are looking at
+and where it might be.
+At this point, we have some places to start—we can use DNS to get us additional
+information based on what we have, whether it’s an IP address or a domain name. Using
+DNS, we can look up hostnames from IP addresses. DNS also stores something called
+resource records. A resource record indicates the function of particular hostnames or IP
+addresses. Using tools designed to query the DNS servers, we can obtain this information
+and make use of it to get a better understanding of the systems that may be used at a
+company. We can determine where the Web servers are, what systems are used to send
+e-mail, and the IP addresses associated with those systems. These hostnames and the IP
+addresses associated with them will provide some additional places in which to do more
+direct poking and prodding of our targets.
+The objective of finding these hosts is so we can see what applications are running
+on them, since, ultimately, it will be these applications that will be our targets. We can
+determine which applications are listening on network ports using port scanners like
+nmap. There are other port scanners out there, and maybe even some that are faster than
+nmap, but none are more venerable or useful. Once we have the port, nmap may also
+be able to give us the name of the application. We may also be able to use some other
+tools to interact more directly with the underlying application so as to determine the
+exact software that is running. Knowing there is a Web server on port 80, for example,
+doesn’t tell us a whole lot. Ideally, we would like to know the name of the software being
+used, like Apache or IIS or Nginx, and the version number. nmap can sometimes get that
+information, though there are other ways as well.
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_3
+
+25
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Domain Name System
+First, let’s talk about the domain name system (DNS) and how it’s all put together. The
+reason for using DNS is because humans can’t memorize numbers very well and the
+Internet relies on numerical addresses, called IP addresses. In order for humans to be
+able to provide addresses that are meaningful to them, there has to be a system that can
+translate the human-readable address to a machine-readable address and vice versa.
+DNS provides this function, as well as some others on top.
+DNS is organized in a hierarchy. At the very top are the top-level domains (TLDs).
+These include .com, .net, .org, .edu, and all of the country-specific domains. You can see
+a diagram of the DNS hierarchy in Figure 3-1. Underneath the TLDs are the second-level
+domains. In the diagram, you can see wubble.com, foo.com, and others that show up
+as second-level domains. Each of these domains contains the actual hostname, though
+they may also have third-tier domains, called subdomains. For example, if wubble.com
+had a little group that wanted its own subdomain, it may be offshoot.wubble.com, as an
+example. Underneath that you may have hostnames like www.offshoot.wubble.com.
+
+A domain name is a container for DNS records, including hostnames, but the domain name
+itself can also have an IP address associated with it. In Figure 3-1, foo.com is a domain
+name, which may include the hostname www, and www.foo.com may have the IP address
+of 172.20.42.5, but foo.com may also have its own IP address. That IP address may be
+something completely different, like 172.30.15.6. The hostname and the domain name
+together, www.foo.com, is called a fully qualified domain name (FQDN).
+
+Figure 3-1. DNS diagram
+
+Each hostname, like www.wubble.com or www.microsoft.com, is really just a way
+for us to be able to use something other than an IP address, since we aren’t as good at
+remembering numbers as we are at associating names to things. When you are looking up
+the IP address that belongs to a hostname, you perform something called a recursive DNS
+query. Recursive query means that you start in one place and it points you to somewhere
+else, and you keep doing this process until you get the answer you are looking for. All of
+the information you are looking for is stored within systems typically called name servers.
+
+26
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+The authoritative name server is the server that has the most accurate information about
+the hostname or the IP address, but in order to get to the authoritative server, a query
+starts at a local or caching server. The local or caching server will start the process.
+The very first thing that happens when you go looking for an IP address for a
+hostname is that you initiate a request for an A record, or an address record, from your
+local caching name server. This is typically a server either within your enterprise or
+in one provided by your service provider. When you go asking for www.wubble.com,
+your client will make a request to your caching server, and that server will see if it has
+the information stored locally. If it doesn’t, it has to go find the answer for you from
+an authoritative server. The first place it goes is the very top of the diagram shown in
+Figure 3-1. These are called root name servers, and they provide information about where
+you can find the second-level domain name server, which would be the authoritative
+server for the domain. So, the caching server will send a query for an NS record to the
+root server associated with the .com domain, whose address it already knows, looking for
+name servers associated with wubble.com. The root server will reply with the information
+for the name servers for the domain requested. The caching server then issues a request
+to the IP address of the authoritative DNS server asking for www.wubble.com. Once DNS
+finds the authoritative server for the wubble.com domain, the caching server should stop
+searching.
+
+While A records are the ones you will most commonly make use of, DNS supports many
+other record types. An SOA record, or start of authority record, keeps track of information
+like the last time the zone for that domain was updated. An MX, or mail exchanger record
+can tell you which server or IP address is the one to send mail to for a particular domain.
+The NS record indicates the name servers that are associated with the domain. An A
+record is an address record, indicating an IP address that is associated with a hostname,
+while a PTR record does the reverse by resolving an IP address to a hostname. There are
+also RR records, which indicate other resources that may be associated with the domain.
+A CNAME record is a canonical name, which is just an alias. Using a CNAME record, you
+make a hostname refer to another hostname. As an example, you might have the hostname
+transfer be a CNAME for ftp and the hostname ftp be an A record. This means you
+only have to change a single A record if an IP address changes, but you have a number of
+hostnames all pointing to the same place.
+There are a number of programs that can be used to retrieve information from DNS
+servers. The most common ones are dig, nslookup, and host. Each of these can request
+information generally using the configured local or caching server, or can go directly
+to a specific name server. While you can use these utilities, they are all command line
+programs. If you prefer a graphical interface, there are programs that offer that. There are
+also Web sites that you can use to perform DNS lookups. In order to determine the name
+server for a particular domain, you could use any of these utilities or you could use whois,
+which we used previously to look up other information about who particular domains
+were registered to.
+
+27
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+If you perform a whois query on a domain name, one of the pieces of information
+you will get back will be the name servers that are assigned to that domain. You can see
+this in Figure 3-2. The figure shows a whois lookup of apress.com. At the bottom of the
+response are the name servers that are associated with the domain. One of them is ns1.
+rackspace.com and the other is ns2.rackspace.com. Looking at the hostnames, we can
+deduce that the service provider handling DNS for Apress is Rackspace. Anytime you
+want to figure out what DNS server to check to get the authoritative information directly
+from the source, you can use whois to get the name servers for that domain.
+
+Figure 3-2. Whois query for name servers
+The utility dig is really useful, though the output can be a little challenging to parse
+if you aren’t familiar with what you are looking at. However, dig can be used to extract
+different records on the command line. Figure 3-3 shows the use of dig. This particular
+request is looking for the mail exchanger (MX) record. This tells us the hostname for
+the system that is responsible for receiving mail for the domain. Every domain will have
+at least one MX record. Knowing the hostname from the MX record will tell you which
+system you need to interact with if you want to perform penetration testing against the
+organization's receiving mail server using the simple mail transfer protocol (SMTP).
+
+28
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Figure 3-3. Using dig
+The responses we care most about are in the answer section. The data displayed
+in this section tells us that for the domain apress.com, mail is handled by mail server
+infrastructure that is operated by Google, or at least appears to be. This may tell us
+something else about their infrastructure. In the additional section, dig helpfully looked
+up the IP addresses associated with the hostnames from the answer section. You can see
+that these are all A records, or address records. If you had an IP address and you wanted a
+hostname from it, you would be looking for a PTR (pointer) record. A CNAME record, or
+canonical name, is really just an alias. For example, you may set web.apress.com to have
+a CNAME entry of www.apress.com. This means that if you need to change the IP address
+for those two hosts, all you need to do is change the www.apress.com address, since any
+check for web.apress.com will be forced to do an A record lookup for www.apress.com, as
+it holds the address. Web.apress.com is just a reference to a different hostname.
+Dig is a very powerful utility for DNS lookups, but it is not the only one. While dig
+and nslookup may both be installed on Unix-like operating systems, dig is not generally
+available on Windows systems. As a result, it’s worth looking at nslookup. To perform the
+preceding lookup, you can see the steps on Figure 3-4.
+
+29
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Figure 3-4. Using nslookup
+Using nslookup, the first thing I need to do is set the record type that I am looking
+for. In this case, I am looking for MX records, so I set my type to MX. Once I have done
+that, all I need to do is enter the domain name, and nslookup will do the lookup for me.
+You can query name servers directly. As an example, if I wanted to go to the authoritative
+server for Apress directly using dig, I would add @ns.rackspace.com onto the end of my
+command. Similarly, with nslookup, I can just tell it the server that I want to go to, and it
+will query that server rather than the DNS server that is configured on my system. Once I
+am in nslookup, I can set the server, and nslookup will send all queries to that server until
+the server is changed or we quit the program. This allows me to check directly on one
+server so as to avoid any issues with cached entries on the local server.
+
+Transport Protocols and Ports
+The Internet Protocol (IP) is a network layer protocol. If you are unfamiliar with the
+different protocol layers, you should look up the Open Systems Interconnection (OSI)
+model. Sitting on top of IP are transport layer protocols. Commonly, those are the
+Transmission Control Protocol (TCP) and the User Datagram Protocol (UDP). Each of
+these protocols serves a different function. If you absolutely, positively have to get it
+there and you want to know that it got there, you would use TCP. This is sort of like using
+delivery confirmation when you go to the post office. You get something like a delivery
+receipt. If you simply don’t care and just want to toss it out in the wind, you would use
+UDP. Using UDP, you get a slight speed advantage because there isn’t all the overhead of
+making sure you know that your messages are received on the other end. Using TCP, you
+make sure no packet is left behind.
+
+30
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Each of the transport layer protocols needs a way to multiplex traffic, so that multiple
+communication exchanges can take place simultaneously, even on a single computer. It
+does this through the use of ports. When packets are sent between computers (or even
+on a single computer), each packet is labeled by the source and destination ports, so the
+computer can keep track of which communication exchange it is a part of. If we didn’t
+have ports, the system would have no idea what to associate an inbound message with.
+Using ports, the operating system knows what application should be getting any messages
+that are being received. It’s pretty obvious that this would be true on the server side, but
+it's also true on the client side. When the server responds, it has to structure its response
+so the client computer will be able to direct the packet to the correct application. As a
+result, the server makes use of the source port in the arriving message to become the
+destination port in the return message. The source ports used by the outgoing messages
+are not reused across applications, which is why the operating system knows how to get
+back to the sending application with the return messages. However, even though the
+operating system will keep track of this information, those ports are not considered open,
+and so they would never show up as listening. When you remotely scan a system, you will
+never see ports that were just used as source ports for a connection to another system.
+
+Port Scanning
+Port scanning allows us to find ports that are actively listening for connections from the
+rest of the Internet. This means that an application has bound to that port and indicated
+to the operating system that it is prepared to accept connections on that port. You can
+do port scanning manually through the use of a program like the telnet client or netcat
+to connect to ports one at a time, but the easiest and best way is to make use of a portscanning program that automates the process across the tens of thousands of available
+ports. There are several, but the one that is most widely used is nmap. The purpose of a
+port-scanning program is to communicate with the target system to trigger a response
+indicating whether the port is listening or not listening, which a port scanner would
+do. This is dependent on the transport protocol you are using. TCP and UDP behave
+in completely different ways. This is because TCP is a connection-oriented protocol,
+which is necessary to ensure the guaranteed delivery promised. UDP, in contrast,
+is connectionless. A port scanner will take advantage of how the different transport
+protocols work to make determinations about ports that are open (listening) or closed
+(not listening). As a result, it’s useful to have a basic understanding of what TCP does
+about establishing connections between systems. In order to establish a connection from
+one system to another, TCP uses what is called a three-way handshake.
+The three-way handshake does a couple of things. First, it establishes that there is
+someone on the other end listening. This could be done with a two-way handshake, so
+it also guarantees that the purported sender is there and that the communication isn’t
+being faked, often called being spoofed. Once we know that the systems in question are in
+place and available to communicate, the other thing that the three-way handshake does
+is set up some necessary information to ensure that messages get received correctly and
+in the right order.
+
+31
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+There are two header fields that are used to ensure messages are sent and received
+in the right order. These are the sequence number and the acknowledgement number,
+and they are two separate sides to the same coin. The sequence number is what gets sent
+to indicate where we are in the sequence. The acknowledgment is sent back to indicate
+on the other end which messages have been received. So, if I have sent 100 bytes, for
+instance, my sequence number will be that 100. If the other end has received all of them,
+the acknowledgment number will be 101 to indicate which byte it is expecting to see next.
+The three-way handshake can be used in two different ways using nmap. The first is
+a SYN scan, also called a half-open scan. Before we go into what that is, let’s take a look at
+what a three-way handshake actually looks like. We’re going to go pretty quickly through
+some concepts that will help you start to get a better understanding of the different types of
+scans and how they work. If you want to understand more deeply, there are a lot of resources
+online that will provide you a far deeper understanding of the TCP/IP protocol suite.
+In Figure 3-5, you can see a client laptop on the left talking to another system on
+the right. The client system sends a message with the synchronization (SYN) flag set.
+Additionally, there is a TCP field for the sequence number that is set as part of this
+message. This is called the initial sequence number (ISN), and it is used to establish
+not only the sequence of the messages that are sent but also that messages are received.
+The receiving system, which you may think of as a server, responds by setting the
+acknowledgment flag (ACK) indicating that the message was received. Along with the
+ACK flag, it sets the acknowledgment number field to be one above the sequence number
+that was received. This tells the client side, in this instance, which byte number it expects
+next. In addition to the ACK flag and number, the server also establishes its own side of
+the communication by initializing its own sequence number that the client will need. As a
+result, it sets the SYN flag and sequence number.
+
+Figure 3-5. Three-way handshake
+The server could use two separate messages to send both the SYN and the ACK,
+but it’s more compact in terms of the communication stream to put both messages into
+a single packet. Now, the client has indicated that it would like to communicate and
+established the parameters for communication. The server has responded, indicating that
+it is open for business and has acknowledged the client. The final step in establishing a
+two-way communications channel is for the client to acknowledge the server. Once that
+happens, using an ACK flag and an acknowledgment number to indicate that the sequence
+number was received, the three-way handshake is complete, and the two parties are ready
+to send and receive messages, incrementing sequence numbers and acknowledgment
+numbers as needed based on the number of bytes that are being transmitted.
+
+32
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+TCP Scanning
+One of the common scan techniques is the SYN scan, sometimes called a half-open scan.
+In a SYN scan, the system running the scanner sends out SYN messages to the target.
+The target will respond either with a SYN/ACK to indicate that the port is open or with
+a message that has the reset (RST) flag set to indicate that the communication needs to
+be reset or shut down. Either of these responses will tell the scanner the state of the port,
+which can then be communicated to the user.
+There is one other possibility with this scan, or any other type of scan you may use. If
+the scanner doesn’t get any response at all, that could mean a couple of things. The first
+is that the system is down. Some scanners, like nmap, will send out an Internet control
+message protocol (ICMP) echo request to determine whether the system is up or not. If
+the system responds to the echo request with an echo reply and the port doesn’t respond,
+it means that either the scanning packet, or the response to the scanning packet, is being
+dropped. With TCP, since it’s connection oriented, the message will be resent a number
+of times to ensure that the message wasn’t simply dropped in transit. If, after a number of
+retries, there is still no answer, the scanner will assume that the packet is being dropped
+by some sort of filter. As a result, you will get responses that indicate the port is being
+filtered, which may mean there is something there but that there is just a firewall in
+the way.
+By default, a scanner like nmap will only scan a limited number of ports. There are
+roughly 1000 well-known ports that nmap will scan by default. If you want to scan more
+than that, you can provide a comma-separated list or a range. You can also just tell nmap
+to scan all 65,536 ports by adding a -p- to the command line, as seen in Figure 3-6. The
+more ports you scan, the longer it will take for the scan to complete, which is one reason
+why nmap defaults to the ports that are most likely to be used. The scan in Figure 3-6 is
+a SYN scan against the default gateway on the local network here. There are three ports
+that are showing as open and a single port showing as closed. Typically, you won’t see
+closed ports in the list, since there isn’t any reason to show the closed ports. If they don’t
+show up, they are assumed to be closed. In this case, it’s not clear from just the nmap
+scan results as to why the closed port is being displayed. In order to determine why nmap
+didn’t just ignore the closed port, you would have to see the packets that were exchanged.
+
+Figure 3-6. nmap scan
+
+33
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Since what we are doing is a half-open scan, we are putting the target system into a
+state of having a half-open connection, meaning there is a port that is waiting for the final
+acknowledgment. In order to prevent having the system sitting there utilizing resources
+holding ports open, nmap does the polite thing by sending a RST message to the target
+system to indicate that it should shut down the communication and not expect anything
+further. A lot of half-open connections may be noticed, since a half-open connection may
+be an indication of a SYN flood. A half-open connection is one where the SYN message
+has been received and an ACK sent but the return ACK hasn’t been received. Another
+TCP scan uses –sT rather than –sS. This is a connect scan, meaning that it goes through
+the entire three-way handshake to create the open connection, then to tear it down. This
+is a bit more polite, but it also increases the total number of messages being sent between
+the scanner and the target.
+
+SYN floods are created by sending a lot of SYN messages, leaving a lot of half-open
+connections on a system. The operating system on the target may only have a limited number
+of slots available for these half-open connections, so it’s possible to put the target into a state
+where it can’t accept any additional connection requests, causing a denial of service.
+There are other types of scans that use TCP as the transport protocol and make use
+of other flags built into TCP, but the SYN scan and the connect scan will generally provide
+you with what you need for information about open and closed ports. Other scans were
+once helpful at evading detection, but unless you are working against a network with very
+outdated equipment, the other types of scans are unlikely to provide you details that are
+much different from the two most common scans.
+
+UDP Scanning
+While most services you would commonly connect to use TCP as the transport protocol,
+not all of them do. Some of them, such as DNS, NTP, and Syslog, use UDP instead. The
+difference with a UDP scan is that there is no defined pattern of initiating communication.
+In the case of TCP, you send a SYN message and the port responds indicating that it is
+either open or closed. This is well defined in the protocol. In the case of UDP, it’s intended
+to be fast and connectionless. This means that the application needs to handle things like
+message order and determining whether a message has been received or not.
+If nmap sends a message to a UDP port and doesn’t get an answer back, it doesn’t
+mean anything. It could mean the port is closed and not responding. It could mean
+that the message was dropped. It could mean that there is an application there but the
+application doesn’t usually send a response to the message that it received. As a result,
+nmap will have to continue to retry the port until it gets an answer or just gives up, and
+the fact that it gave up may or may not actually mean anything useful. With TCP, there are
+timing rules associated with the retries. This includes backoff timers to make sure you
+are waiting a variable length of time in case it’s just a timing thing and you’re running
+into congestion somewhere. With UDP, all of this is entirely up to the application, with no
+consistent rules.
+
+34
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Using nmap, you would do a UDP port scan using the flag “–sU”. You can also specify
+the ports to try just as you would with a TCP scan. Both TCP and UDP scans allow you to
+set the speed at which you scan using the throttle parameter “-T.” You can set numbers
+up to 5, where 3 is the default. Lower throttle numbers slow the communication down,
+which may help you be less detectable to your target. Higher throttle numbers cause the
+communication to go faster. Your scan will be done quicker, but you will be sending a
+lot of traffic in a very short amount of time to your target, which may be noticeable to a
+vigilant defender.
+
+There are a number of other scan types that you can do with nmap, though the basic TCP
+and UDP scans are pretty common. Some of the others include setting different flags within
+the TCP headers, like a FIN scan or an XMAS scan. The FIN scan sets the finish (FIN) flag. The
+XMAS scan sets a number of other oddball flags that you wouldn’t ever see set at the same
+time. With all of the flags set, it is said to make the packet light up like a Christmas tree.
+
+Operating System and Version Scanning
+There is a lot of information that nmap can get for you, and as you get more experienced
+with it, you can even write scripts that nmap can run for you. One piece of information
+that may be very useful is the operating system name and version. In Figure 3-7, you
+can see an example of an operating system scan, which is requested using “–O” as a
+parameter.
+You can do an operating system scan in conjunction with another scan like a SYN
+scan. Nmap makes use of a database of fingerprints that is maintained by the nmap
+developers to identify the target operating system. It makes use of behavior associated
+with open and closed ports and initial sequence numbers as well as other behaviors
+associated with the network communication and protocols. In the case shown here, the
+scan correctly identifies the target operating system but mis-identifies its version. Not
+having the version correct suggests that there may not be fingerprints yet for the newer
+versions of the operating system that was scanned.
+
+35
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Figure 3-7. nmap operating system scan
+In addition to determining the operating system in use, nmap is also capable of
+determining the application and version that is running. It does this by attempting to
+extract information from the exchange with the service. In order to perform a version
+scan, you can supply -sV to nmap. If you were to supply -A as a parameter, it would do
+both a version scan and an operating system scan.
+
+High-Speed Scanning
+nmap is not the only scanner that is available, though it is very widely used. There are
+other scanners like masscan that have been created to do very large network scans
+very quickly. A tool like nmap can scan large address blocks, but it wasn’t developed
+exclusively with that function in mind. As a result, nmap is perfectly capable of doing
+large scans, but if you have enormous address blocks to scan, you may want to consider
+a scanner that is especially developed for the job. Since nmap is so widely considered
+the default scanner to use, newer scanners like masscan have implemented the same
+command line parameters so as to be compatible. massscan is a port scanner that has
+been developed specifically for high-speed scanning of large networks. Since you are
+doing the same job, there is no particular reason to reinvent the wheel. You specify your
+targets, your ports, and the scan types in the same way as in nmap. Using masscan, you
+can also set the speed in packets per second. Since masscan doesn’t use the system
+network stack to create and send packets, it can go very, very fast. In the case of a Linux
+system running on the hardware, meaning not in a virtual machine, it is said to be able
+to send more than a million and a half packets per second. This may be enough to cause
+significant problems on your network, so be sure you have a very good reason to run at
+that speed and that you have notified anyone responsible for the network you are testing
+from in order to protect against outages. This is especially true if you are on or are testing
+a customer’s network.
+
+36
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Grabbing Banners
+Another function that nmap can do is to grab banners. This means that it connects to
+the application port and gets any messages that the server application sends out on that
+connection. These are called banners or welcome messages. Sometimes you can get the
+name of the application as well as the version number from them.
+Identifying applications and versions is helpful, because by using the application
+and version number you can look up vulnerabilities that might be exploited. There are
+a number of places that you can look up this information, including with each vendor,
+but you can also use the Common Vulnerabilities and Exposures (CVE) project. You can
+get to the database that the CVE project maintains at cve.mitre.org. The CVE project
+is a vendor-neutral way of keeping track of software vulnerabilities. Their database will
+give you a way to look up problems in a single place. The CVE repository is one place for
+getting that information. It’s not the only one, but it’s been around for more than fifteen
+years now and is pretty comprehensive.
+While nmap is capable of determining the name and version of the application, you
+may prefer to interact directly with the application server yourself. One program that can
+be used to do that is the telnet client. The word telnet is a little weird in that it can refer to
+the client, the server, or the protocol. In our case, we are going to make use of the program
+that you would typically use to connect to a telnet server. That’s not the only function that
+this little Swiss army knife is capable of performing, however. In reality, the telnet client
+is really just a program that initiates a TCP connection to any port that you would like. If
+you don’t specify a port, it defaults to port 23, which is the default port that a telnet server
+would listen on. If you connect to a telnet server, the client will do all of the negotiation
+for the telnet application protocol for you. If you specify another port, however, the telnet
+client will just leave you with a raw connection to the application listening at that port. In
+Figure 3-8, you can see a connection to the Web server at Google using the telnet client.
+
+Figure 3-8. Using the telnet client
+
+37
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Once you have used telnet to establish a connection to the server, you will need
+to know some protocol commands in order to entice a response. Some connections,
+like that to an SSH server, don’t require any knowledge of the protocol at all. It will just
+provide you the version, as you can see next. With nothing other than the connection, the
+SSH server provided its protocol version as well as the name of the application and its
+version:
+telnet 172.30.42.23 22
+Trying 172.30.42.23...
+Connected to 172.30.42.23.
+Escape character is '^]'.
+SSH-2.0-OpenSSH_6.9
+Not all servers are like that, however, as you can see in Figure 3-8. Even when the
+correct protocol is used, the server only provides the name of the server. In this case,
+we indicate that we are looking for the default Web page at the root of the server using
+“protocol version 1.1” by using the command GET / HTTP/1.1. Beyond that, we indicate
+the hostname that we are looking for, since version 1.1 of the HTTP protocol provides
+the possibility of virtual servers on a single IP address. All we get back in return, though,
+is that this is gws, which we just happen to know is the “Google Web Server.” No version
+number. This is a safe way to operate, of course, but not all software is so parsimonious
+when it comes to information.
+The telnet client is only capable of using TCP for the transport protocol. If you want
+to use UDP, you will need to use a different program altogether. One such program, netcat,
+is also capable of using TCP, just as the telnet client is. It’s also capable of being used as a
+listener on either UDP or TCP on any port that you specify. In Figure 3-9, you can see an
+example using netcat to connect to a UDP server. For the sake of demonstration, the server
+that netcat is connecting to is a simple Python script that just replies with received when a
+message arrives. Real-world UDP services won’t respond as easily, or their communication
+will be in binary and not be human-readable.
+
+Figure 3-9. Using netcat with UDP
+In order to use UDP with netcat, you specify –u on the command line. Otherwise,
+netcat defaults to using TCP as the transport protocol. Netcat also supports either IPv4
+or IPv6, which makes it quite versatile as more enterprises begin to implement IPv6 in
+their networks. Service providers haven’t been as good about allowing IPv6 to pass from
+a client through their network. As a result, it would be unlikely for you to do any remote
+IPv6 testing of a client. However, you may very well perform testing from inside a client
+network at times, and so you may need to use IPv6.
+
+38
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+Summary
+As you start your penetration testing, you will want to find systems on your target
+network. Once you have found the systems that are responsive, you want to find open
+ports. The open ports will tell you what applications are listening on those systems, since
+you can’t have a port that’s open without there being an application listening on that
+port. Before we get to checking for open ports, though, you need to understand how IP
+addresses map to hostnames and vice versa. There are several tools that can be used with
+DNS to look up information about the target domain. This includes different types of host
+records, like mail exchangers. A lot of information is also associated with domain names,
+though sometimes that information is private. You can potentially get names and e-mail
+addresses that you may be able to use later on in a social engineering attack. On top of
+that, you can get the name server associated with the domain, which may tell you a little
+something about the infrastructure that the company is using.
+While nmap is the most common port scanner and has been around for more than
+fifteen years, it is not the only one that is available. Most of the scanners that are available
+do the same sort of things that nmap does, though some of them are designed to be faster
+in the case of scanning large blocks of IP addresses at the same time. Using nmap, you
+can scan for TCP and UDP ports as well as determine the underlying operating system.
+While UDP scans are pretty straightforward, you can do multiple TCP scan types. This
+includes setting different TCP flags in order to potentially evade protections or detections.
+Once you have the open ports identified, you will want to determine the application
+and the version if you can. While you can use nmap to gather some of this information for
+you, you can also do it yourself using the telnet client or by using a program like netcat.
+Using these programs, you can initiate a connection yourself to the listening service, and
+then if you send protocol commands to the server, you can typically get responses back.
+Not all services are text based, which means you may not be able to just send simple
+commands. Instead, you may need to make use of a program that can send the binary
+messages for you, or you can write a simple program yourself that can do it. Sometimes
+you just want to be able to verify the responses that the automatic tools are providing.
+This is another reason why you may want to use manual techniques like telnet or netcat.
+
+Exercises
+1.
+
+Get the mail exchanger record for your own personal or
+corporate domain using both nslookup and dig. If necessary,
+use gmail.com as the domain you are doing the lookup on.
+
+2.
+
+Get the hostname associated with the IP addresses 4.2.2.1
+and 8.8.8.8.
+
+3.
+
+Get the IP address associated with the Web server hostname
+for your company. Once you have the IP address from the
+hostname, do a reverse lookup on the IP address to see what
+the corresponding hostname is.
+
+39
+
+CHAPTER 3 ■ WHAT’S OPEN?
+
+40
+
+4.
+
+Perform a SYN scan on all of the hosts on your local network.
+Most network devices for home use provide a /24 network,
+meaning it provides a netmask of 255.255.255.0. In order to
+scan the entire network, you can provide the network address
+followed by either a network mask or the number of bits in the
+subnet, as in /24. If your network is on 192.168.1.0, you would
+scan 192.168.1.0/24, as an example.
+
+5.
+
+Perform a full-connect TCP scan on your network using nmap
+or a tool of your choice. See if you get any differences from the
+SYN scan.
+
+6.
+
+Perform a UDP scan on your local network using nmap or a
+tool of your choice. Compare the time it took for the UDP scan
+to the time it took to do the TCP scans.
+
+CHAPTER 4
+
+Vulnerabilities
+If you have been following along from chapter to chapter, you now have some IP
+addresses for systems that are responding to connection attempts. You also have a list of
+ports that are open on those systems. The next thing you want to do is figure out exactly
+how you might be able to get into those systems. You need to know what vulnerabilities
+might be associated with the applications behind those ports.
+We know that if there is an open port, there is an application listening on it. Ports
+don’t just magically open, and if the port isn’t open, the operating system will simply
+reset the connection. This means that if you get a response to a connection attempt on
+a TCP connection, you know there is a program sitting there waiting for you to respond.
+It’s slightly more complicated with a UDP application, however, since there is no defined
+response to messages sent to a UDP port. The UDP protocol specifications make no
+comment about what to do if there is a communication on an open port. Essentially,
+based on the protocol definition, the response is entirely left up to the application and not
+to the operating system at all.
+There is a good chance that your scan turned up open ports, whether they are TCP,
+UDP, or some of each. The port numbers, as well as any banners that you collected, will
+be of some use as you try to figure out where to go from here. The next step is to look for
+vulnerabilities. While there are ways to do this manually, the best way to do it is to use a
+vulnerability scanner. If you are working for a company and you have a decent budget, there
+are some excellent commercial scanners. However, if you just want to do some learning and
+investigating on your own, or if you have a very small organization with little to no budget,
+there are open source and very low cost scanners that are very good and easy to use.
+Before we get to looking at these scanners, we’ll review what a vulnerability is
+and investigate some ways to identify one. This will include looking at some common
+scanners and how they can be used.
+
+What Is a Vulnerability?
+Before you can go looking for something, you should know what it is. A vulnerability is
+simply a weakness in a system, whether that system is a piece of software, a hardware
+design, or a network. There are a lot of reasons why you may find vulnerabilities. It may
+simply be a misconfiguration, where unnecessary features have been enabled that can
+be used in malicious ways. One example is accidentally turning on anonymous FTP,
+which might allow someone to upload a large volume of data that could cause the disk
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_4
+
+41
+
+CHAPTER 4 ■ VULNERABILITIES
+
+to fill up. That same misconfiguration could allow sensitive data to be extracted from
+the FTP server if that server had access to sensitive data and was intended to require
+authentication before users could get access. Complex software with a lot of configuration
+settings, including Web servers and Java application servers, to name just a couple of
+examples, are open to these sorts of misconfigurations.
+Misconfiguration is not the only possibility when it comes to vulnerabilities.
+Misconfigurations do not always lead to the ability to do something interesting with the
+system. This is where we want software bugs that can be exploited to do interesting things.
+There are a lot of different bug types that can lead to system exploitation. One of the most
+enduring and most common is the buffer overflow. A buffer is a chunk of memory for
+storing data. In this case, it would be a chunk of memory to store a piece of data provided
+by a user. The buffer is set at a fixed size, and if the user sends more data than is expected,
+the subsequent memory spaces are then filled in with the excess. This is a result of some
+programming languages, most notoriously the C programming language, that have no
+input constraints. Since the input buffers are stored on a memory structure called a stack,
+and the address of the location in memory where the program is meant to return to is also
+stored in memory, this particular type of vulnerability opens the door for the attacker to
+control the flow of execution by manipulating the return address, forcing the program to
+go to a set of code controlled by the attacker. Figure 4-1 shows a simple diagram of a stack.
+At the top is the memory buffer. Once the space allocated for the buffer is used up, the rest
+starts to flow into everything below it, including addresses that have been saved so as to
+return the flow of execution back to the calling memory segment.
+
+Figure 4-1. Stack using a buffer
+
+42
+
+CHAPTER 4 ■ VULNERABILITIES
+
+There are ways to fix this type of vulnerability, including making the stack non-executable.
+You can also use something called a stack canary, which is a random value that is checked
+prior to returning execution to the calling area in memory. If the canary is what it is
+expected to be, the return address is considered safe. If the canary has been altered, the
+program would halt rather than having control return to code that an attacker may have
+uploaded into the running program.
+Rather than going through an exhaustive list of all of the different types of
+vulnerabilities, we’re going to stop at the buffer overflow because it’s such a classic and
+endures today. You may want to look at other subjects, such as race conditions, heap
+overflows, integer overflows, and various injection attacks. You can see that overflows
+are pretty common. Mostly, any time a program takes input from a user, the user input
+should be considered entirely untrustworthy, but programmers don’t always do that. Or,
+in the process of trying to do the right thing, they might inadvertently open the door to
+something else. Either way, there are a lot of different types of vulnerabilities. The Open
+Web Application Security Project (OWASP) keeps track of the common vulnerabilities
+each year. While OWASP is generally focused on Web application security, the different
+vulnerability classes typically exist across application types.
+Other organizations, like the Computer Emergency Response Team (CERT), also
+track top vulnerabilities, though unlike OWASP, which includes types of vulnerabilities,
+CERT lists specific vulnerabilities. A list like the one that CERT has is based on actual
+attacks. They create the list from information they have about attacks that have been
+reported. The list ends up being all of the essential vulnerabilities that need to be
+addressed by an organization right away as a result of known attacks. There are other
+organizations that have similar lists.
+
+Vulnerability Scanners
+Now that we know, more or less, what a vulnerability is, we should start looking for some.
+After all, we need to find ways into the system in order to earn our paycheck, and we do
+that by exploiting vulnerabilities. You can certainly go through a lot of manual effort in
+order to find these vulnerabilities, but it’s far easier if you make use of scanners; there are
+several of them available. The possibilities range from very high end commercial scanners
+to open source scanners, with plenty of choices in between. Vulnerability scanners have
+been around since the 1990s. One of the earliest was the Security Administrator Tool for
+Analyzing Networks (SATAN). SATAN was developed by Dan Farmer and Wietse Venema
+in the mid-1990s. Farmer and Venema are both renowned for other security-related
+projects they have been involved with. Farmer started with the Computer Oracle and
+Password Scanner, which included some specialized checks for vulnerabilities.
+
+SATAN came with a little script that would allow you to change all instances of the word
+satan into santa for people who might be offended by the name satan. The current
+commercial scanner SAINT was based on SATAN. The Security Auditor’s Research Assistant
+(SARA) was also a follow-on to SATAN.
+
+43
+
+CHAPTER 4 ■ VULNERABILITIES
+
+Vulnerability scanners work by running a number of tests against the systems
+and software. This may include running port scans to find open ports and listening
+applications. It will also check to see what the operating system is. Based on this data,
+the vulnerability scanner will determine whether there are potential vulnerabilities.
+It does not actually exploit any of these vulnerabilities. It also can’t locate unknown
+vulnerabilities. If there is a flaw in a piece of software that hasn’t been reported to date,
+the scanner can’t identify it as a problem. This includes what are commonly known as
+zero-day attacks. Zero-days are software bugs where an exploit has been developed but
+the vulnerability has not been disclosed to the software vendor so it can be fixed. As a
+result, installations of the software are vulnerable to attack by the holder of the zeroday until the vendor becomes aware of the vulnerability and develops a fix that can be
+installed.
+Vulnerability scanners operate from a database or a collection of modules. These
+collections of tests need to be updated on a regular basis in order to keep up with the
+volume of vulnerabilities that exist. The reality is that software bugs are being found
+constantly, including in software that is very old.
+
+One notable bug in recent years is ShellShock, which is a vulnerability in the Bourne-again
+shell (bash). This is a vulnerability that has existed for about twenty years but was not
+discovered until recently. Just because a piece of software or an operating system is old
+doesn’t mean there aren’t new bugs to be found.
+For the past couple of decades, there has been a debate within the security
+community regarding researchers and bug hunters and how they should interact with
+software vendors when they find a bug. Many software vendors have long preferred
+to have as much time as they need to repair the bug before anything about the flaw is
+disclosed to the public. Once the issue is disclosed, the details can be used by malicious
+users to create and utilize an exploit before the flaw is repaired by the vendor. It would
+be unethical to release details that could be used to expose innocent and unsuspecting
+users. However, it’s also unethical for a vendor to not repair a vulnerability that they have
+been informed about. As a result, there is a middle ground. Companies like Microsoft are
+willing to work with researchers and allow the researcher to take the credit for the find.
+They also have a process for verifying bugs and getting them resolved. Other companies
+are not as good about timely resolution of issues and are generally well known in the
+security community for not resolving issues and not working well with researchers.
+There are mailing lists like Bugtraq and Full Disclosure where announcements are
+often made related to issues found by third parties like bug hunters and researchers. In
+addition to learning about the bugs that are being disclosed by third parties, you may also
+learn about proof-of-concept code that can be used to exploit these vulnerabilities.
+
+44
+
+CHAPTER 4 ■ VULNERABILITIES
+
+Scanning for Vulnerabilities
+It’s important to note here that while vulnerability scanners do not actually run exploits to
+determine whether a system is vulnerable, there is always the possibility that you could
+impact the running of a system. Just the act of scanning can potentially cause system or
+application failure. You should really provide plenty of notice to system owners before you
+scan them so they can be prepared in case of an impact. Exploit frameworks like Canvas,
+Core Impact, and Metasploit can be used to verify vulnerabilities.
+There are a number of vulnerability scanners. You can buy software scanners or
+appliances. You can make use of open source solutions or you can simply buy a service
+where the provider does the scanning for you over the Internet or through a private
+network connection and then provides you with the results. We’re going to focus on
+Nessus, Nexpose, and OpenVAS here. Primarily, the reason for looking at these is because
+they are readily available and have free versions. Once you get familiar with how these
+work, you should be able to pick up any other scanner you run across.
+When you are performing vulnerability scanning, there are a few things to understand.
+The scanner will go through all of the possible vulnerabilities based on both the configuration
+you have provided and its stored database of published vulnerabilities. Every scanner will
+have different sets of configuration options. Some are more detailed than others. Additionally,
+over time different scanners have changed their options and the way you configure them. In
+Figure 4-2, you can see a section of the options for an advanced scan in Nessus. Nessus has
+been around a long time and is a well-respected vulnerability scanner. It began life as an open
+source scanner that had a standalone client. Currently, you configure Nessus with a Web
+interface that continues to evolve. Products like Nessus may change their interface over time.
+At some point, the interface may change from what you see in this screen capture.
+
+Figure 4-2. Nessus options
+
+45
+
+

@@ -1,0 +1,862 @@
+Introduction
+
+8
+
+Basic Hacking Known Vulnerabilities
+
+11
+
+Introduction
+Identifying technologies
+Introduction
+Wappalyzer
+Powered By
+Summary
+Identifying the vulnerabilities
+Introduction
+Google
+ExploitDB
+CVE
+Summary
+Finding the POC
+Introduction
+Github
+ExploitDB
+Summary
+Exploitation
+Conclusion
+
+11
+13
+13
+13
+14
+15
+16
+16
+16
+17
+19
+19
+20
+20
+20
+21
+21
+22
+22
+
+Basic Hacking CMS
+
+23
+
+Introduction
+
+23
+
+Wordpress
+
+24
+
+Drupal
+
+26
+
+Joomla
+
+26
+
+Adobe AEM
+
+28
+
+Other
+
+29
+
+Conclusion
+
+31
+
+Basic Hacking Github
+
+31
+
+Introduction
+Finding Sensitive Information
+Conclusion
+
+31
+32
+34
+
+Basic Hacking Subdomain Takeover
+
+35
+
+Introduction
+
+35
+
+Subdomain Takeover
+Github Takeover
+Conclusion
+
+35
+37
+43
+
+Basic Hacking Databases
+
+44
+
+Introduction
+Google Firebase
+Introduction
+Misconfigured Firebase Database
+Summary
+ElasticSearch DB
+Introduction
+ElasticSearch Basics
+Unauthenticated ElasticSearch DB
+Summary
+Mongo Database
+Introduction
+MongoDB
+Summary
+Conclusion
+
+44
+45
+45
+45
+46
+46
+46
+47
+48
+53
+54
+54
+54
+55
+55
+
+Basic Hacking Brute Forcing
+
+57
+
+Introduction
+Login Pages
+Default Credentials
+Brute Forcing
+Conclusion
+
+57
+57
+58
+60
+60
+
+Basic Hacking Burp Suite
+
+62
+
+Introduction
+Proxy
+Target
+Intruder
+Repeater
+Conclusion
+
+62
+63
+69
+72
+78
+79
+
+Basic Hacking OWASP
+
+81
+
+Introduction
+SQL Injection(SQLI)
+Introduction
+
+81
+82
+82
+
+MySql
+Union Based Sql Injection
+Error Based Sql Injection
+Xpath
+PostgreSql
+Union Based Sql Injection
+Oracle
+Union Based Sql Injection
+Summary
+Cross Site Scripting(XSS)
+Introduction
+Reflected XSS
+Basic script alert
+Input Field
+Event Attributes
+Stored XSS
+DOM Based XSS
+Introduction
+Sources
+Sinks
+Polyglot
+Beyond the alert box
+Cookie Stealer
+Summary
+File Upload
+Introduction
+File Upload
+Content Type Bypass
+File Name Bypass
+Summary
+Directory Traversal
+Introduction
+Directory Traversal
+Summary
+Open Redirect
+Introduction
+Open Redirect
+Summary
+
+82
+84
+89
+89
+92
+93
+97
+98
+101
+102
+102
+103
+103
+104
+106
+108
+112
+112
+114
+115
+117
+118
+118
+120
+120
+121
+121
+124
+125
+126
+126
+126
+127
+128
+129
+129
+129
+130
+
+Insecure Direct Object Reference(IDOR)
+Introduction
+IDOR
+Summary
+Conclusion
+API Testing
+
+Introduction
+APIs
+Rest API
+Remote Procedure Call (RPC)
+Simple Object Access Protocol (SOAP)
+GraphQL API
+Authentication
+HTTP Basic
+Json Web Token (JWT)
+Introduction
+Deleted Signature
+None Algorithm
+Brute Force Secret Key
+RSA to HMAC
+Summary
+Security Assertion Markup Language (SAML)
+Introduction
+XML Signature Removal
+XMLComment Injection
+XML Signature Wrapping (XSW)
+XSW Attack 1
+XSW Attack 2
+XSW Attack 3
+XSW Attack 4
+XSW Attack 5
+XSW Attack 6
+XSW Attack 7
+XSW Attack 8
+API Documentation
+Introduction
+Swagger API
+
+131
+131
+131
+134
+134
+135
+
+136
+137
+137
+142
+143
+146
+148
+148
+150
+150
+153
+154
+155
+156
+158
+159
+159
+162
+166
+167
+168
+169
+171
+171
+172
+172
+173
+174
+176
+176
+176
+
+XSS
+Postman
+WSDL
+WADL
+Summary
+Conclusion
+
+178
+179
+181
+183
+185
+185
+
+Caching Servers
+
+186
+
+Web Cache Poisoning
+Introduction
+Basic Caching Servers
+Web Cache Poisoning
+Summary
+Web Cache Deception
+Introduction
+Web Cache Deception
+Summary
+More OWASP
+
+Introduction
+Server Side Template Injection (SSTI)
+Introduction
+Python - Jinja 2
+Python - Tornado
+Ruby- ERB
+Ruby - Slim
+Java - Freemarker
+Summary
+On-site Request Forgery (OSRF)
+Introduction
+OSRF
+Summary
+Prototype Pollution
+Introduction
+Prototype Pollution
+Summary
+Client Side Template Injection (CSTI)
+Introduction
+Angular Basics
+
+186
+186
+186
+189
+193
+194
+194
+194
+201
+203
+
+203
+203
+203
+206
+210
+211
+214
+216
+218
+218
+218
+218
+221
+222
+222
+223
+224
+225
+225
+225
+
+Client Side Template Injection (XSS)
+Summary
+XML External Entity (XXE)
+Introduction
+XXE Basics
+XML External Entity(XXE) Attack
+Summary
+CSP Bypass
+Introduction
+Content Security Policy (CSP) Basics
+Basic CSP Bypass
+JSONP CSP Bypass
+CSP Injection Bypass
+Summary
+Relative Path Overwrite (RPO)
+Introduction
+RPO
+Summary
+Conclusion
+Wrap Up
+
+227
+230
+231
+231
+231
+233
+236
+236
+237
+237
+241
+242
+243
+244
+245
+245
+245
+249
+249
+249
+
+Introduction
+In the first version of the Bug Bounty Playbook I described the methodology and
+techniques I use during the recon and fingerprinting phase of an engagement. As you
+probably know there are 3 main phases of a bug bounty engagement: reconnaissance ,
+fingerprinting , and exploitation.
+
+This book is all about the exploitation phase of a hunt. The exploitation phase of a hunt
+is where all the true hacking occurs. Everything up until this stage is just prep work and
+now it's time to get busy.
+
+Each target you go after will most likely be utilizing different technology stacks so it's
+important that you know the vulnerabilities and misconfiguration impacting an array of
+technologies. For example having knowledge of Github is important when mining for
+hardcoded passwords and other sensitive information. If you don’t know what Github is
+how are you supposed to know the possible security failures companies can impose
+when using it ? You need to have deep knowledge on a wide range of technologies.
+
+In addition to this you also need deep knowledge of web application vulnerabilities. The
+vast majority of a company's public facing assets are going to be web apps so it's vital
+that you know at the very least the OWASP top 10. The more vulnerabilities you know
+how to exploit the better chances you have of finding one.
+
+This book will go over the basics of the exploitation phase. Note I won't be teaching you
+how to use tools, for the most part everything we do will be done manually so you can
+get a deep understanding of the process. Once you know how things work at a deep
+level you will want to replace some of your manual process with tools and automation.
+
+Basic Hacking Known Vulnerabilities
+Introduction
+One of the first things you learn in hacker school is how to identify and exploit known
+vulnerabilities. This may seem like a relatively simple step but you would be surprised at
+the number of people who completely skip this phase of the exploitation cycle.
+
+As shown above we start off by visiting the target application, next we attempt to
+determine what software it is running. Once we find out what software and version the
+endpoint is running we search on Google and other resources to see if it has
+vulnerabilities or CVEs. After that we proceed to search for the exploit code and finally
+we run the exploit code against the target.
+
+Another version of this technique focuses on 1-days. In this cycle we start off by looking
+at our threat feeds such as exploitdb and twitter. Here we are looking for new exploits
+and CVEs that have just dropped, these are known as 1-days. When going down this
+path time is the most important aspect, when a new exploit is dropped in the wild you
+need to start exploiting your targets before they have a chance to patch. Once you hear
+about a new exploit you will need to quickly find a POC for it and start mass scanning all
+of your targets for that vulnerability.
+
+As you can see both of these methodologies are very similar. With the first one we find
+a target and see if it has any known vulnerabilities and if it does we try to exploit them.
+In the second methodology we are looking for newly released exploits. When a new
+exploit is dropped we immediately start scanning and exploiting everything before the
+defenders have a chance to patch.
+
+Identifying technologies
+Introduction
+When attempting to exploit a target with a known vulnerability you could just launch your
+exploit at every target and hope for the best or you can do things a little smarter.
+Identifying the target technology stack will help you find the exploits impacting that
+stack. Not knowing this information will leave you blind and you will have to take random
+guesses at which exploits might work.
+
+Wappalyzer
+If you're attempting to discover the technologies running on a website the best place to
+start is wappalyzer. An alternative to wappalyzer is “https://builtwith.com/” but I personally
+like wappalyzer better.
+
+I personally like to use the wappalyzer browser plugin as it makes it easy to determine
+an endpoints tech stack when browsing their website. As you can see in the image
+above this website is running “Ruby on Rails”, “Jquery 3.5.0”, “Backbone.js 1.4.0”, and a
+few other things. Note that if you use a command line tool you can scan multiple
+websites at once, this is nice if you're trying to scan hundreds or thousands of sites at
+once.
+
+Powered By
+Wappalyzer is great but it won’t identify everything. Wappalyzer works off of regexes so
+if it doesn't have a specific technologies regex in its database it won't be able to identify
+it.
+
+As shown above, the wappalyzer came back mostly blank. However, if you look at the
+footer at the bottom of the page you see the words “Powered by Gila CMS”. We can
+conclude that this site is running Gila CMS but if we were only looking at wappalyzer we
+would have missed this.
+
+Summary
+You need to know the technology stack your target is running so you can find
+associated exploits. There are a few ways to determine the technologies an endpoint is
+
+running but I almost always use wappalyzer. If you can’t determine this information with
+wappalyzer there are other techniques to find an endpoints technology stack.
+
+Identifying the vulnerabilities
+Introduction
+You know what software your target is running but how do you determine what
+vulnerabilities it has? The whole point of learning a target technology stack is so you
+can use this information to find associated vulnerabilities.
+
+Google
+When I'm looking to see what vulnerabilities a technology has the first place I go is
+Google. Actually, Google is the first place I go when I have a question about anything as
+it's the best resource out there. Try typing the following search queries into Google:
+● <TECHNOLOGY> <VERSION> vulnerabilities
+● <TECHNOLOGY> <VERSION> exploits
+
+There is all kinds of stuff here! I see SQL injection exploits, LFI exploits, and much
+more. I recommend you click on the first couple links to see what interesting
+vulnerabilities there are. You'd be surprised at the things you will find buried in a blog
+post 10 links down the page.
+
+ExploitDB
+Another place I like to search is ExploitDB. ExploitDB is a tool used to search and
+download exploit code. This is by far one of my favorite resources to use when
+searching for vulnerabilities related to a technology stack.
+● https://www.exploit-db.com/
+
+You can use the website to search for things but I typically use the command line tool
+called searchsploit. You can download this tool from Github as shown below:
+●
+
+https://github.com/offensive-security/exploitdb
+
+● ./searchsploit “name of technology”
+
+Normally once we find out the vulnerabilities a target is vulnerable to we have to search
+for the exploit code but we can skip this step since ExploitDB provides us with the proof
+of concept(POC) code as well.
+
+CVE
+According to Google, the Common Vulnerabilities and Exposures(CVE) system provides
+a reference-method for publicly known information-security vulnerabilities and
+exposures. If you're looking to find what CVEs a technology stack has, there is no better
+place to search than NIST.
+●
+
+https://nvd.nist.gov/vuln/search
+
+Searching for “Gila CMS” gives us 17 CVEs, the newer the CVE the better as there is a
+better chance the target hasn't patched their systems yet. Note that just because you
+
+find a CVE doesn't mean you can exploit it. To exploit a CVE you need the proof of
+concept(POC) exploit code, without that you're stuck.
+
+Summary
+Locating the vulnerabilities impacting a technology stack is relatively easy. All you really
+have to do is search for them. Between Google, ExploitDB, and NIST you should be
+able to find everything you're looking for.
+
+Finding the POC
+Introduction
+You have identified that the target application contains vulnerabilities but to exploit them
+you need the proof of concept (POC) exploit code. If you don't have the exploit code
+your only other option is to make it yourself. However, this is beyond the scope of this
+book.
+
+Github
+One of the best places to find exploit code is Github. GitHub is an American
+multinational corporation that provides hosting for software development and version
+control using Git. It offers the distributed version control and source code management
+functionality of Git, plus its own features. Developers love Github and hackers do as
+well.
+
+You can easily search for a CVE on Github as shown in the above image. If there is a
+POC you will most likely find it on here. However, BE AWARE OF FAKE POCs as
+these exploits are not vetted and come from untrusted third parties.
+
+ExploitDB
+I already mentioned ExploitDB earlier so im not going to talk about it again but this is a
+great resource for finding POCs.
+●
+
+https://www.exploit-db.com/
+
+Summary
+9 times out of 10 you are going to find the exploit code you're looking for on Github or
+on ExploitDB. If you can’t find it in one of those locations it probably doesn't exist and
+
+you will have to create your own POC. However, don’t be afraid to search for resources.
+Sometimes the POC code can be buried deep in a blog post on the 5th page of Google.
+
+Exploitation
+Once you have a working POC you are ready to test it against your target. I always
+recommend setting up a vulnerable machine to test the exploit against first so you know
+what to expect from a real target. Once you're ready just run the exploit on your target
+and review the results to see if they are vulnerable or not.
+
+Conclusion
+Exploiting known vulnerabilities is one of the oldest tricks in the book. That being said
+it’s still one of the best methodologies to use for quick easy wins. There are really only
+three steps when using this approach. First determine your targets techstack, search for
+any vulnerabilities in that tech stack, and finally run the exploits.
+
+Basic Hacking CMS
+Introduction
+Content management systems(CMS) such as wordpress,drupal,and joomla make up
+the vast majority of the internet. According to a survey performed by W3Techs 62% of
+the internet is run on a CMS and 39.1% percent of the internet is run on wordpress. As
+an attacker this means the vast majority of the sites you are going to be going up
+against will be run by a CMS.
+
+Wordpress
+As of right now over a quarter (25%) of the internet is built using WordPress. This is
+useful to know because that means a single exploit has the potential to impact a large
+portion of your target’s assets. There are in fact hundreds of exploits and
+misconfigurations impacting WordPress and its associated plugins. One common tool to
+scan for these vulnerabilities is wpscan:
+● https://github.com/wpscanteam/wpscan
+The only thing that’s annoying about this tool is that it's written in ruby, I prefer tools
+written in python or Golang. During the fingerprinting phase you should've discovered
+the technologies running on your target's assets so it should be easy to search for sites
+running WordPress. Once you find a site scan it with wpscan as shown below:
+● wpscan --URL <URL>
+
+The vast majority of the sites you scan are going to be patched. This is because most of
+these WordPress sites are managed by third party vendors who perform automatic
+updates. However, you will run into vulnerable plugins quite frequently but many of
+these exploits require credentials to exploit. Another thing I find all the time is directly
+listing on the uploads folder. Always make sure to check:
+● “/wp- content/uploads/”
+
+You can often find sensitive information such as user emails, passwords, paid digital
+products, and much more.
+
+Drupal
+Drupal is the third most popular CMS yet I seem to run into Drupal sites more than
+Joomla. If you find a Drupal site you want to use droopescan to scan it. This scanner
+also has the ability to scan additional CMSs as well:
+●
+
+https://github.com/droope/droopescan
+
+● python3 droopescan scan Drupal -u <URL Here> -t 32
+
+Joomla
+WordPress is by far the most popular CMS with over 60% of the market share. Joomla
+comes in second so you can expect to run into this CMS as well. Unlike WordPress
+sites who seem to be fairly locked down Joomla is a mess. If you want to scan for
+vulnerabilities the most popular tool is Joomscan:
+●
+
+https://github.com/rezasp/joomscan
+
+● perl joomscan.pl -u <URL Here>
+
+Adobe AEM
+If you ever run into the Adobe AEM CMS you're about to find a whole bunch of
+vulnerabilities. 99% of the time this is an instant win! This CMS is riddled with public
+vulnerabilities and I’m 100% positive there are hundreds more zero days. Seriously this
+is one of the worst CMSs I have ever seen. If you want to scan an AEM application for
+vulnerabilities use the tool aemhacker:
+●
+
+https://github.com/0ang3el/aem-hacker
+
+● python aem_hacker.py -u <URL Here> --host <Your Public IP>
+
+Note that in order to test for the SSRF vulnerabilities you need to have a public IP that
+the target server can connect back to.
+
+Other
+There are hundreds of different CMSs so it wouldn't be practical for me to mention every
+single one of them. The vast majority of sites are going to be running WordPress,
+Joomla, and Drupal but you still might run into other CMSs.
+
+If you come across a CMS you haven't seen before the first step is to go to exploit db
+and see if it has any known CVEs:
+●
+
+https://www.exploit-db.com/
+
+For instance, if I discover a CMS named “Magento” I would perform the following search
+on exploit-db:
+
+In addition to finding single exploits you want to search GitHub to see if there is a tool
+that can scan for all the possible vulnerabilities and misconfigurations. Like the tools for
+wordpress,drupal, joomla, and adobe aem there are scanners that target other
+platforms.
+
+As it turns out there is a Magento vulnerability scanner called magescan so we can just
+use that:
+●
+
+https://github.com/steverobbins/magescan
+
+Make sure to use this process whenever you come across a CMS framework you don’t
+recognize.
+
+Conclusion
+Over half of the internet is being run by a CMS framework. So, you are almost
+guaranteed to run into a CMS at one point or another. When you do find a CMS, you
+don’t want to waste time manually testing the endpoint, you want to test for known
+CVEs and misconfigurations. The best way to do this is to find some sort of CMS
+specific vulnerability scanner. If you can find that you can try searching exploit-db and
+google for known CVEs. If you still come up empty handed it’s probably best to move on
+unless you're hunting for zero days.
+
+Basic Hacking Github
+Introduction
+GitHub is a web-based version-control and collaboration platform for software
+developers and as of right now it’s one of the easiest ways to compromise an
+organization. This is one of my go to techniques when I want an easy high impact
+finding.
+
+Finding Sensitive Information
+Pilliging github for sensitive information disclosures is one of the easiest ways to
+compromise an organization. It doesn’t matter how hardened your external perimeter is
+if your developers are hard coding credentials and posting them online you’re going to
+get compromised.
+
+It's fairly common for developers to hard code test accounts, API keys, or whatever
+when they are writing a piece of software. This makes things easy for the developer as
+they won’t have to enter their credentials every time they go to run/test their program.
+However, more times than not these credentials remain in the source code when they
+push it to Github, if this repository is public everyone can view it.
+
+The first thing you need is a list of sensitive words to search on. This can be a file name,
+file extension, variable name, or anything else. A good list can be found below thanks to
+“@obheda12”:
+
+Once you have a list of sensitive things to search for your ready to hunt! I normally just
+type in the domain of the target followed by the Github Dork as shown below:
+● Domain.com “password”
+
+As you can see above, searching for the domain “hackerone.com” and the term
+“password” gave us 7,390 results. In a typical scenario I would end up going through
+90% of these results by hand for a few hours before I find something juicy. Having to
+spend hours sorting through a bunch of trash is really the only downside to this
+technique. However, when you do find something it typically leads to an insta high or
+critical finding.
+
+Conclusion
+As of right now Github is one of the easiest ways to get a high or critical vulnerability.
+Almost every developer uses Github and these same developers also like hard coding
+passwords in their source code. As long as you're willing to spend a few hours
+
+searching through thousands of repos you’re almost guaranteed to find something
+good.
+
+Basic Hacking Subdomain Takeover
+Introduction
+Another extremely popular vulnerability is subdomain takeover. Though this vulnerability
+has died down significantly it is still very common in the wild. If you are unfamiliar with
+this type of vulnerability according to Google “Subdomain takeover attacks are a class
+of security issues where an attacker is able to seize control of an organization's
+subdomain via cloud services like AWS or Azure”.
+
+Subdomain Takeover
+A subdomain takeover occurs when a subdomain is pointing to another domain
+(CNAME) that no longer exists. If an attacker were to register the non existing domain
+then the target subdomain would now point to your domain effectively giving you full
+control over the target’s subdomain. What makes this vulnerability so interesting is that
+you can be safe one minute and a single DNS change can make you vulnerable the
+next minute.
+
+The vulnerability here is that the target subdomain points to a domain that does not
+exist. An attacker can then register the non existing domain. Now the target subdomain
+will point to a domain the attacker controls.
+
+If you’re planning on hunting for this vulnerability you are definitely going to be
+referencing the following github page as it contains a bunch of examples and
+walkthroughs on exploiting different providers:
+●
+
+https://github.com/EdOverflow/can-i-take-over-xyz
+
+As you can see above this page contains a large list of engines who can be exploited by
+this vulnerability. If you click on the issue number it will give you a walk through
+exploiting that particular engine. Because every provider has its own way of registering
+domains you will need to learn the process of registering a domain on the engine that
+impacts your target.
+
+Github Takeover
+One of the easiest ways to spot a subdomain takeover vulnerability is by the error
+message it throws as shown below:
+
+As you can see above when we visit our target site it throws a 404 status code and
+gives us the error message “There isn’t a Github Pages Site here”. If we go to the
+subdomain takeover wiki we can confirm that this error message indicates the possibility
+of subdomain takeover.
+
+Now that we have an indicator this site is vulnerable we need to get the github page the
+vulnerable subdomain is pointing to. We need this information so we can register the
+domain through github.
+
+As shown above a “dig” command can be used to gather the DNS records of the
+vulnerable domain. We can also see that the domain points to the github page
+“ghostlulzvulntakeover.github.io”, if we can register this domain we win. To figure out the
+process of registering a domain on Github you can Google it or you can follow the
+tutorial in the subdomain takeover github page as shown below:
+
+Now that we know the steps to register a domain on Github we just need to do it. First I
+created a Github repo with the same name as the CNAME record:
+
+

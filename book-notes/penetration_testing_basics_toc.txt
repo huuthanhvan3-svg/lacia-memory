@@ -1,0 +1,1299 @@
+Penetration
+Testing Basics
+A Quick-Start Guide to Breaking
+into Systems
+—
+Ric Messier
+
+Penetration
+Testing Basics
+A Quick-Start Guide to
+Breaking into Systems
+
+Ric Messier
+
+Penetration Testing Basics: A Quick-Start Guide to Breaking into Systems
+Ric Messier
+Winooski
+Vermont, USA
+ISBN-13 (pbk): 978-1-4842-1856-3
+
+ISBN-13 (electronic): 978-1-4842-1857-0
+
+DOI 10.1007/978-1-4842-1857-0
+Library of Congress Control Number: 2016947013
+Copyright © 2016 by Ric Messier
+This work is subject to copyright. All rights are reserved by the Publisher, whether the whole or part of the material
+is concerned, specifically the rights of translation, reprinting, reuse of illustrations, recitation, broadcasting,
+reproduction on microfilms or in any other physical way, and transmission or information storage and retrieval,
+electronic adaptation, computer software, or by similar or dissimilar methodology now known or hereafter
+developed. Exempted from this legal reservation are brief excerpts in connection with reviews or scholarly
+analysis or material supplied specifically for the purpose of being entered and executed on a computer system,
+for exclusive use by the purchaser of the work. Duplication of this publication or parts thereof is permitted only
+under the provisions of the Copyright Law of the Publisher’s location, in its current version, and permission for use
+must always be obtained from Springer. Permissions for use may be obtained through RightsLink at the Copyright
+Clearance Center. Violations are liable to prosecution under the respective Copyright Law.
+Trademarked names, logos, and images may appear in this book. Rather than use a trademark symbol with every
+occurrence of a trademarked name, logo, or image we use the names, logos, and images only in an editorial fashion
+and to the benefit of the trademark owner, with no intention of infringement of the trademark.
+The use in this publication of trade names, trademarks, service marks, and similar terms, even if they are not identified
+as such, is not to be taken as an expression of opinion as to whether or not they are subject to proprietary rights.
+While the advice and information in this book are believed to be true and accurate at the date of publication, neither
+the authors nor the editors nor the publisher can accept any legal responsibility for any errors or omissions that may
+be made. The publisher makes no warranty, express or implied, with respect to the material contained herein.
+This book references software and tools that are available on the Internet and were found by the author to be suitable
+for use at the time of publication. However, this software is published by independent organizations, and neither
+the author nor their publisher can be responsible for its suitability or safety. Readers must use this software at their
+own risk, and cannot hold the author or publisher responsible for any damages coming from the proper or improper
+use of this software on their systems. Possible damages may include loss or breach of personal data, corruption of
+software or operating systems, or even physical damage to computer systems or peripherals.
+Managing Director: Welmoed Spahr
+Acquisitions Editor: Susan McDermott
+Development Editor: Matthew Moodie
+Technical Reviewers: Chris Williams, Stan Siegel
+Editorial Board: Steve Anglin, Pramila Balen, Laura Berendson, Aaron Black, Louise Corrigan, Jonathan
+Gennick, Robert Hutchinson, Celestin Suresh John, Nikhil Karkal, James Markham, Susan McDermott,
+Matthew Moodie, Natalie Pao, Gwenan Spearing
+Coordinating Editor: Rita Fernando
+Copy Editor: April Rondeau
+Compositor: SPi Global
+Indexer: SPi Global
+Cover image selected by FreePik.
+Distributed to the book trade worldwide by Springer Science+Business Media New York, 233 Spring Street,
+6th Floor, New York, NY 10013. Phone 1-800-SPRINGER, fax (201) 348-4505, e-mail orders-ny@springer-sbm.com,
+or visit www.springer.com. Apress Media, LLC is a California LLC and the sole member (owner) is Springer
+Science + Business Media Finance Inc (SSBM Finance Inc). SSBM Finance Inc is a Delaware corporation.
+For information on translations, please e-mail rights@apress.com, or visit www.apress.com.
+Apress and friends of ED books may be purchased in bulk for academic, corporate, or promotional use.
+eBook versions and licenses are also available for most titles. For more information, reference our Special Bulk
+Sales–eBook Licensing web page at www.apress.com/bulk-sales.
+Any source code or other supplementary materials referenced by the author in this text is available to
+readers at www.apress.com. For detailed information about how to locate your book’s source code, go to
+www.apress.com/source-code/.
+Printed on acid-free paper
+
+This book is dedicated to all those who came before me
+and inspired my own journey in the field of information security.
+
+Contents at a Glance
+About the Author .............................................................................. xi
+About the Technical Reviewers ...................................................... xiii
+Introduction ..................................................................................... xv
+■Chapter 1: What Is Penetration Testing? ........................................ 1
+■Chapter 2: Digging for Information............................................... 13
+■Chapter 3: What’s Open? .............................................................. 25
+■Chapter 4: Vulnerabilities ............................................................. 41
+■Chapter 5: Exploitation ................................................................. 55
+■Chapter 6: Breaking Web Sites ..................................................... 79
+■Chapter 7: Reporting .................................................................. 103
+Index .............................................................................................. 111
+
+v
+
+Contents
+About the Author .............................................................................. xi
+About the Technical Reviewers ...................................................... xiii
+Introduction ......................................................................................xv
+■Chapter 1: What Is Penetration Testing? ........................................ 1
+Information Security ................................................................................ 2
+Limitations of Penetration Testing ........................................................... 4
+Testing Types ........................................................................................... 5
+Who Does Pen Testing ............................................................................. 7
+Methodology............................................................................................ 8
+Summary ............................................................................................... 10
+Exercises ............................................................................................... 10
+■Chapter 2: Digging for Information............................................... 13
+Google Hacking ..................................................................................... 14
+Social Networking ................................................................................. 17
+Internet Registries ................................................................................. 20
+Summary ............................................................................................... 23
+Exercises ............................................................................................... 24
+
+vii
+
+■ CONTENTS
+
+■Chapter 3: What’s Open? .............................................................. 25
+Domain Name System ........................................................................... 26
+Transport Protocols and Ports ............................................................... 30
+Port Scanning ......................................................................................................... 31
+TCP Scanning ......................................................................................................... 33
+UDP Scanning ......................................................................................................... 34
+Operating System and Version Scanning................................................................ 35
+High-Speed Scanning ............................................................................................. 36
+
+Grabbing Banners.................................................................................. 37
+Summary ............................................................................................... 39
+Exercises ............................................................................................... 39
+■Chapter 4: Vulnerabilities ............................................................. 41
+What Is a Vulnerability? ......................................................................... 41
+Vulnerability Scanners........................................................................... 43
+Scanning for Vulnerabilities................................................................... 45
+Fuzzing .................................................................................................. 50
+Summary ............................................................................................... 53
+Exercises ............................................................................................... 53
+■Chapter 5: Exploitation ................................................................. 55
+Getting Control ...................................................................................... 56
+Finding a Vulnerability ........................................................................... 59
+Using Metasploit.................................................................................... 61
+Metasploit Auxiliary Modules ................................................................ 66
+Debugging ............................................................................................. 68
+Exploit Database.................................................................................... 70
+Social Engineer’s Toolkit ....................................................................... 72
+
+viii
+
+■ CONTENTS
+
+Post-Exploitation ................................................................................... 75
+Summary ............................................................................................... 77
+Exercises ............................................................................................... 77
+■Chapter 6: Breaking Web Sites ..................................................... 79
+Web Architecture ................................................................................... 80
+Business Logic and Data ........................................................................................ 82
+Architecture Protections ......................................................................................... 84
+Asynchronous Javascript and XML (AJAX) ............................................................. 85
+
+Common Web Application Attacks ......................................................... 86
+Cross Site Scripting (XSS) ...................................................................................... 86
+SQL Injection........................................................................................................... 87
+Command Injection ................................................................................................. 88
+XML External Entity Attacks .................................................................................... 89
+Clickjacking Attacks ............................................................................................... 90
+Cross Site Request Forgery .................................................................................... 90
+Evasion Attacks ...................................................................................................... 91
+
+Testing Strategies.................................................................................. 91
+Automated Tools ..................................................................................................... 93
+Passive Scanning ................................................................................................... 98
+
+Practice Sites ........................................................................................ 99
+Summary ............................................................................................. 100
+Exercises ............................................................................................. 101
+■Chapter 7: Reporting .................................................................. 103
+Executive Summary ............................................................................ 104
+Methodology........................................................................................ 106
+Findings ............................................................................................... 107
+Finding .................................................................................................................. 108
+Recommendation.................................................................................................. 108
+ix
+
+■ CONTENTS
+
+Evidence ............................................................................................................... 109
+References............................................................................................................ 109
+Informational ........................................................................................................ 109
+
+Summary ............................................................................................. 109
+Index .............................................................................................. 111
+
+x
+
+About the Author
+Ric Messier, MS, GCIH, GSEC, CEH, CISSP, is the
+program director for Cyber Security, Computer
+Forensics and Digital Investigations, and Economic
+Crime Investigation bachelor’s degree programs, as well
+as the Information Security Operations and Digital
+Forensic Science master’s degree programs, at
+Champlain College.
+Messier has been involved in the networking and
+security arena since the early 1980s. He has worked
+at companies ranging from large Internet service
+providers to small software companies, developing
+knowledge and experience about a range of topics
+related to networking and security. Messier spent
+more than four years at a large telecommunications hardware vendor doing penetration
+testing and has spent the last six years doing security assessments, penetration tests, Web
+application tests, and other consulting work for a number of clients.
+As an author and an established expert in the field, Messier has published several
+articles for Hackin9 Magazine, has developed a number of video training titles with
+O’Reilly Media and has written a number of books on information security.
+
+xi
+
+About the Technical
+Reviewers
+Chris Williams has been involved in the IT security
+field since 1994. He is a co-author of the book Enterprise
+Cybersecurity: How to Build a Successful Cyberdefense
+Program Against Advanced Threats (Apress, 2015) and
+holds a patent for secure e-commerce technology. He
+has been with Leidos since 2003, focusing on enterprise
+cybersecurity, defense against advanced threats, and
+regulatory compliance. He has presented on these
+topics at RSA, (ISC)2, ISSA, B-Sides, HIMSS, MILCOM,
+and other forums. He is a former ranger-qualified
+paratrooper and holds degrees in computer science and
+information assurance from Princeton and George
+Washington Universities.
+Dr. Stanley Siegel earned a nuclear physics doctorate
+from Rutgers University. He has more than 40 years of
+progressive experience as a systems engineer,
+mathematician, and computer specialist. His career
+started with the U.S. Government in the Commerce
+Department and then the Defense Department. After
+his government service, he was with Grumman for
+15 years and Science Applications International
+Corporation (SAIC) for over 20 years (before SAIC split
+into two companies—SAIC and Leidos).
+At SAIC he was a senior technical advisor
+and director in areas such as software engineering
+methodology assessment, software requirements
+analysis, software testing and quality assurance, and
+technology assessment.
+He is a co-author of the book Enterprise Cybersecurity: How to Build a Successful
+Cyberdefense Program Against Advanced Threats (Apress, 2015). Dr. Siegel has taught
+software systems engineering graduate courses at Johns Hopkins University since the
+mid-1990s. Johns Hopkins honored him in 2009 with an Excellence in Teaching Award.
+
+xiii
+
+Introduction
+First, this is an introduction to the field of security assessments and penetration testing.
+Becoming really good at these tasks takes a lot of work. You should use this as a starting
+point. It is not a blueprint with a set of instructions for you to follow exactly on your way
+to an exciting career in information security. The most important thing you can do is to
+get your hands dirty and practice, practice, practice so you can keep growing your skills,
+knowledge, and experience.
+There are plenty of places to acquire software and systems to test against. The most
+important thing you should know before you get started is that a lot of the tools and
+techniques we are going to be talking about over the course of this book can cause system
+outages and data loss or corruption. Once you start working with tools and programs
+that are designed to break things, you can cause breakage. As a result, it’s essential that
+you only work on systems that are yours to start with. Get yourself a lab and work there.
+Virtual machines and free software are your friends here.
+The moment that you start working with clients or employers performing
+penetration testing or security assessments—and this can’t be said enough times—make
+sure to get permission. Informed consent is your friend, because inevitably you will
+cause some damage. Whether you intend to or not, you will run across a fragile system
+or a piece of software that misbehaves. Outages will occur, so it’s best to make sure
+everyone is on board with all of this. Let them know that you may cause outages and that
+in very, very rare instances you may cause data loss or corruption. It happens. Once you
+cause damage or downtime, the very last thing you want to do is to have the client or
+your employer come back to you and say you didn’t let them know it was possible. Get
+everything in writing.
+Once you have everything in writing and everyone knows what is possible, you can
+get started on all of the fun work, which is what you are about to do here. Keep in mind
+that in spite of what you see on TV and in the movies, breaking into systems isn’t nearly as
+simple, as a general rule, as a few taps of the keyboard. It’s tedious and can be a lot of hard
+work. Once you’ve popped your first box, though, it makes the time and effort worth it.
+Enjoy the ride!
+
+xv
+
+CHAPTER 1
+
+What Is Penetration Testing?
+Penetration testing is an art. You can learn a lot of techniques and understand all of the
+tools, but the reality is that software is complex, especially when you start putting a lot of
+software systems together. It’s that complexity that means that there is no one-size-fitsall solution when it comes to finding ways to get into systems. An attack that may work
+against one Web server may not work for the same Web server running on a different
+system. Sometimes, you can try a particular attack a number of times without success
+before it suddenly starts working and you find a way to break into the system. A skilled
+and successful penetration tester has not only the technical skills necessary to run the
+tools and understand what is happening, but also the creativity necessary to try different
+approaches.
+You may hear penetration testing referred to as ethical hacking. In fact, there are
+some professional certifications that include ethical hacking in the name. They are
+essentially the same thing, though ethical hacking includes a component in the name
+that penetration testing doesn’t. Ethics is an important component when it comes
+to penetration testing. The name says it all, after all. You are testing to see if you can
+penetrate system and network defenses. If you can penetrate, you gain some level of
+access. In the course of normal operations, this may be access you may not otherwise
+have, and this is where ethics come in, though in reality the ethical component is more of
+a legal requirement.
+The laws in the United States, and in many other countries, make it illegal to obtain
+unauthorized access to computer systems and networks. Once you have gained the
+access that is the point of a penetration test, you have broken the law. Unless, of course,
+you have permission to do it. While you may not have accounts on the systems in
+question, which would be explicit authorization, you should always have permission to
+perform the test, which is an implicit authorization to gain access to the systems. This
+permission is critical, and you may sometimes hear it referred to as a “get out of jail free”
+card. While technically it’s more of a “stay out of jail” card than a “get out of jail” card, the
+important word you don’t want to overlook is jail. If you think you are doing someone a
+favor by testing their network or application security for them and that they will thank
+you when you find a serious hole, think again. Even years ago when everyone wasn’t
+exactly on edge about computer security, this wasn’t done by respectable professionals.
+Performing any sort of penetration testing or using the tools we are going to be reviewing
+against systems you don’t have an agreement in place to touch has the potential to land
+you in jail.
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_1
+
+1
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Breaking into systems can be fun and exciting, and some people really find
+solving the puzzle and getting in to be a bit of a high. There are a lot of ways you can get
+experience without testing on other people’s systems, however. Using virtual machine
+software like VirtualBox, VMWare, or Parallels, you can install a number of operating
+systems on a single computer system. In fact, I would strongly recommend getting some
+virtual machines up and running so you can try out some of the techniques we will be
+going over. At a minimum, you may want to have an installation of Kali Linux and a copy
+of Metasploitable 2. Kali Linux is a Linux distribution that was once called BackTrack. It
+contains a lot of security tools installed by default and can be used to perform penetration
+tests with what’s in place in the distribution. Metasploitable 2 is an implementation of
+Linux that is designed to be exploitable. It includes versions of various services that are
+vulnerable to exploits and are available in the exploit framework Metasploit. A copy of an
+older Windows installation may not be a bad idea either, just to see what Windows attacks
+look like.
+
+Information Security
+Why do we perform penetration testing? Ultimately, the goal of a penetration tester is
+to help an organization improve their defenses in case a real attacker comes by to break
+in and steal information. This information can come in many forms. In the case of a
+business, it may be intellectual property. This is any information that the business relies
+on to set them apart from other companies. This may be patents, source code, or any
+other documentation about how the business is run. Other forms of data are banking
+information, credit card numbers, social security numbers, usernames, passwords, and
+especially anything related to health care. Attackers may be trying to steal any of that
+information, because it can be sold or used to gain additional access to other systems.
+
+You will find I avoid the use of almost any form of the word hack. Hacking has a long
+and storied history that predates its application to computers by several decades. When
+I started using computers, hacking meant doing something really cool and interesting
+with a computer. A hack was the result of that hacking. These days, hack and hacking are
+apparently meant to suggest something else, but the way the media uses the words is very
+vague and it obscures what is really going on. For the most part, when you hear about a
+“hack” in the news, what you are hearing about is a crime. I find it’s best to call a crime
+a crime. If we are talking about the people perpetrating that crime, we are talking about
+criminals. In order to be very clear, you will be seeing the words attacker or adversary.
+These are the people who are trying to break into your systems. You will see the word attack
+used to indicate what they are doing. It’s essential to remember that there is nothing cute
+or charming about what these people are doing. They are frequently well funded and well
+organized, and their activities are run as a business because they make a lot of money from
+them. Treat them as though they are armed and dangerous, because they are.
+
+2
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Organizations will spend a lot of time and resources trying to protect themselves
+from these attacks. They will implement firewalls to keep attackers out and intrusion
+detection systems to hopefully catch when someone gets through the firewall. They will
+also implement procedures within the organization to protect themselves from insider
+attacks, which are also common. This may include the requirement of strong passwords
+or perhaps multi-factor authentication, which may require the user to have something
+on them or even use something like a fingerprint in addition to using a username and
+password.
+The thing that organizations are trying to protect against is vulnerability. A
+vulnerability is a weakness in a system. System, though, is a very vague term. By using
+the word system, in this case, we are not only talking about the operating system and
+applications that make your computer useful but also, in a larger context, all of the
+computers and network devices within the entire enterprise network. The organization
+will try to locate its weaknesses, or vulnerabilities, and either remove or reduce them.
+The process of trying to remove or reduce a vulnerability is called remediation. When
+you are trying to reduce the impact of a vulnerability being taken advantage of, you are
+mitigating the impact. So, in the process of managing vulnerabilities, you will hear the
+terms mitigation and remediation.
+When you take advantage of a vulnerability, you are exploiting it. You will see
+references to exploits as we continue, which are specific techniques or even pieces of
+software that are designed to exploit a particular vulnerability. The point of an exploit
+may be to obtain system-level access, meaning the attacker can see and even control files,
+users, and services. Some of these actions require a higher level of access than a regular
+user may have. On Windows systems, you would say that you have administrator access.
+Under a Linux or Unix-like system, you may say that you have root or superuser access.
+The user root is the default administrative account on a Unix-like system, including
+Linux. If you are root, you can do anything on the system. If you are root and there is some
+action you can’t take, there is probably something wrong.
+The last thing to go over, while we are talking about information security and
+vulnerability management, is the idea of probability and impact. When assessing a
+vulnerability, a security professional will generally take into account two factors. The first
+is the probability. This is often given a qualitative valuation like low, medium, or high.
+What it refers to is the likelihood of a particular vulnerability being exploited. If there
+is proof-of-concept code available or if there is flat out an exploit widely available (“in
+the wild”), the likelihood may be very high. If you have additional mitigations in place,
+like you have to be on the local network and not remote in order to take advantage of
+the vulnerability, you may decide the probability is lower. Making this valuation and
+categorization will often take a combination of knowledge and experience.
+The other factor that is important to know about is the impact. This is what happens
+if the exploit is triggered. If the exploit causes the application to crash but it comes right
+back up, this is probably a low-impact exploit. If, on the other hand, it causes a remote
+attacker to get unauthorized administrative access to your system, the impact is high. If it
+causes the destruction of critical or sensitive information for the business, you may also
+say it’s high impact. While this may be easier to gauge than probability, it still takes a fair
+amount of knowledge and experience to be able to do it accurately.
+
+3
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+It may be tempting to just rate high on impact and probability in order to get someone to pay
+attention to a particular vulnerability, but you will quickly lose credibility. It’s not essential
+that absolutely every vulnerability get fixed. Ensuring that the most critical ones get the most
+attention is far more important. Be honest and based in facts and you will ensure that your
+opinion means something.
+One last thing to note. We have been talking about information security, and that’s
+a phrase you will hear about a lot. The objective is to protect the information assets of
+an organization. However, an attacker may not care about your information assets. They
+may care more about your computing assets. In other words, they may simply be looking
+to collect a system they can add to their network of systems that will perform tasks for
+them. This is a very lucrative business, so don’t assume that just because you are a small
+organization you aren’t a target. You are. Especially if you are easy for the picking. Your
+systems and their computing power are just as good as those from large, high-profile
+companies—more so if they are easy to break into.
+
+Limitations of Penetration Testing
+Penetration testing is looking for vulnerabilities and trying to exploit them. However,
+there may be a tendency for some people and organizations to expect that all
+vulnerabilities can be exploited quickly. In fact, when done well, penetration testing can
+be a very time-consuming operation, and you often have a very limited amount of time
+in order to perform your testing. If the organization is looking for the big bang, the one
+big exploit that gives you the enormous haul of data, then something shy of that may be
+viewed as an indication that they are safe. In fact, nothing could be further from the truth.
+If you or the organization you are working for is myopic about the goal, you will
+end up with generally poor results or, worse, will provide the organization with a false
+sense of their safety. If you only find little things, you haven’t achieved your objective of
+penetration. If you haven’t penetrated any system or haven’t penetrated any system in any
+significant way, it may be seen as a sign that the system or application can’t be penetrated.
+All it means is that you were unable to penetrate it given the time you had available when
+that time was spent on a large number of systems. It’s critical to keep in mind that the
+company’s adversaries are motivated and generally patient over a long period of time. If
+you are a target for them, they will keep coming at you over a much longer period of time
+than you will be provided with as you are doing your penetration test.
+Often, penetration tests can be crippled before they even begin because of the rules
+and constraints that are put into place. As an example, I have worked on engagements
+where the client didn’t want specific systems and networks touched because they knew
+they were fragile. A test that leaves out infrastructure that is known to be vulnerable
+doesn’t provide a complete or accurate representation of the security posture of the
+organization or how vulnerable they are. If the report is used in isolation without the
+additional information, it is misleading.
+
+4
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Focusing on the act of penetration may not be doing the company you are working
+for many favors. Instead, it may be better to perform a security assessment. This is partly a
+penetration test, but it isn’t limited to just the components you were able to quickly break
+into. You may be unable to find issues in the limited time you have. That doesn’t mean
+there aren’t issues that need to be resolved. As an example, though it’s very, very lowhanging fruit, we often see Web servers configured to provide not only the name of the
+software but also the version. Sometimes, even the Linux kernel version, if it’s on a Linux
+system. Windows systems will sometimes provide details about the version of Windows
+that the Internet Information Server (IIS) is running on. While these may not be terrible
+problems, they provide far too much information to an attacker. Sure, they can probably
+figure out some of this information in other ways, but why make their job easier? Make
+them work for every bit of information they get. This is especially true when it’s really easy
+to close some of the leakages. Turning off the feature that exposes version numbers from
+a Web server is a couple of minutes of work. There is almost no reason to not take that
+couple of minutes to just tighten up the perimeter.
+This is the type of finding that doesn’t score many points if you are working on a
+penetration test. A security assessment, though, is a different animal altogether. The
+objective behind a security assessment is to give an honest and complete as possible
+appraisal of the security posture a company has. You may turn up far more items in a
+security assessment than you would in a penetration test. In a penetration test, you may
+not be working in cooperation with the target. This is generally a mistake if the target
+is looking to find ways to shore up defenses. Yes, you can test operational response
+capabilities and you can get a sense of how far someone may be able to get without any
+inside assistance, but as noted above that’s a false sense of security. Again, discovering
+that someone couldn’t get in after working for three days doesn’t tell you anything about
+your readiness against a determined attacker working around the clock for weeks.
+The security assessment is a partnership between the security professional and
+the target. This is usually a full-knowledge penetration test as well as a review of
+configurations and settings that a penetration tester may never get to see. This is valuable
+for two reasons. The first is because the attacker is going to keep poking and prodding
+until something eventually gives. Second, some attacks happen from the inside. These
+people will know about some of these settings and be able to make use of them. A security
+assessment can turn up far more valuable information by just exposing business as usual
+to a third party who isn’t looking at the way things are every day and becoming blind
+to problems because “that’s just the way things are done here.” A security professional
+performing a security assessment can provide an objective analysis of what is found so
+issues can be prioritized by management and resolved.
+
+Testing Types
+The first is called a black box test. This is something like a traditional penetration test,
+but on the extreme end. A black box test means the tester has no knowledge of the target
+other than who the target is. The attacker may not know IP addresses, domain names, or
+anything. This requires gathering a lot of intelligence up front. This can be a very valuable
+exercise, since a company should always know how much information they are leaking to
+the outside world that could be used to attack them. The information gathering will take
+
+5
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+up a large amount of time, so it’s important to make sure that the time for that has been
+scheduled in. You wouldn’t want to take two days out of four you have been allocated just
+gathering information so you can start to perform your attacks.
+When someone is performing a full-blown black box penetration test, it may be
+a good chance to test response capabilities. In that case, you may have a red team,
+also sometimes called a tiger team. The red team is the attack team. They are the ones
+trying to get in. The ones on the inside, whether they are aware it’s happening or not
+(and sometimes the operations staff has no idea in order to get a true sense of response
+capabilities), are called the blue team. You may also have a white team, which is aware of
+both ends of the equation. This is more common in competitions, however, and the white
+team in that case is entirely neutral and manages the competition.
+
+If you are interested in engaging in practice with your penetration testing and you want
+to do it in a safe way that’s also quite challenging, there are a number of competitions
+available online. These are sometimes called capture the flag competitions or cyber defense
+competitions. Sometimes you work in teams, but there are also challenges where you can
+work on your own to solve a particular puzzle to get into a system.
+On the other end of the spectrum, closer to the security assessment mentioned
+earlier, is the white box test. This is generally full knowledge. The attack team works
+closely with the target. It may involve having credentials established ahead of time.
+This allows the tester to perform full local (on-system) assessments without having to
+penetrate before checking the local settings. You may have systems that appear to be very
+hard on the outside, but once the system is popped it’s a soft, gooey mess on the inside.
+This can be an enormous problem, so it’s helpful to check local hardening as well as
+remote hardening. The operations team is generally informed and works with the attack
+team to ensure that there is no impact to customers as a result of the testing.
+In between the black box and the white box is the gray box. This is, not to sound flip,
+a gray area. Each gray box test may be different because it’s somewhere between the black
+and the white tests. One common approach may be to provide all of the initial parameters
+up front. This would be the IP addresses and hostnames that are considered in play.
+This way, the red team doesn’t have to spend time hunting down that information. This
+approach also has the benefit of limiting the impact to systems that are clearly out of scope,
+which may happen by accident if it’s a true black box test. Considering the sorts of activities
+that may be happening here, keeping innocent bystanders out of play is important.
+Determining how you plan to approach should ideally be based on an intersection
+of the amount of time you have and what the client is really looking to accomplish. There
+are always trade-offs associated with the different types of test you can do, so you should
+talk the client or your employer through what you can do in the amount of time you have
+been given. If they are concerned about what could be done once someone is in, a white
+box test may be most in order. If they are really looking to get a sense of how they respond
+to incidents, you may want to use a black box test. Black box testing will often spend a lot
+of time on reconnaissance and less time on actually testing. Sometimes gray box testing
+provides the best balance, but that’s something you need to make sure to communicate
+about with the client.
+
+6
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Typically, testing is performed in a production environment. This provides the
+best idea of how good the defenses are in the live systems. There is a risk to this,
+however. Some companies may prefer some of the testing to be done in a protected lab
+environment to avoid any impact to the live systems. This may be done to ensure that
+the business can continue to take customers, but it may also be done if there is a concern
+about data corruption or leakage as a result of the testing. Either of these cases is valid,
+depending on the circumstances, but you have to be sure that the lab environment
+mirrors the live environment as closely as absolutely possible or else it’s a waste to be
+performing the testing to begin with.
+
+Who Does Pen Testing
+This is really a tricky question, and you may approach it from a couple of different angles.
+First, you may be wondering about the types of people who may be performing this work.
+This may come down to the types of knowledge or skills they have. Just because you are a
+security professional doesn’t mean that you would be a good penetration tester. If you are
+a firewall administrator, you would technically be a security professional, but you may not
+be any good at doing penetration testing work. That doesn’t mean you wouldn’t be good
+at it but the two don’t automatically go hand in hand.
+Personally, I think it has far less to do with technical skills, since those can always
+be taught or picked up. Someone who might be good at penetration testing is likely
+someone who is very curious. This is someone who wouldn’t allow things to sit at face
+value. As part of that, they would also be persistent. They would want to know more about
+something and keep after a particular problem or challenge until they had either resolved
+it or exhausted all possibilities. There is also a certain amount of creativity required of a
+penetration tester. This is because you need someone who can come at a problem from
+different perspectives and not just give up at a road block on the first attempt.
+Sorting out this question is important if you are looking for someone internally to do
+your testing for you. This brings up the important question of whether to use someone
+internal to the organization or to go outside. If you use an outside organization, you get
+the benefit of objectivity. Someone who is outside won’t know the way things work, and
+so they likely won’t make assumptions. Anytime someone performing a penetration test
+starts making assumptions, they run the risk of missing a lot of vulnerabilities. The same
+can be just as true if you continue to use the same outside tester over and over again.
+There ends up being too much familiarity. As an example, I had a client I was working
+with several years ago. In the process of some testing early on, I inadvertently caused
+a system to fail while doing some very basic scanning. The system was clearly far more
+fragile than any of us expected, but that experience ended up coloring a lot of subsequent
+testing over the next couple of years. We were always careful about how aggressive we
+were. This includes the external team as well as the internal team.
+Using someone internal, however, means that you theoretically have someone at
+your disposal whenever you need them, and you can do a lot of incremental testing. As
+with anything else, though, there are advantages and disadvantages to this. If you look too
+much at something, you may miss a change because you start to assume too much. Also,
+unless you can pay someone whose sole purpose is to perform this sort of testing, you are
+losing productivity from someone who may have other things to do if you are using them
+regularly for penetration testing.
+
+7
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+In terms of finding someone to perform penetration testing, there are a lot of things
+to consider. If you are someone who is looking to become a penetration tester yourself, as
+seems likely considering what you are reading, prepare to spend some time learning not
+only about basic penetration testing practices but also about how complex IT systems are
+built, including programming languages, databases, and system administration. These
+will all help you be a better penetration tester and more deeply understand what it is you
+are doing. This will make you in more demand. The larger your toolkit is, the more people
+will want to make use of you.
+
+Methodology
+There are a number of methodologies available when it comes to performing security
+testing. You can go find one you like, whether it’s deep in scope or just very simple. You
+can develop your own, and you may want to do just that once you start getting the hang
+of what you are doing. For our purposes, we will be using a very simplified framework. As
+you start doing your own penetration testing, no matter what methodology you use—and
+you will need to use some sort of methodology—you will want to communicate that
+methodology to your clients or employers.
+The reason for using a methodology is to demonstrate that what you have done is
+repeatable. You weren’t just shooting in the dark. You actually thought through what you
+were doing. Providing your methodology, at a high level, demonstrates that you are using
+a documented process, even if you are flying by the seat of your pants in each individual
+moment. Providing the methodology will generally give more weight to your testing and
+your conclusions. If I were to just provide a bunch of conclusions, and they had no idea
+how I had come to those conclusions, the whole thing may be harder to swallow. It’s just
+like you were in math class. Show your work.
+The methodology we will be using in this book is a modified version of a common
+methodology I would use when working with a client. It will allow us to get right to the
+meat of penetration testing. With that said, this methodology is simplified somewhat.
+There will be a number of areas that we won’t get into that will come up as you keep
+working, including the following:
+1.
+
+8
+
+Intelligence gathering – this is reconnaissance work against
+your target and will vary based on how much information
+you were provided before the engagement. Even if you were
+provided the entire scope, you will probably want to perform
+some reconnaissance so you can provide guidance to the
+client as to how exposed they are from an information leakage
+perspective.
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+2.
+
+Scanning – this is a different level of reconnaissance. Before
+you start determining your attack strategy, you need to know
+what your targets are. This will provide you with a lot of
+information about systems and ports as well as, potentially,
+any firewalls that may be in place. This is also where you may
+need to exercise caution, depending on what level of testing
+you are performing. This can be a very noisy step, since you
+are starting to engage directly with the target here. It may be
+useful for the client to see if they can detect the scanning as
+part of shoring up their defensive stance.
+
+3.
+
+Vulnerability identification – once you have some target
+systems and applications identified, getting a list of known
+vulnerabilities will tell you where you can quickly and easily
+get in. You may use a number of techniques to perform this
+step. Some of them may be automated, but others will be very
+manual.
+
+4.
+
+Exploitation – the vulnerabilities that you have identified will
+lead you to exploitation. This is where you actually begin to
+penetrate the systems by exploiting the vulnerabilities that
+you have identified. This step can be very time consuming and
+also heart breaking, simply because a vulnerability doesn’t
+always lead to a system compromise. Some vulnerabilities are
+very difficult to exploit, and other exploits may just not work.
+You may end up finding a lot of false positives in this stage
+where the vulnerability was identified but the expected exploit
+didn’t work.
+
+5.
+
+Reporting – once you are done, make sure to clearly
+document all of your findings so you have something tangible
+and coherent to present to your employer or client. This stage
+is essential. For all the fun that you can have doing the first
+four steps, if you don’t do a good job with this one, you won’t
+get asked back to play again, and word may eventually get
+around so that no one will ask you in to play with their toys.
+Spend time learning to write a good and effective report.
+
+In reality, some of these stages may be collapsed, depending on how much time
+you are working with. Some of the automated tools that you may find to use will do
+much of this in a single step. Don’t rely on the automated tools, however. Always double
+check your results, and don’t assume that they will always find vulnerabilities or that the
+vulnerabilities they find will always be exploitable. This is why it’s always a good idea
+to do all of this work separately, even if you have a tool that will do a bunch of it all at
+the same time. The fact is that, while various methodologies are designed to mimic the
+actions of an attacker, attackers aren’t always following these steps. They may simply do
+a port scan or a port sweep and then launch attacks once they have identified open ports
+that may be vulnerable. For the most part, there is almost no cost to blindly launching
+attacks.
+
+9
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+Summary
+Anyone can be a penetration tester. Good penetration testers require experience and
+knowledge, just as someone who is good at any other profession. Penetration testing is
+as much an art as it is anything else, in spite of its being a highly technical profession.
+That’s because something that works one day may not work the following day. Software is
+complex. Being able to handle the differences from one day to another and accommodate
+those differences is an important part of the job and a big part of what makes it an art.
+There is never a clear step-by-step process all the way through every penetration test. You
+will have to be a little creative, a lot persistent, and a lot resilient. Patience and persistence
+will get you a long way toward success.
+As you prepare to become a penetration tester, you should keep in mind the
+expected ethical obligations. If you just want to go out and break into systems without
+regard to laws, you are free to do that, of course. That doesn’t make you a penetration
+tester, though. It makes you a criminal, and it’s entirely possible that you won’t be free for
+much longer. Always, always get complete agreement from your target about what it is you
+are expected to be doing. As you are learning, either find someone or some organization
+that is very understanding and lenient that will let you try things out on their systems, or,
+better yet, get yourself a small lab system that you can work on. There are a number of
+ways to do this. The cheapest is to get a system with a lot of memory in it and build virtual
+machines. This doesn’t have to be very expensive. Just about any modern computer will
+work for what you need it for. You can then get free software like VirtualBox to host your
+virtual machines.
+As you start to get into penetration testing, pay attention to the steps you are
+following. As you get comfortable with following a fairly regular routine, you develop
+your methodology. It’s probably helpful to document that. You will likely want to use the
+documentation you produce in reports you generate for your employer or customers.
+Educating your client will improve your relationship with them, give them more for
+their money, and also clearly demonstrate your value. Many penetration testers deliver
+reports highlighting everything they were able to do without clearly explaining what
+happened or what can be done about it. Providing clear and complete documentation
+will also establish that you are following a process and not just shooting from the hip with
+everything you are doing.
+
+Exercises
+1.
+
+10
+
+Obtain a copy of VirtualBox, or VMWare or Parallels if you are
+more comfortable with them. Install it on your system. You
+can obtain VirtualBox from http://www.virtualbox.org. It
+will be a straightforward installation, and you shouldn’t need
+to do anything other than accept the defaults for any prompts.
+
+CHAPTER 1 ■ WHAT IS PENETRATION TESTING?
+
+2.
+
+Obtain a copy of Kali Linux. This will be an .ISO image that
+you will use to install Kali into a virtual machine. You can
+download the current .ISO from http://www.kali.org.
+VirtualBox will allow you to install a new operating system
+from the .ISO image you have downloaded. Again, installation
+of Kali should be fairly straightforward. Accept defaults within
+the installation, since a default Kali installation will get you
+going for our purposes.
+
+3.
+
+Obtain a copy of Metasploitable 2. There are different places
+to get this. You should use Google, Bing, or your favorite
+search tool to look for a place from which to download it. It
+will make for a good target for some of what we will be doing.
+This does not require installation. It is a VMWare image that
+you should be able to just open in any virtualization software
+that you have, including VirtualBox.
+
+11
+
+CHAPTER 2
+
+Digging for Information
+The first step along our path to system conquest is digging up information on the
+target. Fortunately, in the connected age that we live in, there is a lot of information
+that is available online somewhere if you know how and where to look for it. The easy
+availability of information means that there is a lot of it easily available. Of course, there
+are privacy issues related to all of the information that is so easily available, but for the
+moment we aren’t concerned about privacy. In fact, we will be grateful for the freeflowing information that you will find you have access to without having to resort to any
+trickery, deceit, or law breaking. Not even any potential law breaking. You may be aware
+of stories of dumpster diving and other means of obtaining information from the days
+long before information became so free and easy to come by. These sorts of tactics are
+almost entirely unnecessary.
+For a start, you have Google. In addition to the unbelievable volume of information
+accessible via Google, there are a number of techniques you can use to improve your
+searches. Google provides a number of ways to dial in pretty tightly on the information
+you are looking for so you aren’t wading through a large number of pages just to find
+the one piece of information you are looking for. You can think of it as an automated hay
+filter as you are searching for your needle. While Google hacking, as it is called, is very
+powerful, it’s not perfect. You may still need to do a lot of manual filtering and reading.
+Beyond Google, there are a number of sites that can be used to gather information
+about targets. Social networking sites are often good places to go to acquire information,
+and certainly job sites are great repositories of information, especially when it comes to
+gathering technical information about your target. Depending on the awareness levels
+of the company you are working with, you may be able to turn up a large amount of
+information that is, again, stored in very public locations.
+While the Internet is mostly decentralized, there are some cases where there are
+central repositories of information. These repositories are called Regional Internet
+Registries (RIRs), and they can be useful in acquiring information about a business. This
+may include information about domain registrations and IP addresses that are assigned
+to the business. In general, this is public information, though some details, specifically
+those associated with domain registrations, may be masked. When it comes to IP
+addresses, though, it’s all public. Mining these repositories can sometimes turn up useful
+information, including contact data.
+Using a combination of all of these sites and tactics, you will be able to gather a lot of
+information about your target.
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_2
+
+13
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Google Hacking
+The phrase Google hacking sounds incredibly cool, and in some ways it really is, with
+applications far beyond what we are talking about. However, in spite of the name, this
+is not an attack on Google in any way. Instead, it’s a way of using a number of keywords
+that Google has implemented in their search engine to help you get the narrowest of
+results possible. Long gone are the days of 1,589,341 pages returned from your search.
+Instead, you can get very, very specific using a different type of searching. It’s called
+Google hacking, but in reality, other search engines have implemented many of the same
+keywords. If you really love another search engine instead of Google, you should try
+some of these out to see if they work there. Table 2-1 shows the keywords that Google has
+introduced to allow you to narrow results.
+Table 2-1. Google Hacking Keywords
+
+Operator
+
+Description
+
+intitle
+
+Looks for the search terms in the title
+
+allintitle
+
+Looks for the search terms only in the title and nowhere else in the
+document
+
+inurl
+
+Looks through the URL (the address) for the search terms
+
+allinurl
+
+Similar to allintitle, looks only in the URL for the search terms
+
+filetype
+
+You provide the filetype and search terms. All results have that filetype.
+
+allintext
+
+The search will not look at the URL and just in the text.
+
+site
+
+Narrow your search to a particular site. You have to provide the site as
+well as search terms.
+
+link
+
+Searches for links to pages
+
+inanchor
+
+This search will look in anchor tags only
+
+numrange
+
+Searches for a number
+
+daterange
+
+Results will be within a range of dates, as specified
+
+author
+
+Searches Google Groups for a particular author. This only works in
+Google Groups.
+
+group
+
+Looks for a group name. This only works in Google Groups.
+
+insubject
+
+Searches subject lines in posts. This only works in Google Groups.
+
+msgid
+
+Searches within a group for a message ID.
+
+Google is not only a search engine for Web pages. It is also used for searching
+images, groups, and news. Google hosts groups, which are similar to mailing lists or
+the old Usenet groups. They can be used exclusively online, but they can also be used
+with e-mail. Additionally, Google will allow you to search through news. This is a way of
+getting to a collection of sources of news information as defined by Google. If you had a
+particular breaking event you wanted to know about, you would search through Google
+News in order to locate information about it.
+
+14
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+As you can see from the keywords, though, you can start to really narrow in on
+your subject matter. As an example, you can see in Figure 2-1 a search designed to
+find all of the Excel spreadsheets on the microsoft.com site that include the words
+Microsoft Windows. In order to pull this particular search off, we used the filetype
+and site keywords.
+
+Figure 2-1. Google hacking keywords
+There are, of course, a number of far more useful searches that you can use to get
+more interesting information than just a list of Excel spreadsheets from Microsoft’s Web
+site. You could look for sites that include directory listings. Most Web sites should have
+directory listings turned off, because the administrators don’t want you to get direct access
+to all of the files there. They may be using some as background files, and those may include
+things like passwords. This may be especially true in the case of any configuration file.
+
+15
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Web servers have a root directory or folder for each site the server is responsible for. All
+pages that are served up from that Web server would be under that root directory or folder.
+Web servers use index pages, meaning specific pages that are served up automatically if
+no specific page is requested. If there is no index page and the server is configured to allow
+it, which is uncommon, the server will present a list of all of the files and folders in the
+directory.
+In order to locate Web sites that have directory listings turned on, we turn to the use
+of another keyword, intitle. When a Web site is showing a list of its files within a given
+directory, it will commonly put the words “Index of” in the title of the page. So, if we use
+the intitle keyword and look for “Index of” we should get back pages that have directory
+listings turned on. You may take it a step further and look for specific filetypes. If the directory
+listing has a .txt file, for instance, that may be of particular interest. This may include
+the robots.txt file, which may include a listing of all the files that the Web administrator
+does not want search engines to look at. The reason for this is often that there is sensitive
+information within these files, and so the site owner doesn’t want them easily found.
+If you find yourself at a loss for interesting things to search for, you can go
+to the Google Hacking Database (GHDB). As of this writing, it is located at
+https://www.exploit-db.org/google-hacking-database/, though given the fluid
+nature of the Internet, the URL may be prone to change over time. The best way to find it
+is with a quick Google search. The Google Hacking Database is a repository of interesting
+searches that can be used to turn up a wide variety of results. In Figure 2-2, you can
+see the categories of searches that can be found. You can do a lot of looking for various
+devices that belong to the “Internet of Things,” as it’s called. You can find Web cams, look
+for specific error messages given by applications, find vulnerable systems, and do a lot of
+other very targeted searching using Google hacking. This is a great starting point if your
+creativity is a bit tapped as to where to go with the search you are trying to do.
+
+Figure 2-2. Google Hacking Database categories
+
+16
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+GHDB includes a lot of canned search terms that can be used without having to
+figure them out on your own. Of course, while there is a lot of temptation within the
+database, keep in mind that you are only working on the client who has contracted
+your services. Starting to play around with things like login portals to see what you can
+accomplish with some default usernames and passwords is not only unethical, but it may
+also be considered illegal if it is out of scope of your engagement or is conducted against
+a Web site that you do not have permission to access. As always, tread carefully. When
+working for a customer, it is important to tack on the site: keyword to look specifically
+within the domain of your client for some of these issues. Remembering to use the site:
+keyword to restrict your searches to only your client will help to keep you out of trouble.
+When you combine some of the techniques associated with Google hacking
+with information you can gain using other sources, you may be able to identify some
+vulnerabilities. As one good example, you can use the site: tag with search terms,
+such as error messages, to identify vulnerabilities within the infrastructure of your
+target company. This is especially true with Web applications. A Web application that is
+vulnerable to attack will often generate specific error messages. You may be able to search
+for instances of error messages within Web pages belonging to your target. "Google
+hacking" can save you a lot of time by seeing whether an error was ever turned up as part
+of a crawl of sites belonging to your target.
+Using the keywords that Google provides can give you some very targeted results.
+Many of these terms can be combined to make your searches quite powerful. If you
+are interested in learning more or getting some ideas about how to make your Google
+searches more effective, the Google Hacking Database is a great resource. You may also
+find that some of the keywords work on other search sites as well.
+
+Social Networking
+Google is not the only place from which to get a lot of juicy information. There is a lot
+to be found on social networking sites. Twitter, being a big public forum, may be really
+helpful if you do some judicious searching. In the case where you have a specific client,
+do a search like the one you can see in Figure 2-3. Rather than looking for something that
+may include potentially exploitable information, this particular example search is boring.
+It is simply for the publisher of this book to demonstrate the process. If you are working
+with a company, you may find that they post job listings or reference specific skills they
+are looking for. There may be a number of useful and interesting posts related to what
+they have going on in-house, and any of that information can potentially be used down
+the road. Technical information is always gold, like any employee skills they reference or
+any vendors they work with, but there could be a number of other references that could
+be used in a social engineering attack later on.
+
+17
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Figure 2-3. Twitter search results
+Twitter isn’t the only social networking site that can be trolled for information.
+Facebook is another such site, though it has a range of permission settings that may make
+it harder to locate information than it is commonly for Twitter. There was once a public
+Application Programming Interface (API) that anyone could use to query Facebook for
+information. This has now been all but shut down. In order to get anything of any interest,
+you have to have an account with the right permissions. In other words, if you are looking
+for posts from a particular person and those posts have been set to only be available
+to friends, you would have to be a friend of that person to acquire the information.
+Businesses may make public posts, but the API and information available isn’t nearly as
+open as it used to be. While the API was commonly used only to query public posts, you
+may be surprised to see how many posts are made public by people who simply didn’t
+know any better. A few years ago, the Web site weknowwhatyouredoing.com, written by
+one young man by himself, pulled a collection of statuses related to doing drugs and
+saying bad things about your company. He was able to do this because of the public API
+that Facebook published. The site no longer exists because the public API no longer
+exists.
+
+18
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+The fact that the public API isn’t there anymore doesn’t mean that you can’t
+connect to Facebook and go browsing a little yourself. The nice thing about Facebook
+is that no one can see you’re doing a little stalking. The same can’t be similarly said
+of LinkedIn. LinkedIn is also a social networking site, but rather than being primarily
+personal in nature, as Facebook is, it is more business focused. Over time, LinkedIn has
+added a variety of features from other social networking sites, including status updates.
+These status updates may provide a lot of useful information, sometimes including job
+availabilities with a short set of requirements.
+One downside to LinkedIn, unlike other social networking sites, is if you go visit
+someone’s LinkedIn profile, they will get a notice that you stopped by. This may or may
+not be what you want. However, there is a wealth of information that is available in
+LinkedIn. It’s more or less a very public repository of resumes from all over the world.
+As is often the case with resumes, the LinkedIn profiles include a lot of details about job
+responsibilities people had when they were at the companies that show up in their work
+history. If you can see the list of technologies that someone has been working on at a
+company, you can determine the types of infrastructure that company is using. You can
+see a sample of that in Figure 2-4. This is from an employee at a company that has used
+Juniper and Cisco equipment in their networks. They also used Nortel equipment. From
+this list, we can determine the types of systems for which we could look for vulnerabilities.
+This may yield pathways into the network for us.
+
+Figure 2-4. List of technologies from LinkedIn
+
+19
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+The great thing about LinkedIn is that, unlike on other social networking sites like
+Facebook, information is public. LinkedIn works best if people can see one another and
+what they have done. It’s a great way of locating potential employers or learning more
+about potential employees, vendors, or partners. It’s a great site for a lot of reasons. When
+it comes to locating information about infrastructure, LinkedIn is not the only source,
+however. Any job site could be used. In Figure 2-5, you can see a small section of a job
+listing for a security engineer position at an unspecified company. This job listing tells us
+that the company uses Cisco within their network and also does work with VMWare. Both
+of these facts can be used as you are looking for information about your target.
+
+Figure 2-5. Job Listing
+While this doesn’t tell us a lot, it’s a starting point. If you can put it together with other
+information that you have already gained, you may get a lot more traction. Sometimes
+you can use information from a variety of sources in order to get a better understanding
+of what is going on at your target. You can get information from ex-employees via sites
+like LinkedIn, where they may provide a list of vendor-specific skills they made use of
+at an employer. This may tell you that the target uses, for example, Palo Alto Networks
+equipment or Cisco equipment. If you find a job listing from after the tenure of the exemployee indicating a different set of equipment, you may draw the conclusion that this
+is a newer deployment that may not have all of the bugs and configuration settings shaken
+out yet, so it may be a ripe target. Of course, it could also just be a separate location,
+though in larger companies they may use the same equipment vendors across all sites
+for uniformity and cost savings from buying in bulk. You would have to do some poking
+and prodding on the network in order to determine what you are dealing with, but this
+information that you gather from job sites may be valuable as a starting point.
+
+Internet Registries
+Companies that have a presence on the Internet have to register information in various
+places. As the Internet has grown, the number of locations where this information is stored
+has increased. When a company registers a domain name, such as apress.com, it has
+to provide contact information that is stored with the Internet Corporation for Assigned
+Names and Numbers (ICANN). There are a number of registrars who will provide the
+interface for the consumer and manage that interface, but there is a single repository
+for all of the data that is captured. Fortunately, there is a single tool that is used to gather
+information from this repository. Figure 2-6 shows the use of the tool whois from a
+command line. You provide a domain name and whois gathers all of the information about
+that domain. The problem with these databases is that they have long been used to extract
+contacts that are then used for various marketing and spam purposes. Consequently,
+many companies are using "private" registrations, which block the whois tool from
+revealing contact information about the people who registered the domain. What you will
+get back from your whois query is an indication that the contact information is hidden, so
+you won’t have any company-specific information to work with.
+
+20
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Figure 2-6. Whois request
+Even if you can’t get contact information, you can get other information back from a
+whois request that can’t be withheld or blocked, such as who the registrar for the domain
+is as well as the creation date and the date the information about the domain was last
+updated. This isn’t nearly as interesting as getting names, phone numbers, addresses
+and e-mail addresses associated with the domain, but it’s something. You may also
+find domains where the registration hasn’t been turned private, so you may be able to
+obtain other information about the domain registration. There are a number of ways of
+obtaining whois information, including using a command line whois program on any
+Unix-like operating system, like Linux or Mac OS X, as shown in Figure 2-6. There are
+also Web interfaces that you can use that are available from any system, including mobile
+devices.
+In addition to being responsible for domain registrations, ICANN is also responsible
+for handing out Internet Protocol (IP) address allocations through one of its departments,
+the Internet Assigned Numbers Authority (IANA). IANA manages registrations for IP
+addresses and the well-known ports (ports for well-known services like Web and e-mail),
+among other things. IANA distributes network address blocks to the Regional Internet
+Registries (RIRs), including the American Registry for Internet Numbers (ARIN), Reseaux
+IP Europeens (RIPE), Asia Pacific Network Information Center (APNIC), Latin America
+Network Information Center (LACNIC), and the African Network Information Center
+(AfriNIC). Each of these registries maintains its own database of information indicating
+who owns IP address blocks as well as information about the organization and its contact
+information. There is a long tradition of registrations, like domain names and IP address
+block ownership, including a technical and administrative contact at a minimum. If
+you look up an IP address using whois, you will get the organization information as
+well as contact information. Companies that are concerned with exposure of internal
+information will generally hide behind generic contact information.
+
+21
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+Even in cases where the information is generic, you can gather a lot of details from
+a whois lookup on an IP address. In Figure 2-7, you can see a whois request against an
+IP address. In the response, you can see the range of addresses that the one IP address
+belongs to. You can see whether the IP address belongs to a small block or a much larger
+block. This will help you to scope your investigation. You may be given a single IP address,
+or you may discover a single IP address if you haven’t been provided much information
+from your target. Getting the full block will give you other addresses you can look at. This
+will also protect you from mistakenly poking at another IP address that doesn’t actually
+belong to the company you are working with.
+
+Figure 2-7. Whois request on an IP address
+Whois implementations differ, unfortunately. Some whois implementations will
+only tell you which RIR owns the piece of information you are looking for. You may
+need to actually specify which RIR you want to query. In Figure 2-7, you can see that the
+host whois.apnic.net was specified as the system to query for the information about
+the IP address 1.1.1.1. Generally, each RIR has a hostname called whois that handles
+
+22
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+these queries. For APNIC, whois.apnic.net handles the requests and for ARIN, it’s
+whois.arin.net. The other RIRs have similar hostnames. You can see in Figure 2-7
+that the organization owns the block 1.1.1.0-1.1.1.255. In some cases, you may see that
+there is an organization that owns a larger block, but that a more specific block has
+been granted to another organization. Being able to determine who owns particular
+addresses is very helpful.
+In some cases, you may be able to identify a particular IP address as being used by
+a company for a Web or e-mail server when in fact the IP address may belong to another
+company altogether. This may tell you that the company you are targeting has outsourced
+hosting of some of its services to a provider rather than hosting them in house.
+In order to allow everyone on the Internet to get to the places they want to go, there
+is a wealth of information available from a handful of repositories. These repositories,
+regional Internet registries, can provide information like contact addresses or ranges of IP
+addresses. You may also discover that the company is concerned about the information
+they provide. In cases where you don’t get any contact information because it is being
+hidden by the registrar, you will know that the company has taken at least some simple
+steps to protect itself. That information may be useful as you go forward because you will
+know you are taking on an adversary that has some protections in place.
+
+Summary
+The most important skill that you can take away here is that of Google hacking. Google
+hacking makes use of specific keywords to help narrow your search parameters to
+get very specific results back. With this information you can better identify points of
+weakness within the infrastructure, but you may also turn up confidential memos or
+other documents that may provide useful information like usernames or passwords.
+Many companies have no idea just what is being stored within their Web-accessible
+systems, which Google may be scouring and cataloging on a regular basis. Google
+hacking keywords can help you reduce the haystack you are searching through down to
+a few strands of hay that may be obscuring the needle you are looking for. Even outside
+of penetration testing, Google hacking is an incredibly useful skill to have. The more you
+use those keywords, the more they become second nature and reduce the time that you
+spend looking for information within Google.
+There are a number of locations in which you can gather information related to a
+company, often without touching the company at all. In today’s world, companies need
+to maintain a presence in the Internet world and often have more of a presence than they
+realize, simply because they can’t always control what current and former employees
+say or do. This means that social networking sites like Facebook, Twitter, and LinkedIn
+can be very valuable resources for you as a penetration tester. You can often very easily
+determine what vendors the company is using within its infrastructure, which can
+provide you a leg up on finding ways in. Often, job descriptions or LinkedIn profiles can
+be very specific about the technologies that are in use.
+
+23
+
+CHAPTER 2 ■ DIGGING FOR INFORMATION
+
+In addition, you can also make use of the various Internet registries that are used
+to maintain all of the information related to domain names and IP addresses, which are
+global across the entire Internet. Often, these will come with physical addresses and even
+contact names, e-mail addresses, and phone numbers. You can use this information
+for phishing or other social engineering attacks. Depending on the attack techniques
+you are using, this information may be even more valuable than the technical details of
+infrastructure vendors.
+
+Exercises
+
+24
+
+1.
+
+Use Google hacking techniques to obtain a list of Web sites
+that provide you access to a Web cam that has an admin login.
+
+2.
+
+Use whois, either from the command line if you are using
+Linux or Mac OS or through one of the many Web interfaces,
+to get all of the information you can about Apress. Then, look
+for the information about the company you are working for.
+
+3.
+
+Use whois to gather information about IP addresses, including
+4.2.2.1 and 8.8.8.8. Both of these addresses belong to wellknown domain name servers.
+
+4.
+
+Use Google hacking to locate Web server pages that have
+generated 500 Internal Server Error responses. The 500
+Internal Server error indicates that the server has run into a
+problem with the request and can be an indication of either
+a programming error or a misconfiguration. Either of these
+possibilities could potentially be exploited.
+
+5.
+
+Use Google hacking to get a list of PDFs that may be stored at
+ICANN.
+
+CHAPTER 3
+
+What’s Open?
+Commonly at this point, whether you were provided some starting places or you figured
+some out as you were poking around in Google or the Internet registries, you have at least
+some IP addresses or maybe hostnames to work with. In either case, the domain name
+system (DNS) is one of the next steps. At a minimum, having a better understanding
+of the structure and use of DNS is important. The DNS is where Internet Protocol (IP)
+addresses are mapped to hostnames and vice versa. There are some really useful tools
+that are commonly used when prowling around DNS, and we’re going to take a look at
+those tools, since you likely want to figure out in more detail just what you are looking at
+and where it might be.
+At this point, we have some places to start—we can use DNS to get us additional
+information based on what we have, whether it’s an IP address or a domain name. Using
+DNS, we can look up hostnames from IP addresses. DNS also stores something called
+resource records. A resource record indicates the function of particular hostnames or IP
+addresses. Using tools designed to query the DNS servers, we can obtain this information
+and make use of it to get a better understanding of the systems that may be used at a
+company. We can determine where the Web servers are, what systems are used to send
+e-mail, and the IP addresses associated with those systems. These hostnames and the IP
+addresses associated with them will provide some additional places in which to do more
+direct poking and prodding of our targets.
+The objective of finding these hosts is so we can see what applications are running
+on them, since, ultimately, it will be these applications that will be our targets. We can
+determine which applications are listening on network ports using port scanners like
+nmap. There are other port scanners out there, and maybe even some that are faster than
+nmap, but none are more venerable or useful. Once we have the port, nmap may also
+be able to give us the name of the application. We may also be able to use some other
+tools to interact more directly with the underlying application so as to determine the
+exact software that is running. Knowing there is a Web server on port 80, for example,
+doesn’t tell us a whole lot. Ideally, we would like to know the name of the software being
+used, like Apache or IIS or Nginx, and the version number. nmap can sometimes get that
+information, though there are other ways as well.
+
+© Ric Messier 2016
+R. Messier, Penetration Testing Basics, DOI 10.1007/978-1-4842-1857-0_3
+
+25
+
+

@@ -1,0 +1,659 @@
+This book will go over the basics of the exploitation phase. Note I won't be teaching you
+how to use tools, for the most part everything we do will be done manually so you can
+get a deep understanding of the process. Once you know how things work at a deep
+level you will want to replace some of your manual process with tools and automation.
+
+Basic Hacking Known Vulnerabilities
+Introduction
+One of the first things you learn in hacker school is how to identify and exploit known
+vulnerabilities. This may seem like a relatively simple step but you would be surprised at
+the number of people who completely skip this phase of the exploitation cycle.
+
+As shown above we start off by visiting the target application, next we attempt to
+determine what software it is running. Once we find out what software and version the
+endpoint is running we search on Google and other resources to see if it has
+vulnerabilities or CVEs. After that we proceed to search for the exploit code and finally
+we run the exploit code against the target.
+
+Another version of this technique focuses on 1-days. In this cycle we start off by looking
+at our threat feeds such as exploitdb and twitter. Here we are looking for new exploits
+and CVEs that have just dropped, these are known as 1-days. When going down this
+path time is the most important aspect, when a new exploit is dropped in the wild you
+need to start exploiting your targets before they have a chance to patch. Once you hear
+about a new exploit you will need to quickly find a POC for it and start mass scanning all
+of your targets for that vulnerability.
+
+As you can see both of these methodologies are very similar. With the first one we find
+a target and see if it has any known vulnerabilities and if it does we try to exploit them.
+In the second methodology we are looking for newly released exploits. When a new
+exploit is dropped we immediately start scanning and exploiting everything before the
+defenders have a chance to patch.
+
+Identifying technologies
+Introduction
+When attempting to exploit a target with a known vulnerability you could just launch your
+exploit at every target and hope for the best or you can do things a little smarter.
+Identifying the target technology stack will help you find the exploits impacting that
+stack. Not knowing this information will leave you blind and you will have to take random
+guesses at which exploits might work.
+
+Wappalyzer
+If you're attempting to discover the technologies running on a website the best place to
+start is wappalyzer. An alternative to wappalyzer is “https://builtwith.com/” but I personally
+like wappalyzer better.
+
+I personally like to use the wappalyzer browser plugin as it makes it easy to determine
+an endpoints tech stack when browsing their website. As you can see in the image
+above this website is running “Ruby on Rails”, “Jquery 3.5.0”, “Backbone.js 1.4.0”, and a
+few other things. Note that if you use a command line tool you can scan multiple
+websites at once, this is nice if you're trying to scan hundreds or thousands of sites at
+once.
+
+Powered By
+Wappalyzer is great but it won’t identify everything. Wappalyzer works off of regexes so
+if it doesn't have a specific technologies regex in its database it won't be able to identify
+it.
+
+As shown above, the wappalyzer came back mostly blank. However, if you look at the
+footer at the bottom of the page you see the words “Powered by Gila CMS”. We can
+conclude that this site is running Gila CMS but if we were only looking at wappalyzer we
+would have missed this.
+
+Summary
+You need to know the technology stack your target is running so you can find
+associated exploits. There are a few ways to determine the technologies an endpoint is
+
+running but I almost always use wappalyzer. If you can’t determine this information with
+wappalyzer there are other techniques to find an endpoints technology stack.
+
+Identifying the vulnerabilities
+Introduction
+You know what software your target is running but how do you determine what
+vulnerabilities it has? The whole point of learning a target technology stack is so you
+can use this information to find associated vulnerabilities.
+
+Google
+When I'm looking to see what vulnerabilities a technology has the first place I go is
+Google. Actually, Google is the first place I go when I have a question about anything as
+it's the best resource out there. Try typing the following search queries into Google:
+● <TECHNOLOGY> <VERSION> vulnerabilities
+● <TECHNOLOGY> <VERSION> exploits
+
+There is all kinds of stuff here! I see SQL injection exploits, LFI exploits, and much
+more. I recommend you click on the first couple links to see what interesting
+vulnerabilities there are. You'd be surprised at the things you will find buried in a blog
+post 10 links down the page.
+
+ExploitDB
+Another place I like to search is ExploitDB. ExploitDB is a tool used to search and
+download exploit code. This is by far one of my favorite resources to use when
+searching for vulnerabilities related to a technology stack.
+● https://www.exploit-db.com/
+
+You can use the website to search for things but I typically use the command line tool
+called searchsploit. You can download this tool from Github as shown below:
+●
+
+https://github.com/offensive-security/exploitdb
+
+● ./searchsploit “name of technology”
+
+Normally once we find out the vulnerabilities a target is vulnerable to we have to search
+for the exploit code but we can skip this step since ExploitDB provides us with the proof
+of concept(POC) code as well.
+
+CVE
+According to Google, the Common Vulnerabilities and Exposures(CVE) system provides
+a reference-method for publicly known information-security vulnerabilities and
+exposures. If you're looking to find what CVEs a technology stack has, there is no better
+place to search than NIST.
+●
+
+https://nvd.nist.gov/vuln/search
+
+Searching for “Gila CMS” gives us 17 CVEs, the newer the CVE the better as there is a
+better chance the target hasn't patched their systems yet. Note that just because you
+
+find a CVE doesn't mean you can exploit it. To exploit a CVE you need the proof of
+concept(POC) exploit code, without that you're stuck.
+
+Summary
+Locating the vulnerabilities impacting a technology stack is relatively easy. All you really
+have to do is search for them. Between Google, ExploitDB, and NIST you should be
+able to find everything you're looking for.
+
+Finding the POC
+Introduction
+You have identified that the target application contains vulnerabilities but to exploit them
+you need the proof of concept (POC) exploit code. If you don't have the exploit code
+your only other option is to make it yourself. However, this is beyond the scope of this
+book.
+
+Github
+One of the best places to find exploit code is Github. GitHub is an American
+multinational corporation that provides hosting for software development and version
+control using Git. It offers the distributed version control and source code management
+functionality of Git, plus its own features. Developers love Github and hackers do as
+well.
+
+You can easily search for a CVE on Github as shown in the above image. If there is a
+POC you will most likely find it on here. However, BE AWARE OF FAKE POCs as
+these exploits are not vetted and come from untrusted third parties.
+
+ExploitDB
+I already mentioned ExploitDB earlier so im not going to talk about it again but this is a
+great resource for finding POCs.
+●
+
+https://www.exploit-db.com/
+
+Summary
+9 times out of 10 you are going to find the exploit code you're looking for on Github or
+on ExploitDB. If you can’t find it in one of those locations it probably doesn't exist and
+
+you will have to create your own POC. However, don’t be afraid to search for resources.
+Sometimes the POC code can be buried deep in a blog post on the 5th page of Google.
+
+Exploitation
+Once you have a working POC you are ready to test it against your target. I always
+recommend setting up a vulnerable machine to test the exploit against first so you know
+what to expect from a real target. Once you're ready just run the exploit on your target
+and review the results to see if they are vulnerable or not.
+
+Conclusion
+Exploiting known vulnerabilities is one of the oldest tricks in the book. That being said
+it’s still one of the best methodologies to use for quick easy wins. There are really only
+three steps when using this approach. First determine your targets techstack, search for
+any vulnerabilities in that tech stack, and finally run the exploits.
+
+Basic Hacking CMS
+Introduction
+Content management systems(CMS) such as wordpress,drupal,and joomla make up
+the vast majority of the internet. According to a survey performed by W3Techs 62% of
+the internet is run on a CMS and 39.1% percent of the internet is run on wordpress. As
+an attacker this means the vast majority of the sites you are going to be going up
+against will be run by a CMS.
+
+Wordpress
+As of right now over a quarter (25%) of the internet is built using WordPress. This is
+useful to know because that means a single exploit has the potential to impact a large
+portion of your target’s assets. There are in fact hundreds of exploits and
+misconfigurations impacting WordPress and its associated plugins. One common tool to
+scan for these vulnerabilities is wpscan:
+● https://github.com/wpscanteam/wpscan
+The only thing that’s annoying about this tool is that it's written in ruby, I prefer tools
+written in python or Golang. During the fingerprinting phase you should've discovered
+the technologies running on your target's assets so it should be easy to search for sites
+running WordPress. Once you find a site scan it with wpscan as shown below:
+● wpscan --URL <URL>
+
+The vast majority of the sites you scan are going to be patched. This is because most of
+these WordPress sites are managed by third party vendors who perform automatic
+updates. However, you will run into vulnerable plugins quite frequently but many of
+these exploits require credentials to exploit. Another thing I find all the time is directly
+listing on the uploads folder. Always make sure to check:
+● “/wp- content/uploads/”
+
+You can often find sensitive information such as user emails, passwords, paid digital
+products, and much more.
+
+Drupal
+Drupal is the third most popular CMS yet I seem to run into Drupal sites more than
+Joomla. If you find a Drupal site you want to use droopescan to scan it. This scanner
+also has the ability to scan additional CMSs as well:
+●
+
+https://github.com/droope/droopescan
+
+● python3 droopescan scan Drupal -u <URL Here> -t 32
+
+Joomla
+WordPress is by far the most popular CMS with over 60% of the market share. Joomla
+comes in second so you can expect to run into this CMS as well. Unlike WordPress
+sites who seem to be fairly locked down Joomla is a mess. If you want to scan for
+vulnerabilities the most popular tool is Joomscan:
+●
+
+https://github.com/rezasp/joomscan
+
+● perl joomscan.pl -u <URL Here>
+
+Adobe AEM
+If you ever run into the Adobe AEM CMS you're about to find a whole bunch of
+vulnerabilities. 99% of the time this is an instant win! This CMS is riddled with public
+vulnerabilities and I’m 100% positive there are hundreds more zero days. Seriously this
+is one of the worst CMSs I have ever seen. If you want to scan an AEM application for
+vulnerabilities use the tool aemhacker:
+●
+
+https://github.com/0ang3el/aem-hacker
+
+● python aem_hacker.py -u <URL Here> --host <Your Public IP>
+
+Note that in order to test for the SSRF vulnerabilities you need to have a public IP that
+the target server can connect back to.
+
+Other
+There are hundreds of different CMSs so it wouldn't be practical for me to mention every
+single one of them. The vast majority of sites are going to be running WordPress,
+Joomla, and Drupal but you still might run into other CMSs.
+
+If you come across a CMS you haven't seen before the first step is to go to exploit db
+and see if it has any known CVEs:
+●
+
+https://www.exploit-db.com/
+
+For instance, if I discover a CMS named “Magento” I would perform the following search
+on exploit-db:
+
+In addition to finding single exploits you want to search GitHub to see if there is a tool
+that can scan for all the possible vulnerabilities and misconfigurations. Like the tools for
+wordpress,drupal, joomla, and adobe aem there are scanners that target other
+platforms.
+
+As it turns out there is a Magento vulnerability scanner called magescan so we can just
+use that:
+●
+
+https://github.com/steverobbins/magescan
+
+Make sure to use this process whenever you come across a CMS framework you don’t
+recognize.
+
+Conclusion
+Over half of the internet is being run by a CMS framework. So, you are almost
+guaranteed to run into a CMS at one point or another. When you do find a CMS, you
+don’t want to waste time manually testing the endpoint, you want to test for known
+CVEs and misconfigurations. The best way to do this is to find some sort of CMS
+specific vulnerability scanner. If you can find that you can try searching exploit-db and
+google for known CVEs. If you still come up empty handed it’s probably best to move on
+unless you're hunting for zero days.
+
+Basic Hacking Github
+Introduction
+GitHub is a web-based version-control and collaboration platform for software
+developers and as of right now it’s one of the easiest ways to compromise an
+organization. This is one of my go to techniques when I want an easy high impact
+finding.
+
+Finding Sensitive Information
+Pilliging github for sensitive information disclosures is one of the easiest ways to
+compromise an organization. It doesn’t matter how hardened your external perimeter is
+if your developers are hard coding credentials and posting them online you’re going to
+get compromised.
+
+It's fairly common for developers to hard code test accounts, API keys, or whatever
+when they are writing a piece of software. This makes things easy for the developer as
+they won’t have to enter their credentials every time they go to run/test their program.
+However, more times than not these credentials remain in the source code when they
+push it to Github, if this repository is public everyone can view it.
+
+The first thing you need is a list of sensitive words to search on. This can be a file name,
+file extension, variable name, or anything else. A good list can be found below thanks to
+“@obheda12”:
+
+Once you have a list of sensitive things to search for your ready to hunt! I normally just
+type in the domain of the target followed by the Github Dork as shown below:
+● Domain.com “password”
+
+As you can see above, searching for the domain “hackerone.com” and the term
+“password” gave us 7,390 results. In a typical scenario I would end up going through
+90% of these results by hand for a few hours before I find something juicy. Having to
+spend hours sorting through a bunch of trash is really the only downside to this
+technique. However, when you do find something it typically leads to an insta high or
+critical finding.
+
+Conclusion
+As of right now Github is one of the easiest ways to get a high or critical vulnerability.
+Almost every developer uses Github and these same developers also like hard coding
+passwords in their source code. As long as you're willing to spend a few hours
+
+searching through thousands of repos you’re almost guaranteed to find something
+good.
+
+Basic Hacking Subdomain Takeover
+Introduction
+Another extremely popular vulnerability is subdomain takeover. Though this vulnerability
+has died down significantly it is still very common in the wild. If you are unfamiliar with
+this type of vulnerability according to Google “Subdomain takeover attacks are a class
+of security issues where an attacker is able to seize control of an organization's
+subdomain via cloud services like AWS or Azure”.
+
+Subdomain Takeover
+A subdomain takeover occurs when a subdomain is pointing to another domain
+(CNAME) that no longer exists. If an attacker were to register the non existing domain
+then the target subdomain would now point to your domain effectively giving you full
+control over the target’s subdomain. What makes this vulnerability so interesting is that
+you can be safe one minute and a single DNS change can make you vulnerable the
+next minute.
+
+The vulnerability here is that the target subdomain points to a domain that does not
+exist. An attacker can then register the non existing domain. Now the target subdomain
+will point to a domain the attacker controls.
+
+If you’re planning on hunting for this vulnerability you are definitely going to be
+referencing the following github page as it contains a bunch of examples and
+walkthroughs on exploiting different providers:
+●
+
+https://github.com/EdOverflow/can-i-take-over-xyz
+
+As you can see above this page contains a large list of engines who can be exploited by
+this vulnerability. If you click on the issue number it will give you a walk through
+exploiting that particular engine. Because every provider has its own way of registering
+domains you will need to learn the process of registering a domain on the engine that
+impacts your target.
+
+Github Takeover
+One of the easiest ways to spot a subdomain takeover vulnerability is by the error
+message it throws as shown below:
+
+As you can see above when we visit our target site it throws a 404 status code and
+gives us the error message “There isn’t a Github Pages Site here”. If we go to the
+subdomain takeover wiki we can confirm that this error message indicates the possibility
+of subdomain takeover.
+
+Now that we have an indicator this site is vulnerable we need to get the github page the
+vulnerable subdomain is pointing to. We need this information so we can register the
+domain through github.
+
+As shown above a “dig” command can be used to gather the DNS records of the
+vulnerable domain. We can also see that the domain points to the github page
+“ghostlulzvulntakeover.github.io”, if we can register this domain we win. To figure out the
+process of registering a domain on Github you can Google it or you can follow the
+tutorial in the subdomain takeover github page as shown below:
+
+Now that we know the steps to register a domain on Github we just need to do it. First I
+created a Github repo with the same name as the CNAME record:
+
+After that create an “index.html” file in the repo as shown below:
+
+The next step is to set the repo as the main branch.
+
+Finally specify the target domain you are going after.
+
+That's it! Now when you visit the target domain you should see the page you set up.
+
+We WIN! As you can see above we successfully exploited the subdomain takeover
+vulnerable and got our page to appear on the targets subdomain. Note that this is the
+process for Github, if your target is vulnerable to something else you will have to follow
+
+the steps for that provider. Lucky for us all this is documented on the subdomain
+takeover github wiki.
+
+Conclusion
+A few years ago subdomain takeover was all over the place but it has started to die
+down recently. However, you will still find plenty of organizations vulnerable to this type
+of attack. It is extremely easy to pull off and it allows attackers to completely take over
+the target subdomain. If you’re looking for an easy high security finding this is it.
+
+Basic Hacking Databases
+Introduction
+A database is an organized collection of data, generally stored and accessed
+electronically from a computer system. If you’re attacking a web application a lot of the
+time one of the main goals is to compromise the back end database as it's where all the
+sensitive user data is stored.
+
+Compromising these databases normally involves exploiting an sql injection vulnerability
+but sometimes it can be much easier. These databases are often exposed to the
+internet without authentication leaving them open to hackers for pilliging as discussed in
+the following sections.
+
+Google Firebase
+Introduction
+According to Google “The Firebase Realtime Database is a cloud-hosted database
+stored as JSON and synchronized in realtime to every connected client”. An issue can
+arise in firebase when developers fail to enable authentication. This vulnerability is very
+similar to every other database misconfiguration, there's no authentication. Leaving a
+database exposed to the world unauthenticated is an open invite for malicious hackers.
+
+Misconfigured Firebase Database
+When i'm hunting for this I'll try to keep an eye out for the “*.firebaseio.com” url, if you
+see this then you know your target is utilizing Google's firebase DB. An example domain
+can be found below:
+● Vuln-domain.firebaseio.com
+
+If the developer forgot to enable authentication the database will be exposed to the
+word. You can easily view the database by appending a “/.json” to the url as shown
+below:
+● vuln-domain.firebaseio.com/.json
+
+As you can see above we were able to dump a bunch of passwords belonging to an
+organization. An attacker could then leverage these credentials to perform additional
+attacks on the application.
+
+Summary
+Finding and exploiting this misconfiguration is extremely easy and requires zero
+technical skills to pull off. All you need to do is find an application using firebase,
+append “/.json” to the url, and if there isn't authentication you can export the entire DB!
+
+ElasticSearch DB
+Introduction
+You have probably heard of the popular relational database called MySQL. Elastic
+search like MySQL is a database used to hold and query information. However, elastic
+search is typically used to perform full text searches on very large datasets. Another
+thing to note is that ElasticSearch is unauthenticated by default which can cause a lot of
+security problems as described in the following sections.
+
+ElasticSearch Basics
+According to Google “ElasticSearch is a document- oriented database designed to
+store, retrieve, and manage document-oriented or semi-structured data. When you use
+Elasticsearch, you store data in JSON document form. Then, you query them for
+retrieval.” Unlike MySQL which stores its information in tables, elastic search uses
+something called types. Each type can have several rows which are called documents.
+Documents are basically a json blob that hold your data as shown in the example
+below:
+● {"id":1, "name":"ghostlulz", "password":"SuperSecureP@ssword"}
+
+In MySQL we use column names but in Elasticsearch we use field names. The field
+names in the above json blob would be id, name, and password. In MySQL we would
+store all of our tables in a database.
+
+In Elastic Search we store our documents in something called an index. An index is
+basically a collection of documents.
+
+Unauthenticated ElasticSearch DB
+Elastic search has an http server running on port 9200 that can be used to query the
+database. The major issue here is that a lot of people expose this port to the public
+internet without any kind of authentication. This means anyone can query the database
+and extract information. A quick Shodan search will produce a tun of results as shown
+below:
+
+Once you have identified that your target has port 9200 open you can easily check if it is
+an ElasticSearch database by hitting the root directory with a GET request. The
+response should look something like the following:
+
+Once you know an endpoint has an exposed Elastic Search db try to find all the
+indexes(Databases) that are available. This can be done by hitting the “/_cat/indices?v”
+endpoint with a GET request. This will list out all of the indexes as shown below:
+
+This information along with other details about the service can also be found by
+querying the “/_stats/?pretty=1” endpoint.
+To perform a full text search on the database you can use the following command
+“/_all/_search?q=email”. This will query every index for the word “email”. There are a
+
+few words that I like to search for which include:
+● Username
+● Email
+● Password
+● Token
+● Secret
+● Key
+If you want to query a specific index you can replace the word “_all” with the name of
+the index you want to search against.
+
+Another useful technique is to list all of the field names by making a GET request to the
+“/INDEX_NAME_HERE/_mapping?pretty=1” endpoint. I typically search for interesting
+
+field names such as:
+● Username
+● Email
+● Password
+● Token
+● Secret
+● Key
+
+The output should look something like this:
+
+As you can see above we have the field names addressable_type, city, and much more
+which isn't displayed as the output was too large.
+
+To query all values that contain a specific field name use the following command
+“/_all/_search?q=_exists:email&pretty=1” . This will return documents that contain a field
+
+name(column) named email as shown below:
+
+Again you can replace “_all” with the name of an index to perform searches specifically
+against that endpoint.
+
+Summary
+ElasticSearch is just another database where you can store and query information. The
+major problem is that people expose the unauthenticated web service to the public. With
+unauthenticated access to the web service attackers can easily dump the entire
+database. Always be on the lookout for port 9200.
+
+Mongo Database
+Introduction
+Like Elasticsearch MongoDB is a nosql database that uses JSON-like documents to
+store data. Also similar to the rest of the databases we have talked about Mongo DB
+fails to implement authentication by default. This means it's up to the user to enable this
+which they often forget.
+
+MongoDB
+If you're searching for MongoDB instances, be on the lookout for port 27017. As
+mentioned earlier MongoDB doesn't have authentication enabled by default so to test
+for this vulnerability just try to login. To do this I normally just use the mongo cli as
+shown below:
+● mongo ip-address-here
+Once logged into the database try issuing a command, if you get an “unauthorized”
+error message prompting for authentication then the endpoint has authentication
+enabled.
+
+However, if you can run arbitrary commands against the system then authentication has
+not been set up and you can do whatever you want.
+
+Summary
+If you see port 27017 open or any other MongoDB associate port make sure to test the
+endpoint to see if its missing authentication. Exploiting this misconfiguration is as easy
+as connecting to the database and extracting the data. This is as easy as it gets folks.
+
+Conclusion
+If an application needs to store data chances are its being stored in a database. These
+databases hold all kinds of sensitive information such as passwords, tokens, private
+messages, and everything else. That's why databases are always popular targets by
+hackers. Since these are such popular targets you would think they would be fairly
+secure but they aren't. A lot of databases are missing authentication by default! This
+means if connected to the internet anyone could connect to these devices to extract the
+information they hold.
+
+Name
+
+Endpoint
+
+Firebase DB
+
+*.firebaseio.com/.json
+
+Elasticsearch
+
+Port:9200
+
+MongoDB
+
+Port:27017
+
+CouchDB
+
+Port:5985,6984
+
+CassandraDB
+
+Port:9042,9160
+
+Basic Hacking Brute Forcing
+Introduction
+Brute forcing is a classic attack that has been around forever and shows no signs of
+being eliminated. Passwords are a weak point of security and as an attacker you should
+take full advantage of this. Easily guessable passwords, using default passwords, and
+password reuse are easy ways for an organization to get compromised. The rule of
+thumb is if there is a login screen it should be brute forced.
+
+Login Pages
+There are three things you need to have if you want to launch a brute force attack. The
+three things you need are an endpoint with a login page, a username , and a password.
+First you need to find the endpoint you want to target.
+
+Name
+
+Endpoint
+
+Web Application Login Page
+
+Web application login page, Outlook mail,
+VPN, Router, Firewall, Wordpress admin
+panel, etc
+
+SSH
+
+Port:22
+
+RDP
+
+Port:3389
+
+VNC
+
+Port:5900
+
+FTP
+
+Port:21
+
+Telnet
+
+Port:23
+
+Default Credentials
+Now that you know which endpoints to look out for you need to get a list of usernames
+and passwords. This technique may be basic but you would be surprised at the number
+of times iv compromised an organization because they are using default credentials.
+
+As shown above one of the best places to find default passwords is SecList:
+●
+
+https://github.com/danielmiessler/SecLists/tree/master/Passwords/Default-Credentials
+
+The above picture is an example file containing default usernames and passwords to
+hundreds of routers. All you have to do is look up the target vendor and try all the
+
+default passwords it uses, this technique works very well as people often forget to
+change the default credentials.
+
+If you are targeting an SSH server or something other than a router the process will be
+slightly different. Not really, those services also come with default credentials as shown
+in the image below:
+
+Depending on the service you are brute forcing you will want to find or create a list of
+credentials tailored toward that. You may also find that sec list does not have any
+default passwords impacting the target technology. If that's the case just perform a
+Google search or two, I normally find these things in the first few links.
+
+Brute Forcing
+Once you have a good set of credentials you can start the actual process of brute
+forcing. You could do this by hand but I would 100% recommend using a tool for this job
+unless you are only testing 5 passwords or something small like that.
+●
+
+https://github.com/vanhauser-thc/thc-hydra
+
+If you're performing a brute force attack you probably want to use the tool “hydra”. This
+tool supports a bunch of different protocols and has never let me down. Once you have
+the target endpoint and credentials you can use any tool to perform the brute force
+attack just pick one you like.
+
+Conclusion
+Brute force attacks is an easy way to compromise a target application. With the use of
+default passwords, easily guessable passwords, and password reuse finding a target
+
+

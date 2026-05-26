@@ -1,0 +1,2109 @@
+C ontents in D etail
+Foreword by Katie Moussouris
+
+xv
+
+Acknowledgments
+
+xvii
+
+Introduction
+
+xix
+
+Why Read This Book? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xx
+What’s in This Book? .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xx
+How to Use This Book .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxii
+Contact Me  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . xxii
+
+1
+The Basics of Networking
+
+1
+
+Network Architecture and Protocols .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 1
+The Internet Protocol Suite  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 2
+Data Encapsulation .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 4
+Headers, Footers, and Addresses .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 4
+Data Transmission  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 6
+Network Routing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 7
+My Model for Network Protocol Analysis .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 8
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 10
+
+2
+Capturing Application Traffic
+
+11
+
+Passive Network Traffic Capture .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 12
+Quick Primer for Wireshark .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 12
+Alternative Passive Capture Techniques .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 14
+System Call Tracing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 14
+The strace Utility on Linux  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 16
+Monitoring Network Connections with DTrace .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 16
+Process Monitor on Windows  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 18
+Advantages and Disadvantages of Passive Capture  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 19
+Active Network Traffic Capture .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 20
+Network Proxies .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 20
+Port-Forwarding Proxy .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 21
+SOCKS Proxy  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 24
+HTTP Proxies .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 29
+Forwarding an HTTP Proxy  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 29
+Reverse HTTP Proxy  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 32
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 35
+
+3
+Network Protocol Structures
+
+37
+
+Binary Protocol Structures .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 38
+Numeric Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 38
+Booleans .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 41
+Bit Flags .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 41
+Binary Endian  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 41
+Text and Human-Readable Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 42
+Variable Binary Length Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 47
+Dates and Times .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 49
+POSIX/Unix Time .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 50
+Windows FILETIME .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 50
+Tag, Length, Value Pattern .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 50
+Multiplexing and Fragmentation .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 51
+Network Address Information .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 52
+Structured Binary Formats .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 53
+Text Protocol Structures  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 54
+Numeric Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 55
+Text Booleans  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 55
+Dates and Times  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 55
+Variable-Length Data  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 56
+Structured Text Formats .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 56
+Encoding Binary Data .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 59
+Hex Encoding .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 59
+Base64 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 60
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 62
+
+4
+Advanced Application Traffic Capture
+
+63
+
+Rerouting Traffic .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 64
+Using Traceroute .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 64
+Routing Tables .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 65
+Configuring a Router .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 66
+Enabling Routing on Windows .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 67
+Enabling Routing on *nix  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 67
+Network Address Translation .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 68
+Enabling SNAT .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 68
+Configuring SNAT on Linux .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 69
+Enabling DNAT .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 70
+Forwarding Traffic to a Gateway  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 71
+DHCP Spoofing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 71
+ARP Poisoning .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 74
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 77
+
+5
+Analysis from the Wire
+
+79
+
+The Traffic-Producing Application: SuperFunkyChat .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 80
+Starting the Server .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 80
+Starting Clients  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 80
+Communicating Between Clients  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 81
+x   Contents in Detail
+
+A Crash Course in Analysis with Wireshark .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 81
+Generating Network Traffic and Capturing Packets  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 83
+Basic Analysis .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 84
+Reading the Contents of a TCP Session .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 85
+Identifying Packet Structure with Hex Dump  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 86
+Viewing Individual Packets  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 87
+Determining the Protocol Structure  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 88
+Testing Our Assumptions .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 89
+Dissecting the Protocol with Python .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 90
+Developing Wireshark Dissectors in Lua .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 95
+Creating the Dissector .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 98
+The Lua Dissection .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 99
+Parsing a Message Packet .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 100
+Using a Proxy to Actively Analyze Traffic .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 103
+Setting Up the Proxy .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 103
+Protocol Analysis Using a Proxy .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 105
+Adding Basic Protocol Parsing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 107
+Changing Protocol Behavior  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 108
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 110
+
+6
+Application Reverse Engineering
+
+111
+
+Compilers, Interpreters, and Assemblers .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 112
+Interpreted Languages  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 112
+Compiled Languages .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 113
+Static vs. Dynamic Linking .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 113
+The x86 Architecture .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 114
+The Instruction Set Architecture  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 114
+CPU Registers  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 116
+Program Flow  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 118
+Operating System Basics .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 119
+Executable File Formats .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 119
+Sections  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 120
+Processes and Threads .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 120
+Operating System Networking Interface .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 121
+Application Binary Interface  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 123
+Static Reverse Engineering .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 125
+A Quick Guide to Using IDA Pro Free Edition  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 125
+Analyzing Stack Variables and Arguments  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 128
+Identifying Key Functionality  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 129
+Dynamic Reverse Engineering .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 134
+Setting Breakpoints .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 135
+Debugger Windows .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 135
+Where to Set Breakpoints?  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 137
+Reverse Engineering Managed Languages .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 137
+.NET Applications  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 137
+Using ILSpy .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 138
+Java Applications .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 141
+Dealing with Obfuscation .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 143
+Reverse Engineering Resources .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 144
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 144
+Contents in Detail   xi
+
+7
+Network Protocol Security
+
+145
+
+Encryption Algorithms .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 146
+Substitution Ciphers .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 147
+XOR Encryption .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 148
+Random Number Generators .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 149
+Symmetric Key Cryptography .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 149
+Block Ciphers  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 150
+Block Cipher Modes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 152
+Block Cipher Padding .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 155
+Padding Oracle Attack .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 156
+Stream Ciphers  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 158
+Asymmetric Key Cryptography .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 159
+RSA Algorithm .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 160
+RSA Padding .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 162
+Diffie–Hellman Key Exchange  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 162
+Signature Algorithms .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 164
+Cryptographic Hashing Algorithms .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 164
+Asymmetric Signature Algorithms .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 165
+Message Authentication Codes  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 166
+Public Key Infrastructure .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 169
+X.509 Certificates  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 169
+Verifying a Certificate Chain .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 170
+Case Study: Transport Layer Security .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 172
+The TLS Handshake  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 172
+Initial Negotiation  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 173
+Endpoint Authentication  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 174
+Establishing Encryption .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 175
+Meeting Security Requirements  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 176
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 178
+
+8
+Implementing the Network Protocol
+
+179
+
+Replaying Existing Captured Network Traffic  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 180
+Capturing Traffic with Netcat  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 180
+Using Python to Resend Captured UDP Traffic .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 182
+Repurposing Our Analysis Proxy  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 183
+Repurposing Existing Executable Code  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 188
+Repurposing Code in .NET Applications .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 189
+Repurposing Code in Java Applications  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 193
+Unmanaged Executables .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 195
+Encryption and Dealing with TLS .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 200
+Learning About the Encryption In Use .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 200
+Decrypting the TLS Traffic  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 201
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 206
+
+xii   Contents in Detail
+
+9
+The Root Causes of Vulnerabilities
+
+207
+
+Vulnerability Classes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 208
+Remote Code Execution  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 208
+Denial-of-Service  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 208
+Information Disclosure .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 209
+Authentication Bypass .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 209
+Authorization Bypass .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 209
+Memory Corruption Vulnerabilities  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 210
+Memory-Safe vs. Memory-Unsafe Programming Languages .  .  .  .  .  .  .  .  .  .  .  .  .  . 210
+Memory Buffer Overflows  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 210
+Out-of-Bounds Buffer Indexing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 216
+Data Expansion Attack .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 217
+Dynamic Memory Allocation Failures .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 217
+Default or Hardcoded Credentials .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 218
+User Enumeration .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 218
+Incorrect Resource Access  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 219
+Canonicalization .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 220
+Verbose Errors .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 221
+Memory Exhaustion Attacks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 222
+Storage Exhaustion Attacks  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 223
+CPU Exhaustion Attacks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 224
+Algorithmic Complexity .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 224
+Configurable Cryptography .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 226
+Format String Vulnerabilities .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 227
+Command Injection .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 228
+SQL Injection  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 228
+Text-Encoding Character Replacement .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 229
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 231
+
+10
+Finding and Exploiting Security Vulnerabilities
+
+233
+
+Fuzz Testing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 234
+The Simplest Fuzz Test  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 234
+Mutation Fuzzer .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 235
+Generating Test Cases .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 235
+Vulnerability Triaging  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 236
+Debugging Applications .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 236
+Improving Your Chances of Finding the Root Cause of a Crash .  .  .  .  .  .  .  .  .  .  . 243
+Exploiting Common Vulnerabilities  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 245
+Exploiting Memory Corruption Vulnerabilities  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 246
+Arbitrary Memory Write Vulnerability .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 253
+Writing Shell Code .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 255
+Getting Started  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 256
+Simple Debugging Technique  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 258
+Calling System Calls .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 259
+
+Contents in Detail   xiii
+
+Executing the Other Programs .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 263
+Generating Shell Code with Metasploit .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 265
+Memory Corruption Exploit Mitigations .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 266
+Data Execution Prevention .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 267
+Return-Oriented Programming Counter-Exploit .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 268
+Address Space Layout Randomization (ASLR)  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 270
+Detecting Stack Overflows with Memory Canaries .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 273
+Final Words .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 276
+
+Network Protocol Analysis Toolkit
+
+277
+
+Passive Network Protocol Capture and Analysis Tools .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 278
+Microsoft Message Analyzer  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 278
+TCPDump and LibPCAP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 278
+Wireshark .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 279
+Active Network Capture and Analysis .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 280
+Canape  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 280
+Canape Core  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 281
+Mallory .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 281
+Network Connectivity and Protocol Testing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 282
+Hping .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 282
+Netcat  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 282
+Nmap .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 282
+Web Application Testing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 283
+Burp Suite .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 283
+Zed Attack Proxy (ZAP) .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 284
+Mitmproxy  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 284
+Fuzzing, Packet Generation, and
+Vulnerability Exploitation Frameworks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 285
+American Fuzzy Lop (AFL) .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 285
+Kali Linux  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 286
+Metasploit Framework  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 286
+Scapy .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 287
+Sulley .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 287
+Network Spoofing and Redirection .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 287
+DNSMasq .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 287
+Ettercap  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 287
+Executable Reverse Engineering .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 288
+Java Decompiler (JD)  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 288
+IDA Pro .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 289
+Hopper .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 289
+ILSpy  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 290
+.NET Reflector .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 290
+
+index
+
+xiv   Contents in Detail
+
+293
+
+Foreword
+
+When I first met James Forshaw, I worked in what
+Popular Science described in 2007 as one of the
+top ten worst jobs in science: a “Microsoft Security
+Grunt.” This was the broad-swath label the magazine
+used for anyone working in the Microsoft Security
+Response Center (MSRC). What positioned our jobs
+as worse than “whale-feces researcher” but somehow better than “elephant
+vasectomist” on this list (so famous among those of us who suffered in
+Redmond, WA, that we made t-shirts) was the relentless drumbeat of
+incoming security bug reports in Microsoft products.
+It was here in MSRC that James, with his keen and creative eye toward
+the uncommon and overlooked, first caught my attention as a security
+strategist. James was the author of some of the most interesting security
+bug reports. This was no small feat, considering the MSRC was receiving
+upwards of 200,000 security bug reports per year from security researchers.
+James was finding not only simple bugs—he had taken a look at the .NET
+
+framework and found architecture-level issues. While these architecturelevel bugs were harder to address in a simple patch, they were much more
+valuable to Microsoft and its customers.
+Fast-forward to the creation of Microsoft’s first bug bounty programs,
+which I started at the company in June of 2013. We had three programs in
+that initial batch of bug bounties—programs that promised to pay security
+researchers like James cash in exchange for reporting the most serious
+bugs to Microsoft. I knew that for these programs to prove their efficacy,
+we needed high-quality security bugs to be turned in.
+If we built it, there was no guarantee that the bug finders would come.
+We knew we were competing for some of the most highly skilled bug hunting eyes in the world. Numerous other cash rewards were available, and
+not all of the bug markets were for defense. Nation-states and criminals
+had a well-established offense market for bugs and exploits, and Microsoft
+was relying on the finders who were already coming forward at the rate of
+200,000 bug reports per year for free. The bounties were to focus the attention of those friendly, altruistic bug hunters on the problems Microsoft
+needed the most help with eradicating.
+So of course, I called on James and a handful of others, because I was
+counting on them to deliver the buggy goods. For these first Microsoft bug
+bounties, we security grunts in the MSRC really wanted vulnerabilities for
+Internet Explorer (IE) 11 beta, and we wanted something no software vendor had ever tried to set a bug bounty on before: we wanted to know about
+new exploitation techniques. That latter bounty was known as the Mitigation
+Bypass Bounty, and worth $100,000 at the time.
+I remember sitting with James over a beer in London, trying to get
+him excited about looking for IE bugs, when he explained that he’d never
+looked at browser security much before and cautioned me not to expect
+much from him.
+James nevertheless turned in four unique sandbox escapes for IE 11 beta.
+Four.
+These sandbox escapes were in areas of the IE code that our internal
+teams and private external penetration testers had all missed. Sandbox
+escapes are essential to helping other bugs be more reliably exploitable.
+James earned bounties for all four bugs, paid for by the IE team itself, plus
+an extra $5,000 bonus out of my bounty budget. Looking back, I probably
+should have given him an extra $50,000. Because wow. Not bad for a bug
+hunter who had never looked at web browser security before.
+Just a few months later, I was calling James on the phone from outside
+a Microsoft cafeteria on a brisk autumn day, absolutely breathless, to tell
+him that he had just made history. This particular Microsoft Security Grunt
+couldn’t have been more thrilled to deliver the news that his entry for one
+of the other Microsoft bug bounty programs—the Mitigation Bypass Bounty
+for $100,000—had been accepted. James Forshaw had found a unique new
+way to bypass all the platform defenses using architecture-level flaws in
+the latest operating system and won the very first $100,000 bounty from
+Microsoft.
+
+xvi    Foreword
+
+On that phone call, as I recall the conversation, he said he pictured
+me handing him a comically-huge novelty check onstage at Microsoft’s
+internal BlueHat conference. I sent the marketing department a note
+after that call, and in an instant, “James and the Giant Check” became
+part of Microsoft and internet history forever.
+
+What I am certain readers will gain in the following pages of this
+book are pieces of James’s unparalleled brilliance—the same brilliance
+that I saw arching across a bug report or four so many years ago. There
+are precious few security researchers who can find bugs in one advanced
+technology, and fewer still who can find them in more than one with any
+consistency. Then there are people like James Forshaw, who can focus on
+deeper architecture issues with a surgeon’s precision. I hope that those
+reading this book, and any future book by James, treat it like a practical
+guide to spark that same brilliance and creativity in their own work.
+In a bug bounty meeting at Microsoft, when the IE team members
+were shaking their heads, wondering how they could have missed some of
+the bugs James reported, I stated simply, “James can see the Lady in the
+Red Dress, as well as the code that rendered her, in the Matrix.” All of
+those around the table accepted this explanation for the kind of mind at
+work in James. He could bend any spoon; and by studying his work, if you
+have an open mind, then so might you.
+For all the bug finders in the world, here is your bar, and it is high.
+For all the untold numbers of security grunts in the world, may all your
+bug reports be as interesting and valuable as those supplied by the one
+and only James Forshaw.
+Katie Moussouris
+Founder and CEO, Luta Security
+October 2017
+
+Foreword   xvii
+
+A cknowledg m ents
+
+I’d like to thank you for reading my book; I hope you
+find it enlightening and of practical use. I’m grateful
+for the contributions from many different people.
+I must start by thanking my lovely wife Huayi, who made sure I stuck to
+writing even if I really didn’t want to. Through her encouragement, I finished it in only four years; without her maybe it could have been written in
+two, but it wouldn’t have been as much fun.
+Of course, I definitely wouldn’t be here today without my amazing parents. Their love and encouragement has led me to become a widely recognized computer security researcher and published author. They bought the
+family a computer—an Atari 400—when I was young, and they were instrumental in starting my interest in computers and software development. I
+can’t thank them enough for giving me all my opportunities.
+Acting as a great counterpoint to my computer nerdiness was my oldest
+friend, Sam Shearon. Always the more confident and outgoing person and
+an incredible artist, he made me see a different side to life.
+Throughout my career, there have been many colleagues and friends
+who have made major contributions to my achievements. I must highlight
+
+Richard Neal, a good friend and sometimes line manager who gave me the
+opportunity to find an interest in computer security, a skill set that suited
+my mindset.
+I also can’t forget Mike Jordon who convinced me to start working at
+Context Information Security in the UK. Along with owners Alex Church
+and Mark Raeburn, they gave me the time to do impactful security research,
+build my skills in network protocol analysis, and develop tools such as
+Canape. This experience of attacking real-world, and typically completely
+bespoke, network protocols is what much of the content of this book is
+based on.
+I must thank Katie Moussouris for convincing me to go for the
+Microsoft Mitigation Bypass Bounty, raising my profile massively in the
+information security world, and of course for giving me a giant novelty
+check for $100,000 for my troubles.
+My increased profile didn’t go amiss when the team for Google Project
+Zero—a group of world leading security researchers with the goal of making the platforms that we all rely on more secure—was being set up. Will
+Harris mentioned me to the current head of the team, Chris Evans, who
+convinced me to interview, and soon I was a Googler. Being a member of
+such an excellent team makes me proud.
+Finally, I must thank Bill, Laurel, and Liz at No Starch Press for having the patience to wait for me to finish this book and for giving me solid
+advice on how to tackle it. I hope that they, and you, are happy with the
+final result.
+
+xx   Acknowledgments
+
+I ntrod u ction
+
+When first introduced, the technology that allowed
+devices to connect to a network was exclusive to large
+companies and governments. Today, most people
+carry a fully networked computing device in their
+pocket, and with the rise of the Internet of Things
+(IoT), you can add devices such as your fridge and
+our home’s security system to this interconnected world. The security of
+these connected devices is therefore increasingly important. Although you
+might not be too concerned about someone disclosing the details of how
+many yogurts you buy, if your smartphone is compromised over the same network as your fridge, you could lose all your personal and financial information to a malicious attacker.
+This book is named Attacking Network Protocols because to find security vulnerabilities in a network-connected device, you need to adopt the
+mind-set of the attacker who wants to exploit those weaknesses. Network
+protocols communicate with other devices on a network, and because these
+
+protocols must be exposed to a public network and often don’t undergo the
+same level of scrutiny as other components of a device, they’re an obvious
+attack target.
+
+Why Read This Book?
+Many books discuss network traffic capture for the purposes of diagnostics
+and basic network analysis, but they don’t focus on the security aspects of
+the protocols they capture. What makes this book different is that it focuses
+on analyzing custom protocols to find security vulnerabilities.
+This book is for those who are interested in analyzing and attacking
+network protocols but don’t know where to start. The chapters will guide you
+through learning techniques to capture network traffic, performing analysis of the protocols, and discovering and exploiting security vulnerabilities.
+The book provides background information on networking and network
+security, as well as practical examples of protocols to analyze.
+Whether you want to attack network protocols to report security vulnerabilities to an application’s vendor or just want to know how your latest IoT
+device communicates, you’ll find several topics of interest.
+
+What’s in This Book?
+This book contains a mix of theoretical and practical chapters. For the
+practical chapters, I’ve developed and made available a networking library
+called Canape Core, which you can use to build your own tools for protocol
+analysis and exploitation. I’ve also provided an example networked application called SuperFunkyChat, which implements a user-to-user chat protocol.
+By following the discussions in the chapters, you can use the example application to learn the skills of protocol analysis and attack the sample network
+protocols. Here is a brief breakdown of each chapter:
+Chapter 1: The Basics of Networking
+This chapter describes the basics of computer networking with a particular focus on TCP/IP, which forms the basis of application-level network
+protocols. Subsequent chapters assume that you have a good grasp of the
+network basics. This chapter also introduces the approach I use to model
+application protocols. The model breaks down the application protocol
+into flexible layers and abstracts complex technical detail, allowing you
+to focus on the bespoke parts of the protocol you’re analyzing.
+Chapter 2: Capturing Application Traffic
+This chapter introduces the concepts of passive and active capture of
+network traffic, and it’s the first chapter to use the Canape Core network libraries for practical tasks.
+
+xxii   Introduction
+
+Chapter 3: Network Protocol Structures
+This chapter contains details of the internal structures that are common
+across network protocols, such as the representation of numbers or
+human-readable text. When you’re analyzing captured network traffic, you can use this knowledge to quickly identify common structures,
+speeding up your analysis.
+Chapter 4: Advanced Application Traffic Capture
+This chapter explores a number of more advanced capture techniques
+that complement the examples in Chapter 2. The advanced capture
+techniques include configuring Network Address Translation to redirect traffic of interest and spoofing the address resolution protocol.
+Chapter 5: Analysis from the Wire
+This chapter introduces methods for analyzing captured network traffic
+using the passive and active techniques described in Chapter 2. In this
+chapter, we begin using the SuperFunkyChat application to generate
+example traffic.
+Chapter 6: Application Reverse Engineering
+This chapter describes techniques for reverse engineering networkconnected programs. Reverse engineering allows you to analyze a
+protocol without needing to capture example traffic. These methods
+also help to identify how custom encryption or obfuscation is implemented so you can better analyze traffic you’ve captured.
+Chapter 7: Network Protocol Security
+This chapter provides background information on techniques and cryptographic algorithms used to secure network protocols. Protecting the
+contents of network traffic from disclosure or tampering as it travels
+over public networks is of the utmost importance for network protocol
+security.
+Chapter 8: Implementing the Network Protocol
+This chapter explains techniques for implementing the application network protocol in your own code so you can test the protocol’s behavior
+to find security weaknesses.
+Chapter 9: The Root Causes of Vulnerabilities
+This chapter describes common security vulnerabilities you’ll encounter
+in a network protocol. When you understand the root causes of vulnerabilities, you can more easily identify them during analysis.
+Chapter 10: Finding and Exploiting Security Vulnerabilities
+This chapter describes processes for finding security vulnerabilities
+based on the root causes in Chapter 9 and demonstrates a number of
+ways of exploiting them, including developing your own shell code and
+bypassing exploit mitigations through return-oriented programming.
+Introduction   xxiii
+
+Appendix: Network Protocol Analysis Toolkit
+In the appendix, you’ll find descriptions of some of the tools I commonly use when performing network protocol analysis. Many of the
+tools are described briefly in the main body of the text as well.
+
+How to Use This Book
+If you want to start with a refresher on the basics of networking,
+read Chapter 1 first. When you’re familiar with the basics, proceed to
+Chapters 2, 3, and 5 for practical experience in capturing network traffic
+and learning the network protocol analysis process.
+With the knowledge of the principles of network traffic capture and
+analysis, you can then move on to Chapters 7 through 10 for practical information on how to find and exploit security vulnerabilities in these protocols.
+Chapters 4 and 6 contain more advanced information about additional capture techniques and application reverse engineering, so you can read them
+after you’ve read the other chapters if you prefer.
+For the practical examples, you’ll need to install .NET Core (https://
+www.microsoft.com/net/core/), which is a cross-platform version of the .NET
+runtime from Microsoft that works on Windows, Linux, and macOS. You
+can then download releases for Canape Core from https://github.com/tyranid/
+CANAPE.Core/releases/ and SuperFunkyChat from https://github.com/tyranid/
+ExampleChatApplication/releases/; both use .NET Core as the runtime. Links to
+each site are available with the book’s resources at https://www.nostarch.com/
+networkprotocols/.
+To execute the example Canape Core scripts, you’ll need to use the
+CANAPE.Cli application, which will be in the release package downloaded
+from the Canape Core Github repository. Execute the script with the following command line, replacing script.csx with the name of the script you want
+to execute.
+dotnet exec CANAPE.Cli.dll script.csx
+
+All example listings for the practical chapters as well as packet captures
+are available on the book’s page at https://www.nostarch.com/networkprotocols/.
+It’s best to download these example listings before you begin so you can follow the practical chapters without having to enter a large amount of source
+code manually.
+
+Contact Me
+I’m always interested in receiving feedback, both positive and negative, on
+my work, and this book is no exception. You can email me at attacking.network
+.protocols@gmail.com. You can also follow me on Twitter @tiraniddo or subscribe
+to my blog at https://tyranidslair.blogspot.com/ where I post some of my latest
+advanced security research.
+xxiv   Introduction
+
+1
+
+T he B asics o f N etworking
+
+To attack network protocols, you need to understand
+the basics of computer networking. The more you
+understand how common networks are built and function, the easier it will be to apply that knowledge to
+capturing, analyzing, and exploiting new protocols.
+Throughout this chapter, I’ll introduce basic network concepts you’ll
+encounter every day when you’re analyzing network protocols. I’ll also lay
+the groundwork for a way to think about network protocols, making it easier
+to find previously unknown security issues during your analysis.
+
+Network Architecture and Protocols
+Let’s start by reviewing some basic networking terminology and asking the
+fundamental question: what is a network? A network is a set of two or more
+computers connected together to share information. It’s common to refer
+to each connected device as a node on the network to make the description applicable to a wider range of devices. Figure 1-1 shows a very simple
+example.
+
+Network
+Workstation
+node
+
+Mainframe
+node
+
+Server
+node
+
+Figure 1-1: A simple network of three nodes
+
+The figure shows three nodes connected with a common network. Each
+node might have a different operating system or hardware. But as long as
+each node follows a set of rules, or network protocol, it can communicate with
+the other nodes on the network. To communicate correctly, all nodes on a
+network must understand the same network protocol.
+A network protocol serves many functions, including one or more of
+the following:
+Maintaining session state Protocols typically implement mechanisms
+to create new connections and terminate existing connections.
+Identifying nodes through addressing Data must be transmitted to
+the correct node on a network. Some protocols implement an addressing mechanism to identify specific nodes or groups of nodes.
+Controlling flow The amount of data transferred across a network
+is limited. Protocols can implement ways of managing data flow to
+increase throughput and reduce latency.
+Guaranteeing the order of transmitted data Many networks do not
+guarantee that the order in which the data is sent will match the order
+in which it’s received. A protocol can reorder the data to ensure it’s
+delivered in the correct order.
+Detecting and correcting errors Many networks are not 100 percent
+reliable; data can become corrupted. It’s important to detect corruption and, ideally, correct it.
+Formatting and encoding data Data isn’t always in a format suitable
+for transmitting on the network. A protocol can specify ways of encoding data, such as encoding English text into binary values.
+
+The Internet Protocol Suite
+TCP/IP is the de facto protocol that modern networks use. Although you can
+think of TCP/IP as a single protocol, it’s actually a combination of two protocols: the Transmission Control Protocol (TCP) and the Internet Protocol (IP). These
+
+2   Chapter 1
+
+two protocols form part of the Internet Protocol Suite (IPS), a conceptual model
+of how network protocols send network traffic over the internet that breaks
+down network communication into four layers, as shown in Figure 1-2.
+Example protocols
+
+Internet Protocol Suite
+
+External connections
+
+HTTP, SMTP, DNS
+
+Application layer
+
+User application
+
+TCP, UDP
+
+Transport layer
+
+IPv4, IPv6
+
+Internet layer
+
+Ethernet, PPP
+
+Link layer
+
+Physical network
+
+Figure 1-2: Internet Protocol Suite layers
+
+These four layers form a protocol stack. The following list explains each
+layer of the IPS:
+Link layer (layer 1) This layer is the lowest level and describes the
+physical mechanisms used to transfer information between nodes on a
+local network. Well-known examples include Ethernet (both wired and
+wireless) and Point-to-Point Protocol (PPP).
+Internet layer (layer 2) This layer provides the mechanisms for
+addressing network nodes. Unlike in layer 1, the nodes don’t have to
+be located on the local network. This level contains the IP; on modern
+networks, the actual protocol used could be either version 4 (IPv4) or
+version 6 (IPv6).
+Transport layer (layer 3) This layer is responsible for connections
+between clients and servers, sometimes ensuring the correct order of
+packets and providing service multiplexing. Service multiplexing allows
+a single node to support multiple different services by assigning a different number for each service; this number is called a port. TCP and
+the User Datagram Protocol (UDP) operate on this layer.
+Application layer (layer 4) This layer contains network protocols, such
+as the HyperText Transport Protocol (HTTP), which transfers web page contents; the Simple Mail Transport Protocol (SMTP), which transfers email;
+and the Domain Name System (DNS) protocol, which converts a name to a
+node on the network. Throughout this book, we’ll focus primarily on
+this layer.
+The Basics of Networking   3
+
+Each layer interacts only with the layer above and below it, but there must
+be some external interactions with the stack. Figure 1-2 shows two external
+connections. The link layer interacts with a physical network connection,
+transmitting data in a physical medium, such as pulses of electricity or light.
+The application layer interacts with the user application: an application is a
+collection of related functionality that provides a service to a user. Figure 1-3
+shows an example of an application that processes email. The service provided by the mail application is the sending and receiving of messages over
+a network.
+Mail application
+User interface
+HTML rendering
+
+Content parsers
+Text, HTML, JPEG
+
+Network communication
+SMTP, POP3, IMAP
+
+Network
+Mail server
+
+Figure 1-3: Example mail application
+
+Typically, applications contain the following components:
+Network communication This component communicates over the
+network and processes incoming and outgoing data. For a mail application, the network communication is most likely a standard protocol,
+such as SMTP or POP3.
+Content parsers Data transferred over a network usually contains content that must be extracted and processed. Content might include textual data, such as the body of an email, or it might be pictures or video.
+User interface (UI) The UI allows the user to view received emails
+and to create new emails for transmission. In a mail application, the UI
+might display emails using HTML in a web browser.
+Note that the user interacting with the UI doesn’t have to be a human
+being. It could be another application that automates the sending and
+receiving of emails through a command line tool.
+
+Data Encapsulation
+Each layer in the IPS is built on the one below, and each layer is able to
+encapsulate the data from the layer above so it can move between the
+layers. Data transmitted by each layer is called a protocol data unit (PDU).
+
+Headers, Footers, and Addresses
+The PDU in each layer contains the payload data that is being transmitted. It’s common to prefix a header—which contains information required
+4   Chapter 1
+
+for the payload data to be transmitted, such as the addresses of the source
+and destination nodes on the network—to the payload data. Sometimes a
+PDU also has a footer that is suffixed to the payload data and contains values
+needed to ensure correct transmission, such as error-checking information.
+Figure 1-4 shows how the PDUs are laid out in the IPS.
+
+Application payload
+
+Layer 4:
+Application layer
+
+PDU
+Source
+port
+
+Destination
+port
+TCP payload
+
+
+
+TCP header
+Source
+address
+
+IP header
+Source
+address
+
+PDU
+
+Destination
+address
+IP payload
+
+
+
+Layer 3:
+Session layer
+
+Layer 2:
+Internet layer
+
+PDU
+
+Destination
+address
+Ethernet payload
+
+
+
+Ethernet header
+
+Footer
+
+Layer 1:
+Link layer
+
+Protocol data unit (PDU)
+
+Figure 1-4: IPS data encapsulation
+
+The TCP header contains a source and destination port number .
+These port numbers allow a single node to have multiple unique network
+connections. Port numbers for TCP (and UDP) range from 0 to 65535.
+Most port numbers are assigned as needed to new connections, but some
+numbers have been given special assignments, such as port 80 for HTTP.
+(You can find a current list of assigned port numbers in the /etc/services file
+on most Unix-like operating systems.) A TCP payload and header are commonly called a segment, whereas a UDP payload and header are commonly
+called a datagram.
+The IP protocol uses a source and a destination address . The destination address allows the data to be sent to a specific node on the network.
+The source address allows the receiver of the data to know which node sent
+the data and allows the receiver to reply to the sender.
+IPv4 uses 32-bit addresses, which you’ll typically see written as
+four numbers separated by dots, such as 192.168.10.1. IPv6 uses 128-bit
+addresses, because 32-bit addresses aren’t sufficient for the number of
+nodes on modern networks. IPv6 addresses are usually written as hexadecimal numbers separated by colons, such as fe80:0000:0000:0000
+:897b:581e:44b0:2057. Long strings of 0000 numbers are collapsed into
+The Basics of Networking   5
+
+two colons. For example, the preceding IPv6 address can also be written
+as fe80::897b:581e:44b0:2057. An IP payload and header are commonly
+called a packet.
+Ethernet also contains source and destination addresses . Ethernet
+uses a 64-bit value called a Media Access Control (MAC) address, which is
+typically set during manufacture of the Ethernet adapter. You’ll usually
+see MAC addresses written as a series of hexadecimal numbers separated
+by dashes or colons, such as 0A-00-27-00-00-0E. The Ethernet payload,
+including the header and footer, is commonly referred to as a frame.
+
+Data Transmission
+Let’s briefly look at how data is transferred from one node to another using
+the IPS data encapsulation model. Figure 1-5 shows a simple Ethernet network with three nodes.
+
+192.1.1.100
+
+
+
+
+
+192.1.1.101
+MAC: 00-11-22-33-44-55
+
+
+
+192.1.1.50
+MAC: 66-77-88-99-AA-BB
+
+Figure 1-5: A simple Ethernet network
+
+In this example, the node at  with the IP address 192.1.1.101 wants
+to send data using the IP protocol to the node at  with the IP address
+192.1.1.50. (The switch device  forwards Ethernet frames between all
+nodes on the network. The switch doesn’t need an IP address because
+it operates only at the link layer.) Here is what takes place to send data
+between the two nodes:
+1.
+
+2.
+
+6   Chapter 1
+
+The operating system network stack node  encapsulates the application and transport layer data and builds an IP packet with a source
+address of 192.1.1.101 and a destination address of 192.1.1.50.
+The operating system can at this point encapsulate the IP data as an
+Ethernet frame, but it might not know the MAC address of the target
+node. It can request the MAC address for a particular IP address using
+the Address Resolution Protocol (ARP), which sends a request to all
+nodes on the network to find the MAC address for the destination IP
+address.
+
+3.
+
+Once the node at  receives an ARP response, it can build the frame,
+setting the source address to the local MAC address of 00-11-22-33-44​
+-55 and the destination address to 66-77-88-99-AA-BB. The new frame
+is transmitted on the network and is received by the switch .
+4. The switch forwards the frame to the destination node, which
+unpacks the IP packet and verifies that the destination IP address
+matches. Then the IP payload data is extracted and passes up the
+stack to be received by the waiting application.
+
+Network Routing
+Ethernet requires that all nodes be directly connected to the same local
+network. This requirement is a major limitation for a truly global network
+because it’s not practical to physically connect every node to every other
+node. Rather than require that all nodes be directly connected, the source
+and destination addresses allow data to be routed over different networks
+until the data reaches the desired destination node, as shown in Figure 1-6.
+Ethernet network 1
+
+Ethernet network 2
+
+192.1.1.100
+192.1.1.1
+
+
+
+
+
+200.0.1.10
+200.0.1.1
+
+Router
+
+192.1.1.101
+MAC: 00-11-22-33-44-55
+
+192.1.1.50
+
+
+
+200.0.1.50
+MAC: 66-77-88-99-AA-BB
+
+200.0.1.100
+
+Figure 1-6: An example of a routed network connecting two Ethernet networks
+
+Figure 1-6 shows two Ethernet networks, each with separate IP network
+address ranges. The following description explains how the IP uses this
+model to send data from the node at  on network 1 to the node at  on
+network 2.
+1.
+
+2.
+
+The operating system network stack node  encapsulates the application and transport layer data, and it builds an IP packet with a source
+address of 192.1.1.101 and a destination address of 200.0.1.50.
+The network stack needs to send an Ethernet frame, but because the
+destination IP address does not exist on any Ethernet network that the
+node is connected to, the network stack consults its operating system
+
+The Basics of Networking   7
+
+3.
+
+4.
+
+5.
+
+routing table. In this example, the routing table contains an entry for the
+IP address 200.0.1.50. The entry indicates that a router  on IP address
+192.1.1.1 knows how to get to that destination address.
+The operating system uses ARP to look up the router’s MAC address at
+192.1.1.1, and the original IP packet is encapsulated within the Ethernet
+frame with that MAC address.
+The router receives the Ethernet frame and unpacks the IP packet.
+When the router checks the destination IP address, it determines that
+the IP packet is not destined for the router but for a different node on
+another connected network. The router looks up the MAC address of
+200.0.1.50, encapsulates the original IP packet into the new Ethernet
+frame, and sends it on to network 2.
+The destination node receives the Ethernet frame, unpacks the IP
+packet, and processes its contents.
+
+This routing process might be repeated multiple times. For example, if
+the router was not directly connected to the network containing the node
+200.0.1.50, it would consult its own routing table and determine the next
+router it could send the IP packet to.
+Clearly, it would be impractical for every node on the network to know
+how to get to every other node on the internet. If there is no explicit routing entry for a destination, the operating system provides a default routing
+table entry, called the default gateway, which contains the IP address of a
+router that can forward IP packets to their destinations.
+
+My Model for Network Protocol Analysis
+The IPS describes how network communication works; however, for analysis
+purposes, most of the IPS model is not relevant. It’s simpler to use my model
+to understand the behavior of an application network protocol. My model
+contains three layers, as shown in Figure 1-7, which illustrates how I would
+analyze an HTTP request.
+Here are the three layers of my model:
+Content layer Provides the meaning of what is being communicated.
+In Figure 1-7, the meaning is making an HTTP request for the file
+image.jpg.
+Encoding layer Provides rules to govern how you represent your content. In this example, the HTTP request is encoded as an HTTP GET
+request, which specifies the file to retrieve.
+Transport layer Provides rules to govern how data is transferred
+between the nodes. In the example, the HTTP GET request is sent
+over a TCP/IP connection to port 80 on the remote node.
+
+8   Chapter 1
+
+Protocol model
+Content layer
+(File request)
+
+I would like to get the file image.jpg
+
+Encoding layer
+(HTTP)
+
+GET /image.jpg HTTP/1.1
+
+Transport layer
+(TCP/IP)
+
+4500 0043 50d1 4000 8006 0000 c0a8 0a6d
+d83a d544 40e0 0050 5dff a4e6 6ac2 4254
+5018 0102 78ca 0000 4745 5420 2f69 6d61
+6765 2e6a 7067 2048 5454 502f 312e 310d
+0a0d 0a
+...
+
+Figure 1-7: My conceptual protocol model
+
+Splitting the model this way reduces complexity with application-specific
+protocols because it allows us to filter out details of the network protocol that
+aren’t relevant. For example, because we don’t really care how TCP/IP is sent
+to the remote node (we take for granted that it will get there somehow), we
+simply treat the TCP/IP data as a binary transport that just works.
+To understand why the protocol model is useful, consider this protocol
+example: imagine you’re inspecting the network traffic from some malware.
+You find that the malware uses HTTP to receive commands from the operator via the server. For example, the operator might ask the malware to enumerate all files on the infected computer’s hard drive. The list of files can
+be sent back to the server, at which point the operator can request a specific
+file to be uploaded.
+If we analyze the protocol from the perspective of how the operator would interact with the malware, such as by requesting a file to
+be uploaded, the new protocol breaks down into the layers shown in
+Figure 1-8.
+Protocol model
+Content layer
+(Send file request)
+
+Encoding layer
+(Simple text-based command)
+
+Transport layer
+(HTTP and TCP/IP)
+
+Sending file secret.doc with content 1122..
+
+SEND secret.doc 1122..
+
+GET /image.jpg?e=SEND%20secret.doc%11%22 HTTP/1.1
+
+Figure 1-8: The conceptual model for a malware protocol using HTTP
+
+The Basics of Networking   9
+
+The following list explains each layer of the new protocol model:
+Content layer The malicious application is sending a stolen file called
+secret.doc to the server.
+Encoding layer The encoding of the command to send the stolen file
+is a simple text string with a command SEND followed by the filename
+and the file data.
+Transport layer The protocol uses an HTTP request parameter to
+transport the command. It uses the standard percent-encoding mechanism, making it a legal HTTP request.
+Notice in this example that we don’t consider the HTTP request being
+sent over TCP/IP; we’ve combined the encoding and transport layer in
+Figure 1-7 into just the transport layer in Figure 1-8. Although the malware still uses lower-level protocols, such as TCP/IP, these protocols are
+not important to the analysis of the malware command to send a file. The
+reason it’s not important is that we can consider HTTP over TCP/IP as a
+single transport layer that just works and focus specifically on the unique
+malware commands.
+By narrowing our scope to the layers of the protocol that we need
+to analyze, we avoid a lot of work and focus on the unique aspects of the
+protocol. On the other hand, if we were to analyze this protocol using the
+layers in Figure 1-7, we might assume that the malware was simply requesting the file image.jpg, because it would appear as though that was all the
+HTTP request was doing.
+
+Final Words
+This chapter provided a quick tour of the networking basics. I discussed
+the IPS, including some of the protocols you’ll encounter in real networks,
+and described how data is transmitted between nodes on a local network as
+well as remote networks through routing. Additionally, I described a way to
+think about application network protocols that should make it easier for you
+to focus on the unique features of the protocol to speed up its analysis.
+In Chapter 2, we’ll use these networking basics to guide us in capturing network traffic for analysis. The goal of capturing network traffic is
+to access the data you need to start the analysis process, identify what protocols are being used, and ultimately discover security issues that you can
+exploit to compromise the applications using these protocols.
+
+10   Chapter 1
+
+2
+
+C apt u ring
+A pplication  T ra f f ic
+
+Surprisingly, capturing useful traffic can be a challenging aspect of protocol analysis. This chapter describes
+two different capture techniques: passive and active.
+Passive capture doesn’t directly interact with the traffic. Instead, it extracts the data as it travels on the wire,
+which should be familiar from tools like Wireshark.
+You’ll find that different applications provide different mechanisms (which
+have their own advantages and disadvantages) to redirect traffic. Active
+capture interferes with traffic between a client application and the server;
+this has great power but can cause some complications. You can think of
+active capture in terms of proxies or even a man-in-the-middle attack. Let’s
+look at both active and passive techniques in more depth.
+
+Passive Network Traffic Capture
+Passive capture is a relatively easy technique: it doesn’t typically require
+any specialist hardware, nor do you usually need to write your own code.
+Figure 2-1 shows a common scenario: a client and server communicating
+via Ethernet over a network.
+
+Client application
+
+Server application
+
+Passive capture device
+
+Figure 2-1: An example of passive network capture
+
+Passive network capture can take place either on the network by tapping the traffic as it passes in some way or by sniffing directly on either the
+client or server host.
+
+Quick Primer for Wireshark
+Wireshark is perhaps the most popular packet-sniffing application available.
+It’s cross platform and easy to use, and it comes with many built-in protocol
+analysis features. In Chapter 5 you’ll learn how to write a dissector to aid
+in protocol analysis, but for now, let’s set up Wireshark to capture IP traffic
+from the network.
+To capture traffic from an Ethernet interface (wired or wireless), the
+capturing device must be in promiscuous mode. A device in promiscuous mode
+receives and processes any Ethernet frame it sees, even if that frame wasn’t
+destined for that interface. Capturing an application running on the same
+computer is easy: just monitor the outbound network interface or the local
+loopback interface (better known as localhost). Otherwise, you might need
+to use networking hardware, such as a hub or a configured switch, to ensure
+traffic is sent to your network interface.
+Figure 2-2 shows the default view when capturing traffic from an
+Ethernet interface.
+
+12   Chapter 2
+
+
+
+
+
+
+
+Figure 2-2: The default Wireshark view
+
+There are three main view areas. Area u shows a timeline of raw packets
+captured off the network. The timeline provides a list of the source and
+destination IP addresses as well as decoded protocol summary information.
+Area v provides a dissected view of the packet, separated into distinct protocol layers that correspond to the OSI network stack model. Area w shows
+the captured packet in its raw form.
+The TCP network protocol is stream based and designed to recover
+from dropped packets or data corruption. Due to the nature of networks
+and IP, there is no guarantee that packets will be received in a particular
+order. Therefore, when you are capturing packets, the timeline view might
+be difficult to interpret. Fortunately, Wireshark offers dissectors for known
+protocols that will normally reassemble the entire stream and provide all
+the information in one place. For example, highlight a packet in a TCP connection in the timeline view and then select Analyze4Follow TCP Stream
+from the main menu. A dialog similar to Figure 2-3 should appear. For protocols without a dissector, Wireshark can decode the stream and present it
+in an easy-to-view dialog.
+
+Capturing Application Traffic   13
+
+Figure 2-3: Following a TCP stream
+
+Wireshark is a comprehensive tool, and covering all of its features is
+beyond the scope of this book. If you’re not familiar with it, obtain a good
+reference, such as Practical Packet Analysis, 3rd Edition (No Starch Press,
+2017), and learn many of its useful features. Wireshark is indispensable for
+analyzing application network traffic, and it’s free under the General Public
+License (GPL).
+
+Alternative Passive Capture Techniques
+Sometimes using a packet sniffer isn’t appropriate, for example, in situations when you don’t have permission to capture traffic. You might be doing
+a penetration test on a system with no administrative access or a mobile
+device with a limited privilege shell. You might also just want to ensure that
+you look at traffic only for the application you’re testing. That’s not always
+easy to do with packet sniffing unless you correlate the traffic based on
+time. In this section, I’ll describe a few techniques for extracting network
+traffic from a local application without using a packet-sniffing tool.
+
+System Call Tracing
+Many modern operating systems provide two modes of execution. Kernel
+mode runs with a high level of privilege and contains code implementing
+the OS’s core functionality. User mode is where everyday processes run. The
+kernel provides services to user mode by exporting a collection of special
+system calls (see Figure 2-4), allowing users to access files, create processes—
+and most important for our purposes—connect to networks.
+14   Chapter 2
+
+Network
+subsystem
+
+Kernel
+
+Network
+
+Kernel/User mode boundary
+
+System call
+
+Server
+
+System libraries
+
+Client application
+
+Figure 2-4: An example of user-to-kernel network communication via
+system calls
+
+When an application wants to connect to a remote server, it issues
+special system calls to the OS’s kernel to open a connection. The app then
+reads and writes the network data. Depending on the operating system running your network applications, you can monitor these calls directly to passively extract data from an application.
+Most Unix-like systems implement system calls resembling the
+Berkeley Sockets model for network communication. This isn’t surprising, because the IP protocol was originally implemented in the Berkeley
+Software Distribution (BSD) 4.2 Unix operating system. This socket implementation is also part of POSIX, making it the de facto standard. Table 2-1
+shows some of the more important system calls in the Berkeley Sockets API.
+Table 2-1: Common Unix System Calls for Networking
+
+Name
+
+Description
+
+socket
+
+Creates a new socket file descriptor.
+
+connect
+
+Connects a socket to a known IP address and port.
+
+bind
+
+Binds the socket to a local known IP address and port.
+
+recv, read, recvfrom
+
+Receives data from the network via the socket. The generic
+function read is for reading from a file descriptor, whereas
+recv and recvfrom are specific to the socket’s API.
+
+send, write, sendfrom
+
+Sends data over the network via the socket.
+
+Capturing Application Traffic   15
+
+To learn more about how these system calls work, a great resource is
+The TCP/IP Guide (No Starch Press, 2005). Plenty of online resources are
+also available, and most Unix-like operating systems include manuals you
+can view at a terminal using the command man 2 syscall_name. Now let’s look
+at how to monitor system calls.
+
+The strace Utility on Linux
+In Linux, you can directly monitor system calls from a user program without special permissions, unless the application you want to monitor runs as
+a privileged user. Many Linux distributions include the handy utility strace,
+which does most of the work for you. If it isn’t installed by default, download it from your distribution’s package manager or compile it from source.
+Run the following command, replacing /path/to/app with the application you’re testing and args with the necessary parameters, to log the network system calls used by that application:
+$ strace –e trace=network,read,write /path/to/app args
+
+Let’s monitor a networking application that reads and writes a few strings
+and look at the output from strace. Listing 2-1 shows four log entries (extraneous logging has been removed from the listing for brevity).
+$ strace -e trace=network,read,write customapp
+--snip-u socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+v connect(3, {sa_family=AF_INET, sin_port=htons(5555),
+sin_addr=inet_addr("192.168.10.1")}, 16) = 0
+w write(3, "Hello World!\n", 13)
+= 13
+x read(3, "Boo!\n", 2048)
+= 5
+Listing 2-1: Example output of the strace utility
+
+The first entry u creates a new TCP socket, which is assigned the
+handle 3. The next entry v shows the connect system call used to make
+a TCP connection to IP address 192.168.10.1 on port 5555. The application
+then writes the string Hello World! w before reading out a string Boo! x. The
+output shows it’s possible to get a good idea of what an application is doing
+at the system call level using this utility, even if you don’t have high levels of
+privilege.
+
+Monitoring Network Connections with DTrace
+DTrace is a very powerful tool available on many Unix-like systems, including Solaris (where it was originally developed), macOS, and FreeBSD. It
+allows you to set system-wide probes on special trace providers, including
+system calls. You configure DTrace by writing scripts in a language with
+a C-like syntax. For more details on this tool, refer to the DTrace Guide
+online at http://www.dtracebook.com/index.php/DTrace_Guide.
+
+16   Chapter 2
+
+Listing 2-2 shows an example of a script that monitors outbound IP connections using DTrace.
+traceconnect.d
+
+/* traceconnect.d - A simple DTrace script to monitor a connect system call */
+u struct sockaddr_in {
+short
+sin_family;
+unsigned short
+sin_port;
+in_addr_t
+sin_addr;
+char
+sin_zero[8];
+};
+v syscall::connect:entry
+w /arg2 == sizeof(struct sockaddr_in)/
+{
+x addr = (struct sockaddr_in*)copyin(arg1, arg2);
+y printf("process:'%s' %s:%d", execname, inet_ntop(2, &addr->sin_addr),
+ntohs(addr->sin_port));
+}
+Listing 2-2: A simple DTrace script to monitor a connect system call
+
+This simple script monitors the connect system call and outputs IPv4 TCP
+and UDP connections. The system call takes three parameters, represented
+by arg0, arg1, and arg2 in the DTrace script language, that are initialized
+for us in the kernel. The arg0 parameter is the socket file descriptor (that
+we don’t need), arg1 is the address of the socket we’re connecting to, and
+arg2 is the length of that address. Parameter 0 is the socket handle, which
+is not needed in this case. The next parameter is the user process memory
+address of a socket address structure, which is the address to connect to
+and can be different sizes depending on the socket type. (For example,
+IPv4 addresses are smaller than IPv6.) The final parameter is the length of
+the socket address structure in bytes.
+The script defines a sockaddr_in structure that is used for IPv4 connections at u; in many cases these structures can be directly copied from the
+system’s C header files. The system call to monitor is specified at v. At w,
+a DTrace-specific filter is used to ensure we trace only connect calls where
+the socket address is the same size as sockaddr_in. At x, the sockaddr_in
+structure is copied from your process into a local structure for DTrace to
+inspect. At y, the process name, the destination IP address, and the port
+are printed to the console.
+To run this script, copy it to a file called traceconnect.d and then run the
+command dtrace -s traceconnect.d as the root user. When you use a networkconnected application, the output should look like Listing 2-3.
+process:'Google Chrome'
+process:'Google Chrome'
+process:'Google Chrome'
+process:'ntpd'
+process:'Mail'
+
+173.194.78.125:5222
+173.194.66.95:443
+217.32.28.199:80
+17.72.148.53:123
+173.194.67.109:993
+
+Capturing Application Traffic   17
+
+process:'syncdefaultsd'
+process:'AddressBookSour'
+
+17.167.137.30:443
+17.172.192.30:443
+
+Listing 2-3: Example output from traceconnect.d script
+
+The output shows individual connections to IP addresses, printing out
+the process name, for example 'Google Chrome', the IP address, and the port
+connected to. Unfortunately, the output isn’t always as useful as the output
+from strace on Linux, but DTrace is certainly a valuable tool. This demonstration only scratches the surface of what DTrace can do.
+
+Process Monitor on Windows
+In contrast to Unix-like systems, Windows implements its user-mode network functions without direct system calls. The networking stack is exposed
+through a driver, and establishing a connection uses the file open, read, and
+write system calls to configure a network socket for use. Even if Windows
+supported a facility similar to strace, this implementation makes it more
+difficult to monitor network traffic at the same level as other platforms.
+Windows, starting with Vista and later, has supported an event generation framework that allows applications to monitor network activity. Writing
+your own implementation of this would be quite complex, but fortunately,
+someone has already written a tool to do it for you: Microsoft’s Process
+Monitor tool. Figure 2-5 shows the main interface when filtering only on
+network connection events.
+
+Figure 2-5: An example Process Monitor capture
+
+18   Chapter 2
+
+Selecting the filter circled in Figure 2-5 displays only events related to
+network connections from a monitored process. Details include the hosts
+involved as well as the protocol and port being used. Although the capture
+doesn’t provide any data associated with the connections, it does offer valuable insight into the network communications the application is establishing. Process Monitor can also capture the state of the current calling stack,
+which helps you determine where in an application network connections
+are being made. This will become important in Chapter 6 when we start
+reverse engineering binaries to work out the network protocol. Figure 2-6
+shows a single HTTP connection to a remote server in detail.
+
+
+
+
+
+
+
+
+
+Figure 2-6: A single captured connection
+
+Column u shows the name of the process that established the connection. Column v shows the operation, which in this case is connecting to a
+remote server, sending the initial HTTP request and receiving a response.
+Column w indicates the source and destination addresses, and column x
+provides more in-depth information about the captured event.
+Although this solution isn’t as helpful as monitoring system calls on other
+platforms, it’s still useful in Windows when you just want to determine the
+network protocols a particular application is using. You can’t capture data
+using this technique, but once you determine the protocols in use, you can
+add that information to your analysis through more active network traffic
+capture.
+
+Advantages and Disadvantages of Passive Capture
+The greatest advantage of using passive capture is that it doesn’t disrupt the
+client and server applications’ communication. It will not change the destination or source address of traffic, and it doesn’t require any modifications
+or reconfiguration of the applications.
+Passive capture might also be the only technique you can use when you
+don’t have direct control over the client or the server. You can usually find
+a way to listen to the network traffic and capture it with a limited amount
+of effort. After you’ve collected your data, you can determine which active
+capture techniques to use and the best way to attack the protocol you want
+to analyze.
+
+Capturing Application Traffic   19
+
+One major disadvantage of passive network traffic capture is that capture techniques like packet sniffing run at such a low level that it can difficult to interpret what an application received. Tools such as Wireshark
+certainly help, but if you’re analyzing a custom protocol, it might not be
+possible to easily take apart the protocol without interacting with it directly.
+Passive capture also doesn’t always make it easy to modify the traffic an
+application produces. Modifying traffic isn’t always necessary, but it’s useful
+when you encounter encrypted protocols, want to disable compression, or
+need to change the traffic for exploitation.
+When analyzing traffic and injecting new packets doesn’t yield results,
+switch tactics and try using active capture techniques.
+
+Active Network Traffic Capture
+Active capture differs from passive in that you’ll try to influence the flow
+of the traffic, usually by using a man-in-the-middle attack on the network
+communication. As shown in Figure 2-7, the device capturing traffic usually sits between the client and server applications, acting as a bridge. This
+approach has several advantages, including the ability to modify traffic and
+disable features like encryption or compression, which can make it easier to
+analyze and exploit a network protocol.
+
+Client application
+
+Man-in-the-middle proxy
+
+Server application
+
+Figure 2-7: A man-in-the-middle proxy
+
+A disadvantage of this approach is that it’s usually more difficult
+because you need to reroute the application’s traffic through your active
+capture system. Active capture can also have unintended, undesirable
+effects. For example, if you change the network address of the server or
+client to the proxy, this can cause confusion, resulting in the application
+sending traffic to the wrong place. Despite these issues, active capture is
+probably the most valuable technique for analyzing and exploiting application network protocols.
+
+Network Proxies
+The most common way to perform a man-in-the-middle attack on network
+traffic is to force the application to communicate through a proxy service.
+In this section, I’ll explain the relative advantages and disadvantages of
+some of the common proxy types you can use to capture traffic, analyze
+that data, and exploit a network protocol. I’ll also show you how to get
+traffic from typical client applications into a proxy.
+20   Chapter 2
+
+Port-Forwarding Proxy
+Port forwarding is the easiest way to proxy a connection. Just set up a listening server (TCP or UDP) and wait for a new connection. When that
+new connection is made to the proxy server, it will open a forwarding
+connection to the real service and logically connect the two, as shown
+in Figure 2-8.
+
+TCP
+
+Client application
+
+Listening
+TCP
+service
+
+TCP
+client
+
+TCP port-forwarding proxy
+
+TCP
+
+Server application
+
+Figure 2-8: Overview of a TCP port-forwarding proxy
+
+Simple Implementation
+To create our proxy, we’ll use the built-in TCP port forwarder included with
+the Canape Core libraries. Place the code in Listing 2-4 into a C# script file,
+changing LOCALPORT v, REMOTEHOST w, and REMOTEPORT x to appropriate values
+for your network.
+PortFormat		 // PortFormatProxy.csx – Simple TCP port-forwarding proxy
+Proxy.csx		// Expose methods like WriteLine and WritePackets
+using static System.Console;
+using static CANAPE.Cli.ConsoleUtils;
+// Create proxy template
+var template = new uFixedProxyTemplate();
+template.LocalPort = vLOCALPORT;
+template.Host = w"REMOTEHOST";
+template.Port = xREMOTEPORT;
+// Create proxy instance and start
+y var service = template.Create();
+service.Start();
+WriteLine("Created {0}", service);
+WriteLine("Press Enter to exit...");
+ReadLine();
+z service.Stop();
+// Dump packets
+var packets = service.Packets;
+WriteLine("Captured {0} packets:",
+packets.Count);
+{ WritePackets(packets);
+Listing 2-4: A simple TCP port-forwarding proxy example
+Capturing Application Traffic   21
+
+This very simple script creates an instance of a FixedProxyTemplate u.
+Canape Core works on a template model, although if required you can get
+down and dirty with the low-level network configuration. The script configures the template with the desired local and remote network information. The template is used to create a service instance at y; you can think
+of documents in the framework acting as templates for services. The newly
+created service is then started; at this point, the network connections are
+configured. After waiting for a key press, the service is stopped at z. Then
+all the captured packets are written to the console using the WritePackets()
+method {.
+Running this script should bind an instance of our forwarding proxy
+to the LOCALPORT number for the localhost interface only. When a new TCP
+connection is made to that port, the proxy code should establish a new connection to REMOTEHOST with TCP port REMOTEPORT and link the two connections
+together.
+WARNING
+
+Binding a proxy to all network addresses can be risky from a security perspective
+because proxies written for testing protocols rarely implement robust security mechanisms. Unless you have complete control over the network you are connected to or
+have no choice, only bind your proxy to the local loopback interface. In Listing 2-4,
+the default is LOCALHOST; to bind to all interfaces, set the AnyBind property to true.
+Redirecting Traffic to Proxy
+With our simple proxy application complete, we now need to direct our
+application traffic through it.
+For a web browser, it’s simple enough: to capture a specific request,
+instead of using the URL form http://www.domain.com/resource, use http://
+localhost:localport/resource, which pushes the request through your portforwarding proxy.
+Other applications are trickier: you might have to dig into the application’s configuration settings. Sometimes, the only setting an application
+allows you to change is the destination IP address. But this can lead to a
+chicken-and-egg scenario where you don’t know which TCP or UDP ports
+the application might be using with that address, especially if the application contains complex functions running over multiple different service
+connections. This occurs with Remote Procedure Call (RPC) protocols, such
+as the Common Object Request Broker Architecture (CORBA). This protocol usually makes an initial network connection to a broker, which acts as
+a directory of available services. A second connection is then made to the
+requested service over an instance-specific TCP port.
+In this case, a good approach is to use as many network-connected
+features of the application as possible while monitoring it using passive
+capture techniques. By doing so, you should uncover the connections that
+application typically makes, which you can then easily replicate with forwarding proxies.
+If the application doesn’t support changing its destination, you need
+to be a bit more creative. If the application resolves the destination server
+
+22   Chapter 2
+
+address via a hostname, you have more options. You could set up a custom
+DNS server that responds to name requests with the IP address of your proxy.
+Or you could use the hosts file facility, which is available on most operating
+systems, including Windows, assuming you have control over system files on
+the device the application is running on.
+During hostname resolving, the OS (or the resolving library) first refers
+to the hosts file to see if any local entries exist for that name, making a DNS
+request only if one is not found. For example, the hosts file in Listing 2-5
+redirects the hostnames www.badgers.com and www.domain.com to localhost.
+# Standard Localhost addresses
+127.0.0.1
+localhost
+::1
+localhost
+# Following are dummy entries to redirect traffic through the proxy
+127.0.0.1
+www.badgers.com
+127.0.0.1
+www.domain.com
+Listing 2-5: An example hosts file
+
+The standard location of the hosts file on Unix-like OSes is /etc/hosts,
+whereas on Windows it is C:\Windows\System32\Drivers\etc\hosts. Obviously,
+you’ll need to replace the path to the Windows folder as necessary for your
+environment.
+N ote
+
+Some antivirus and security products track changes to the system’s hosts, because
+changes are a sign of malware. You might need to disable the product’s protection
+if you want to change the hosts file.
+Advantages of a Port-Forwarding Proxy
+The main advantage of a port-forwarding proxy is its simplicity: you wait for
+a connection, open a new connection to the original destination, and then
+pass traffic back and forth between the two. There is no protocol associated
+with the proxy to deal with, and no special support is required by the application from which you are trying to capture traffic.
+A port-forwarding proxy is also the primary way of proxying UDP traffic; because it isn’t connection oriented, the implementation of a forwarder
+for UDP is considerably simpler.
+Disadvantages of a Port-Forwarding Proxy
+Of course, the simplicity of a port-forwarding proxy also contributes to its
+disadvantages. Because you are only forwarding traffic from a listening
+connection to a single destination, multiple instances of a proxy would be
+required if the application uses multiple protocols on different ports.
+For example, consider an application that has a single hostname or IP
+address for its destination, which you can control either directly by changing it in the application’s configuration or by spoofing the hostname. The
+application then attempts to connect to TCP ports 443 and 1234. Because
+Capturing Application Traffic   23
+
+you can control the address it connects to, not the ports, you need to set up
+forwarding proxies for both, even if you are only interested in the traffic
+running over port 1234.
+This proxy can also make it difficult to handle more than one connection to a well-known port. For example, if the port-forwarding proxy is
+listening on port 1234 and making a connection to www.domain.com port
+1234, only redirected traffic for the original domain will work as expected.
+If you wanted to also redirect www.badgers.com, things would be more difficult. You can mitigate this if the application supports specifying the destination address and port or by using other techniques, such as Destination
+Network Address Translation (DNAT), to redirect specific connections to
+unique forwarding proxies. (Chapter 5 contains more details on DNAT as
+well as numerous other more advanced network capture techniques.)
+Additionally, the protocol might use the destination address for its own
+purposes. For example, the Host header in HyperText Transport Protocol
+(HTTP) can be used for Virtual Host decisions, which might make a portforwarded protocol work differently, or not at all, from a redirected connection. Still, at least for HTTP, I will discuss a workaround for this limitation
+in “Reverse HTTP Proxy” on page 32.
+
+SOCKS Proxy
+Think of a SOCKS proxy as a port-forwarding proxy on steroids. Not only
+does it forward TCP connections to the desired network location, but all
+new connections start with a simple handshake protocol that informs the
+proxy of the ultimate destination rather than having it fixed. It can also
+support listening connections, which is important for protocols like File
+Transfer Protocol (FTP) that need to open new local ports for the server
+to send data to. Figure 2-9 provides an overview of SOCKS proxy.
+
+TCP client to
+www.domain.com
+SOCKS
+
+Listening
+SOCKS
+service
+
+Client application
+
+TCP
+
+Server www.domain.com
+
+SOCKS proxy
+
+TCP listener
+from
+www.badgers.com
+
+TCP
+
+Server www.badgers.com
+
+Figure 2-9: Overview of SOCKS proxy
+
+Three common variants of the protocol are currently in use—SOCKS 4,
+4a, and 5—and each has its own use. Version 4 is the most commonly supported version of the protocol; however, it supports only IPv4 connections,
+and the destination address must be specified as a 32-bit IP address. An
+24   Chapter 2
+
+update to version 4, version 4a allowed connections by hostname (which is
+useful if you don’t have a DNS server that can resolve IP addresses). Version 5
+introduced hostname support, IPv6, UDP forwarding, and improved authentication mechanisms; it is also the only one specified in an RFC (1928).
+As an example, a client will send the request shown in Figure 2-10 to
+establish a SOCKS connection to IP address 10.0.0.1 on port 12345. The
+USERNAME component is the only method of authentication in SOCKS version 4
+(not especially secure, I know). VER represents the version number, which in
+this case is 4. CMD indicates it wants to connect out (binding to an address is
+CMD 2), and the TCP port and address are specified in binary form.
+
+Size in octets
+
+VER
+0x04
+
+CMD
+0x01
+
+TCP PORT
+12345
+
+IP ADDRESS
+0x10000001
+
+USERNAME
+"james"
+
+NULL
+0x00
+
+1
+
+1
+
+2
+
+4
+
+VARIABLE
+
+1
+
+Figure 2-10: A SOCKS version 4 request
+
+If the connection is successful, it will send back the appropriate response,
+as shown in Figure 2-11. The RESP field indicates the status of the response;
+the TCP port and address fields are only significant for binding requests.
+Then the connection becomes transparent and the client and server directly
+negotiate with each other; the proxy server only acts to forward traffic in
+either direction.
+
+Size in octets
+
+VER
+0x04
+
+RESP
+0x5A
+
+TCP PORT
+0
+
+IP ADDRESS
+0
+
+1
+
+1
+
+2
+
+4
+
+Figure 2-11: A SOCKS version 4 successful response
+
+Simple Implementation
+The Canape Core libraries have built-in support for SOCKS 4, 4a, and 5.
+Place Listing 2-6 into a C# script file, changing LOCALPORT v to the local TCP
+port you want to listen on for the SOCKS proxy.
+SocksProxy.csx
+
+// SocksProxy.csx – Simple SOCKS proxy
+// Expose methods like WriteLine and WritePackets
+using static System.Console;
+using static CANAPE.Cli.ConsoleUtils;
+// Create the SOCKS proxy template
+u var template = new SocksProxyTemplate();
+template.LocalPort = vLOCALPORT;
+// Create proxy instance and start
+var service = template.Create();
+service.Start();
+
+Capturing Application Traffic   25
+
+WriteLine("Created {0}", service);
+WriteLine("Press Enter to exit...");
+ReadLine();
+service.Stop();
+// Dump packets
+var packets = service.Packets;
+WriteLine("Captured {0} packets:",
+packets.Count);
+WritePackets(packets);
+Listing 2-6: A simple SOCKS proxy example
+
+Listing 2-6 follows the same pattern established with the TCP portforwarding proxy in Listing 2-4. But in this case, the code at u creates a
+SOCKS proxy template. The rest of the code is exactly the same.
+Redirecting Traffic to Proxy
+To determine a way of pushing an application’s network traffic through a
+SOCKS proxy, look in the application first. For example, when you open the
+proxy settings in Mozilla Firefox, the dialog in Figure 2-12 appears. From
+there, you can configure Firefox to use a SOCKS proxy.
+
+Figure 2-12: Firefox proxy configuration
+
+26   Chapter 2
+
+But sometimes SOCKS support is not immediately obvious. If you are
+testing a Java application, the Java Runtime accepts command line parameters that enable SOCKS support for any outbound TCP connection. For
+example, consider the very simple Java application in Listing 2-7, which connects to IP address 192.168.10.1 on port 5555.
+SocketClient.java // SocketClient.java – A simple Java TCP socket client
+import java.io.PrintWriter;
+import java.net.Socket;
+public class SocketClient {
+public static void main(String[] args) {
+try {
+Socket s = new Socket("192.168.10.1", 5555);
+PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+out.println("Hello World!");
+s.close();
+} catch(Exception e) {
+}
+}
+}
+Listing 2-7: A simple Java TCP client
+
+When you run this compiled program normally, it would do as you
+expect. But if on the command line you pass two special system properties,
+socksProxyHost and socksProxyPort, you can specify a SOCKS proxy for any
+TCP connection:
+java –DsocksProxyHost=localhost –DsocksProxyPort=1080 SocketClient
+
+This will make the TCP connection through the SOCKS proxy on localhost port 1080.
+Another place to look to determine how to push an application’s network
+traffic through a SOCKS proxy is the OS’s default proxy. On macOS, navigate to System Preferences4Network4Advanced4Proxies. The dialog
+shown in Figure 2-13 appears. From here, you can configure a system-wide
+SOCKS proxy or general proxies for other protocols. This won’t always work,
+but it’s an easy option worth trying out.
+In addition, if the application just will not support a SOCKS proxy
+natively, certain tools will add that function to arbitrary applications. These
+tools range from free and open source tools, such as Dante (https://www​
+.inet.no/dante/) on Linux, to commercial tools, such as Proxifier (https://
+www.proxifier.com/), which runs on Windows and macOS. In one way or
+another, they all inject into the application to add SOCKS support and
+modify the operation of the socket functions.
+
+Capturing Application Traffic   27
+
+Figure 2-13: A proxy configuration dialog on macOS
+
+Advantages of a SOCKS Proxy
+The clear advantage of using a SOCKS proxy, as opposed to using a simple
+port forwarder, is that it should capture all TCP connections (and potentially some UDP if you are using SOCKS version 5) that an application
+makes. This is an advantage as long as the OS socket layer is wrapped to
+effectively push all connections through the proxy.
+A SOCKS proxy also generally preserves the destination of the connection from the point of view of the client application. Therefore, if a client
+application sends in-band data that refers to its endpoint, then the endpoint will be what the server expects. However, this does not preserve the
+source address. Some protocols, such as FTP, assume they can request ports
+to be opened on the originating client. The SOCKS protocol provides a
+facility for binding listening connections but adds to the complexity of the
+implementation. This makes capture and analysis more difficult because
+you must consider many different streams of data to and from a server.
+Disadvantages of a SOCKS Proxy
+The main disadvantage of SOCKS is that support can be inconsistent
+between applications and platforms. The Windows system proxy supports only SOCKS version 4 proxies, which means it will resolve only local
+
+28   Chapter 2
+
+hostnames. It does not support IPv6 and does not have a robust authentication mechanism. Generally, you get better support by using a SOCKS tool
+to add to an existing application, but this doesn’t always work well.
+
+HTTP Proxies
+HTTP powers the World Wide Web as well as a myriad of web services and
+RESTful protocols. Figure 2-14 provides an overview of an HTTP proxy.
+The protocol can also be co-opted as a transport mechanism for non-web
+protocols, such as Java’s Remote Method Invocation (RMI) or Real Time
+Messaging Protocol (RTMP), because it can tunnel though the most restrictive firewalls. It is important to understand how HTTP proxying works in
+practice, because it will almost certainly be useful for protocol analysis,
+even if a web service is not being tested. Existing web application–testing
+tools rarely do an ideal job when HTTP is being used out of its original
+environment. Sometimes rolling your own implementation of an HTTP
+proxy is the only solution.
+
+HTTP client to
+www.domain.com
+HTTP
+
+Listening
+HTTP
+service
+
+Client application
+
+HTTP
+
+Server www.domain.com
+
+HTTP proxy
+
+Tunneled
+HTTPS to
+www.badgers.com
+
+HTTPS
+
+Server www.badgers.com
+
+Figure 2-14: Overview of an HTTP proxy
+
+The two main types of HTTP proxy are the forwarding proxy and the
+reverse proxy. Each has advantages and disadvantages for the prospective
+network protocol analyzer.
+
+Forwarding an HTTP Proxy
+The HTTP protocol is specified in RFC 1945 for version 1.0 and RFC 2616
+for version 1.1; both versions provide a simple mechanism for proxying
+HTTP requests. For example, HTTP 1.1 specifies that the first full line of
+a request, the request line, has the following format:
+uGET v/image.jpg HTTP/1.1
+
+The method u specifies what to do in that request using familiar
+verbs, such as GET, POST, and HEAD. In a proxy request, this does not change
+from a normal HTTP connection. The path v is where the proxy request
+gets interesting. As is shown, an absolute path indicates the resource that
+Capturing Application Traffic   29
+
+the method will act upon. Importantly, the path can also be an absolute
+Uniform Request Identifier (URI). By specifying an absolute URI, a proxy
+server can establish a new connection to the destination, forwarding all
+traffic on and returning data back to the client. The proxy can even manipulate the traffic, in a limited fashion, to add authentication, hide version 1.0
+servers from 1.1 clients, and add transfer compression along with all manner of other things. However, this flexibility comes with a cost: the proxy
+server must be able to process the HTTP traffic, which adds massive complexity. For example, the following request line accesses an image resource
+on a remote server through a proxy:
+GET http://www.domain.com/image.jpg HTTP/1.1
+
+You, the attentive reader, might have identified an issue with this
+approach to proxying HTTP communication. Because the proxy must be
+able to access the underlying HTTP protocol, what about HTTPS, which
+transports HTTP over an encrypted TLS connection? You could break out
+the encrypted traffic; however, in a normal environment, it is unlikely the
+HTTP client would trust whatever certificate you provided. Also, TLS is
+intentionally designed to make it virtually impossible to use a man-in-themiddle attack any other way. Fortunately, this was anticipated, and RFC 2817
+provides two solutions: it includes the ability to upgrade an HTTP connection to encryption (there is no need for more details here), and more importantly for our purposes, it specifies the CONNECT HTTP method for creating
+transparent, tunneled connections over HTTP proxies. As an example, a
+web browser that wants to establish a proxy connection to an HTTPS site
+can issue the following request to the proxy:
+CONNECT www.domain.com:443 HTTP/1.1
+
+If the proxy accepts this request, it will make a new TCP connection to
+the server. On success, it should return the following response:
+HTTP/1.1 200 Connection Established
+
+The TCP connection to the proxy now becomes transparent, and the
+browser is able to establish the negotiated TLS connection without the proxy
+getting in the way. Of course, it’s worth noting that the proxy is unlikely to
+verify that TLS is actually being used on this connection. It could be any
+protocol you like, and this fact is abused by some applications to tunnel out
+their own binary protocols through HTTP proxies. For this reason, it’s common to find deployments of HTTP proxies restricting the ports that can be
+tunneled to a very limited subset.
+Simple Implementation
+Once again, the Canape Core libraries include a simple implementation of
+an HTTP proxy. Unfortunately, they don’t support the CONNECT method to
+30   Chapter 2
+
+create a transparent tunnel, but it will suffice for demonstration purposes.
+Place Listing 2-8 into a C# script file, changing LOCALPORT v to the local TCP
+port you want to listen on.
+HttpProxy.csx		
+
+// HttpProxy.csx – Simple HTTP proxy
+// Expose methods like WriteLine and WritePackets
+using static System.Console;
+using static CANAPE.Cli.ConsoleUtils;
+// Create proxy template
+u var template = new HttpProxyTemplate();
+template.LocalPort = vLOCALPORT;
+// Create proxy instance and start
+var service = template.Create();
+service.Start();
+WriteLine("Created {0}", service);
+WriteLine("Press Enter to exit...");
+ReadLine();
+service.Stop();
+// Dump packets
+var packets = service.Packets;
+WriteLine("Captured {0} packets:", packets.Count);
+WritePackets(packets);
+Listing 2-8: A simple forward HTTP proxy example
+
+Here we created a forward HTTP Proxy. The code at line u is again
+only a slight variation from the previous examples, creating an HTTP proxy
+template.
+Redirecting Traffic to Proxy
+As with SOCKS proxies, the first port of call will be the application. It’s
+rare for an application that uses the HTTP protocol to not have some
+sort of proxy configuration. If the application has no specific settings
+for HTTP proxy support, try the OS configuration, which is in the same
+place as the SOCKS proxy configuration. For example, on Windows you
+can access the system proxy settings by selecting Control Panel4Internet
+Options4Connections4LAN Settings.
+Many command line utilities on Unix-like systems, such as curl, wget,
+and apt, also support setting HTTP proxy configuration through environment variables. If you set the environment variable http_proxy to the URL
+for the HTTP proxy to use—for example, http://localhost:3128—the application will use it. For secure traffic, you can also use https_proxy. Some implementations allow special URL schemes, such as socks4://, to specify that you
+want to use a SOCKS proxy.
+
+Capturing Application Traffic   31
+
+Advantages of a Forwarding HTTP Proxy
+The main advantage of a forwarding HTTP proxy is that if the application
+uses the HTTP protocol exclusively, all it needs to do to add proxy support
+is to change the absolute path in the Request Line to an absolute URI and
+send the data to a listening proxy server. Also, only a few applications that
+use the HTTP protocol for transport do not already support proxying.
+Disadvantages of a Forwarding HTTP Proxy
+The requirement of a forwarding HTTP proxy to implement a full HTTP
+parser to handle the many idiosyncrasies of the protocol adds significant
+complexity; this complexity might introduce processing issues or, in the
+worst case, security vulnerabilities. Also, the addition of the proxy destination within the protocol means that it can be more difficult to retrofit
+HTTP proxy support to an existing application through external techniques, unless you convert connections to use the CONNECT method (which
+even works for unencrypted HTTP).
+Due to the complexities of handling a full HTTP 1.1 connection, it
+is common for proxies to either disconnect clients after a single request
+or downgrade communications to version 1.0 (which always closes the
+response connection after all data has been received). This might break
+a higher-level protocol that expects to use version 1.1 or request pipelining,
+which is the ability to have multiple requests in flight to improve performance or state locality.
+
+Reverse HTTP Proxy
+Forwarding proxies are fairly common in environments where an internal
+client is connecting to an outside network. They act as a security boundary, limiting outbound traffic to a small subset of protocol types. (Let’s
+just ignore the potential security implications of the CONNECT proxy for a
+moment.) But sometimes you might want to proxy inbound connections,
+perhaps for load-balancing or security reasons (to prevent exposing your
+servers directly to the outside world). However, a problem arises if you do
+this. You have no control over the client. In fact, the client probably doesn’t
+even realize it’s connecting to a proxy. This is where the reverse HTTP proxy
+comes in.
+Instead of requiring the destination host to be specified in the request
+line, as with a forwarding proxy, you can abuse the fact that all HTTP 1.1–
+compliant clients must send a Host HTTP header in the request that
+specifies the original hostname used in the URI of the request. (Note that
+HTTP 1.0 has no such requirement, but most clients using that version will
+send the header anyway.) With the Host header information, you can infer
+the original destination of the request, making a proxy connection to that
+server, as shown in Listing 2-9.
+
+32   Chapter 2
+
+GET /image.jpg HTTP/1.1
+User-Agent: Super Funky HTTP Client v1.0
+Host: uwww.domain.com
+Accept: */*
+Listing 2-9: An example HTTP request
+
+Listing 2-9 shows a typical Host header u where the HTTP request
+was to the URL http://www.domain.com/image.jpg. The reverse proxy can
+easily take this information and reuse it to construct the original destination. Again, because there is a requirement for parsing the HTTP headers, it is more difficult to use for HTTPS traffic that is protected by TLS.
+Fortunately, most TLS implementations take wildcard certificates where
+the subject is in the form of *.domain.com or similar, which would match
+any subdomain of domain.com.
+Simple Implementation
+Unsurprisingly, the Canape Core libraries include a built-in HTTP reverse
+proxy implementation, which you can access by changing the template
+object to HttpReverseProxyTemplate from HttpProxyTemplate. But for completeness, Listing 2-10 shows a simple implementation. Place the following code
+in a C# script file, changing LOCALPORT u to the local TCP port you want to
+listen on. If LOCALPORT is less than 1024 and you’re running this on a Unixstyle system, you’ll also need to run the script as root.
+ReverseHttp		 // ReverseHttpProxy.csx – Simple reverse HTTP proxy
+Proxy.csx		// Expose methods like WriteLine and WritePackets
+using static System.Console;
+using static CANAPE.Cli.ConsoleUtils;
+// Create proxy template
+var template = new HttpReverseProxyTemplate();
+template.LocalPort = uLOCALPORT;
+// Create proxy instance and start
+var service = template.Create();
+service.Start();
+WriteLine("Created {0}", service);
+WriteLine("Press Enter to exit...");
+ReadLine();
+service.Stop();
+// Dump packets
+var packets = service.Packets;
+WriteLine("Captured {0} packets:",
+packets.Count);
+WritePackets(packets);
+Listing 2-10: A simple reverse HTTP proxy example
+
+Capturing Application Traffic   33
+
+Redirecting Traffic to Your Proxy
+The approach to redirecting traffic to a reverse HTTP proxy is similar to
+that employed for TCP port-forwarding, which is by redirecting the connection to the proxy. But there is a big difference; you can’t just change
+the destination hostname. This would change the Host header, shown in
+Listing 2-10. If you’re not careful, you could cause a proxy loop.1 Instead, it’s
+best to change the IP address associated with a hostname using the hosts file.
+But perhaps the application you’re testing is running on a device that
+doesn’t allow you to change the hosts file. Therefore, setting up a custom
+DNS server might be the easiest approach, assuming you’re able to change
+the DNS server configuration.
+You could use another approach, which is to configure a full DNS server
+with the appropriate settings. This can be time consuming and error prone;
+just ask anyone who has ever set up a bind server. Fortunately, existing tools
+are available to do what we want, which is to return our proxy’s IP address
+in response to a DNS request. Such a tool is dnsspoof. To avoid installing another tool, you can do it using Canape’s DNS server. The basic DNS
+server spoofs only a single IP address to all DNS requests (see Listing 2-11).
+Replace IPV4ADDRESS u, IPV6ADDRESS v, and REVERSEDNS w with appropriate
+strings. As with the HTTP Reverse Proxy, you’ll need to run this as root
+on a Unix-like system, as it will try to bind to port 53, which is not usually
+allowed for normal users. On Windows, there’s no such restriction on binding to ports less than 1024.
+DnsServer.csx		
+
+// DnsServer.csx – Simple DNS Server
+// Expose console methods like WriteLine at global level.
+using static System.Console;
+// Create the DNS server template
+var template = new DnsServerTemplate();
+// Setup the response addresses
+template.ResponseAddress = u"IPV4ADDRESS";
+template.ResponseAddress6 = v"IPV6ADDRESS";
+template.ReverseDns = w"REVERSEDNS";
+// Create DNS server instance and start
+var service = template.Create();
+service.Start();
+WriteLine("Created {0}", service);
+WriteLine("Press Enter to exit...");
+ReadLine();
+service.Stop();
+Listing 2-11: A simple DNS server
+
+1. A proxy loop occurs when a proxy repeatedly connects to itself, causing a recursive loop.
+The outcome can only end in disaster, or at least running out of available resources.
+
+34   Chapter 2
+
+

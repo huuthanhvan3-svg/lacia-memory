@@ -1,0 +1,1075 @@
+History
+
+Topics
+
+LINUX BASICS FOR HACKERS
+
+Getting Started with Networking, Scripting, and Security in Kali
+Tutorials
+
+by OccupyTheWeb
+Offers & Deals
+
+Highlights
+
+Settings
+Support
+
+San Francisco
+
+Sign Out
+
+laylists
+
+LINUX BASICS FOR HACKERS. Copyright © 2019 by OccupyTheWeb.
+istory
+
+All rights reserved. No part of this work may be reproduced or transmitted in any form
+or by any means, electronic or mechanical, including photocopying, recording, or by
+
+opics
+
+any information storage or retrieval system, without the prior written permission of the
+copyright owner and the publisher.
+
+utorials
+
+ISBN­10: 1­59327­855­1
+
+ffers & Deals
+
+ISBN­13: 978­1­59327­855­7
+
+ighlights
+
+Publisher: William Pollock
+Production Editors: Serena Yang and Meg Sneeringer
+
+ettings
+
+Cover Illustration: Josh Ellingson
+Interior Design: Octopod Studios
+
+Support
+
+Developmental Editor: Liz Chadwick
+
+Reviewer: Cliff Janzen
+SignTechnical
+Out
+Copyeditor: Barton D. Reed
+Compositors: Serena Yang and Meg Sneeringer
+Proofreader: Paula L. Fleming
+Indexer: JoAnne Burek
+For information on distribution, translations, or bulk sales, please contact No Starch
+Press, Inc. directly:
+No Starch Press, Inc.
+245 8th Street, San Francisco, CA 94103
+phone: 1.415.863.9900; info@nostarch.com
+www.nostarch.com
+Library of Congress Cataloging­in­Publication Data
+Names: OccupyTheWeb, author.
+Title: Linux basics for hackers : getting started with networking, scripting,
+and security in Kali / OccupyTheWeb.
+Description: First edition. | San Francisco : No Starch Press, Inc., [2018].
+Identifiers: LCCN 2018030544 (print) | LCCN 2018032646 (ebook) | ISBN
+
+9781593278564 (epub) | ISBN 159327856X (epub) | ISBN 9781593278557 (print)
+| ISBN 1593278551 (print) | ISBN 9781593278564 (ebook) | ISBN 159327856X
+(ebook)
+Subjects: LCSH: Penetration testing (Computer security) | Kali Linux. |
+Hackers. | Operating systems (Computers)
+Classification: LCC QA76.9.A25 (ebook) | LCC QA76.9.A25 O325 2018 (print) |
+DDC 005.8­­dc23
+LC record available at https://lccn.loc.gov/2018030544
+No Starch Press and the No Starch Press logo are registered trademarks of No Starch
+Press, Inc. Other product and company names mentioned herein may be the
+trademarks of their respective owners. Rather than use a trademark symbol with every
+occurrence of a trademarked name, we are using the names only in an editorial fashion
+and to the benefit of the trademark owner, with no intention of infringement of the
+trademark.
+The information in this book is distributed on an “As Is” basis, without warranty. While
+every precaution has been taken in the preparation of this work, neither the author nor
+No Starch Press, Inc. shall have any liability to any person or entity with respect to any
+loss or damage caused or alleged to be caused directly or indirectly by the information
+contained in it.
+
+y
+
+History
+
+INTRODUCTION
+
+Topics
+
+Tutorials
+
+Offers & Deals
+
+Highlights
+
+Hacking is the most important skill set of the 21st century! I don’t make that statement
+Settings
+lightly. Events in recent years seem to reaffirm this statement with every morning’s
+Support
+headline. Nations are spying on each other to gain secrets, cyber criminals are stealing
+
+billions of dollars, digital worms demanding ransoms are being released, adversaries
+
+Sign Out
+
+are influencing each other’s elections, and combatants are taking down each other’s
+utilities. These are all the work of hackers, and their influence over our increasingly
+digital world is just beginning to be felt.
+I decided to write this book after working with tens of thousands of aspiring hackers
+through Null­Byte, https://www.hackers­arise.com/, and nearly every branch of the
+
+US military and intelligence agencies (NSA, DIA, CIA, and FBI). These experiences
+have taught me that many aspiring hackers have had little or no experience with Linux,
+and this lack of experience is the primary barrier to their starting the journey to
+becoming professional hackers. Almost all the best hacker tools are written in Linux, so
+some basic Linux skills are a prerequisite to becoming a professional hacker. I have
+written this book to help aspiring hackers get over this barrier.
+Hacking is an elite profession within the IT field. As such, it requires an extensive and
+detailed understanding of IT concepts and technologies. At the most fundamental level,
+Linux is a requirement. I strongly suggest you invest time and energy into using and
+understanding it if you want to make hacking and information security your career.
+This book is not intended for the experienced hacker or the experienced Linux admin.
+
+Instead, it is intended for those who want to get started along the exciting path of
+hacking, cybersecurity, and pentesting. It is also intended not as a complete treatise on
+Linux or hacking but rather a starting point into these worlds. It begins with the
+essentials of Linux and extends into some basic scripting in both bash and Python.
+Wherever appropriate, I have tried to use examples from the world of hacking to teach
+Linux principles.
+In this introduction, we’ll look at the growth of ethical hacking for information security,
+and I’ll take you through the process of installing a virtual machine so you can install
+Kali Linux on your system without disturbing the operating system you are already
+running.
+
+WHAT’S IN THIS BOOK
+In the first set of chapters you’ll get comfortable with the fundamentals of Linux;
+Chapter 1 will get you used to the file system and the terminal, and give you some
+basic commands. Chapter 2 shows you how to manipulate text to find, examine, and
+alter software and files.
+In Chapter 3 you’ll manage networks. You’ll scan for networks, find information on
+connections, and disguise yourself by masking your network and DNS information.
+Chapter 4 teaches you to add, remove, and update software, and how to keep your
+system streamlined. In Chapter 5, you’ll manipulate file and directory permissions to
+control who can access what. You’ll also learn some privilege escalation techniques.
+Chapter 6 teaches you how to manage services, including starting and stopping
+processes and allocating resources to give you greater control. In Chapter 7 you’ll
+manage environment variables for optimal performance, convenience, and even stealth.
+You’ll find and filter variables, change your PATH variable, and create new
+environment variables.
+Chapter 8 introduces you to bash scripting, a staple for any serious hacker. You’ll
+learn the basics of bash and build a script to scan for target ports that you might later
+infiltrate.
+Chapters 9 and 10 give you some essential file system management skills, showing
+you how to compress and archive files to keep your system clean, copy entire storage
+devices, and get information on files and connected disks.
+The latter chapters dig deeper into hacking topics. In Chapter 11 you’ll use and
+
+manipulate the logging system to get information on a target’s activity and cover your
+own tracks. Chapter 12 shows you how to use and abuse three core Linux services:
+Apache web server, OpenSSH, and MySQL. You’ll create a web server, build a remote
+video spy, and learn about databases and their vulnerabilities. Chapter 13 will show
+you how to stay secure and anonymous with proxy servers, the Tor network, VPNs, and
+encrypted email.
+Chapter 14 deals with wireless networks. You’ll learn basic networking commands,
+then crack Wi­Fi access points and detect and connect to Bluetooth signals.
+Chapter 15 dives deeper into Linux itself with a high level view of how the kernel
+works and how its drivers can be abused to deliver malicious software. In Chapter 16
+you’ll learn essential scheduling skills in order to automate your hacking scripts.
+Chapter 17 will teach you core Python concepts, and you’ll script two hacking tools: a
+scanner to spy on TCP/IP connections, and a simple password cracker.
+
+WHAT IS ETHICAL HACKING?
+With the growth of the information security field in recent years has come dramatic
+growth in the field of ethical hacking, also known as white hat (good guy) hacking.
+Ethical hacking is the practice of attempting to infiltrate and exploit a system in order
+to find out its weaknesses and better secure it. I segment the field of ethical hacking
+into two primary components: penetration testing for a legitimate information security
+firm and working for your nation’s military or intelligence agencies. Both are rapidly
+growing areas, and demand is strong.
+
+Penetration Testing
+As organizations become increasingly security conscious and the cost of security
+breaches rises exponentially, many large organizations are beginning to contract out
+security services. One of these key security services is penetration testing. A
+penetration test is essentially a legal, commissioned hack to demonstrate the
+vulnerability of a firm’s network and systems.
+Generally, organizations conduct a vulnerability assessment first to find potential
+vulnerabilities in their network, operating systems, and services. I emphasize potential,
+as this vulnerability scan includes a significant number of false positives (things
+identified as vulnerabilities that really are not). It is the role of the penetration tester to
+attempt to hack, or penetrate, these vulnerabilities. Only then can the organization
+know whether the vulnerability is real and decide to invest time and money to close the
+vulnerability.
+
+Military and Espionage
+
+Military and Espionage
+Nearly every nation on earth now engages in cyber espionage and cyber warfare. One
+only needs to scan the headlines to see that cyber activities are the chosen method for
+spying on and attacking military and industrial systems.
+Hacking plays a crucial part in these military and intelligence­gathering activities, and
+that will only be more true as time goes by. Imagine a war of the future where hackers
+can gain access to their adversary’s war plans and knock out their electric grid, oil
+refineries, and water systems. These activities are taking place every day now. The
+hacker thus becomes a key component of their nation’s defense.
+
+WHY HACKERS USE LINUX
+So why do hackers use Linux over other operating systems? Mostly because Linux
+offers a far higher level of control via a few different methods.
+
+Linux Is Open Source
+Unlike Windows, Linux is open source, meaning that the source code of the operating
+system is available to you. As such, you can change and manipulate it as you please. If
+you are trying to make a system operate in ways it was not intended to, being able to
+manipulate the source code is essential.
+
+Linux Is Transparent
+To hack effectively, you must know and understand your operating system and, to a
+large extent, the operating system you are attacking. Linux is totally transparent,
+meaning we can see and manipulate all its working parts.
+Not so with Windows. Microsoft tries hard to make it as difficult as possible to know
+the inner workings of its operating systems, so you never really know what’s going on
+“under the hood,” whereas in Linux, you have a spotlight shining directly on each and
+every component of the operating system. This makes working with Linux more
+effective.
+
+Linux Offers Granular Control
+Linux is granular. That means that you have an almost infinite amount of control over
+the system. In Windows, you can control only what Microsoft allows you to control. In
+Linux, everything can be controlled by the terminal, at the most miniscule level or the
+most macro level. In addition, Linux makes scripting in any of the scripting languages
+
+simple and effective.
+
+Most Hacking Tools Are Written for Linux
+Well over 90 percent of all hacking tools are written for Linux. There are exceptions, of
+course, such as Cain and Abel and Wikto, but those exceptions prove the rule. Even
+when hacking tools such as Metasploit or nmap are ported for Windows, not all the
+capabilities transfer from Linux.
+
+The Future Belongs to Linux/Unix
+This might seem like a radical statement, but I firmly believe that the future of
+information technology belongs to Linux and Unix systems. Microsoft had its day in the
+1980s and 1990s, but its growth is slowing and stagnating.
+Since the internet began, Linux/Unix has been the operating system of choice for web
+servers due to its stability, reliability, and robustness. Even today, Linux/Unix is used
+in two­thirds of web servers and dominates the market. Embedded systems in routers,
+switches, and other devices almost always use a Linux kernel, and the world of
+virtualization is dominated by Linux, with both VMware and Citrix built on the Linux
+kernel.
+Over 80 percent of mobile devices run Unix or Linux (iOS is Unix, and Android is
+Linux), so if you believe that the future of computing lies in mobile devices such as
+tablets and phones (it would be hard to argue otherwise), then the future is Unix/Linux.
+Microsoft Windows has just 7 percent of the mobile devices market. Is that the wagon
+you want to be hitched to?
+
+DOWNLOADING KALI LINUX
+Before getting started, you need to download and install Kali Linux on your computer.
+This is the Linux distribution we will be working with throughout this book. Linux was
+first developed by Linus Torvalds in 1991 as an open source alternative to Unix. Since it
+is open source, volunteer developers code the kernel, the utilities, and the applications.
+This means that there is no overriding corporate entity overseeing development, and as
+a result, conventions and standardization are often lacking.
+Kali Linux was developed by Offensive Security as a hacking operating system built on
+a distribution of Linux called Debian. There are many distributions of Linux, and
+Debian is one of the best. You are probably most familiar with Ubuntu as a popular
+desktop distribution of Linux. Ubuntu is also built on Debian. Other distributions
+
+include Red Hat, CentOS, Mint, Arch, and SUSE. Although they all share the same
+Linux kernel (the heart of the operating system that controls the CPU, RAM, and so
+on), each has its own utilities, applications, and choice of graphical interface (GNOME,
+KDE, and others) for different purposes. As a result, each of these distributions of
+Linux looks and feels slightly different. Kali was designed for penetration testers and
+hackers and comes with a significant complement of hacking tools.
+I strongly recommend that you use Kali for this book. Although you can use another
+distribution, you will likely have to download and install the various tools we will be
+using, which could mean many hours downloading and installing tools. In addition, if
+that distribution is not built on Debian, there may be other minor differences. You can
+download and install Kali from https://www.kali.org/.
+From the home page, click the Downloads link at the top of the page. On the
+Downloads page you’ll be faced with multiple download choices. It’s important to
+choose the right download. Along the left side of the table, you will see the image name,
+which is the name of the version that the link downloads. For instance, the first image
+name listing I see is Kali Linux 64 Bit, meaning it’s the full Kali Linux and is suitable for
+64­bit systems—most modern systems use a 64­bit Intel or AMD CPU. To determine
+what type of CPU is on your system, go to Control Panel ▸ System and Security ▸
+System, and it should be listed. If your system is 64­bit, download and install the 64­
+bit version of the full Kali (not Light or Lxde, or any of the other alternatives).
+If you are running an older computer with a 32­bit CPU, you will need to install the 32­
+bit version, which appears lower on the page.
+You have a choice of downloading via HTTP or Torrent. If you choose HTTP, Kali will
+download directly to your system just like any download, and it will be placed in your
+Downloads folder. The torrent download is the peer­to­peer download used by many
+file­sharing sites. You will need a torrenting application like BitTorrent to do this. The
+Kali file will then download to the folder in which the torrenting application stores its
+downloads.
+There are other versions for other types of CPUs, such as the commonly used ARM
+architecture found in so many mobile devices. If you are using a Raspberry Pi, tablet, or
+other mobile device (phone users will likely prefer Kali NetHunter), make certain you
+download and install the ARM architecture version of Kali by scrolling down to
+Download ARM images and clicking Kali ARM Images.
+You have Kali downloaded, but before you install anything, I want to talk a bit about
+
+virtual machines. Generally, for the beginner, installing Kali into a virtual machine is
+the best solution for learning and practicing.
+
+VIRTUAL MACHINES
+Virtual machine (VM) technology allows you to run multiple operating systems from
+one piece of hardware like your laptop or desktop. This means that you can continue to
+run the Windows or MacOS operating system you are familiar with and run a virtual
+machine of Kali Linux inside that operating system. You don’t need to overwrite your
+existing OS to learn Linux.
+Numerous virtual machine applications are available from VMware, Oracle, Microsoft,
+and other vendors. All are excellent, but here I will be showing you how to download
+and install Oracle’s free VirtualBox.
+
+Installing VirtualBox
+You can download VirtualBox at https://www.virtualbox.org/, as shown in Figure 1.
+Click the Downloads link in the left menu, and select the VirtualBox package for your
+computer’s current operating system, which will host VirtualBox VM. Make sure to
+download the latest version.
+
+Figure 1: VirtualBox home page
+When the download has completed, click the setup file, and you will be greeted by a
+familiar Setup Wizard, shown in Figure 2.
+
+Figure 2: The Setup Wizard dialog
+Click Next, and you should be greeted with the Custom Setup screen, as in Figure 3.
+
+Figure 3: The Custom Setup dialog
+From this screen, simply click Next. Keep clicking Next until you get to the Network
+Interfaces warning screen and then click Yes.
+Click Install to begin the process. During this process, you will likely be prompted
+several times about installing device software. These are the virtual networking devices
+necessary for your virtual machines to communicate. Click Install for each one.
+
+When the installation is complete, click Finish.
+
+Setting Up Your Virtual Machine
+Now let’s get you started with your virtual machine. VirtualBox should open once it has
+installed—if not, open it—and you should be greeted by the VirtualBox Manager, as
+seen in Figure 4.
+
+Figure 4: The VirtualBox Manager
+Since we will be creating a new virtual machine with Kali Linux, click New in the
+upper­left corner. This opens the Create Virtual Machine dialog shown in Figure 5.
+Give your machine a name (any name is okay, but I simply used Kali) and then select
+Linux from the Type drop­down menu. Finally, select Debian (64­bit) from the
+third drop­down menu (unless you are using the 32­bit version of Kali, in which case
+select the Debian 32­bit version). Click Next, and you’ll see a screen like Figure 6.
+Here, you need to select how much RAM you want to allocate to this new virtual
+machine.
+
+Figure 5: The Create Virtual Machine dialog
+
+Figure 6: Allocating memory
+As a rule of thumb, I don’t recommend using more than 25 percent of your total system
+RAM. That means if you have installed 4GB on your physical or host system, then select
+just 1GB for your virtual machine, and if you have 16GB on your physical system, then
+select 4GB. The more RAM you give your virtual machine, the better and faster it will
+run, but you must also leave enough RAM for your host operating system and any other
+virtual machines you might want to run simultaneously. Your virtual machines will not
+use any RAM when you are not using them, but they will use hard drive space.
+Click Next, and you’ll get to the Hard Disk screen. Choose Create Virtual Hard
+Disk and click Create.
+
+In the next screen, you can decide whether you want the hard drive you are creating to
+be allocated dynamically or at a fixed size. If you choose Dynamically Allocated, the
+system will not take the entire maximum size you allocate for the virtual hard disk until
+you need it, saving more unused hard disk space for your host system. I suggest you
+select dynamically allocated.
+Click Next, and you’ll choose the amount of hard drive space to allocate to the VM and
+the location of the VM (see Figure 7).
+
+Figure 7: Allocating hard drive space
+The default is 8GB. I usually find that to be a bit small and recommend that you
+allocate 20–25GB at a minimum. Remember, if you chose to dynamically allocate hard
+drive space, it won’t use the space until you need it, and expanding your hard drive
+after it has already been allocated can be tricky, so better to err on the high side.
+Click Create, and you’re ready to go!
+
+Installing Kali on the VM
+At this point, you should see a screen like Figure 8. Now you’ll need to install Kali. Note
+that on the left of the VirtualBox Manager, you should see an indication that Kali VM is
+powered off. Click the Start button (green arrow icon).
+
+Figure 8: The VirtualBox welcome screen
+The VirtualBox Manager will then ask where to find the startup disk. You’ve already
+downloaded a disk image with the extension .iso, which should be in your Downloads
+folder (if you used a torrent to download Kali, the .iso file will be in the Downloads
+folder of your torrenting application). Click the folder icon to the right, navigate to the
+Downloads folder, and select the Kali image file (see Figure 9).
+
+Figure 9: Selecting your startup disk
+Then click Start. Congratulations, you’ve just installed Kali Linux on a virtual machine!
+
+SETTING UP KALI
+Kali will now open a screen like Figure 10, offering you several startup choices. I
+suggest using the graphical install for beginners. Use your keyboard keys to navigate
+the menu.
+If you get an error when you’re installing Kali into your VirtualBox, it’s likely because
+you don’t have virtualization enabled within your system’s BIOS. Each system and its
+BIOS is slightly different, so check with your manufacturer or search online for
+solutions for your system and BIOS. In addition, on Windows systems, you will likely
+need to disable any competing virtualization software such as Hyper­V. Again, an
+internet search for your system should guide you in doing so.
+
+Figure 10: Selecting the install method
+You will next be asked to select your language. Make certain you select the language you
+are most comfortable working in and then click Continue. Next, select your location,
+click Continue, and then select your keyboard layout.
+When you click Continue, VirtualBox will go through a process of detecting your
+hardware and network adapters. Just wait patiently as it does so. Eventually, you will
+be greeted by a screen asking you to configure your network, as in Figure 11.
+
+Figure 11: Entering a hostname
+The first item it asks for is the name of your host. You can name it anything you please,
+but I left mine with the default “kali.”
+Next, you will be asked for the domain name. It’s not necessary to enter anything here.
+Click Continue. The next screen, shown in Figure 12, is very important. Here, you are
+asked for the password you want to use for the root user.
+
+Figure 12: Choosing a password
+The root user in Linux is the all­powerful system administrator. You can use any
+password you feel secure with. If this were a physical system that we were using on the
+internet, I would suggest that you use a very long and complex password to limit the
+ability of an attacker to crack it. Since this is a virtual machine that people can’t access
+without first accessing your host operating system, password authentication on this
+virtual machine is less important, but you should still choose wisely.
+Click Continue, and you will be asked to set your time zone. Do so and then continue.
+The next screen asks about partition disks (a partition is just what it sounds like—a
+portion or segment of your hard drive). Choose Guided – use entire disk, and Kali
+will detect your hard drives and set up a partitioner automatically.
+Kali will then warn you that all data on the disk you select will be erased . . . but don’t
+worry! This is a virtual disk, and the disk is new and empty, so this won’t actually do
+anything. Click Continue.
+Kali will now ask whether you want all files in one partition or if you want to have
+
+separate partitions. If this were a production system, you probably would select
+separate partitions for /home, /var, and /tmp, but considering that we will be using
+this as a learning system in a virtual environment, it is safe for you to simply select All
+files in one partition.
+Now you be will be asked whether to write your changes to disk. Select Finish
+partitioning and write changes to disk. Kali will prompt you once more to see if
+you want to write the changes to disk; select Yes and click Continue (see Figure 13).
+
+Figure 13: Writing changes to disk
+Kali will now begin to install the operating system. This could take a while, so be
+patient. Now is the time to take your bathroom break and get your favorite beverage.
+Once the installation is complete, you will be prompted as to whether you want to use a
+network mirror. This really is not necessary, so click No.
+Then Kali will prompt you as to whether you want to install GRUB (Grand Unified
+Bootloader), shown in Figure 14. A bootloader enables you to select different operating
+systems to boot into, which means when you boot your machine, you can boot into
+
+either Kali or another operating system. Select Yes and click Continue.
+
+Figure 14: Installing GRUB
+On the next screen, you will be prompted as to whether you want to install the GRUB
+bootloader automatically or manually. For reasons as yet unclear, if you choose the
+second option, Kali will tend to hang and display a blank screen after installation. Select
+Enter device manually, as shown in Figure 15.
+
+Figure 15: Entering your device manually
+On the following screen, select the drive where the GRUB bootloader should be
+installed (it will likely be something like /dev/sda). Click through to the next screen,
+which should tell you that the installation is complete.
+Congratulations! You’ve installed Kali. Click Continue. Kali will attempt to reboot, and
+you will see a number of lines of code go across a blank, black screen before you are
+eventually greeted with Kali 2018’s login screen, as shown in Figure 16.
+
+Figure 16: The Kali login screen
+
+Log in as root, and you will be asked for your password. Enter whatever password you
+selected for your root user.
+After logging in as root, you will be greeted with the Kali Linux desktop, as in Figure 17.
+
+Figure 17: The Kali home screen
+You are now ready to begin your journey into the exciting field of hacking! Welcome!
+
+History
+
+Topics
+
+1
+
+GETTING STARTED WITH THE BASICS
+
+Tutorials
+
+Offers & Deals
+
+Highlights
+
+Settings
+Support
+
+By our very nature, hackers are doers. We want to touch and play with things. We also
+
+Signwant
+Out to create and, sometimes, break things. Few of us want to read long tomes of
+
+information technology theory before we can do what we love most: hacking. With that
+in mind, this chapter is designed to give you some fundamental skills to get you up and
+running in Kali . . . now!
+In this chapter, we won’t go into any one concept in great detail—we’ll cover just
+enough to let you play and explore in the operating system of hackers: Linux. We will
+save more in­depth discussions for later chapters.
+
+INTRODUCTORY TERMS AND CONCEPTS
+Before we begin our journey through the wonderful world of Linux Basics for Hackers,
+I want to introduce a few terms that should clarify some concepts discussed later in this
+chapter.
+Binaries This term refers to files that can be executed, similar to executables in
+Windows. Binaries generally reside in the /usr/bin or usr/sbin directory and include
+utilities such as ps, cat, ls, and cd(we’ll touch on all of four of these in this chapter) as
+well as applications such as the wireless hacking tool aircrack­ng and the intrusion
+detection system (IDS) Snort.
+
+Case sensitivity Unlike Windows, Linux is case sensitive. This means that Desktop is
+different from desktop, which is different from DeskTop. Each of these would represent
+a different file or directory name. Many people coming from a Windows environment
+can find this frustrating. If you get the error message “file or directory not found” and
+you are sure the file or directory exists, you probably need to check your case.
+Directory This is the same as a folder in Windows. A directory provides a way of
+organizing files, usually in a hierarchical manner.
+Home Each user has their own /home directory, and this is generally where files you
+create will be saved by default.
+Kali Kali Linux is a distribution of Linux specifically designed for penetration testing.
+It has hundreds of tools preinstalled, saving you the hours it would take to download
+and install them yourself. I will be using the latest version of Kali at the time of this
+writing: Kali 2018.2, first released in April 2018.
+root Like nearly every operating system, Linux has an administrator or superuser
+account, designed for use by a trusted person who can do nearly anything on the
+system. This would include such things as reconfiguring the system, adding users, and
+changing passwords. In Linux, that account is called root. As a hacker or pentester, you
+will often use the root account to give yourself control over the system. In fact, many
+hacker tools require that you use the root account.
+Script This is a series of commands run in an interpretive environment that converts
+each line to source code. Many hacking tools are simply scripts. Scripts can be run with
+the bash interpreter or any of the other scripting language interpreters, such as Python,
+Perl, or Ruby. Python is currently the most popular interpreter among hackers.
+Shell This is an environment and interpreter for running commands in Linux. The
+most widely used shell is bash, which stands for Bourne­again shell, but other popular
+shells include the C shell and Z shell. I will be using the bash shell exclusively in this
+book.
+Terminal This is a command line interface (CLI).
+With those basics behind us, we will attempt to methodically develop the essential
+Linux skills you’ll need to become a hacker or penetration tester. In this first chapter,
+I’ll walk you through getting started with Kali Linux.
+
+A TOUR OF KALI
+
+Once you start Kali, you’ll be greeted with a login screen, as shown in Figure 1­1. Log in
+using the root account username root and the default password toor.
+
+Figure 1­1: Logging into Kali using the root account
+You should now have access to your Kali desktop (see Figure 1­2). We’ll quickly look at
+two of the most basic aspects of the desktop: the terminal interface and file structure.
+
+Figure 1­2: The Kali desktop
+
+The Terminal
+
+The Terminal
+The first step in using Kali is to open the terminal, which is the command line interface
+we’ll use in this book. In Kali Linux, you’ll find the icon for the terminal at the bottom
+of the desktop. Double­click this icon to open the terminal or press CTRL­ALT­T. Your
+new terminal should look like the one shown in Figure 1­3.
+
+Figure 1­3: The Kali terminal
+This terminal opens the command line environment, known as the shell, which enables
+you to run commands on the underlying operating systems and write scripts. Although
+Linux has many different shell environments, the most popular is the bash shell, which
+is also the default shell in Kali and many other Linux distributions.
+To change your password, you can use the command passwd.
+
+The Linux Filesystem
+The Linux filesystem structure is somewhat different from that of Windows. Linux
+doesn’t have a physical drive (such as the C: drive) at the base of the filesystem but uses
+a logical filesystem instead. At the very top of the filesystem structure is /, which is
+often referred to as the root of the filesystem, as if it were an upside­down tree (see
+
+Figure 1­4). Keep in mind that this is different from the root user. These terms may
+seem confusing at first, but they will become easier to differentiate once you get used to
+Linux.
+
+Figure 1­4: The Linux filesystem
+The root (/) of the filesystem is at the top of the tree, and the following are the most
+important subdirectories to know:
+/root The home directory of the all­powerful root user
+/etc Generally contains the Linux configuration files—files that control when and how
+programs start up
+/home The user’s home directory
+/mnt Where other filesystems are attached or mounted to the filesystem
+/media Where CDs and USB devices are usually attached or mounted to the filesystem
+/bin Where application binaries (the equivalent of executables in Microsoft Windows)
+reside
+/lib Where you’ll find libraries (shared programs that are similar to Windows DLLs)
+We’ll spend more time with these key directories throughout this book. Understanding
+these first­level directories is important to navigating through the filesystem from the
+command line.
+It’s also important to know before you start that you should not log in as root when
+performing routine tasks, because anyone who hacks your system (yes, hackers
+sometimes get hacked) when you’re logged in as root would immediately gain root
+privileges and thus “own” your system. Log in as a regular user when starting regular
+
+applications, browsing the web, running tools like Wireshark, and so on.
+
+BASIC COMMANDS IN LINUX
+To begin, let’s look at some basic commands that will help you get up and running in
+Linux.
+
+Finding Yourself with pwd
+Unlike when you’re working in a graphical user interface (GUI) environment like
+Windows or macOS, the command line in Linux does not always make it apparent
+which directory you’re presently in. To navigate to a new directory, you usually need to
+know where you are currently. The present working directory command, pwd, returns
+your location within the directory structure.
+Enter pwdin your terminal to see where you are:
+kali >pwd
+/root
+In this case, Linux returned /root, telling me I’m in the root user’s directory. And
+because you logged in as root when you started Linux, you should be in the root user’s
+directory, too, which is one level below the top of the filesystem structure (/).
+If you’re in another directory, pwdwill return that directory name instead.
+
+Checking Your Login with whoami
+In Linux, the one “all­powerful” superuser or system administrator is named root, and
+it has all the system privileges needed to add users, change passwords, change
+privileges, and so on. Obviously, you don’t want just anyone to have the ability to make
+such changes; you want someone who can be trusted and has proper knowledge of the
+operating system. As a hacker, you usually need to have all those privileges to run the
+programs and commands you need (many hacker tools won’t work unless you have root
+privileges), so you’ll want to log in as root.
+If you’ve forgotten whether you’re logged in as root or another user, you can use the
+who
+amicommand to see which user you’re logged in as:
+
+kali >whoami
+
+root
+If I had been logged in as another user, such as my personal account, whoamiwould have
+returned my username instead, as shown here:
+kali >whoami
+OTW
+
+Navigating the Linux Filesystem
+Navigating the filesystem from the terminal is an essential Linux skill. To get anything
+done, you need to be able to move around to find applications, files, and directories
+located in other directories. In a GUI­based system, you can visually see the directories,
+but when you’re using the command line interface, the structure is entirely text based,
+and navigating the filesystem means using some commands.
+
+Changing Directories with cd
+To change directories from the terminal, use the change directory command, cd. For
+example, here’s how to change to the /etc directory used to store configuration files:
+kali >cd/etc
+root@kali:/etc#
+The prompt changes to root@kali:/etc, indicating that we’re in the /etc directory. We can
+confirm this by entering pwd:
+root@kali:/etc# p
+wd
+/etc
+To move up one level in the file structure (toward the root of the file structure, or /), we
+use cdfollowed by double dots (..), as shown here:
+root@kali:/etc# c
+d..
+root@kali:/# pw
+d
+/
+root@kali:/#
+This moves us up one level from /etc to the / root directory, but you can move up as
+
+many levels as you need. Just use the same number of double­dot pairs as the number
+of levels you want to move:
+You would use ..to move up one level.
+You would use ....to move up two levels.
+You would use ......to move up three levels, and so on.
+
+So, for example, to move up two levels, enter cdfollowed by two sets of double dots with
+a space in between:
+kali >c
+d...
+.
+You can also move up to the root level in the file structure from anywhere by entering cd
+/
+, where /represents the root of the filesystem.
+
+Listing the Contents of a Directory with ls
+To see the contents of a directory (the files and subdirectories), we can use the ls(list)
+command. This is very similar to the dircommand in Windows.
+kali >l
+s
+bin initrd.img
+
+media
+
+run
+
+var
+
+boot initrd.img.old mnt
+
+sbin
+
+vmlinuz
+
+dev lib
+
+opt
+
+srv
+
+vmlinuz.old
+
+etc lib64
+
+proc
+
+tmp
+
+home lost+found
+
+root
+
+usr
+
+This command lists both the files and directories contained in the directory. You can
+also use this command on any particular directory, not just the one you are currently in,
+by listing the directory name after the command; for example, ls/etcshows what’s in
+the /etc directory.
+To get more information about the files and directories, such as their permissions,
+owner, size, and when they were last modified, you can add the -lswitch after ls(the l
+stands for long). This is often referred to as long listing. Let’s try it here:
+
+As you can see, ls-lprovides us with significantly more information, such as whether
+an object is a file or directory, the number of links, the owner, the group, its size, when
+it was created or modified, and its name.
+I typically add the -lswitch whenever doing a listing in Linux, but to each their own.
+We’ll talk more about ls-lin Chapter 5.
+Some files in Linux are hidden and won’t be revealed by a simple lsor ls-lcommand.
+To show hidden files, add a lowercase –aswitch, like so:
+kali >l
+sla
+If you aren’t seeing a file you expect to see, it’s worth trying lswith the aflag.
+
+Getting Help
+Nearly every command, application, or utility has a dedicated help file in Linux that
+provides guidance for its use. For instance, if I needed help using the best wireless
+cracking tool, aircrack­ng, I could simply type the aircrack-ngcommand followed by the
+-he
+lpcommand:
+
+kali >a
+ir
+c
+rac
+kng-he
+lp
+Note the double dash here. The convention in Linux is to use a double dash (--) before
+word options, such as help, and a single dash (-) before single­letter options, such as –h.
+When you enter this command, you should see a short description of the tool and
+guidance on how to use it. In some cases, you can use either -hor -?to get to the help
+file. For instance, if I needed help using the hacker’s best port­scanning tool, nmap, I
+would enter the following:
+kali >n
+ma
+p-h
+
+Unfortunately, although many applications support all three options (--help, -h, and -?),
+there’s no guarantee the application you’re using will. So if one option doesn’t work, try
+another.
+
+Referencing Manual Pages with man
+In addition to the help switch, most commands and applications have a manual (man)
+page with more information, such as a description and synopsis of the command or
+application. You can view a man page by simply typing manbefore the command, utility,
+or application. To see the man page for aircrack­ng, for example, you would enter the
+following:
+
+This opens the manual for aircrack­ng, providing you with more detailed information
+than the helpscreen. You can scroll through this manual file using the ENTER key, or
+you can page up and down using the PG DN and PG UP keys, respectively. To exit, simply
+enter q(for quit), and you’ll return to the command prompt.
+
+FINDING STUFF
+Until you become familiar with Linux, it can be frustrating to find your way around, but
+knowledge of a few basic commands and techniques will go a long way toward making
+the command line much friendlier. The following commands help you locate things
+from the terminal.
+
+Searching with locate
+
+Searching with locate
+Probably the easiest command to use is locate. Followed by a keyword denoting what it
+is you want to find, this command will go through your entire filesystem and locate
+every occurrence of that word.
+To look for aircrack­ng, for example, enter the following:
+kali >locateaircr
+ac
+kng
+/usr/bin/aircrack­ng
+/usr/share/applications/kali­aircrack­ng.desktop
+/usr/share/desktop­directories/05­1­01­aircrack­ng.directory
+­­snip­­
+/var/lib/dpkg/info/aircrack­ng.mg5sums
+The locatecommand is not perfect, however. Sometimes the results of locatecan be
+overwhelming, giving you too much information. Also, locateuses a database that is
+usually only updated once a day, so if you just created a file a few minutes or a few
+hours ago, it might not appear in this list until the next day. It’s worth knowing the
+disadvantages of these basic commands so you can better decide when best to use each
+one.
+
+Finding Binaries with whereis
+If you’re looking for a binary file, you can use the whereiscommand to locate it. This
+command returns not only the location of the binary but also its source and man page if
+they are available. Here’s an example:
+kali >whereisairc
+ra
+ck
+-ng
+aircarck­ng: /usr/bin/aircarck­ng /usr/share/man/man1/aircarck­ng.1.gz
+In this case, whereisreturned just the aircrack­ng binaries and man page, rather than
+every occurrence of the word aircrack­ng. Much more efficient and illuminating, don’t
+you think?
+
+Finding Binaries in the PATH Variable with which
+The whichcommand is even more specific: it only returns the location of the binaries in
+the PATHvariable in Linux. We’ll look more closely at the PATHvariable in Chapter 7, but
+for now it’s sufficient to know that PATHholds the directories in which the operating
+
+system looks for the commands you execute at the command line. For example, when I
+enter aircrack-ngon the command line, the operating system looks to the PATHvariable to
+see in which directories it should look for aircrack­ng:
+kali >whichaircra
+ck
+-n
+g
+/usr/bin/aircrack­ng
+Here, whichwas able to find a single binary file in the directories listed in the PATH
+variable. At minimum, these directories usually include /usr/bin, but may include
+/usr/sbin and maybe a few others.
+
+Performing More Powerful Searches with find
+The findcommand is the most powerful and flexible of the searching utilities. It is
+capable of beginning your search in any designated directory and looking for a number
+of different parameters, including, of course, the filename but also the date of creation
+or modification, the owner, the group, permissions, and the size.
+Here’s the basic syntax for find:
+find d
+i
+r
+ector
+yoption
+se
+xp
+res
+s
+ion
+So, if I wanted to search for a file with the name apache2 (the open source web server)
+starting in the root directory, I would enter the following:
+kali >find/➊ -t
+yp
+ef➋ na
+mea
+p
+ac
+h
+e
+2➌
+First I state the directory in which to start the search, in this case /➊. Then I specify
+which type of file to search for, in this case ffor an ordinary file ➋. Last, I give the name
+of the file I’m searching for, in this case apache2➌.
+My results for this search are shown here:
+kali >find /-typ
+ef-nameap
+a
+che
+2
+/usr/lib/apache2/mpm­itk/apache2
+/usr/lib/apache2/mpm­event/apache2
+/usr/lib/apache2/mpm­worker/apache2
+/usr/lib/apache2/mpm­prefork/apache2
+/etc/cron.daily/apache2
+
+/etc/logrotate.d/apache2
+/etc/init.d/apache2
+/etc/default/apache2
+The findcommand started at the top of the filesystem (/), went through every directory
+looking for apache2 in the filename, and then listed all instances found.
+As you might imagine, a search that looks in every directory can be slow. One way to
+speed it up is to look only in the directory where you would expect to find the file(s) you
+need. In this case, we are looking for a configuration file, so we could start the search in
+the /etc directory, and Linux would only search as far as its subdirectories. Let’s try it:
+kali >f
+in
+d/e
+tc-t
+yp
+efna
+mea
+p
+ac
+h
+e
+2
+/etc/init.d/apache2
+/etc/logrotate.d/apache2
+/etc/cron.daily/apache2
+This much quicker search only found occurrences of apache2 in the /etc directory and
+its subdirectories. It’s also important to note that unlike some other search commands,
+fi
+nddisplays only exact name matches. If the file apache2 has an extension, such as
+
+apache2.conf, the search will not find a match. We can remedy this limitation by using
+wildcards, which enable us to match multiple characters. Wildcards come in a few
+different forms: *.,?and [].
+Let’s look in the /etc directory for all files that begin with apache2 and have any
+extension. For this, we could write a findcommand using the following wildcard:
+kali >f
+in
+d/e
+tc-t
+yp
+ef-n
+amea
+pa
+c
+h
+e2
+.
+*
+/etc/apache2/apache2.conf
+When we run this command, we find that there is one file in the /etc directory that fits
+the apache2.*pattern. When we use a period followed by the *wildcard, the terminal
+looks for any extension after the filename apache2. This can be a very useful technique
+for finding files where you don’t know the file extension.
+When I run this command, I find two files that start with apache2 in the /etc directory,
+including the apache2.conf file.
+
+A QUICK LOOK AT WILDCARDS
+Let’s say we’re doing a search on a directory that has the files cat, hat, what,
+and bat. The ?wildcard is used to represent a single character, so a search
+for ?atwould find hat, cat, and bat but not what, because at in this filename is
+preceded by two letters. The []wildcard is used to match the characters that
+appear inside the square brackets. For example, a search for [c,b]atwould
+match cat and bat but not hat or what. Among the most widely used
+wildcards is the asterisk (*), which matches any character(s) of any length,
+from none to an unlimited number of characters. A search for *at, for
+example, would find cat, hat, what, and bat.
+
+Filtering with grep
+Very often when using the command line, you’ll want to search for a particular
+keyword. For this, you can use the grepcommand as a filter to search for keywords.
+The grepcommand is often used when output is piped from one command to another. I
+cover piping in Chapter 2, but for now, suffice it to say that Linux (and Windows for
+that matter) allows us to take the output of one command and send it as input to
+another command. This is called piping, and we use the |command to do it (the | key is
+usually above the ENTER key on your keyboard).
+The pscommand is used to display information about processes running on the
+machine. We cover this in more detail in Chapter 6, but for this example, suppose I
+want to see all the processes running on my Linux system. In this case, I can use the ps
+(processes) command followed by the auxswitches to specify which process information
+to display, like so:
+kali >p
+saux
+This provides me with a listing of all the processes running in this system—but what if I
+just want to find one process to see if it is running?
+I can do this by piping the output from psto grepand searching for a keyword. For
+instance, to find out whether the apache2 service is running, I would enter the
+following.
+
+kali >psaux|gre
+pap
+ache2
+root 4851 0.2 0.7 37548 7668 ? Ss 10:14 0:00 /usr/sbin/apache2 ­k start
+root 4906 0.0 0.4 37572 4228 ? S 10:14 0:00 /usr/sbin/apache2 ­k start
+root 4910 0.0 0.4 37572 4228 ? Ss 10:14 0:00 /usr/sbin/apache2 ­k start
+­­snip­­
+This command tells Linux to display all my services and then send that output to grep,
+which will look through the output for the keyword apache2 and then display only the
+relevant output, thus saving me considerable time and my eyesight.
+
+MODIFYING FILES AND DIRECTORIES
+Once you’ve found your files and directories, you’ll want to be able to perform actions
+on them. In this section, we look at how to create files and directories, copy files,
+rename files, and delete files and directories.
+
+Creating Files
+There are many ways to create files in Linux, but for now we’ll just look at two simple
+methods. The first is cat, which is short for concatenate, meaning to combine pieces
+together (not a reference to your favorite domesticated feline). The catcommand is
+generally used for displaying the contents of a file, but it can also be used to create
+small files. For creating bigger files, it’s better to enter the code in a text editor such as
+vim, emacs, leafpad, gedit, or kate and then save it as a file.
+
+Concatenation with cat
+The catcommand followed by a filename will display the contents of that file, but to
+create a file, we follow the catcommand with a redirect, denoted with the >symbol, and
+a name for the file we want to create. Here’s an example:
+kali >cat>hackin
+gs
+ki
+lls
+Hacking is the most valuable skill set of the 21st century!
+When you press ENTER, Linux will go into interactive mode and wait for you to start
+entering content for the file. This can be puzzling because the prompt disappears, but if
+you simply begin typing, whatever you enter will go into the file (in this case,
+hackingskills). Here, I entered Hackingisthemostvaluableskillsetofthe21stcentury!.
+To exit and return to the prompt, I press CTRL­D. Then, when I want to see what’s in
+the file hackingskills, I enter the following:
+
+kali >cathackings
+ki
+ll
+s
+Hacking is the most valuable skill set of the 21st century!
+If you don’t use the redirect symbol, Linux will spit back the contents of your file.
+To add, or append, more content to a file, you can use the catcommand with a double
+redirect (>>), followed by whatever you want to add to the end of the file. Here’s an
+example:
+kali >cat>>hacki
+ng
+sk
+ills
+Everyone should learn hacking
+Linux once again goes into interactive mode, waiting for content to append to the file.
+When I enter Everyoneshouldlearnhackingand press CTRL­D, I am returned to the
+prompt. Now, when I display the contents of that file with cat, I can see that the file has
+been appended with Everyoneshouldlearnhacking, as shown here:
+kali >cathackings
+ki
+ll
+s
+Hacking is the most valuable skill set of the 21st century! Everyone should
+learn hacking
+If I want to overwrite the file with new information, I can simply use the catcommand
+with a single redirect again, as follows:
+kali >cat>hackin
+gs
+ki
+lls
+Everyone in IT security without hacking skills is in the dark
+kali >cathackings
+ki
+ll
+s
+Everyone in IT security without hacking skills is in the dark
+As you can see here, Linux goes into interactive mode, and I enter the new text and then
+exit back to the prompt. When I once again use catto see the content of the file, I see
+that my previous words have been overwritten with the latest text.
+
+File Creation with touch
+The second command for file creation is touch. This command was originally developed
+so a user could simply touch a file to change some of its details, such as the date it was
+created or modified. However, if the file doesn’t already exist, this command creates
+that file by default.
+
+
